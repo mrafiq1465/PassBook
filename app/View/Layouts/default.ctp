@@ -25,9 +25,10 @@ $bodyclass = $this->params['controller'] . '_' . $this->params['action'];
     <!-- styles -->
     <?php
         echo $this->Html->css('reset');
-        echo $this->Html->css('bootstrap.min');
+        echo $this->Html->css('kendo.common.min');
+        echo $this->Html->css('kendo.default.min');
         echo $this->Html->css('style');
-        echo $this->Html->css('style1');
+
     ?>
 
     <!-- scripts -->
@@ -37,12 +38,10 @@ $bodyclass = $this->params['controller'] . '_' . $this->params['action'];
 
         echo $this->Html->script(
             array(
-                'http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js',
-                'bootstrap.min'
+                'jquery-1.8.2.min.js',
+                'kendo.all.min.js',
+                'main.js'
             ));
-
-        echo $this->Html->script('main');
-
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
@@ -50,41 +49,15 @@ $bodyclass = $this->params['controller'] . '_' . $this->params['action'];
 	?>
 
 </head>
-<body class="<?php echo $bodyclass ?>">
+<body>
 	<div id="container" class="container">
-
-        <?php if ($bodyclass !== 'users_login'): ?>
-        <!-- Navbar ============================================= -->
-        <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container1">
-                    <a class="btn btn-navbar" data-toggle="collapse"
-                       data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <a class="brand" href="/">Pixta</a>
-                    <a href="/users/logout" class="pull-right" id="logout_btn">Logout</a>
-                </div>
-            </div>
-        </div>
-            <?php endif; ?>
-
         <div id="row">
             <?php echo $this->Session->flash(); ?>
             <?php echo $this->fetch('content'); ?>
         </div>
         
         <footer id="footer">
-            <address id="address">
-
-            </address>
         </footer>
 	</div>
-
-
-    <?php // echo $this->element('sql_dump'); ?>
-
 </body>
 </html>
