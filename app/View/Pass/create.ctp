@@ -3,7 +3,7 @@
 <section id="pass_config">
 
     <h3>Create a  pass in under 5 mins</h3>
-    <ul>
+    <ul id="pass_type">
         <li><a href="/pass/event/">Event Ticket</a></li>
         <li><a href="/pass/coupon/">Coupons</a></li>
         <li><a href="/pass/transport/">Transport</a></li>

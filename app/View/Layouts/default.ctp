@@ -39,13 +39,16 @@
     <!--script src=" http://dev.kendoui/js/kendo.web.min.js"></script-->
 </head>
 <body>
+<div class="k-content">
 <?php echo $this->element('menu'); ?>
-<div id="container" class="k-content">
+<div id="container" >
             <?php echo $this->Session->flash(); ?>
             <?php echo $this->fetch('content'); ?>
+</div>
+</div>
+<footer id="footer">
 
-        <footer id="footer">
-        </footer>
-	</div>
+</footer>
+
 </body>
 </html>

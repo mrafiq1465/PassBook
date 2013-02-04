@@ -5,7 +5,10 @@
     <div id="tabstrip">
         <ul>
             <li class="k-state-active">
-                Base config
+                Details
+            </li>
+            <li>
+                Base items
             </li>
             <li>
                Front
@@ -14,9 +17,19 @@
                 Back
             </li>
             <li>
+                Relevance
+            </li>
+            <li>
                 Barcode
             </li>
         </ul>
+        <div>
+            <div class="">
+                <p>
+        2 text fields. Description & Organization.
+                </p>
+            </div>
+        </div>
         <div>
             <div class="">
                 <h2>Select from below</h2>
@@ -65,6 +78,15 @@
         </div>
         <div>
             <div class="">
+
+                <p>
+                    Pass can be relevent by location. You can choose 10 locations.
+                    When your pass is close to the location it will appear on the lock screen.
+                </p>
+            </div>
+        </div>
+        <div>
+            <div class="">
                 <h2>Select from below</h2>
                 <p>
                     <select id="barcode_format">
@@ -103,5 +125,6 @@
         });
 
         $("#barcode_format").kendoDropDownList();
+
     });
 </script>

@@ -2,6 +2,8 @@
 $(document).ready(function() {
 
 
+    $("#menu").kendoMenu();
+    $("#pass_type").kendoMenu();
 
     $('#resetPassword').click(function(e){
         var email = $('#email').val();

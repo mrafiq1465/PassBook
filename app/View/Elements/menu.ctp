@@ -1,4 +1,3 @@
-Menu will go here
 
 <ul id="menu">
     <li>Item 1</li>
