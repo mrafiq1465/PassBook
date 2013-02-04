@@ -6,8 +6,8 @@ App::uses('AppController', 'Controller');
 class PassController extends AppController {
 
 
-    public $components = array('RequestHandler');
-    public $helpers = array('Text');
+    //public $components = array('RequestHandler');
+   // public $helpers = array('Text');
 
     public $name = 'Pass';
 
@@ -17,6 +17,10 @@ class PassController extends AppController {
 	}
 
     public function create() {
+
+    }
+
+    public function event() {
 
     }
 

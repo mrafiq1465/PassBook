@@ -13,6 +13,7 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 
+    /*
     public $helpers = array(
         'Html'      => array('className' => ''),
         'Form'      => array('className' => ''),
@@ -24,10 +25,11 @@ class AppController extends Controller {
         'Cookie',
         'RequestHandler',
     );
-
+*/
 
     // If current user is not logged in, prompt for login
     function requireLogin() {
+        /*
         if (!$this->Session->check('User')) {
             // clear session var for where we were before going to login form
             $this->Session->delete('goto');
@@ -37,6 +39,7 @@ class AppController extends Controller {
             $this->redirect('/users/login/');
             exit();
         }
+        */
     }
 
     // If current user is not admin, prompt for login
@@ -70,15 +73,12 @@ class AppController extends Controller {
     function beforeFilter() {
 
         $excluded = array(
-            array('users','login'),
-            array('users','send_password'),
+
 
         );
 
         $included_admin = array(
-            array('users', 'add'),
-            array('users', 'index'),
-            array('users', 'delete'),
+
         );
 
         $login_req = !in_array(array($this->params->params['controller'],$this->params->params['action']),$excluded);
