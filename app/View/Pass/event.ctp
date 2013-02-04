@@ -67,12 +67,17 @@
             <div class="">
                 <h2>Select from below</h2>
                 <p>
-                    <input id="barcode_format" value="1" />
+                    <select id="barcode_format">
+                        <option>PDF417</option>
+                        <option>Aztec</option>
+                        <option>QR codes</option>
+                    </select>
 
                     There are 3 different type of barcodes. User can select one. <br>
                     'format'            => 'PKBarcodeFormatPDF417', <br>
                     'message'           => '123456789',<br>
                     'messageEncoding'   => 'iso-8859-1'<br><br>
+
 
                     Previous  Button
 
@@ -97,20 +102,6 @@
             }
         });
 
-        var barcode_format = [
-            { text: "PDF417", value: "PKBarcodeFormatPDF417" },
-            { text: "Aztec", value: "PKBarcodeFormatAztec" },
-            { text: "QR codes", value: "PKBarcodeFormatQR" }
-        ];
-
-
-        $("#barcode_format").kendoDropDownList({
-            dataTextField: "text",
-            dataValueField: "value",
-            dataSource: barcode_format,
-            index: 0,
-            change: onChange
-        });
-
+        $("#barcode_format").kendoDropDownList();
     });
 </script>

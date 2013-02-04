@@ -12,6 +12,7 @@
     <!--script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script-->
     <![endif]-->
     <!--  meta info -->
+
     <?php
 
       echo $this->Html->meta(array("name"    => "viewport",
@@ -35,7 +36,7 @@
 		echo $this->fetch('script');
 
 	?>
-
+    <!--script src=" http://dev.kendoui/js/kendo.web.min.js"></script-->
 </head>
 <body>
 <?php echo $this->element('menu'); ?>
