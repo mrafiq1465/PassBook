@@ -21,6 +21,8 @@
 /**
  * Use the DS to separate the directories in other defines
  */
+date_default_timezone_set('America/Los_Angeles');
+
 if (!defined('DS')) {
     define('DS', DIRECTORY_SEPARATOR);
 }
