@@ -19,13 +19,14 @@ class AppController extends Controller {
         'Form'      => array('className' => ''),
         'Paginator' => array('className' => '')
     );
+    */
 
     public $components = array(
         'Session',
         'Cookie',
         'RequestHandler',
     );
-*/
+
 
     // If current user is not logged in, prompt for login
     function requireLogin() {
