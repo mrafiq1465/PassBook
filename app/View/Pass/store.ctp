@@ -1,5 +1,6 @@
 
 <section id="pass_config">
+
     <h3>Create a pass in under 5 mins</h3>
     <div id="tabstrip">
         <ul>
@@ -10,7 +11,7 @@
                 Base items
             </li>
             <li>
-                Front
+               Front
             </li>
             <li>
                 Back
@@ -25,7 +26,7 @@
         <div>
             <div class="">
                 <p>
-                    2 text fields. Description & Organization.
+        2 text fields. Description & Organization.
                 </p>
             </div>
         </div>
@@ -38,8 +39,8 @@
                     use this to upload image: <br />
                     <b>http://demos.kendoui.com/web/upload/events.html</b> <br><br>
                     2. Background image:<br />
-                    use this to upload image: <br />
-                    <b>http://demos.kendoui.com/web/upload/events.html</b> <br><br>
+                       use this to upload image: <br />
+                       <b>http://demos.kendoui.com/web/upload/events.html</b> <br><br>
 
                     3. Background color (have to use a color picker) <br>
                     4. foreground color <br>

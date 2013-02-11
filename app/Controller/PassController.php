@@ -21,7 +21,22 @@ class PassController extends AppController {
     }
 
     public function event() {
-
+        $pass_type_id = 1;
     }
 
+    public function coupon() {
+        $pass_type_id = 2;
+    }
+
+    public function transport() {
+        $pass_type_id = 3;
+    }
+
+    public function store() {
+        $pass_type_id = 4;
+    }
+
+    public function generic() {
+        $pass_type_id = 5;
+    }
 }
