@@ -1,50 +1,55 @@
-
+<? /**
+ * @var $this View
+ */
+?>
 <section id="pass_config">
 
     <h3>Create a pass in under 5 mins</h3>
+
     <div id="tabstrip">
         <ul>
-            <li class="k-state-active">
+            <li class="k-state-active" id="tab1">
                 Details
             </li>
-            <li>
+            <li id="tab2">
                 Base items
             </li>
-            <li>
-               Front
+            <li id="tab3">
+                Front
             </li>
-            <li>
+            <li id="tab4">
                 Back
             </li>
-            <li>
+            <li id="tab5">
                 Relevance
             </li>
-            <li>
+            <li id="tab6">
                 Barcode
             </li>
         </ul>
         <div>
-            <div class="">
+            <div id="step1Tab">
                 <p>
-        2 text fields. Description & Organization.
+                    2 text fields. Description & Organization.
                 </p>
-                <?=$this->Form->create(); ?>
+                <?=$this->Form->create(null, array('id' => 'step1Form')); ?>
                 <?=$this->Form->input('organizationName');?>
                 <?=$this->Form->input('description');?>
                 <?=$this->Form->end('Next'); ?>
             </div>
         </div>
         <div>
-            <div class="">
+            <div id="step2Tab">
                 <h2>Select from below</h2>
+
                 <p>
-                    These are the items user will select from this tab: <br />
-                    1. Icon image:<br />
-                    use this to upload image: <br />
+                    These are the items user will select from this tab: <br/>
+                    1. Icon image:<br/>
+                    use this to upload image: <br/>
                     <b>http://demos.kendoui.com/web/upload/events.html</b> <br><br>
-                    2. Background image:<br />
-                       use this to upload image: <br />
-                       <b>http://demos.kendoui.com/web/upload/events.html</b> <br><br>
+                    2. Background image:<br/>
+                    use this to upload image: <br/>
+                    <b>http://demos.kendoui.com/web/upload/events.html</b> <br><br>
 
                     3. Background color (have to use a color picker) <br>
                     4. foreground color <br>
@@ -55,11 +60,12 @@
             </div>
         </div>
         <div>
-            <div class="">
+            <div id="step3Tab">
                 <h2>Select from below</h2>
+
                 <p>
-                    1. Logo image:<br />
-                    2. Thumbnail image:<br />
+                    1. Logo image:<br/>
+                    2. Thumbnail image:<br/>
                     3. logo text <br>
                     4. header text <br>
                     5. Primary fields <br>
@@ -72,8 +78,9 @@
             </div>
         </div>
         <div>
-            <div class="">
+            <div id="step4Tab">
                 <h2>Select from below</h2>
+
                 <p>
                     1. Secondary fields (there can be multiple key value pairs) <br><br>
                     Previous & Next Button
@@ -92,6 +99,7 @@
         <div>
             <div class="">
                 <h2>Select from below</h2>
+
                 <p>
                     <select id="barcode_format">
                         <option>PDF417</option>
@@ -100,12 +108,12 @@
                     </select>
 
                     There are 3 different type of barcodes. User can select one. <br>
-                    'format'            => 'PKBarcodeFormatPDF417', <br>
-                    'message'           => '123456789',<br>
-                    'messageEncoding'   => 'iso-8859-1'<br><br>
+                    'format' => 'PKBarcodeFormatPDF417', <br>
+                    'message' => '123456789',<br>
+                    'messageEncoding' => 'iso-8859-1'<br><br>
 
 
-                    Previous  Button
+                    Previous Button
 
                 </p>
             </div>
@@ -119,16 +127,32 @@
 </section>
 
 <script>
-    $(document).ready(function() {
-        $("#tabstrip").kendoTabStrip({
-            animation:	{
-                open: {
-                    effects: "fadeIn"
+    $(document).ready(function () {
+        var $tabstrip = $('#tabstrip');
+        var $step1Tab = $('#tab1');
+        var $step2Tab = $('#tab2');
+        var $step3Tab = $('#tab3');
+        var $step4Tab = $('#tab4');
+        $tabstrip.kendoTabStrip({
+            animation:{
+                open:{
+                    effects:"fadeIn"
                 }
             }
         });
 
         $("#barcode_format").kendoDropDownList();
+
+        $('#step1Form').ajaxForm({
+            success: function(resp){
+                resp = $.parseJSON(resp);
+                if(resp.error !== undefined) {
+                    $step1Tab.append('Error: ' + resp.error);
+                } else {
+                    $tabstrip.data('kendoTabStrip').activateTab($step2Tab);
+                }
+            }
+        })
 
     });
 </script>

@@ -28,6 +28,7 @@
             array(
                 'jquery-1.8.2.min.js',
                 'kendo.all.min.js',
+                'jquery.form.js',
                 'main.js'
             ));
 

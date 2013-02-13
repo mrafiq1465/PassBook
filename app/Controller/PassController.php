@@ -37,8 +37,14 @@ class PassController extends AppController
                 break;
         }
         if ($this->request->is('post')) {
+            $this->autoRender = false;
             $this->Pass->create();
-            $this->Pass->save($this->request->data);
+            $this->request->data['Pass']['pass_type_id'] = $pass_type_id;
+            if ($this->Pass->save($this->request->data)) {
+                echo json_encode(array('success' => true));
+            } else {
+                echo json_encode(array('error' => __('The user could not be saved. Please, try again.')));
+            }
         }
     }
 }
