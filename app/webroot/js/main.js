@@ -23,6 +23,47 @@ $(document).ready(function() {
 
     });
 
+    var $tabStrip = $('#tabstrip');
+    if($tabStrip.length) {
+        $tabStrip.kendoTabStrip({
+            animation:{
+                open:{
+                    effects:"fadeIn"
+                }
+            }
+        });
+        $("#barcode_format").kendoDropDownList();
+        $('form[id^=step]').each(function(){
+            var $form = $(this);
+            $(this).ajaxForm({
+                success:function (resp) {
+                    resp = $.parseJSON(resp);
+                    if (resp.error !== undefined) {
+                        //todo: show error somewhere
+                    } else {
+                        if (window.create_mode !== undefined && window.create_mode === true) {
+                            window.location.href = '/pass/edit/' + resp.success.id + '/step2';
+                            return;
+                        }
+
+                        var tabNumber = parseInt($form.attr('id').substr(4,1));
+                        if(tabNumber !== 6) {
+                            tabNumber++;
+                            var $tabToActivate = $('#tab' + tabNumber);
+                            $tabStrip.data('kendoTabStrip').activateTab($tabToActivate);
+                        }
+                    }
+                }
+            });
+        });
+
+    }
+
+
+
+
+
+
 
 
 });

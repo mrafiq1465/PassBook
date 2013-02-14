@@ -32,7 +32,7 @@
                 <p>
                     2 text fields. Description & Organization.
                 </p>
-                <?=$this->Form->create(null, array('id' => 'step1Form')); ?>
+                <?=$this->Form->create(null, array('url'=> '/pass/edit/'.$this->data['Pass']['id'] . '/step1' ,'id' => 'step1Form')); ?>
                 <?=$this->Form->input('organizationName');?>
                 <?=$this->Form->input('description');?>
                 <?=$this->Form->end('Next'); ?>
@@ -128,7 +128,8 @@
 
 <script>
     $(document).ready(function () {
-        window.create_mode = true;
-        $('#tabstrip').data('kendoTabStrip').disable($('[id^=tab]')).enable($('#tab1'));
+        var tabNumber = parseInt('<?=$step?>');
+        var $tabToActivate = $('#tab' + tabNumber);
+        $('#tabstrip').data('kendoTabStrip').activateTab($tabToActivate);
     });
 </script>
