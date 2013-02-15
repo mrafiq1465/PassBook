@@ -57,6 +57,19 @@
 
                     Next Button
                 </p>
+                <div style="width:45%">
+                    <img src="/<?=$this->request->data['Pass']['iconImage']?>" id="iconImg"/>
+                    <?=$this->Form->input('iconImage', array('type' => 'file','id' => 'iconImage'));?>
+
+                    <img src="/<?=$this->request->data['Pass']['backgroundImage']?>" id="backgroundImg"/>
+                    <?=$this->Form->input('backgroundImage', array('type' => 'file','id' => 'backgroundImage'));?>
+
+                    <?=$this->Form->create(null, array('url'=> '/pass/edit/'.$this->data['Pass']['id'] . '/step2' ,'id' => 'step2Form')); ?>
+                    <?=$this->Form->input('backgroundColor', array('id' => 'backgroundColor'));?>
+                    <?=$this->Form->input('foregroundColor', array('id' => 'foregroundColor'));?>
+                    <?=$this->Form->input('labelColor', array('id' => 'labelColor'));?>
+                    <?=$this->Form->end('Next'); ?>
+                </div>
             </div>
         </div>
         <div>
@@ -126,10 +139,50 @@
     <?php echo $this->element('simulator/event'); ?>
 </section>
 
+<?
+echo $this->Html->script('colorpicker.js');
+echo $this->Html->css('colorpicker/colorpicker.css');
+?>
+
 <script>
+
     $(document).ready(function () {
+        $('#backgroundColor, #foregroundColor, #labelColor').ColorPicker({
+            onSubmit: function(hsb, hex, rgb, el) {
+                $(el).val('#' + hex);
+                $(el).ColorPickerHide();
+            },
+            onBeforeShow: function () {
+                $(this).ColorPickerSetColor(this.value);
+            }
+        });
+
         var tabNumber = parseInt('<?=$step?>');
         var $tabToActivate = $('#tab' + tabNumber);
         $('#tabstrip').data('kendoTabStrip').activateTab($tabToActivate);
+
+        var $iconImage = $("#iconImage");
+        var $backgroundImage = $("#backgroundImage");
+        $iconImage.kendoUpload({
+            async: {
+                saveUrl: "/pass/edit/<?=$this->data['Pass']['id']?>/step2",
+                removeUrl: "/pass/edit/<?=$this->data['Pass']['id']?>/step2?remove="+encodeURIComponent($iconImage.attr('name')),
+                autoUpload: true
+            },
+            success: function(e){
+                $('#iconImg').attr('src', $('#iconImg').attr('src')+ '?'+Math.random());
+            }
+        });
+
+        $backgroundImage.kendoUpload({
+            async: {
+                saveUrl: "/pass/edit/<?=$this->data['Pass']['id']?>/step2",
+                removeUrl: "/pass/edit/<?=$this->data['Pass']['id']?>/step2?remove="+encodeURIComponent($backgroundImage.attr('name')),
+                autoUpload: true
+            },
+            success: function(e){
+                $('#backgroundImg').attr('src', $('#backgroundImg').attr('src') + '?'+Math.random());
+            }
+        });
     });
 </script>

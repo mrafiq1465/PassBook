@@ -64,6 +64,9 @@ class PassController extends AppController
                     $this->Pass->save($this->request->data);
                     echo json_encode(array('success' => array('id' => $this->Pass->id)));
                     break;
+                case 'step2' :
+                    echo $this->processStep2($id);
+                    break;
                 default:
                     throw new NotFoundException(__('Invalid step'));
             }
@@ -71,7 +74,49 @@ class PassController extends AppController
         } else {
             $this->request->data = $this->Pass->read(null, $id);
         }
-        $step = substr($step,4);
+        $step = substr($step, 4);
+
         $this->set(compact('step'));
+    }
+
+    public function processStep2($id)
+    {
+        $this->Pass->id = $id;
+        $this->Pass->read();
+        if (isset($this->request->query['remove'])) {
+            switch($this->request->query['remove']) {
+                case 'data[iconImage]' :
+                    unlink(WWW_ROOT . $this->Pass->data['Pass']['iconImage']);
+                    $this->Pass->data['Pass']['iconImage'] = '';
+                    $this->Pass->save($this->Pass->data);break;
+                case 'data[backgroundImage]' :
+                    unlink(WWW_ROOT . $this->Pass->data['Pass']['backgroundImage']);
+                    $this->Pass->data['Pass']['backgroundImage'] = '';
+                    $this->Pass->save($this->Pass->data);break;
+                default: break;
+            }
+
+        } elseif (isset($this->request->data['iconImage'])) {
+            $destination_dir = WWW_ROOT . "data/$id/iconImage/";
+            if (!is_dir($destination_dir)) {
+                mkdir($destination_dir, 0777, true);
+            }
+            $destination_path = $destination_dir . "image.jpg";
+            move_uploaded_file($this->request->data['iconImage']['tmp_name'], $destination_path);
+            $this->Pass->data['Pass']['iconImage'] = str_replace(WWW_ROOT,'',$destination_path);
+            $this->Pass->save($this->Pass->data);
+        } elseif (isset($this->request->data['backgroundImage'])) {
+            $destination_dir = WWW_ROOT . "data/$id/backgroundImage/";
+            if (!is_dir($destination_dir)) {
+                mkdir($destination_dir, 0777, true);
+            }
+            $destination_path = $destination_dir . "image.jpg";
+            move_uploaded_file($this->request->data['backgroundImage']['tmp_name'], $destination_path);
+            $this->Pass->data['Pass']['backgroundImage'] = str_replace(WWW_ROOT,'',$destination_path);
+            $this->Pass->save($this->Pass->data);
+        } else {
+            $this->Pass->save($this->request->data);
+        }
+        return json_encode(array('success' => true));
     }
 }
