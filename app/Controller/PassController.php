@@ -129,7 +129,7 @@ class PassController extends AppController
         $passbook = new Passbook();
 
         $data_path = APP . 'data' . DS;
-        $data_path_web = WWW_ROOT . 'data' . DS;
+        $data_path_web = WWW_ROOT;
 // Set pass output path
         $passbook->output_path = $data_path . "passes" . DS . $id . DS;
 
