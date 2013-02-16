@@ -97,20 +97,20 @@ class PassController extends AppController
             }
 
         } elseif (isset($this->request->data['iconImage'])) {
-            $destination_dir = WWW_ROOT . "data/$id/iconImage/";
+            $destination_dir = WWW_ROOT . "data" . DS . $id . DS;
             if (!is_dir($destination_dir)) {
                 mkdir($destination_dir, 0777, true);
             }
-            $destination_path = $destination_dir . "image.jpg";
+            $destination_path = $destination_dir . "iconImage.png";
             move_uploaded_file($this->request->data['iconImage']['tmp_name'], $destination_path);
             $this->Pass->data['Pass']['iconImage'] = str_replace(WWW_ROOT,'',$destination_path);
             $this->Pass->save($this->Pass->data);
         } elseif (isset($this->request->data['backgroundImage'])) {
-            $destination_dir = WWW_ROOT . "data/$id/backgroundImage/";
+            $destination_dir = WWW_ROOT . "data" . DS . $id . DS;
             if (!is_dir($destination_dir)) {
                 mkdir($destination_dir, 0777, true);
             }
-            $destination_path = $destination_dir . "image.jpg";
+            $destination_path = $destination_dir . "backgroundImage.png";
             move_uploaded_file($this->request->data['backgroundImage']['tmp_name'], $destination_path);
             $this->Pass->data['Pass']['backgroundImage'] = str_replace(WWW_ROOT,'',$destination_path);
             $this->Pass->save($this->Pass->data);
@@ -208,20 +208,20 @@ class PassController extends AppController
         $passbook->set_json($pass_data);
 
 // Set background
-        $passbook->set_image('background', $data_path . DS . 'sample' . '/img/event/background.png');
+        $passbook->set_image('background', $data_path_web . $this->Pass->data['Pass']['backgroundImage']);
         $passbook->set_image('background', $data_path . DS . 'sample' . '/img/event/background@2x.png', true);
 
 // Set icon
-        $passbook->set_image('icon', $data_path . DS . 'sample' . '/img/event/icon.png');
-        $passbook->set_image('icon', $data_path . DS . 'sample' . '/img/event/icon@2x.png', true);
+        $passbook->set_image('icon', $data_path_web . $this->Pass->data['Pass']['iconImage']);
+        $passbook->set_image('icon', $data_path . 'sample' . '/img/event/icon@2x.png', true);
 
 // Set logo
-        $passbook->set_image('logo', $data_path . DS . 'sample' . '/img/event/logo.png');
-        $passbook->set_image('logo', $data_path . DS . 'sample' . '/img/event/logo@2x.png', true);
+        $passbook->set_image('logo', $data_path . 'sample' . '/img/event/logo.png');
+        $passbook->set_image('logo', $data_path . 'sample' . '/img/event/logo@2x.png', true);
 
 // Set thumbnail
-        $passbook->set_image('thumbnail', $data_path . DS . 'sample' . '/img/event/thumbnail.png');
-        $passbook->set_image('thumbnail', $data_path . DS . 'sample' . '/img/event/thumbnail@2x.png', true);
+        $passbook->set_image('thumbnail', $data_path . 'sample' . '/img/event/thumbnail.png');
+        $passbook->set_image('thumbnail', $data_path . 'sample' . '/img/event/thumbnail@2x.png', true);
 
 // Create a pass
         $pass = $passbook->create('pass', false);
