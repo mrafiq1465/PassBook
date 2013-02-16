@@ -8,4 +8,5 @@ app/[Cc]onfig/core.php
 app/[Cc]onfig/database.php
 app/Test/*
 app/webroot/data/*
+app/data/passes/*
 !empty

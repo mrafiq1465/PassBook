@@ -161,27 +161,21 @@ class Passbook {
         // Create pass.json file contents
         $pass_contents = json_encode($this->_keys);
         // Set temporary pass folder name
-
         $pass_folder_name = uniqid() . '.raw';
         // Set temporary pass folder path
         $pass_folder_path = $this->temp_path . $pass_folder_name . DIRECTORY_SEPARATOR;
-
         // Create temporary pass folder
         if (!mkdir($pass_folder_path, 0777)) throw new Exception("Couldn't create temporary pass folder.");
         // Create pass.json file
         if (!file_put_contents($pass_folder_path . $this->_pass_file_name, $pass_contents)) throw new Exception("Couldn't create pass.json file.");
         // Check for images
-
         if (!empty($this->_images))
         {
-
             // Loop images
             foreach ($this->_images as $image)
             {
-
                 // Set new filename
                 $image_name = $image['type'];
-
                 // Check for retina
                 if ($image['retina']) $image_name .= '@2x';
                 // Add extension
@@ -197,9 +191,6 @@ class Passbook {
         // Set zip file
         $zip_file = $this->output_path . $pkpass_file_name . $this->_pass_extension;
         // Init zip
-
-
-
         $zip = new ZipArchive();
         // Open zip file (by default it overwrites if file exists)
         if (!$zip->open($zip_file, ZIPARCHIVE::OVERWRITE)) throw new Exception("Couldn't open zip file.");
@@ -225,13 +216,10 @@ class Passbook {
         }
         // Close zip
         $zip->close();
-
         // Remove temp folder
         $this->_remove_dir($pass_folder_path);
         // Check show
-
         if ($show) $this->show($zip_file);
-
         return $pkpass_file_name . $this->_pass_extension;
     }
 
@@ -278,7 +266,6 @@ class Passbook {
             // Push into manifest
             $manifest[$file] = sha1_file($pass_folder_path . $file);
         }
-
         // Put manifest file in pass folder path
         if (!file_put_contents($pass_folder_path . $this->_manifest_file_name, json_encode($manifest))) throw new Exception("Failed to write manifest.json.");
         return true;
@@ -304,11 +291,15 @@ class Passbook {
         {
             $certdata = openssl_x509_read($certs['cert']);
             $privkey = openssl_pkey_get_private($certs['pkey'], $this->p12_cert_pass );
-            openssl_pkcs7_sign($pass_folder_path . $this->_manifest_file_name, $pass_folder_path . $this->_signature_file_name, $certdata, $privkey, array(), PKCS7_BINARY | PKCS7_DETACHED, $this->wwdr_certificate);
+            openssl_pkcs7_sign($pass_folder_path . $this->_manifest_file_name,
+                $pass_folder_path . $this->_signature_file_name,
+                $certdata,
+                $privkey, array(),
+                PKCS7_BINARY | PKCS7_DETACHED,
+                $this->wwdr_certificate);
             //openssl_pkcs7_sign($pass_folder_path . $this->_manifest_file_name, $pass_folder_path . $this->_signature_file_name, $certdata, $privkey, array(), PKCS7_BINARY | PKCS7_DETACHED);
             // Get signature content
             $signature_content = @file_get_contents($pass_folder_path . $this->_signature_file_name);
-
             // Check signature content
             if (!$signature_content) throw new Exception("Couldn't read signature file.");
             // Delimeters

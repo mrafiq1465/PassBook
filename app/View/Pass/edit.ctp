@@ -69,6 +69,7 @@
                     <?=$this->Form->input('foregroundColor', array('id' => 'foregroundColor'));?>
                     <?=$this->Form->input('labelColor', array('id' => 'labelColor'));?>
                     <?=$this->Form->end('Next'); ?>
+                    <a href="/edit/generate_pass/<?=$this->data['Pass']['id']?>" target="_blank">Generate Pass</a>
                 </div>
             </div>
         </div>
@@ -149,7 +150,7 @@ echo $this->Html->css('colorpicker/colorpicker.css');
     $(document).ready(function () {
         $('#backgroundColor, #foregroundColor, #labelColor').ColorPicker({
             onSubmit: function(hsb, hex, rgb, el) {
-                $(el).val('#' + hex);
+                $(el).val('rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')');
                 $(el).ColorPickerHide();
             },
             onBeforeShow: function () {
