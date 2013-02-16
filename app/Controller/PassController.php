@@ -230,7 +230,7 @@ class PassController extends AppController
         App::uses('CakeEmail', 'Network/Email');
         $email = new CakeEmail();
         $email->from(array('me@example.com' => 'My Site'));
-        $email->to('abdallahs@gmail.com');
+        $email->to('mrafiq1465@gmail.com');
         $email->subject('Pass file');
         $email->attachments($passbook->output_path .$pass);
         $email->send('My message');
