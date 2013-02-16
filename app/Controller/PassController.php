@@ -84,18 +84,38 @@ class PassController extends AppController
         $this->Pass->id = $id;
         $this->Pass->read();
         if (isset($this->request->query['remove'])) {
-            switch($this->request->query['remove']) {
+            switch ($this->request->query['remove']) {
                 case 'data[iconImage]' :
-                    unlink(WWW_ROOT . $this->Pass->data['Pass']['iconImage']);
-                    $this->Pass->data['Pass']['iconImage'] = '';
-                    $this->Pass->save($this->Pass->data);break;
+                    if (!empty($this->Pass->data['Pass']['iconImage'])) {
+                        unlink(WWW_ROOT . $this->Pass->data['Pass']['iconImage']);
+                        $this->Pass->data['Pass']['iconImage'] = '';
+                        $this->Pass->save($this->Pass->data);
+                    }
+                    break;
+                case 'data[iconImageRetina]' :
+                    if(!empty($this->Pass->data['Pass']['iconImageRetina'])) {
+                        unlink(WWW_ROOT . $this->Pass->data['Pass']['iconImageRetina']);
+                        $this->Pass->data['Pass']['iconImageRetina'] = '';
+                        $this->Pass->save($this->Pass->data);
+                    }
+                    break;
                 case 'data[backgroundImage]' :
-                    unlink(WWW_ROOT . $this->Pass->data['Pass']['backgroundImage']);
-                    $this->Pass->data['Pass']['backgroundImage'] = '';
-                    $this->Pass->save($this->Pass->data);break;
-                default: break;
+                    if (!empty($this->Pass->data['Pass']['backgroundImage'])) {
+                        unlink(WWW_ROOT . $this->Pass->data['Pass']['backgroundImage']);
+                        $this->Pass->data['Pass']['backgroundImage'] = '';
+                        $this->Pass->save($this->Pass->data);
+                    }
+                    break;
+                case 'data[backgroundImageRetina]' :
+                    if (!empty($this->Pass->data['Pass']['backgroundImageRetina'])) {
+                        unlink(WWW_ROOT . $this->Pass->data['Pass']['backgroundImageRetina']);
+                        $this->Pass->data['Pass']['backgroundImageRetina'] = '';
+                        $this->Pass->save($this->Pass->data);
+                    }
+                    break;
+                default:
+                    break;
             }
-
         } elseif (isset($this->request->data['iconImage'])) {
             $destination_dir = WWW_ROOT . "data" . DS . $id . DS;
             if (!is_dir($destination_dir)) {
@@ -103,7 +123,16 @@ class PassController extends AppController
             }
             $destination_path = $destination_dir . "iconImage.png";
             move_uploaded_file($this->request->data['iconImage']['tmp_name'], $destination_path);
-            $this->Pass->data['Pass']['iconImage'] = str_replace(WWW_ROOT,'',$destination_path);
+            $this->Pass->data['Pass']['iconImage'] = str_replace(WWW_ROOT, '', $destination_path);
+            $this->Pass->save($this->Pass->data);
+        } elseif (isset($this->request->data['iconImageRetina'])) {
+            $destination_dir = WWW_ROOT . "data" . DS . $id . DS;
+            if (!is_dir($destination_dir)) {
+                mkdir($destination_dir, 0777, true);
+            }
+            $destination_path = $destination_dir . "iconImageRetina.png";
+            move_uploaded_file($this->request->data['iconImageRetina']['tmp_name'], $destination_path);
+            $this->Pass->data['Pass']['iconImageRetina'] = str_replace(WWW_ROOT, '', $destination_path);
             $this->Pass->save($this->Pass->data);
         } elseif (isset($this->request->data['backgroundImage'])) {
             $destination_dir = WWW_ROOT . "data" . DS . $id . DS;
@@ -112,15 +141,26 @@ class PassController extends AppController
             }
             $destination_path = $destination_dir . "backgroundImage.png";
             move_uploaded_file($this->request->data['backgroundImage']['tmp_name'], $destination_path);
-            $this->Pass->data['Pass']['backgroundImage'] = str_replace(WWW_ROOT,'',$destination_path);
+            $this->Pass->data['Pass']['backgroundImage'] = str_replace(WWW_ROOT, '', $destination_path);
+            $this->Pass->save($this->Pass->data);
+        } elseif (isset($this->request->data['backgroundImageRetina'])) {
+            $destination_dir = WWW_ROOT . "data" . DS . $id . DS;
+            if (!is_dir($destination_dir)) {
+                mkdir($destination_dir, 0777, true);
+            }
+            $destination_path = $destination_dir . "backgroundImageRetina.png";
+            move_uploaded_file($this->request->data['backgroundImageRetina']['tmp_name'], $destination_path);
+            $this->Pass->data['Pass']['backgroundImageRetina'] = str_replace(WWW_ROOT, '', $destination_path);
             $this->Pass->save($this->Pass->data);
         } else {
             $this->Pass->save($this->request->data);
         }
-        return json_encode(array('success' => true));
+        if (isset($destination_path)) return json_encode(array('success' => '/' . str_replace(WWW_ROOT, '', $destination_path)));
+        else return json_encode(array('success' => true));
     }
 
-    public function generate_pass($id) {
+    public function generate_pass($id)
+    {
         $this->autoRender = false;
         $this->Pass->id = $id;
         $data = $this->Pass->read();
@@ -133,14 +173,14 @@ class PassController extends AppController
 // Set pass output path
         $passbook->output_path = $data_path . "passes" . DS . $id . DS;
 
-        if(!is_dir($passbook->output_path)) mkdir($passbook->output_path, 0777, true);
+        if (!is_dir($passbook->output_path)) mkdir($passbook->output_path, 0777, true);
 
 // Set temporary folder
         $passbook->temp_path = sys_get_temp_dir() . DS;
 
 // Set P12 certificate
-        $passbook->p12_certificate  = $data_path . 'ios.p12'; # Required!
-        $passbook->p12_cert_pass    = '1234'; # Required!
+        $passbook->p12_certificate = $data_path . 'ios.p12'; # Required!
+        $passbook->p12_cert_pass = '1234'; # Required!
 
 // Set WWDR certificate
         $passbook->wwdr_certificate = $data_path . 'AppleWWDRCA.cer'; # Required!
@@ -148,74 +188,74 @@ class PassController extends AppController
 // Create pass data
         $pass_data = array(
             // Identifiers
-            'teamIdentifier'        => '9E8L8Y3KWG', # Required!
-            'passTypeIdentifier'    => 'pass.eventcinemas.movie', # Required!
-            'organizationName'      => $data['Pass']['organizationName'],
-            'serialNumber'          => '123456789',
-            'description'           => $data['Pass']['description'],
-            // Styling
-            'backgroundColor'       => $data['Pass']['backgroundColor'],
-            'foregroundColor'       => $data['Pass']['foregroundColor'],
-            'labelColor'            => $data['Pass']['labelColor'],
+            'teamIdentifier' => '9E8L8Y3KWG', # Required!
+            'passTypeIdentifier' => 'pass.eventcinemas.movie', # Required!
+            'organizationName' => $data['Pass']['organizationName'],
+            'serialNumber' => '123456789',
+            'description' => $data['Pass']['description'],
             // Texts
-            'logoText'              => '',
+            'logoText' => '',
             // Passbook version
-            'formatVersion'         => 1,
+            'formatVersion' => 1,
             // Locations
-            'locations'             => array(
+            'locations' => array(
                 array(
-                    'latitude'      => 37.6189722,
-                    'longitude'     => -122.3748889,
+                    'latitude' => 37.6189722,
+                    'longitude' => -122.3748889,
                 ),
                 array(
-                    'latitude'      => 37.33182,
-                    'longitude'     => -122.03118,
+                    'latitude' => 37.33182,
+                    'longitude' => -122.03118,
                 )
             ),
             // Event
-            'relevantDate'          => "2013-12-28T13:00-08:00",
-            'eventTicket'           => array(
-                'primaryFields'         => array(
+            'relevantDate' => "2013-12-28T13:00-08:00",
+            'eventTicket' => array(
+                'primaryFields' => array(
                     array(
-                        'key'   => 'event',
+                        'key' => 'event',
                         'label' => 'EVENT',
                         'value' => 'The Beat Goes On'
                     )
                 ),
-                'secondaryFields'       => array(
+                'secondaryFields' => array(
                     array(
-                        'key'   => 'location',
+                        'key' => 'location',
                         'label' => 'LOCATION',
                         'value' => 'Moscone West'
                     ),
                 ),
-                'backFields'            => array(
+                'backFields' => array(
                     array(
-                        'key'   => 'copy1',
+                        'key' => 'copy1',
                         'label' => 'Lorem Ipsum',
                         'value' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
                     )
                 )
             ),
-            'barcode'               => array(
-                'format'            => 'PKBarcodeFormatPDF417',
-                'message'           => '123456789',
-                'messageEncoding'   => 'iso-8859-1'
+            'barcode' => array(
+                'format' => 'PKBarcodeFormatPDF417',
+                'message' => '123456789',
+                'messageEncoding' => 'iso-8859-1'
             )
         );
+
+        // Styling
+        if (!empty($pass_data['backgroundColor'])) $pass_data['backgroundColor'] = $data['Pass']['backgroundColor'];
+        if (!empty($pass_data['foregroundColor'])) $pass_data['foregroundColor'] = $data['Pass']['foregroundColor'];
+        if (!empty($pass_data['labelColor'])) $pass_data['labelColor'] = $data['Pass']['labelColor'];
+
 
 // Set JSON
         $passbook->set_json($pass_data);
 
 // Set background
         if (!empty($this->Pass->data['Pass']['backgroundImage'])) $passbook->set_image('background', $data_path_web . $this->Pass->data['Pass']['backgroundImage']);
-        else $passbook->set_image('background', $data_path . DS . 'sample' . '/img/event/background.png', true);
-        $passbook->set_image('background', $data_path . DS . 'sample' . '/img/event/background@2x.png', true);
+        if (!empty($this->Pass->data['Pass']['backgroundImageRetina'])) $passbook->set_image('background', $data_path_web . $this->Pass->data['Pass']['backgroundImageRetina'], true);
 
 // Set icon
         if (!empty($this->Pass->data['Pass']['iconImage'])) $passbook->set_image('icon', $data_path_web . $this->Pass->data['Pass']['iconImage']);
-        else $passbook->set_image('icon', $data_path . 'sample' . '/img/event/icon.png', true);
-        $passbook->set_image('icon', $data_path . 'sample' . '/img/event/icon@2x.png', true);
+        if (!empty($this->Pass->data['Pass']['iconImageRetina'])) $passbook->set_image('icon', $data_path_web . $this->Pass->data['Pass']['iconImageRetina'], true);
 
 // Set logo
         $passbook->set_image('logo', $data_path . 'sample' . '/img/event/logo.png');
@@ -232,7 +272,7 @@ class PassController extends AppController
         $email->from(array('me@example.com' => 'My Site'));
         $email->to('mrafiq1465@gmail.com');
         $email->subject('Pass file');
-        $email->attachments($passbook->output_path .$pass);
+        $email->attachments($passbook->output_path . $pass);
         $email->send('My message');
         echo json_encode(array('success' => true));
     }

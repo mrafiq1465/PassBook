@@ -25,12 +25,18 @@ $(document).ready(function() {
 
     var $tabStrip = $('#tabstrip');
     if($tabStrip.length) {
+        var onSelect = function(e) {
+            // access the selected item via e.item (Element)
+            var tabNumber = $(e.item).attr('id').substr(3,1);
+            window.history.pushState(null, null, window.location.pathname.replace(window.location.pathname.substr(-5), '') + 'step' + tabNumber);
+        };
         $tabStrip.kendoTabStrip({
             animation:{
                 open:{
                     effects:"fadeIn"
                 }
-            }
+            },
+            select: onSelect
         });
         $("#barcode_format").kendoDropDownList();
         $('form[id^=step]').each(function(){
@@ -45,12 +51,12 @@ $(document).ready(function() {
                             window.location.href = '/pass/edit/' + resp.success.id + '/step2';
                             return;
                         }
-
                         var tabNumber = parseInt($form.attr('id').substr(4,1));
                         if(tabNumber !== 6) {
                             tabNumber++;
                             var $tabToActivate = $('#tab' + tabNumber);
                             $tabStrip.data('kendoTabStrip').activateTab($tabToActivate);
+                            window.history.pushState(null, null, '/pass/edit/' + resp.success.id + '/step' + tabNumber)
                         }
                     }
                 }

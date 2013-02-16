@@ -32,7 +32,7 @@
                 <p>
                     2 text fields. Description & Organization.
                 </p>
-                <?=$this->Form->create(null, array('url'=> '/pass/edit/'.$this->data['Pass']['id'] . '/step1' ,'id' => 'step1Form')); ?>
+                <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'] . '/step1', 'id' => 'step1Form')); ?>
                 <?=$this->Form->input('organizationName');?>
                 <?=$this->Form->input('description');?>
                 <?=$this->Form->end('Next'); ?>
@@ -57,14 +57,19 @@
 
                     Next Button
                 </p>
+
                 <div style="width:45%">
                     <img src="/<?=$this->request->data['Pass']['iconImage']?>" id="iconImg"/>
-                    <?=$this->Form->input('iconImage', array('type' => 'file','id' => 'iconImage'));?>
+                    <?=$this->Form->input('iconImage', array('type' => 'file', 'rel' => '#iconImg', 'class' => 'imageUpload'));?>
+                    <img src="/<?=$this->request->data['Pass']['iconImageRetina']?>" id="iconImgRetina"/>
+                    <?=$this->Form->input('iconImageRetina', array('type' => 'file', 'rel' => '#iconImgRetina', 'class' => 'imageUpload'));?>
 
                     <img src="/<?=$this->request->data['Pass']['backgroundImage']?>" id="backgroundImg"/>
-                    <?=$this->Form->input('backgroundImage', array('type' => 'file','id' => 'backgroundImage'));?>
+                    <?=$this->Form->input('backgroundImage', array('type' => 'file', 'rel' => '#backgroundImg', 'class' => 'imageUpload'));?>
+                    <img src="/<?=$this->request->data['Pass']['backgroundImageRetina']?>" id="backgroundImgRetina"/>
+                    <?=$this->Form->input('backgroundImageRetina', array('type' => 'file', 'rel' => '#backgroundImgRetina', 'class' => 'imageUpload'));?>
 
-                    <?=$this->Form->create(null, array('url'=> '/pass/edit/'.$this->data['Pass']['id'] . '/step2' ,'id' => 'step2Form')); ?>
+                    <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'] . '/step2', 'id' => 'step2Form')); ?>
                     <?=$this->Form->input('backgroundColor', array('id' => 'backgroundColor'));?>
                     <?=$this->Form->input('foregroundColor', array('id' => 'foregroundColor'));?>
                     <?=$this->Form->input('labelColor', array('id' => 'labelColor'));?>
@@ -74,7 +79,9 @@
         </div>
         <div>
             <div class="">
-                <a href="/pass/generate_pass/<?=$this->data['Pass']['id']?>" target="_blank">Generate Pass</a>
+                <a href="javascript:void(0);" data-href="/pass/generate_pass/<?=$this->data['Pass']['id']?>"
+                   id="generateBtn">Generate Pass</a>
+
                 <h2>Select from below</h2>
 
                 <p>
@@ -149,11 +156,11 @@ echo $this->Html->css('colorpicker/colorpicker.css');
 
     $(document).ready(function () {
         $('#backgroundColor, #foregroundColor, #labelColor').ColorPicker({
-            onSubmit: function(hsb, hex, rgb, el) {
+            onSubmit:function (hsb, hex, rgb, el) {
                 $(el).val('rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')');
                 $(el).ColorPickerHide();
             },
-            onBeforeShow: function () {
+            onBeforeShow:function () {
                 $(this).ColorPickerSetColor(this.value);
             }
         });
@@ -162,28 +169,29 @@ echo $this->Html->css('colorpicker/colorpicker.css');
         var $tabToActivate = $('#tab' + tabNumber);
         $('#tabstrip').data('kendoTabStrip').activateTab($tabToActivate);
 
-        var $iconImage = $("#iconImage");
-        var $backgroundImage = $("#backgroundImage");
-        $iconImage.kendoUpload({
-            async: {
-                saveUrl: "/pass/edit/<?=$this->data['Pass']['id']?>/step2",
-                removeUrl: "/pass/edit/<?=$this->data['Pass']['id']?>/step2?remove="+encodeURIComponent($iconImage.attr('name')),
-                autoUpload: true
-            },
-            success: function(e){
-                $('#iconImg').attr('src', $('#iconImg').attr('src')+ '?'+Math.random());
-            }
+        $('.imageUpload').each(function () {
+            var $this = $(this);
+            $this.kendoUpload({
+                async:{
+                    saveUrl:"/pass/edit/<?=$this->data['Pass']['id']?>/step2",
+                    removeUrl:"/pass/edit/<?=$this->data['Pass']['id']?>/step2?remove=" + encodeURIComponent($this.attr('name')),
+                    autoUpload:true
+                },
+                success:function (e) {
+                    var $target_img = $($this.attr('rel'));
+                    if (e.response.success === true) $target_img.attr('src', '');
+                    else $target_img.attr('src', e.response.success + '?' + Math.random());
+                }
+            });
         });
-
-        $backgroundImage.kendoUpload({
-            async: {
-                saveUrl: "/pass/edit/<?=$this->data['Pass']['id']?>/step2",
-                removeUrl: "/pass/edit/<?=$this->data['Pass']['id']?>/step2?remove="+encodeURIComponent($backgroundImage.attr('name')),
-                autoUpload: true
-            },
-            success: function(e){
-                $('#backgroundImg').attr('src', $('#backgroundImg').attr('src') + '?'+Math.random());
-            }
-        });
+        $('#generateBtn').click(function () {
+            var $this = $(this);
+            $.ajax({
+                url:$this.attr('data-href'),
+                success:function (msg) {
+                    alert('Success');
+                }
+            })
+        })
     });
 </script>
