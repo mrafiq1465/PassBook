@@ -208,11 +208,13 @@ class PassController extends AppController
         $passbook->set_json($pass_data);
 
 // Set background
-        $passbook->set_image('background', $data_path_web . $this->Pass->data['Pass']['backgroundImage']);
+        if (!empty($this->Pass->data['Pass']['backgroundImage'])) $passbook->set_image('background', $data_path_web . $this->Pass->data['Pass']['backgroundImage']);
+        else $passbook->set_image('background', $data_path . DS . 'sample' . '/img/event/background.png', true);
         $passbook->set_image('background', $data_path . DS . 'sample' . '/img/event/background@2x.png', true);
 
 // Set icon
-        $passbook->set_image('icon', $data_path_web . $this->Pass->data['Pass']['iconImage']);
+        if (!empty($this->Pass->data['Pass']['iconImage'])) $passbook->set_image('icon', $data_path_web . $this->Pass->data['Pass']['iconImage']);
+        else $passbook->set_image('icon', $data_path . 'sample' . '/img/event/icon.png', true);
         $passbook->set_image('icon', $data_path . 'sample' . '/img/event/icon@2x.png', true);
 
 // Set logo
