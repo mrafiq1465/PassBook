@@ -69,12 +69,12 @@
                     <?=$this->Form->input('foregroundColor', array('id' => 'foregroundColor'));?>
                     <?=$this->Form->input('labelColor', array('id' => 'labelColor'));?>
                     <?=$this->Form->end('Next'); ?>
-                    <a href="/pass/generate_pass/<?=$this->data['Pass']['id']?>" target="_blank">Generate Pass</a>
                 </div>
             </div>
         </div>
         <div>
             <div class="">
+                <a href="/pass/generate_pass/<?=$this->data['Pass']['id']?>" target="_blank">Generate Pass</a>
                 <h2>Select from below</h2>
 
                 <p>
