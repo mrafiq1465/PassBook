@@ -76,22 +76,23 @@ CREATE TABLE `pass` (
   `teamIdentifier` varchar(16) DEFAULT NULL,
   `passTypeIdentifier` varchar(64) DEFAULT NULL,
   `organizationName` varchar(64) DEFAULT NULL,
-  `iconImage` varchar(255) DEFAULT NULL,
+  `iconImage` text,
+  `iconImageRetina` text,
   `backgroundImage` text,
-  `background_image_ratina` text,
+  `backgroundImageRetina` text,
   `backgroundColor` varchar(32) DEFAULT NULL,
   `foregroundColor` varchar(32) DEFAULT NULL,
   `labelColor` varchar(32) DEFAULT NULL,
   `serialNumber` varchar(32) DEFAULT NULL,
   `description` varchar(64) DEFAULT NULL,
-  `logo_image` text,
-  `logo_image_ratina` text,
+  `logoImage` text,
+  `logoImageRetina` text,
   `logoText` varchar(100) DEFAULT NULL,
   `headerText` varchar(100) DEFAULT NULL,
-  `thumbnail_image` text,
-  `thumbnail_image_ratina` text,
-  `strip_image` text,
-  `strip_image_ratina` text,
+  `thumbnailImage` text,
+  `thumbnailImageRetina` text,
+  `stripImage` text,
+  `stripImageRetina` text,
   `primaryFields` text,
   `secondaryFields` text,
   `auxilaryFields` text,
@@ -100,7 +101,7 @@ CREATE TABLE `pass` (
   `locations` text,
   `relevantDate` varchar(100) DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,7 +110,7 @@ CREATE TABLE `pass` (
 
 LOCK TABLES `pass` WRITE;
 /*!40000 ALTER TABLE `pass` DISABLE KEYS */;
-INSERT INTO `pass` VALUES (1,NULL,NULL,NULL,NULL,NULL,'adsfasd','','',NULL,'','','',NULL,'fasdfsf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,''),(2,1,NULL,NULL,NULL,NULL,'sdfasdf',NULL,NULL,NULL,'rgb(184,66,184)','rgb(84,36,84)','rgb(189,147,189)',NULL,'asdfdas',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'');
+INSERT INTO `pass` VALUES (1,NULL,NULL,NULL,NULL,NULL,'adsfasd','','','',NULL,'','','',NULL,'fasdfsf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,''),(2,1,NULL,NULL,NULL,NULL,'sdfasdf',NULL,'',NULL,NULL,'rgb(184,66,184)','rgb(84,36,84)','rgb(189,147,189)',NULL,'asdfdas',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,''),(3,1,NULL,NULL,NULL,NULL,'adfsfas','data/3/iconImage.png','data/3/iconImageRetina.png','data/3/backgroundImage.png','data/3/backgroundImageRetina.png',NULL,NULL,NULL,NULL,'fdasfadsf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'');
 /*!40000 ALTER TABLE `pass` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,4 +147,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-02-16 13:11:04
+-- Dump completed on 2013-02-17  2:01:05
