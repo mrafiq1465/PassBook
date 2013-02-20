@@ -38,7 +38,7 @@ $(document).ready(function() {
             },
             select: onSelect
         });
-        $("#barcode_format").kendoDropDownList();
+        $("#PassBarcodeFormatId").kendoDropDownList();
         $('form[id^=step]').each(function(){
             var $form = $(this);
             $(this).ajaxForm({
@@ -56,7 +56,7 @@ $(document).ready(function() {
                             tabNumber++;
                             var $tabToActivate = $('#tab' + tabNumber);
                             $tabStrip.data('kendoTabStrip').activateTab($tabToActivate);
-                            window.history.pushState(null, null, '/pass/edit/' + resp.success.id + '/step' + tabNumber)
+                            window.history.pushState(null, null, '/pass/edit/' + resp.success + '/step' + tabNumber)
                         }
                     }
                 }

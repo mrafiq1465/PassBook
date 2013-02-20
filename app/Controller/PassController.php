@@ -67,6 +67,9 @@ class PassController extends AppController
                 case 'step2' :
                     echo $this->processStep2($id);
                     break;
+                case 'step3' :
+                    echo $this->processStep3($id);
+                    break;
                 default:
                     throw new NotFoundException(__('Invalid step'));
             }
@@ -76,7 +79,9 @@ class PassController extends AppController
         }
         $step = substr($step, 4);
 
-        $this->set(compact('step'));
+        $barcodeFormats = $this->Pass->BarcodeFormat->find('list');
+
+        $this->set(compact('step', 'barcodeFormats'));
     }
 
     public function processStep2($id)
@@ -85,78 +90,158 @@ class PassController extends AppController
         $this->Pass->read();
         if (isset($this->request->query['remove'])) {
             switch ($this->request->query['remove']) {
-                case 'data[iconImage]' :
-                    if (!empty($this->Pass->data['Pass']['iconImage'])) {
-                        unlink(WWW_ROOT . $this->Pass->data['Pass']['iconImage']);
-                        $this->Pass->data['Pass']['iconImage'] = '';
+                case 'data[logoImage]' :
+                    if (!empty($this->Pass->data['Pass']['logoImage'])) {
+                        unlink(WWW_ROOT . $this->Pass->data['Pass']['logoImage']);
+                        $this->Pass->data['Pass']['logoImage'] = '';
                         $this->Pass->save($this->Pass->data);
                     }
                     break;
-                case 'data[iconImageRetina]' :
-                    if(!empty($this->Pass->data['Pass']['iconImageRetina'])) {
-                        unlink(WWW_ROOT . $this->Pass->data['Pass']['iconImageRetina']);
-                        $this->Pass->data['Pass']['iconImageRetina'] = '';
+                case 'data[logoImageRetina]' :
+                    if(!empty($this->Pass->data['Pass']['logoImageRetina'])) {
+                        unlink(WWW_ROOT . $this->Pass->data['Pass']['logoImageRetina']);
+                        $this->Pass->data['Pass']['logoImageRetina'] = '';
                         $this->Pass->save($this->Pass->data);
                     }
                     break;
-                case 'data[backgroundImage]' :
-                    if (!empty($this->Pass->data['Pass']['backgroundImage'])) {
-                        unlink(WWW_ROOT . $this->Pass->data['Pass']['backgroundImage']);
-                        $this->Pass->data['Pass']['backgroundImage'] = '';
+                case 'data[thumbnailImage]' :
+                    if (!empty($this->Pass->data['Pass']['thumbnailImage'])) {
+                        unlink(WWW_ROOT . $this->Pass->data['Pass']['thumbnailImage']);
+                        $this->Pass->data['Pass']['thumbnailImage'] = '';
                         $this->Pass->save($this->Pass->data);
                     }
                     break;
-                case 'data[backgroundImageRetina]' :
-                    if (!empty($this->Pass->data['Pass']['backgroundImageRetina'])) {
-                        unlink(WWW_ROOT . $this->Pass->data['Pass']['backgroundImageRetina']);
-                        $this->Pass->data['Pass']['backgroundImageRetina'] = '';
+                case 'data[thumbnailImageRetina]' :
+                    if (!empty($this->Pass->data['Pass']['thumbnailImageRetina'])) {
+                        unlink(WWW_ROOT . $this->Pass->data['Pass']['thumbnailImageRetina']);
+                        $this->Pass->data['Pass']['thumbnailImageRetina'] = '';
                         $this->Pass->save($this->Pass->data);
                     }
                     break;
                 default:
                     break;
             }
-        } elseif (isset($this->request->data['iconImage'])) {
+        } elseif (isset($this->request->data['logoImage'])) {
             $destination_dir = WWW_ROOT . "data" . DS . $id . DS;
             if (!is_dir($destination_dir)) {
                 mkdir($destination_dir, 0777, true);
             }
-            $destination_path = $destination_dir . "iconImage.png";
-            move_uploaded_file($this->request->data['iconImage']['tmp_name'], $destination_path);
-            $this->Pass->data['Pass']['iconImage'] = str_replace(WWW_ROOT, '', $destination_path);
+            $destination_path = $destination_dir . "logoImage.png";
+            move_uploaded_file($this->request->data['logoImage']['tmp_name'], $destination_path);
+            $this->Pass->data['Pass']['logoImage'] = str_replace(WWW_ROOT, '', $destination_path);
             $this->Pass->save($this->Pass->data);
-        } elseif (isset($this->request->data['iconImageRetina'])) {
+        } elseif (isset($this->request->data['logoImageRetina'])) {
             $destination_dir = WWW_ROOT . "data" . DS . $id . DS;
             if (!is_dir($destination_dir)) {
                 mkdir($destination_dir, 0777, true);
             }
-            $destination_path = $destination_dir . "iconImageRetina.png";
-            move_uploaded_file($this->request->data['iconImageRetina']['tmp_name'], $destination_path);
-            $this->Pass->data['Pass']['iconImageRetina'] = str_replace(WWW_ROOT, '', $destination_path);
+            $destination_path = $destination_dir . "logoImageRetina.png";
+            move_uploaded_file($this->request->data['logoImageRetina']['tmp_name'], $destination_path);
+            $this->Pass->data['Pass']['logoImageRetina'] = str_replace(WWW_ROOT, '', $destination_path);
             $this->Pass->save($this->Pass->data);
-        } elseif (isset($this->request->data['backgroundImage'])) {
+        } elseif (isset($this->request->data['thumbnailImage'])) {
             $destination_dir = WWW_ROOT . "data" . DS . $id . DS;
             if (!is_dir($destination_dir)) {
                 mkdir($destination_dir, 0777, true);
             }
-            $destination_path = $destination_dir . "backgroundImage.png";
-            move_uploaded_file($this->request->data['backgroundImage']['tmp_name'], $destination_path);
-            $this->Pass->data['Pass']['backgroundImage'] = str_replace(WWW_ROOT, '', $destination_path);
+            $destination_path = $destination_dir . "thumbnailImage.png";
+            move_uploaded_file($this->request->data['thumbnailImage']['tmp_name'], $destination_path);
+            $this->Pass->data['Pass']['thumbnailImage'] = str_replace(WWW_ROOT, '', $destination_path);
             $this->Pass->save($this->Pass->data);
-        } elseif (isset($this->request->data['backgroundImageRetina'])) {
+        } elseif (isset($this->request->data['thumbnailImageRetina'])) {
             $destination_dir = WWW_ROOT . "data" . DS . $id . DS;
             if (!is_dir($destination_dir)) {
                 mkdir($destination_dir, 0777, true);
             }
-            $destination_path = $destination_dir . "backgroundImageRetina.png";
-            move_uploaded_file($this->request->data['backgroundImageRetina']['tmp_name'], $destination_path);
-            $this->Pass->data['Pass']['backgroundImageRetina'] = str_replace(WWW_ROOT, '', $destination_path);
+            $destination_path = $destination_dir . "thumbnailImageRetina.png";
+            move_uploaded_file($this->request->data['thumbnailImageRetina']['tmp_name'], $destination_path);
+            $this->Pass->data['Pass']['thumbnailImageRetina'] = str_replace(WWW_ROOT, '', $destination_path);
             $this->Pass->save($this->Pass->data);
         } else {
             $this->Pass->save($this->request->data);
         }
         if (isset($destination_path)) return json_encode(array('success' => '/' . str_replace(WWW_ROOT, '', $destination_path)));
         else return json_encode(array('success' => true));
+    }
+    
+    public function processStep3($id)
+    {
+        $this->Pass->id = $id;
+        $this->Pass->read();
+        if (isset($this->request->query['remove'])) {
+            switch ($this->request->query['remove']) {
+                case 'data[logoImage]' :
+                    if (!empty($this->Pass->data['Pass']['logoImage'])) {
+                        unlink(WWW_ROOT . $this->Pass->data['Pass']['logoImage']);
+                        $this->Pass->data['Pass']['logoImage'] = '';
+                        $this->Pass->save($this->Pass->data);
+                    }
+                    break;
+                case 'data[logoImageRetina]' :
+                    if(!empty($this->Pass->data['Pass']['logoImageRetina'])) {
+                        unlink(WWW_ROOT . $this->Pass->data['Pass']['logoImageRetina']);
+                        $this->Pass->data['Pass']['logoImageRetina'] = '';
+                        $this->Pass->save($this->Pass->data);
+                    }
+                    break;
+                case 'data[thumbnailImage]' :
+                    if (!empty($this->Pass->data['Pass']['thumbnailImage'])) {
+                        unlink(WWW_ROOT . $this->Pass->data['Pass']['thumbnailImage']);
+                        $this->Pass->data['Pass']['thumbnailImage'] = '';
+                        $this->Pass->save($this->Pass->data);
+                    }
+                    break;
+                case 'data[thumbnailImageRetina]' :
+                    if (!empty($this->Pass->data['Pass']['thumbnailImageRetina'])) {
+                        unlink(WWW_ROOT . $this->Pass->data['Pass']['thumbnailImageRetina']);
+                        $this->Pass->data['Pass']['thumbnailImageRetina'] = '';
+                        $this->Pass->save($this->Pass->data);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        } elseif (isset($this->request->data['logoImage'])) {
+            $destination_dir = WWW_ROOT . "data" . DS . $id . DS;
+            if (!is_dir($destination_dir)) {
+                mkdir($destination_dir, 0777, true);
+            }
+            $destination_path = $destination_dir . "logoImage.png";
+            move_uploaded_file($this->request->data['logoImage']['tmp_name'], $destination_path);
+            $this->Pass->data['Pass']['logoImage'] = str_replace(WWW_ROOT, '', $destination_path);
+            $this->Pass->save($this->Pass->data);
+        } elseif (isset($this->request->data['logoImageRetina'])) {
+            $destination_dir = WWW_ROOT . "data" . DS . $id . DS;
+            if (!is_dir($destination_dir)) {
+                mkdir($destination_dir, 0777, true);
+            }
+            $destination_path = $destination_dir . "logoImageRetina.png";
+            move_uploaded_file($this->request->data['logoImageRetina']['tmp_name'], $destination_path);
+            $this->Pass->data['Pass']['logoImageRetina'] = str_replace(WWW_ROOT, '', $destination_path);
+            $this->Pass->save($this->Pass->data);
+        } elseif (isset($this->request->data['thumbnailImage'])) {
+            $destination_dir = WWW_ROOT . "data" . DS . $id . DS;
+            if (!is_dir($destination_dir)) {
+                mkdir($destination_dir, 0777, true);
+            }
+            $destination_path = $destination_dir . "thumbnailImage.png";
+            move_uploaded_file($this->request->data['thumbnailImage']['tmp_name'], $destination_path);
+            $this->Pass->data['Pass']['thumbnailImage'] = str_replace(WWW_ROOT, '', $destination_path);
+            $this->Pass->save($this->Pass->data);
+        } elseif (isset($this->request->data['thumbnailImageRetina'])) {
+            $destination_dir = WWW_ROOT . "data" . DS . $id . DS;
+            if (!is_dir($destination_dir)) {
+                mkdir($destination_dir, 0777, true);
+            }
+            $destination_path = $destination_dir . "thumbnailImageRetina.png";
+            move_uploaded_file($this->request->data['thumbnailImageRetina']['tmp_name'], $destination_path);
+            $this->Pass->data['Pass']['thumbnailImageRetina'] = str_replace(WWW_ROOT, '', $destination_path);
+            $this->Pass->save($this->Pass->data);
+        } else {
+            $this->Pass->save($this->request->data);
+        }
+        if (isset($destination_path)) return json_encode(array('success' => '/' . str_replace(WWW_ROOT, '', $destination_path)));
+        else return json_encode(array('success' => $id));
     }
 
     public function generate_pass($id)
@@ -225,6 +310,13 @@ class PassController extends AppController
                         'value' => 'Moscone West'
                     ),
                 ),
+                'auxiliaryFields' => array(
+                    array(
+                        'key' => 'location',
+                        'label' => 'LOCATION',
+                        'value' => 'Moscone West'
+                    ),
+                ),
                 'backFields' => array(
                     array(
                         'key' => 'copy1',
@@ -250,12 +342,12 @@ class PassController extends AppController
         $passbook->set_json($pass_data);
 
 // Set background
-        if (!empty($this->Pass->data['Pass']['backgroundImage'])) $passbook->set_image('background', $data_path_web . $this->Pass->data['Pass']['backgroundImage']);
-        if (!empty($this->Pass->data['Pass']['backgroundImageRetina'])) $passbook->set_image('background', $data_path_web . $this->Pass->data['Pass']['backgroundImageRetina'], true);
+        if (!empty($this->Pass->data['Pass']['thumbnailImage'])) $passbook->set_image('background', $data_path_web . $this->Pass->data['Pass']['thumbnailImage']);
+        if (!empty($this->Pass->data['Pass']['thumbnailImageRetina'])) $passbook->set_image('background', $data_path_web . $this->Pass->data['Pass']['thumbnailImageRetina'], true);
 
 // Set icon
-        if (!empty($this->Pass->data['Pass']['iconImage'])) $passbook->set_image('icon', $data_path_web . $this->Pass->data['Pass']['iconImage']);
-        if (!empty($this->Pass->data['Pass']['iconImageRetina'])) $passbook->set_image('icon', $data_path_web . $this->Pass->data['Pass']['iconImageRetina'], true);
+        if (!empty($this->Pass->data['Pass']['logoImage'])) $passbook->set_image('icon', $data_path_web . $this->Pass->data['Pass']['logoImage']);
+        if (!empty($this->Pass->data['Pass']['logoImageRetina'])) $passbook->set_image('icon', $data_path_web . $this->Pass->data['Pass']['logoImageRetina'], true);
 
 // Set logo
         $passbook->set_image('logo', $data_path . 'sample' . '/img/event/logo.png');

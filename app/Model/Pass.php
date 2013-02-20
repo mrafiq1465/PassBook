@@ -4,7 +4,7 @@ App::uses('AppModel', 'Model');
  * Pass Model
  *
  * @property PassType $PassType
- * @property Type $Type
+ * @property BarcodeFormat $BarcodeFormat
  */
 class Pass extends AppModel {
 
@@ -30,8 +30,13 @@ class Pass extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+		'BarcodeFormat' => array(
+			'className' => 'BarcodeFormat',
+			'foreignKey' => 'barcode_format_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
-
-
 }

@@ -60,14 +60,14 @@
 
                 <div style="width:45%">
                     <img src="/<?=$this->request->data['Pass']['iconImage']?>" id="iconImg"/>
-                    <?=$this->Form->input('iconImage', array('type' => 'file', 'rel' => '#iconImg', 'class' => 'imageUpload'));?>
+                    <?=$this->Form->input('iconImage', array('type' => 'file', 'data-target'=>'step2', 'rel' => '#iconImg', 'class' => 'imageUpload'));?>
                     <img src="/<?=$this->request->data['Pass']['iconImageRetina']?>" id="iconImgRetina"/>
-                    <?=$this->Form->input('iconImageRetina', array('type' => 'file', 'rel' => '#iconImgRetina', 'class' => 'imageUpload'));?>
+                    <?=$this->Form->input('iconImageRetina', array('type' => 'file', 'data-target'=>'step2', 'rel' => '#iconImgRetina', 'class' => 'imageUpload'));?>
 
                     <img src="/<?=$this->request->data['Pass']['backgroundImage']?>" id="backgroundImg"/>
-                    <?=$this->Form->input('backgroundImage', array('type' => 'file', 'rel' => '#backgroundImg', 'class' => 'imageUpload'));?>
+                    <?=$this->Form->input('backgroundImage', array('type' => 'file', 'data-target'=>'step2', 'rel' => '#backgroundImg', 'class' => 'imageUpload'));?>
                     <img src="/<?=$this->request->data['Pass']['backgroundImageRetina']?>" id="backgroundImgRetina"/>
-                    <?=$this->Form->input('backgroundImageRetina', array('type' => 'file', 'rel' => '#backgroundImgRetina', 'class' => 'imageUpload'));?>
+                    <?=$this->Form->input('backgroundImageRetina', array('type' => 'file', 'data-target'=>'step2', 'rel' => '#backgroundImgRetina', 'class' => 'imageUpload'));?>
 
                     <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'] . '/step2', 'id' => 'step2Form')); ?>
                     <?=$this->Form->input('backgroundColor', array('id' => 'backgroundColor'));?>
@@ -79,9 +79,6 @@
         </div>
         <div>
             <div class="">
-                <a href="javascript:void(0);" data-href="/pass/generate_pass/<?=$this->data['Pass']['id']?>"
-                   id="generateBtn">Generate Pass</a>
-
                 <h2>Select from below</h2>
 
                 <p>
@@ -96,6 +93,26 @@
 
                     Previous & Next Button
                 </p>
+                <div style="width:45%">
+                    <img src="/<?=$this->request->data['Pass']['logoImage']?>" id="logoImg"/>
+                    <?=$this->Form->input('logoImage', array('type' => 'file', 'data-target'=>'step3', 'rel' => '#logoImg', 'class' => 'imageUpload'));?>
+                    <img src="/<?=$this->request->data['Pass']['logoImageRetina']?>" id="logoImgRetina"/>
+                    <?=$this->Form->input('logoImageRetina', array('type' => 'file', 'data-target'=>'step3', 'rel' => '#logoImgRetina', 'class' => 'imageUpload'));?>
+
+                    <img src="/<?=$this->request->data['Pass']['thumbnailImage']?>" id="thumbnailImg"/>
+                    <?=$this->Form->input('thumbnailImage', array('type' => 'file', 'data-target'=>'step3', 'rel' => '#thumbnailImg', 'class' => 'imageUpload'));?>
+                    <img src="/<?=$this->request->data['Pass']['thumbnailImageRetina']?>" id="thumbnailImgRetina"/>
+                    <?=$this->Form->input('thumbnailImageRetina', array('type' => 'file', 'data-target'=>'step3', 'rel' => '#thumbnailImgRetina', 'class' => 'imageUpload'));?>
+
+                    <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'] . '/step3', 'id' => 'step3Form')); ?>
+                    <?=$this->Form->input('logoText');?>
+                    <?=$this->Form->input('headerText');?>
+                    <?=$this->Form->input('primaryFields', array('type' => 'hidden'));?>
+                    <?=$this->Form->input('secondaryFields', array('type' => 'hidden'));?>
+                    <?=$this->Form->input('auxiliaryFields', array('type' => 'hidden'));?>
+                    <?=$this->Form->input('barcode_format_id');?>
+                    <?=$this->Form->end('Next'); ?>
+                </div>
             </div>
         </div>
         <div>
@@ -106,6 +123,9 @@
                     1. Secondary fields (there can be multiple key value pairs) <br><br>
                     Previous & Next Button
                 </p>
+                <a href="javascript:void(0);" data-href="/pass/generate_pass/<?=$this->data['Pass']['id']?>"
+                   id="generateBtn">Generate Pass</a>
+
             </div>
         </div>
         <div>
@@ -122,11 +142,7 @@
                 <h2>Select from below</h2>
 
                 <p>
-                    <select id="barcode_format">
-                        <option>PDF417</option>
-                        <option>Aztec</option>
-                        <option>QR codes</option>
-                    </select>
+
 
                     There are 3 different type of barcodes. User can select one. <br>
                     'format' => 'PKBarcodeFormatPDF417', <br>
@@ -173,8 +189,8 @@ echo $this->Html->css('colorpicker/colorpicker.css');
             var $this = $(this);
             $this.kendoUpload({
                 async:{
-                    saveUrl:"/pass/edit/<?=$this->data['Pass']['id']?>/step2",
-                    removeUrl:"/pass/edit/<?=$this->data['Pass']['id']?>/step2?remove=" + encodeURIComponent($this.attr('name')),
+                    saveUrl:"/pass/edit/<?=$this->data['Pass']['id']?>/"+$this.attr('data-target'),
+                    removeUrl:"/pass/edit/<?=$this->data['Pass']['id']?>/"+$this.attr('data-target')+"?remove=" + encodeURIComponent($this.attr('name')),
                     autoUpload:true
                 },
                 success:function (e) {
