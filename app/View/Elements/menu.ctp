@@ -1,9 +1,11 @@
 
+<div id="logo">
+    <a href="/"><img src="/img/logo.jpg" alt="Logo" /></a>
+</div>
 <ul id="menu">
-    <li>Item 1</li>
-    <li>Item 2</li>
-    <li>Item 3</li>
-    <li>Item 4</li>
-    <li>Item 5</li>
+    <li>home</li>
+    <li>pricing</li>
+    <li>my passes</li>
+    <li>help</li>
 </ul>
 
