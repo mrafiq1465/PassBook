@@ -28,7 +28,10 @@ $(document).ready(function() {
         var onSelect = function(e) {
             // access the selected item via e.item (Element)
             var tabNumber = $(e.item).attr('id').substr(3,1);
-            window.history.pushState(null, null, window.location.pathname.replace(window.location.pathname.substr(-5), '') + 'step' + tabNumber);
+            var url;
+            if(window.location.pathname.substr(-5).search(/step/) < 0) url = window.location.pathname + '/step'+ tabNumber;
+            else url = window.location.pathname.replace(window.location.pathname.substr(-5), '') + 'step' + tabNumber;
+            window.history.pushState(null, null, url);
         };
         $tabStrip.kendoTabStrip({
             animation:{
@@ -42,8 +45,17 @@ $(document).ready(function() {
         $('form[id^=step]').each(function(){
             var $form = $(this);
             $(this).ajaxForm({
+                beforeSend: function(){
+                    $form.find('.error').hide();
+                },
                 success:function (resp) {
-                    resp = $.parseJSON(resp);
+                    try {
+                        resp = $.parseJSON(resp);
+                    } catch (ex) {
+                        $form.find('.error').html(resp).show();
+                        return;
+                    }
+
                     if (resp.error !== undefined) {
                         //todo: show error somewhere
                     } else {

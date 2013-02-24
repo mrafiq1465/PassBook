@@ -34,3 +34,15 @@ body {
 #container {
     clear:both;
 }
+
+.hide {
+    display: none;
+}
+
+.inner {
+    padding: 3px;
+}
+
+.error {
+    display: none;
+}
