@@ -78,7 +78,7 @@ $(document).ready(function() {
     }
 
     $('.template-background-image-ctrl').hover(function(){
-        $('.template-background-image').eq($('.template-image-ctrl').index($(this))).toggle();
+        $('.template-background-image').eq($('.template-background-image-ctrl').index($(this))).toggle();
     });
 
 
