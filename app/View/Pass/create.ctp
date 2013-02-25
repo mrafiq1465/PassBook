@@ -29,9 +29,9 @@
         </ul>
         <div>
             <div class="">
-                <p>
+                <!--<p>
                     2 text fields. Description & Organization.
-                </p>
+                </p>-->
                 <?=$this->Form->create(null, array('id' => 'step1Form')); ?>
                 <?=$this->Form->input('organizationName');?>
                 <?=$this->Form->input('description');?>
