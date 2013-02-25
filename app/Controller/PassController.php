@@ -354,21 +354,17 @@ class PassController extends AppController
         } else {
             $data['Pass']['primaryFields'] = '';
         }
-        $data['Pass']['secondaryFields'] = json_encode(array_merge(array_filter($data['Pass']['secondaryFields'], function ($item) {
-            if (empty($item['Label']) || empty($item['Value'])) {
-                return false;
-            } else {
-                return true;
-            }
-        })));
+        if (isset($data['Pass']['secondaryFields'])) $data['Pass']['secondaryFields'] = json_encode(array_merge(array_filter(
+            $data['Pass']['secondaryFields'],
+            array($this, 'check_label_value'))));
 
-        $data['Pass']['auxiliaryFields'] = json_encode(array_merge(array_filter($data['Pass']['auxiliaryFields'], function ($item) {
-            if (empty($item['Label']) || empty($item['Value'])) {
-                return false;
-            } else {
-                return true;
-            }
-        })));
+        if (isset($data['Pass']['auxiliaryFields']))$data['Pass']['auxiliaryFields'] = json_encode(array_merge(array_filter(
+            $data['Pass']['auxiliaryFields'],
+            array($this, 'check_label_value'))));
+
+        if (isset($data['Pass']['backFields'])) $data['Pass']['backFields'] = json_encode(array_merge(array_filter(
+            $data['Pass']['backFields'],
+            array($this, 'check_label_value'))));
     }
     public function decodeDynamicFields(&$data)
     {
@@ -381,6 +377,18 @@ class PassController extends AppController
         if (!empty($data['Pass']['auxiliaryFields'])) {
             $data['Pass']['auxiliaryFields'] = json_decode($data['Pass']['auxiliaryFields'],1);
         }
+        if (!empty($data['Pass']['backFields'])) {
+            $data['Pass']['backFields'] = json_decode($data['Pass']['backFields'],1);
+        }
 
+    }
+
+    public function check_label_value($item)
+    {
+        if (empty($item['Label']) || empty($item['Value'])) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
