@@ -4,11 +4,11 @@
 
     <h3>Create a  pass in under 5 mins</h3>
     <ul id="pass_type">
-        <li><a href="/pass/create/event/"><img src="/img/event.jpg" alt="event ticket"></a></li>
-        <li><a href="/pass/create/coupon/"><img src="/img/coupon.jpg" alt="coupon"></a></li>
-        <li><a href="/pass/create/boarding/"><img src="/img/boarding.jpg" alt="boarding"></a></li>
-        <li><a href="/pass/create/store/"><img src="/img/store.jpg" alt="store card"></a></li>
-        <li><a href="/pass/create/generic/"><img src="/img/generic.jpg" alt="generic"></a></li>
+        <li><a href="/pass/create/event/" class="template-background-image-ctrl"><img src="/img/event.jpg" alt="event ticket"></a></li>
+        <li><a href="/pass/create/coupon/" class="template-background-image-ctrl"><img src="/img/coupon.jpg" alt="coupon"></a></li>
+        <li><a href="/pass/create/boarding/" class="template-background-image-ctrl"><img src="/img/boarding.jpg" alt="boarding"></a></li>
+        <li><a href="/pass/create/store/" class="template-background-image-ctrl"><img src="/img/store.jpg" alt="store card"></a></li>
+        <li><a href="/pass/create/generic/" class="template-background-image-ctrl"><img src="/img/generic.jpg" alt="generic"></a></li>
     </ul>
 
     <div>
