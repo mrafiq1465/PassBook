@@ -356,15 +356,19 @@ class PassController extends AppController
         }
         if (isset($data['Pass']['secondaryFields'])) $data['Pass']['secondaryFields'] = json_encode(array_merge(array_filter(
             $data['Pass']['secondaryFields'],
-            array($this, 'check_label_value'))));
+            array($this, 'check_all_keys_values'))));
 
         if (isset($data['Pass']['auxiliaryFields']))$data['Pass']['auxiliaryFields'] = json_encode(array_merge(array_filter(
             $data['Pass']['auxiliaryFields'],
-            array($this, 'check_label_value'))));
+            array($this, 'check_all_keys_values'))));
 
         if (isset($data['Pass']['backFields'])) $data['Pass']['backFields'] = json_encode(array_merge(array_filter(
             $data['Pass']['backFields'],
-            array($this, 'check_label_value'))));
+            array($this, 'check_all_keys_values'))));
+
+        if (isset($data['Pass']['locations'])) $data['Pass']['locations'] = json_encode(array_merge(array_filter(
+            $data['Pass']['locations'],
+            array($this, 'check_all_keys_values'))));
     }
     public function decodeDynamicFields(&$data)
     {
@@ -380,15 +384,19 @@ class PassController extends AppController
         if (!empty($data['Pass']['backFields'])) {
             $data['Pass']['backFields'] = json_decode($data['Pass']['backFields'],1);
         }
+        if (!empty($data['Pass']['locations'])) {
+            $data['Pass']['backFields'] = json_decode($data['Pass']['backFields'],1);
+        }
 
     }
 
-    public function check_label_value($item)
+    public function check_all_keys_values($item)
     {
-        if (empty($item['Label']) || empty($item['Value'])) {
-            return false;
-        } else {
-            return true;
+        foreach ($item as $v) {
+            if ($v == '' || is_null($v)) {
+                return false;
+            }
         }
+        return true;
     }
 }
