@@ -5,10 +5,5 @@ $config['Settings'] = array(
     'title' => 'My Application'
 );
 
-
-
-
-
-
-
-
+define('SITE_EMAIL','no-reply@example.com');
+define('SITE_NAME','example');
