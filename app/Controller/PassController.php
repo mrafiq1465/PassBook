@@ -385,7 +385,7 @@ class PassController extends AppController
             $data['Pass']['backFields'] = json_decode($data['Pass']['backFields'],1);
         }
         if (!empty($data['Pass']['locations'])) {
-            $data['Pass']['backFields'] = json_decode($data['Pass']['backFields'],1);
+            $data['Pass']['locations'] = json_decode($data['Pass']['locations'],1);
         }
 
     }

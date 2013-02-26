@@ -64,7 +64,7 @@ $(document).ready(function() {
                             return;
                         }
                         var tabNumber = parseInt($form.attr('id').substr(4,1));
-                        if(tabNumber !== 5) {
+                        if(tabNumber !== 6) {
                             tabNumber++;
                             var $tabToActivate = $('#tab' + tabNumber);
                             $tabStrip.data('kendoTabStrip').activateTab($tabToActivate);

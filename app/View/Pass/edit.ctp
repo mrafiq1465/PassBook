@@ -23,6 +23,9 @@
             <li id="tab5">
                 Relevance
             </li>
+            <li id="tab6">
+                Generate Pass
+            </li>
         </ul>
         <div>
             <div class="">
@@ -157,8 +160,12 @@
                         <? } ?>
                     </div>
                     <p class="error"></p>
-                    <?=$this->Form->end('Next'); ?>
+                    <?=$this->Form->end('Finish'); ?>
                 </div>
+            </div>
+        </div>
+        <div>
+            <div class="">
                 <a class="k-button" href="javascript:void(0);"
                    data-href="/pass/generate_pass/<?=$this->data['Pass']['id']?>"
                    id="generateBtn">Generate Pass</a>
