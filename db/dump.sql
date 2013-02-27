@@ -35,7 +35,7 @@ CREATE TABLE `barcode_format` (
 
 LOCK TABLES `barcode_format` WRITE;
 /*!40000 ALTER TABLE `barcode_format` DISABLE KEYS */;
-INSERT INTO `barcode_format` VALUES (1,'PDF417'),(2,'QR codes'),(3,'Aztec');
+INSERT INTO `barcode_format` VALUES (1,'PKBarcodeFormatPDF417'),(2,'QR codes'),(3,'Aztec');
 /*!40000 ALTER TABLE `barcode_format` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -48,9 +48,10 @@ DROP TABLE IF EXISTS `barcode_message_encoding`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `barcode_message_encoding` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `barcode_format_id` int(11) NOT NULL,
   `name` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -59,6 +60,7 @@ CREATE TABLE `barcode_message_encoding` (
 
 LOCK TABLES `barcode_message_encoding` WRITE;
 /*!40000 ALTER TABLE `barcode_message_encoding` DISABLE KEYS */;
+INSERT INTO `barcode_message_encoding` VALUES (1,1,'iso-8859-1');
 /*!40000 ALTER TABLE `barcode_message_encoding` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -111,7 +113,7 @@ CREATE TABLE `pass` (
 
 LOCK TABLES `pass` WRITE;
 /*!40000 ALTER TABLE `pass` DISABLE KEYS */;
-INSERT INTO `pass` VALUES (1,NULL,NULL,NULL,NULL,NULL,'adsfasd','','','','data/1/backgroundImageRetina.png','rgb(120,31,120)','rgb(222,185,222)','rgb(26,5,26)',NULL,'fasdfsf','data/1/logoImage.png','data/1/logoImageRetina.png','afdsf','adsfadsf','','data/1/thumbnailImageRetina.png',NULL,NULL,'','[]','[{\"Label\":\"adfs\",\"Value\":\"asdf\"}]',3,NULL,NULL,''),(2,1,NULL,NULL,NULL,NULL,'sdfasdf',NULL,'',NULL,NULL,'rgb(184,66,184)','rgb(84,36,84)','rgb(189,147,189)',NULL,'asdfdas',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,''),(3,1,NULL,NULL,NULL,NULL,'adfsfas','data/3/iconImage.png','data/3/iconImageRetina.png','data/3/backgroundImage.png','data/3/backgroundImageRetina.png',NULL,NULL,NULL,NULL,'fdasfadsf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'');
+INSERT INTO `pass` VALUES (1,NULL,NULL,NULL,NULL,NULL,'adsfasd','data/1/iconImage.png','','','data/1/backgroundImageRetina.png','rgb(120,31,120)','rgb(222,185,222)','rgb(26,5,26)',NULL,'fasdfsf','data/1/logoImage.png','data/1/logoImageRetina.png','afdsf','adsfadsf','','data/1/thumbnailImageRetina.png',NULL,NULL,'','[{\"Label\":\"adsfasfas\",\"Value\":\"dfasfdsfs\"}]','[{\"Label\":\"sdasdas\",\"Value\":\"dasd\"}]',1,'[{\"Label\":\"sdfds\",\"Value\":\"fdsf\"}]','[{\"Value\":\"34,34\"}]',''),(2,1,NULL,NULL,NULL,NULL,'sdfasdf',NULL,'',NULL,NULL,'rgb(184,66,184)','rgb(84,36,84)','rgb(189,147,189)',NULL,'asdfdas',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,''),(3,1,NULL,NULL,NULL,NULL,'adfsfas','data/3/iconImage.png','data/3/iconImageRetina.png','data/3/backgroundImage.png','data/3/backgroundImageRetina.png',NULL,NULL,NULL,NULL,'fdasfadsf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'');
 /*!40000 ALTER TABLE `pass` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,4 +150,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-02-25 12:43:34
+-- Dump completed on 2013-02-28  0:52:49
