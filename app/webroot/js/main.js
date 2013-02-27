@@ -82,6 +82,63 @@ $(document).ready(function() {
         $('.template-background-image').eq($('.template-background-image-ctrl').index($(this))).toggle();
     });
 
+    $('#backgroundColor, #foregroundColor, #labelColor').ColorPicker({
+        onSubmit:function (hsb, hex, rgb, el) {
+            $(el).val('rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')');
+            $(el).ColorPickerHide();
+        },
+        onBeforeShow:function () {
+            $(this).ColorPickerSetColor(this.value);
+        }
+    });
+
+
+    $('.dynamicFields').click(function () {
+        var $container = $($(this).attr('data-target'));
+        $container.show();
+        $container.find('.inner:hidden').eq(0).show();
+    });
+
+    var $window = $("#window"),
+        undo = $("#generateBtn")
+            .bind("click", function() {
+                $window.data("kendoWindow").open().center();
+                undo.hide();
+            });
+
+    var onClose = function() {
+        undo.show();
+    };
+
+    if (!$window.data("kendoWindow")) {
+        $window.kendoWindow({
+            width: "600px",
+            title: "Pass Generate",
+            close: onClose,
+            visible: false,
+            modal: true
+        });
+    }
+
+    var $PassGenerateForm = $('#PassGenerateForm');
+    $PassGenerateForm.ajaxForm({
+        success: function(resp) {
+            try {
+                resp = $.parseJSON(resp);
+            } catch (ex) {
+                $PassGenerateForm.find('.error').html(resp).show();
+                return;
+            }
+            if (resp.error !== undefined) {
+                //todo: show error somewhere
+                $PassGenerateForm.find('.error').text(resp.error).show();
+            } else {
+                $window.data("kendoWindow").close();
+            }
+        }
+    });
+
+
 
 
 

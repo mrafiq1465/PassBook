@@ -108,7 +108,7 @@
                         </button>
                         <div class="<?=empty($this->data['Pass']['auxiliaryFields']) ? 'hide' : ''?>" id="auxiliaryFieldsContainer">
                             <? for ($i=0; $i < 6; $i++) { ?>
-                            <div class="<?=empty($this->data['Pass']['auxiliaryFields'][0]) ? 'hide' : ''?> inner">
+                            <div class="<?=empty($this->data['Pass']['auxiliaryFields'][$i]) ? 'hide' : ''?> inner">
                                 <label>Label:</label>
                                 <?=$this->Form->input("Pass.auxiliaryFields.$i.Label", array('label' => false));?>
                                 <label>Value:</label>
@@ -189,22 +189,10 @@ echo $this->Html->css('colorpicker/colorpicker.css');
 ?>
 
 <script>
-
     $(document).ready(function () {
-        $('#backgroundColor, #foregroundColor, #labelColor').ColorPicker({
-            onSubmit:function (hsb, hex, rgb, el) {
-                $(el).val('rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')');
-                $(el).ColorPickerHide();
-            },
-            onBeforeShow:function () {
-                $(this).ColorPickerSetColor(this.value);
-            }
-        });
-
         var tabNumber = parseInt('<?=$step?>');
         var $tabToActivate = $('#tab' + tabNumber);
         $('#tabstrip').data('kendoTabStrip').activateTab($tabToActivate);
-
 
         $('.imageUpload').each(function () {
             var $this = $(this);
@@ -221,51 +209,6 @@ echo $this->Html->css('colorpicker/colorpicker.css');
                     else $target_img.attr('src', e.response.success + '?' + Math.random());
                 }
             });
-        });
-
-        $('.dynamicFields').click(function () {
-            var $container = $($(this).attr('data-target'));
-            $container.show();
-            $container.find('.inner:hidden').eq(0).show();
-        })
-
-        var $window = $("#window"),
-                undo = $("#generateBtn")
-                        .bind("click", function() {
-                            $window.data("kendoWindow").open().center();
-                            undo.hide();
-                        });
-
-        var onClose = function() {
-            undo.show();
-        }
-
-        if (!$window.data("kendoWindow")) {
-            $window.kendoWindow({
-                width: "600px",
-                title: "Pass Generate",
-                close: onClose,
-                visible: false,
-                modal: true
-            });
-        }
-
-        var $PassGenerateForm = $('#PassGenerateForm');
-        $PassGenerateForm.ajaxForm({
-            success: function(resp) {
-                try {
-                    resp = $.parseJSON(resp);
-                } catch (ex) {
-                    $PassGenerateForm.find('.error').html(resp).show();
-                    return;
-                }
-                if (resp.error !== undefined) {
-                    //todo: show error somewhere
-                    $PassGenerateForm.find('.error').text(resp.error).show();
-                } else {
-                    $window.data("kendoWindow").close();
-                }
-            }
         });
 
     });
