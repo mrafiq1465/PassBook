@@ -76,17 +76,7 @@ class Pass extends AppModel {
             'logoText' => '',
             // Passbook version
             'formatVersion' => 1,
-            // Locations
-            'locations' => array(
-                array(
-                    'latitude' => 37.6189722,
-                    'longitude' => -122.3748889,
-                ),
-                array(
-                    'latitude' => 37.33182,
-                    'longitude' => -122.03118,
-                )
-            ),
+
             // Event
             'relevantDate' => "2013-12-28T13:00-08:00",
             'eventTicket' => array(
@@ -125,6 +115,16 @@ class Pass extends AppModel {
                 'messageEncoding' => 'iso-8859-1'
             )
         );
+
+        //Locations
+        $data['Pass']['locations'] = json_decode($data['Pass']['locations'], 1);
+        foreach ($data['Pass']['locations'] as $location) {
+            $location = explode(',', $location['Value']);
+            $pass_data['locations'][] = array(
+                'latitude' => $location[0],
+                'longitude' => $location[1],
+            );
+        }
 
         // Styling
         if (!empty($pass_data['backgroundColor'])) $pass_data['backgroundColor'] = $data['Pass']['backgroundColor'];
