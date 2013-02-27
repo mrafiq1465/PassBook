@@ -58,6 +58,7 @@ $(document).ready(function() {
 
                     if (resp.error !== undefined) {
                         //todo: show error somewhere
+                        $form.find('.error').text(resp.error).show();
                     } else {
                         if (window.create_mode !== undefined && window.create_mode === true) {
                             window.location.href = '/pass/edit/' + resp.success.id + '/step2';

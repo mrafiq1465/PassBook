@@ -225,16 +225,16 @@ class PassController extends AppController
     {
         $this->autoRender = false;
 
-        if ($this->request->is('post')) {
-            $email = $this->request->data['email'];
-            if (empty($email)) {
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $to = $this->request->data['email'];
+            if (empty($to)) {
                 die(json_encode(array('error' => 'email not given')));
             }
             $pass = $this->Pass->generate_pass($id);
             App::uses('CakeEmail', 'Network/Email');
             $email = new CakeEmail();
             $email->from(array(SITE_EMAIL => SITE_NAME));
-            $email->to($email);
+            $email->to($to);
             $email->subject('Pass file');
             $email->attachments($pass);
             $email->send('My message');

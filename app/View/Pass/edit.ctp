@@ -169,6 +169,12 @@
                 <a class="k-button" href="javascript:void(0);"
                    data-href="/pass/generate_pass/<?=$this->data['Pass']['id']?>"
                    id="generateBtn">Generate Pass</a>
+                <div id="window">
+                    <?=$this->Form->create(null, array('id'=>'PassGenerateForm', 'url' => '/Pass/generate_pass/' . $this->data['Pass']['id']));?>
+                    <?=$this->Form->input('email', array('name' => 'data[email]','label' => false, 'placeholder' => 'Email to send')); ?>
+                    <p class="error"></p>
+                    <?=$this->Form->end(array('label'=>'Generate', 'class'=> 'k-button'));?>
+                </div>
             </div>
         </div>
     </div>
@@ -199,6 +205,7 @@ echo $this->Html->css('colorpicker/colorpicker.css');
         var $tabToActivate = $('#tab' + tabNumber);
         $('#tabstrip').data('kendoTabStrip').activateTab($tabToActivate);
 
+
         $('.imageUpload').each(function () {
             var $this = $(this);
             $this.kendoUpload({
@@ -215,19 +222,51 @@ echo $this->Html->css('colorpicker/colorpicker.css');
                 }
             });
         });
-        $('#generateBtn').click(function () {
-            var $this = $(this);
-            $.ajax({
-                url:$this.attr('data-href'),
-                success:function (msg) {
-                    alert('Success');
-                }
-            })
-        });
+
         $('.dynamicFields').click(function () {
             var $container = $($(this).attr('data-target'));
             $container.show();
             $container.find('.inner:hidden').eq(0).show();
         })
+
+        var $window = $("#window"),
+                undo = $("#generateBtn")
+                        .bind("click", function() {
+                            $window.data("kendoWindow").open().center();
+                            undo.hide();
+                        });
+
+        var onClose = function() {
+            undo.show();
+        }
+
+        if (!$window.data("kendoWindow")) {
+            $window.kendoWindow({
+                width: "600px",
+                title: "Pass Generate",
+                close: onClose,
+                visible: false,
+                modal: true
+            });
+        }
+
+        var $PassGenerateForm = $('#PassGenerateForm');
+        $PassGenerateForm.ajaxForm({
+            success: function(resp) {
+                try {
+                    resp = $.parseJSON(resp);
+                } catch (ex) {
+                    $PassGenerateForm.find('.error').html(resp).show();
+                    return;
+                }
+                if (resp.error !== undefined) {
+                    //todo: show error somewhere
+                    $PassGenerateForm.find('.error').text(resp.error).show();
+                } else {
+                    $window.data("kendoWindow").close();
+                }
+            }
+        });
+
     });
 </script>
