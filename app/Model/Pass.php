@@ -61,7 +61,7 @@ class Pass extends AppModel
 
 // Set P12 certificate
         $passbook->p12_certificate = $data_path . 'ios.p12'; # Required!
-        $passbook->p12_cert_pass = '1234'; # Required!
+        $passbook->p12_cert_pass = P12_CERT_PASS; # Required!
 
 // Set WWDR certificate
         $passbook->wwdr_certificate = $data_path . 'AppleWWDRCA.cer'; # Required!
