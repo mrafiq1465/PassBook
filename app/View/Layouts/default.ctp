@@ -24,7 +24,7 @@
         echo $this->Html->css('reset');
         echo $this->Html->css('kendo.common.min');
         echo $this->Html->css('kendo.default.min');
-        echo $this->Html->css('style.css' . (Configure::read('debug') == 2) ? '?' . uniqid(): '');
+        echo $this->Html->css('style.css' . ((Configure::read('debug') == 2) ? '?' . uniqid(): ''));
         echo $this->Html->meta('favicon.ico','/favicon.ico', array('type' => 'icon'));
 
         echo $this->Html->script(
@@ -32,7 +32,7 @@
                 'jquery-1.8.2.min.js',
                 'kendo.all.min.js',
                 'jquery.form.js',
-                'main.js' . (Configure::read('debug') == 2) ? '?' . uniqid(): '',
+                'main.js' . ((Configure::read('debug') == 2) ? '?' . uniqid(): ''),
             ));
 
 		echo $this->fetch('meta');
