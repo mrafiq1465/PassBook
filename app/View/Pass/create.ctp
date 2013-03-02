@@ -126,6 +126,11 @@
     <?php echo $this->element('simulator/event'); ?>
 </section>
 
+<?
+echo $this->Html->script('colorpicker.js');
+echo $this->Html->css('colorpicker/colorpicker.css');
+?>
+
 <script>
     $(document).ready(function () {
         window.create_mode = true;
