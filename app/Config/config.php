@@ -8,4 +8,4 @@ $config['Settings'] = array(
 define('SITE_EMAIL','no-reply@example.com');
 define('SITE_NAME','example');
 
-define('P12_CERT_PASS','pass123');
+define('P12_CERT_PASS','pass1234');
