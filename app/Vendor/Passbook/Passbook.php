@@ -291,7 +291,7 @@ class Passbook {
         {
             $certdata = openssl_x509_read($certs['cert']);
             $privkey = openssl_pkey_get_private($certs['pkey'], $this->p12_cert_pass );
-            openssl_pkcs7_sign($pass_folder_path . $this->_manifest_file_name,
+            $response = openssl_pkcs7_sign($pass_folder_path . $this->_manifest_file_name,
                 $pass_folder_path . $this->_signature_file_name,
                 $certdata,
                 $privkey, array(),

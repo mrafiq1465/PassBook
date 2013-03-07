@@ -157,20 +157,20 @@ class Pass extends AppModel
         $passbook->set_json($pass_data);
 
 // Set background
-        if (!empty($this->data['Pass']['thumbnailImage'])) $passbook->set_image('background', $data_path_web . $this->data['Pass']['thumbnailImage']);
-        if (!empty($this->data['Pass']['thumbnailImageRetina'])) $passbook->set_image('background', $data_path_web . $this->data['Pass']['thumbnailImageRetina'], true);
+        if (!empty($this->data['Pass']['backgroundImage'])) $passbook->set_image('background', $data_path_web . $this->data['Pass']['backgroundImage']);
+        if (!empty($this->data['Pass']['backgroundImageRetina'])) $passbook->set_image('background', $data_path_web . $this->data['Pass']['backgroundImageRetina'], true);
 
 // Set icon
         if (!empty($this->data['Pass']['iconImage'])) $passbook->set_image('icon', $data_path_web . $this->data['Pass']['iconImage']);
         if (!empty($this->data['Pass']['iconImageRetina'])) $passbook->set_image('icon', $data_path_web . $this->data['Pass']['iconImageRetina'], true);
 
 // Set logo
-        if (!empty($this->data['Pass']['logoImage'])) $passbook->set_image('icon', $data_path_web . $this->data['Pass']['logoImage']);
-        if (!empty($this->data['Pass']['logoImageRetina'])) $passbook->set_image('icon', $data_path_web . $this->data['Pass']['logoImageRetina']);
+        if (!empty($this->data['Pass']['logoImage'])) $passbook->set_image('logo', $data_path_web . $this->data['Pass']['logoImage']);
+        if (!empty($this->data['Pass']['logoImageRetina'])) $passbook->set_image('logo', $data_path_web . $this->data['Pass']['logoImageRetina'], true);
 
 // Set thumbnail
-        if (!empty($this->data['Pass']['thumbnailImage'])) $passbook->set_image('icon', $data_path_web . $this->data['Pass']['thumbnailImage']);
-        if (!empty($this->data['Pass']['thumbnailImageRetina'])) $passbook->set_image('icon', $data_path_web . $this->data['Pass']['thumbnailImageRetina']);
+        if (!empty($this->data['Pass']['thumbnailImage'])) $passbook->set_image('thumbnail', $data_path_web . $this->data['Pass']['thumbnailImage']);
+        if (!empty($this->data['Pass']['thumbnailImageRetina'])) $passbook->set_image('thumbnail', $data_path_web . $this->data['Pass']['thumbnailImageRetina'], true);
 
 // Create a pass
         $pass = $passbook->create('pass', false);
