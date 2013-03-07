@@ -291,13 +291,18 @@ class Passbook {
         {
             $certdata = openssl_x509_read($certs['cert']);
             $privkey = openssl_pkey_get_private($certs['pkey'], $this->p12_cert_pass );
-            $response = openssl_pkcs7_sign($pass_folder_path . $this->_manifest_file_name,
+            /*openssl_pkcs7_sign($pass_folder_path . $this->_manifest_file_name,
                 $pass_folder_path . $this->_signature_file_name,
                 $certdata,
                 $privkey, array(),
                 PKCS7_BINARY | PKCS7_DETACHED,
-                $this->wwdr_certificate);
-            //openssl_pkcs7_sign($pass_folder_path . $this->_manifest_file_name, $pass_folder_path . $this->_signature_file_name, $certdata, $privkey, array(), PKCS7_BINARY | PKCS7_DETACHED);
+                $this->wwdr_certificate);*/
+            openssl_pkcs7_sign($pass_folder_path . $this->_manifest_file_name,
+                $pass_folder_path . $this->_signature_file_name,
+                $certdata,
+                $privkey, array(),
+                PKCS7_BINARY | PKCS7_DETACHED
+            );
             // Get signature content
             $signature_content = @file_get_contents($pass_folder_path . $this->_signature_file_name);
             // Check signature content

@@ -133,6 +133,7 @@ $(document).ready(function() {
                 //todo: show error somewhere
                 $PassGenerateForm.find('.error').text(resp.error).show();
             } else {
+                $PassGenerateForm.find('.error').text('').hide();
                 $window.data("kendoWindow").close();
             }
         }
