@@ -16,26 +16,14 @@ class PassController extends AppController
 
     public function create($action = 'event')
     {
-        switch ($action) {
-            case 'event' :
-                $pass_type_id = 1;
-                break;
-            case 'coupon' :
-                $pass_type_id = 2;
-                break;
-            case 'transport' :
-                $pass_type_id = 3;
-                break;
-            case 'store' :
-                $pass_type_id = 4;
-                break;
-            case 'generic' :
-                $pass_type_id = 5;
-                break;
-            default:
-                $pass_type_id = 1;
-                break;
-        }
+        $pass_type = $this->Pass->PassType->find('first',array(
+            'recursive' => -1,
+            'conditions' => array(
+                'name' => $action
+            ),
+        ));
+        $pass_type_id = $pass_type['PassType']['id'];
+
         if ($this->request->is('post')) {
             $this->autoRender = false;
             $this->Pass->create();
@@ -214,6 +202,7 @@ class PassController extends AppController
 
         $this->request->data = $this->Pass->read(null, $id);
         $this->decodeDynamicFields($this->request->data);
+
         $step = substr($step, 4);
 
         $barcodeFormats = $this->Pass->BarcodeFormat->find('list');

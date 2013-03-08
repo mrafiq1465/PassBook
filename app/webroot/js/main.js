@@ -105,9 +105,14 @@ $(document).ready(function() {
                 $window.data("kendoWindow").open().center();
                 undo.hide();
             });
+    var $PassGenerateForm = $('#PassGenerateForm');
 
     var onClose = function() {
         undo.show();
+    };
+
+    var onOpen = function() {
+        $PassGenerateForm.find('.error').text('');
     };
 
     if (!$window.data("kendoWindow")) {
@@ -115,12 +120,12 @@ $(document).ready(function() {
             width: "600px",
             title: "Pass Generate",
             close: onClose,
+            open: onOpen,
             visible: false,
             modal: true
         });
     }
 
-    var $PassGenerateForm = $('#PassGenerateForm');
     $PassGenerateForm.ajaxForm({
         success: function(resp) {
             try {
