@@ -1,7 +1,45 @@
 <div class="simulator">
     <div id="k-container">
         <div class="side front">
+          <div class="section_header">
+            <div class="logo_image" style=" margin: 10px; float: left;">
+               <img src="/img/passes/1/logo.png" />
+            </div>
+            <div class="logo_text" style="  margin: 10px; float: left;">
+                    logo text
+            </div>
+            <div class="header_text" style="  margin: 10px; float: right;">
+                header text
+            </div>
+          </div>
+          <div class="section_strip" style="clear: both;">
+              <div class="left" style="  margin: 10px; float: left;">
+                  <div class="primary_field" style="  margin: 15px 0;" >
+                      Rydges Melbourne
+                  </div>
+                  <div class="secondary_field" >
+                     <span class="key">Reservation</span> <br /> <span class="value">123456789L</span>
+                  </div>
+              </div>
+              <div class="right" style="  margin: 10px; float: right;">
+                  <img src="/img/passes/1/thumbnail.png" height="100px" />
+              </div>
+          </div>
+          <div class="section_auxiliary" style="clear: both;">
+              <div class="logo_text" style="  margin: 10px; float: left;">
+                    <span class="key">Arrive:</span> <br /> <span class="value">1 Nov 2012, 2 pm</span>
+              </div>
+              <div class="logo_text" style="  margin: 10px; float: left;">
+                    <span class="key">Depart:</span> <br /> <span class="value">3 Nov 2012, 2 pm</span>
+              </div>
 
+          </div>
+          <div class="section_barcode" style="clear: both;  text-align: center; margin-top: 120px">
+              <img src="/img/PDF417_Barcode_Font.jpg" height="100px" />
+          </div>
+           <div class="section_flip" style="clear: both; float: right; margin-right: 20px;">
+                <a href="#">i</a>
+            </div>
         </div>
         <div class="current side back">
 
@@ -37,10 +75,20 @@
     }
 
     .front {
-        background-image: url('/img/boarding_front.jpg');
+        background-image: url('/img/passes/1/background.png');
+        background-color: #fff;
+        padding: 0px 0 0 0px;
+        width:360px;
+        height:450px;
+        margin: 190px 0 0 40px;
+        color: #fff;
     }
+    .key {
+        font-weight: bold;
+    }
+
     .back{
-        background-image: url('/img/boarding.jpg');
+        background-image: url('/img/boarding_frontt.jpg');
     }
 
 </style>
