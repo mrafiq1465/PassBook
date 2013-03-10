@@ -12,7 +12,7 @@
                 header text
             </div>
           </div>
-          <div class="section_thumbnail" style="clear: both; display:none;">
+          <div class="section_thumbnail" style="clear: both; display:block;">
               <div class="left" style="  margin: 10px; float: left;">
                   <div class="primary_field" style="  margin: 15px 0;" >
                       Rydges Melbourne
@@ -25,12 +25,12 @@
                   <img src="/img/passes/event/thumbnail.png" height="100px" />
               </div>
           </div>
-          <div class="section_strip" style="background-image: url('/img/passes/event/strip.png');clear: both; height: 100px;">
+          <div class="section_strip" style="display:none;background-image: url('/img/passes/event/strip.png');clear: both; height: 100px;">
               <div class="primary_field" style="  padding: 10px;" >
                   Rydges Melbourne
               </div>
           </div>
-          <div class="secondary_field_strip" style="clear: both;">
+          <div class="secondary_field_strip" style="display:none;clear: both;">
               <div class="logo_text" style="  margin: 10px; float: left;">
                   <span class="key">Arrive:</span> <br /> <span class="value">1 Nov 2012, 2 pm</span>
               </div>
