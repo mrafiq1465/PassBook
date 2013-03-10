@@ -3,7 +3,7 @@
         <div class="side front">
           <div class="section_header">
             <div class="logo_image" style=" margin: 10px; float: left;">
-               <img src="/img/passes/1/logo.png" />
+               <img src="/img/passes/event/logo.png" />
             </div>
             <div class="logo_text" style="  margin: 10px; float: left;">
                     logo text
@@ -12,18 +12,32 @@
                 header text
             </div>
           </div>
-          <div class="section_strip" style="clear: both;">
+          <div class="section_thumbnail" style="clear: both; display:none;">
               <div class="left" style="  margin: 10px; float: left;">
                   <div class="primary_field" style="  margin: 15px 0;" >
                       Rydges Melbourne
                   </div>
-                  <div class="secondary_field" >
+                  <div class="secondary_field">
                      <span class="key">Reservation</span> <br /> <span class="value">123456789L</span>
                   </div>
               </div>
               <div class="right" style="  margin: 10px; float: right;">
-                  <img src="/img/passes/1/thumbnail.png" height="100px" />
+                  <img src="/img/passes/event/thumbnail.png" height="100px" />
               </div>
+          </div>
+          <div class="section_strip" style="background-image: url('/img/passes/event/strip.png');clear: both; height: 100px;">
+              <div class="primary_field" style="  padding: 10px;" >
+                  Rydges Melbourne
+              </div>
+          </div>
+          <div class="secondary_field_strip" style="clear: both;">
+              <div class="logo_text" style="  margin: 10px; float: left;">
+                  <span class="key">Arrive:</span> <br /> <span class="value">1 Nov 2012, 2 pm</span>
+              </div>
+              <div class="logo_text" style="  margin: 10px; float: left;">
+                  <span class="key">Depart:</span> <br /> <span class="value">3 Nov 2012, 2 pm</span>
+              </div>
+
           </div>
           <div class="section_auxiliary" style="clear: both;">
               <div class="logo_text" style="  margin: 10px; float: left;">
@@ -75,7 +89,7 @@
     }
 
     .front {
-        background-image: url('/img/passes/1/background.png');
+        background-image: url('/img/passes/event/background.png');
         background-color: #fff;
         padding: 0px 0 0 0px;
         width:360px;
@@ -88,7 +102,7 @@
     }
 
     .back{
-        background-image: url('/img/boarding_frontt.jpg');
+        background-color: #fff;
     }
 
 </style>
