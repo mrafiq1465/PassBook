@@ -83,12 +83,12 @@
 
 /**
  * To configure CakePHP *not* to use mod_rewrite and to
- * use CakePHP pretty URLs, remove these .htaccess
+ * use CakePHP pretty URLs, remove these .raf_htaccess
  * files:
  *
- * /.htaccess
- * /app/.htaccess
- * /app/webroot/.htaccess
+ * /.raf_htaccess
+ * /app/.raf_htaccess
+ * /app/webroot/.raf_htaccess
  *
  * And uncomment the App.baseUrl below:
  */

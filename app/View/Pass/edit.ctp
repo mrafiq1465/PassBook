@@ -1,7 +1,5 @@
-<? /**
- * @var $this View
- */
-?>
+
+<div id="wrapper">
 <section id="pass_config">
 
     <h3>Create a pass in under 5 mins</h3>
@@ -182,6 +180,7 @@
 <section id="simulator">
     <?php echo $this->element('simulator/event'); ?>
 </section>
+</div>
 
 <?
 echo $this->Html->script('colorpicker.js');

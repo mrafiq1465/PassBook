@@ -51,4 +51,14 @@ class PagesController extends AppController {
 
     }
 
+    public function pricing(){
+
+
+    }
+
+    public function help(){
+
+
+    }
+
 }

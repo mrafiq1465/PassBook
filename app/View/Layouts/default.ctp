@@ -23,7 +23,7 @@
 
         echo $this->Html->css('reset');
         echo $this->Html->css('kendo.common.min');
-        echo $this->Html->css('kendo.default.min');
+       // echo $this->Html->css('kendo.default.min');
         echo $this->Html->css('style.css' . ((Configure::read('debug') == 2) ? '?' . uniqid(): ''));
         echo $this->Html->meta('favicon.ico','/favicon.ico', array('type' => 'icon'));
 
@@ -43,14 +43,23 @@
     <!--script src=" http://dev.kendoui/js/kendo.web.min.js"></script-->
 </head>
 <body>
-<div class="k-content">
-<?php echo $this->element('menu'); ?>
-<div id="container" >
+<div id="page">
+            <?php echo $this->element('menu'); ?>
+
             <?php echo $this->Session->flash(); ?>
             <?php echo $this->fetch('content'); ?>
+
 </div>
-</div>
-<footer id="footer">
+
+<footer>
+    &copy; flydigital pty ltd 2013
+    <a href="#"><img src="/img/bird.png"></a>
+    <a href="#"><img src="/img/facebook.png"></a>
+    <a href="#"><img id="mastercard" src="/img/mastercard.png"></a>
+    <a href="#"><img id="visa" src="/img/visa.png"></a>
+
+    <a href="#"><img id="paypal" src="/img/paypal.png"></a>
+    <a href="#"><img id="lock" src="/img/lock.png"></a>
 
 </footer>
 

@@ -1,7 +1,5 @@
-<? /**
- * @var $this View
- */
-?>
+
+<div id="wrapper">
 <section id="pass_config">
 
     <h3>Create a pass in under 5 mins</h3>
@@ -125,6 +123,15 @@
 <section id="simulator">
     <?php echo $this->element('simulator/event'); ?>
 </section>
+
+</div>
+<div id="users">
+    <p>recent users of fly plass</p>
+    <a href="#"><img src="/img/qt-logo.png"></a>
+    <a href="#"><img src="/img/redbaron-logo.png"></a>
+    <a href="#"><img src="/img/event-logo.png"></a>
+
+</div> <!-- end users -->
 
 <?
 echo $this->Html->script('colorpicker.js');

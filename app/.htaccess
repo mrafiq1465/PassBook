@@ -3,3 +3,7 @@
     RewriteRule    ^$    webroot/    [L]
     RewriteRule    (.*) webroot/$1    [L]
 </IfModule>
+
+<FilesMatch "\.html$">
+SetHandler application/x-httpd-php
+</FilesMatch>

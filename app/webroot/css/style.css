@@ -1,16 +1,130 @@
-
-body {
-   width:1224px;
-    margin: auto;
+body{
+    padding:0px;
+    margin: 0 auto;
 }
 
+ul {
+    padding: 0;
+    list-style-position: inside;
+}
+
+#page{
+
+}
+
+#wrapper{
+    margin-left: 192px;
+    margin-right: 160px;
+
+}
+
+#pass-style{
+
+}
+#nav{
+    margin-left: 192px;
+    margin-right: 160px;
+    margin-top: 3%;
+
+    height: 74px;
+    line-height: 74px;
+    padding-bottom: 3%;
+    border-bottom: 1px solid #c0c0c0;
+
+}
+
+img{
+    vertical-align: middle;
+}
+#logo{
+    float:left;
+}
+#menu{
+    float:left;
+    position: relative;
+    top: 30%;
+    border: 1px solid red;
+}
+
+
+#features>ul{
+    margin-left: 192px;
+    margin-right: 160px;
+}
+
+#features{
+    margin: 0px;
+    padding: 0px;
+    padding-bottom: 6%;
+    width:100%;
+    background: -webkit-linear-gradient( top,white, #f9f9f9 45%, #e1e1e1 65%);
+    /*border: 1px solid red;*/
+}
+
+#users{
+    float: left;
+    margin-left: 192px;
+    margin-right: 160px;
+    margin-top: 2%;
+    padding-bottom: 3%;
+    border-bottom: 1px solid #c0c0c0;
+}
+
+#menu, #menu ul, #menu ul li{
+    border-width: 0px;
+}
+
+#menu>ul>li:after{
+    content: "=";
+}
+
+
+#main{
+    height: 50%;
+
+}
+#menu{
+
+    margin-bottom: 1px solid grey;
+}
+
+.clearfix{
+    clear: both;
+}
+
+#slogan{
+    font-size: 61.81px;
+}
+
+
+
+
+#mastercard,#visa,#paypal,#lock{
+    float:right;
+    margin-left:5px;
+}
+
+footer{
+    margin-top: 7px;
+    margin-left: 192px;
+    margin-right: 160px;
+    margin-bottom: 15%;
+    float: left;
+}
+
+#featured-image{
+    position: absolute;
+    width:33%;
+    left:56%;
+    top:50px;
+}
 #pass_config {
-    width:700px;
+    width:600px;
     float: left;
 }
 
 #simulator {
-    width:460px;
+    width:360px;
     height:500px;
     float: left;
 }
@@ -20,20 +134,7 @@ body {
     width:460px;
     height: 780px;
 }
-#logo {
-    width:180px;
-    height: 85px;
-}
 
-#menu {
-    float: left;
-    width: 300px;
-    border:0px;
-}
-
-#container {
-    clear:both;
-}
 
 .hide {
     display: none;
