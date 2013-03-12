@@ -147,3 +147,10 @@ footer{
 .error {
     display: none;
 }
+
+.switch > div {
+    display: none;
+}
+.switch > div.on {
+    display: block;
+}

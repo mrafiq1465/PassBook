@@ -1,6 +1,6 @@
 <div class="simulator">
     <div id="k-container">
-        <div class="side front">
+        <div class="current side front">
           <div class="section_header">
             <div class="logo_image" style=" margin: 10px; float: left;">
                <img src="/img/passes/event/logo.png" />
@@ -55,7 +55,7 @@
                 <a href="#">i</a>
             </div>
         </div>
-        <div class="current side back">
+        <div class="side back">
 
         </div>
     </div>
@@ -90,7 +90,6 @@
 
     .front {
         background-image: url('/img/passes/event/background.png');
-        background-color: #fff;
         padding: 0px 0 0 0px;
         width:360px;
         height:450px;
@@ -102,7 +101,7 @@
     }
 
     .back{
-        background-color: #fff;
+
     }
 
 </style>
