@@ -18,6 +18,7 @@
                 <a href="javascript:void(0);" class="k-button switch-btn">Background & Thumbnail</a>
                 <a href="javascript:void(0);" class="k-button switch-btn">Strip Image</a>
                 <div class="on">
+                    <p style="display: none;" class="message">Background and Thumbnail images will be deleted.</p>
                     <img src="/<?=$this->request->data['Pass']['backgroundImage']?>" id="backgroundImg"/>
                     <?=$this->Form->input('backgroundImage', array('type' => 'file', 'rel' => '#backgroundImg', 'class' => 'imageUpload'));?>
                     <img src="/<?=$this->request->data['Pass']['backgroundImageRetina']?>" id="backgroundImgRetina"/>
@@ -29,6 +30,7 @@
                     <?=$this->Form->input('thumbnailImageRetina', array('type' => 'file', 'rel' => '#thumbnailImgRetina', 'class' => 'imageUpload'));?>
                 </div>
                 <div>
+                    <p style="display: none;" class="message">Strip images will be deleted.</p>
                     <img src="/<?=$this->request->data['Pass']['stripImage']?>" id="stripImg"/>
                     <?=$this->Form->input('stripImage', array('type' => 'file', 'rel' => '#stripImg', 'class' => 'imageUpload'));?>
                     <img src="/<?=$this->request->data['Pass']['stripImageRetina']?>" id="stripImgRetina"/>

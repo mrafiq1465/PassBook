@@ -25,6 +25,11 @@
                 </li>
             </ul>
             <?=$this->element('forms/' . $this->data['PassType']['name']);?>
+            <div id="k-window">
+                <p class="message"></p>
+                <button type="button" class="k-button">OK</button>
+                <button type="button" class="k-button">Cancel</button>
+            </div>
         </div>
     </section>
     <section id="simulator">
@@ -60,10 +65,16 @@ echo $this->Html->css('colorpicker/colorpicker.css');
             });
         });
 
+        var $kWindow = $('#k-window');
         $('.switch-btn').click(function () {
+            window.switchButtonIndex = $('.switch-btn').index($(this));
             var switchDivs = $('.switch > div');
-            switchDivs.hide();
-            switchDivs.eq($('.switch-btn').index($(this))).show().addClass('on');
+            var switchDivsOn = $('.switch > div.on');
+            if (window.switchButtonIndex == switchDivs.index(switchDivsOn)) {
+                return;
+            }
+            $kWindow.data("kendoWindow").open().center();
+            $kWindow.find('p').text(switchDivsOn.find('p.message').text());
         });
 
     });

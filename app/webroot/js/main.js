@@ -126,6 +126,41 @@ $(document).ready(function() {
         });
     }
 
+    var $kWindow = $('#k-window');
+    if (!$kWindow.data("kendoWindow")) {
+        $kWindow.kendoWindow({
+            width: "600px",
+            title: "Are you sure?",
+            visible: false,
+            modal: true
+        });
+    }
+
+    $kWindow.find('button').eq(1).click(function(){
+        $kWindow.data('kendoWindow').close();
+    });
+
+    $kWindow.find('button').eq(0).click(function(){
+        var switchDivs = $('.switch > div');
+        switchDivs.find('.imageUpload').each(function(){
+            var $this = $(this);
+            $.ajax({
+                url: $this.data('kendoUpload').options.async.removeUrl,
+                type: 'post',
+                success: function(e) {
+                    e = $.parseJSON(e);
+                    e.response = e;
+                    $this.data('kendoUpload').options.success(e);
+                }
+            });
+        });
+        switchDivs.hide().removeClass('on');
+        switchDivs.eq(window.switchButtonIndex).show().addClass('on');
+        $kWindow.data('kendoWindow').close();
+    });
+
+
+
     $PassGenerateForm.ajaxForm({
         success: function(resp) {
             try {
