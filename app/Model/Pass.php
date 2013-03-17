@@ -108,11 +108,13 @@ class Pass extends AppModel
         //Event
         $data['Pass']['primaryFields'] = json_decode($data['Pass']['primaryFields'], 1);
         if (is_array($data['Pass']['primaryFields'])) {
-            $pass_data['eventTicket']['primaryFields'][] = array(
-                'key' => 'event',
-                'label' => $data['Pass']['primaryFields']['Label'],
-                'value' => $data['Pass']['primaryFields']['Value']
-            );
+            foreach ($data['Pass']['primaryFields'] as $v) {
+                $pass_data['eventTicket']['primaryFields'][] = array(
+                    'key' => 'event',
+                    'label' => $v['Label'],
+                    'value' => $v['Value']
+                );
+            }
         }
 
         $data['Pass']['secondaryFields'] = json_decode($data['Pass']['secondaryFields'], 1);

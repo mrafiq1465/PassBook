@@ -29,9 +29,9 @@ class PassController extends AppController
             $this->Pass->create();
             $this->request->data['Pass']['pass_type_id'] = $pass_type_id;
             if ($this->Pass->save($this->request->data)) {
-                echo json_encode(array('success' => array('id' => $this->Pass->id)));
+                $this->ajax_response(array('success' => array('id' => $this->Pass->id)));
             } else {
-                echo json_encode(array('error' => __('The user could not be saved. Please, try again.')));
+                $this->ajax_response(array('error' => __('The user could not be saved. Please, try again.')));
             }
         }
     }
@@ -57,6 +57,7 @@ class PassController extends AppController
                     unlink(WWW_ROOT . $this->Pass->data['Pass'][$remove_field]);
                     $this->Pass->data['Pass'][$remove_field] = '';
                     $this->Pass->save($this->Pass->data);
+                    $this->ajax_response(array('success' => true));
                 }
             } else {
                 foreach ($this->request->data as $k=>$val) {
@@ -82,9 +83,8 @@ class PassController extends AppController
                 }
             }
 
-            if (isset($destination_path)) echo json_encode(array('success' => '/' . str_replace(WWW_ROOT, '', $destination_path)));
-            else echo json_encode(array('success' => $id));
-            die();
+            if (isset($destination_path)) $this->ajax_response(array('success' => '/' . str_replace(WWW_ROOT, '', $destination_path)));
+            else $this->ajax_response(array('success' => $id));
         }
 
         $this->request->data = $this->Pass->read(null, $id);
@@ -114,9 +114,9 @@ class PassController extends AppController
             $email->subject('Pass file');
             $email->attachments($pass);
             $email->send('My message');
-            echo json_encode(array('success' => true));
+            $this->ajax_response(array('success' => true));
         } else {
-            echo json_encode(array('error' => 'Invalid method'));
+            $this->ajax_response(array('error' => 'Invalid method'));
         }
 
     }

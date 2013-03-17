@@ -68,8 +68,8 @@ echo $this->Html->css('colorpicker/colorpicker.css');
         var $kWindow = $('#k-window');
         $('.switch-btn').click(function () {
             window.switchButtonIndex = $('.switch-btn').index($(this));
-            var switchDivs = $('.switch > div');
-            var switchDivsOn = $('.switch > div.on');
+            var switchDivs = $(this).nextAll('div');
+            var switchDivsOn = $(this).nextAll('div.on');
             if (window.switchButtonIndex == switchDivs.index(switchDivsOn)) {
                 return;
             }

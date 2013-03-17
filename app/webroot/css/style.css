@@ -154,3 +154,7 @@ footer{
 .switch > div.on {
     display: block;
 }
+
+a.close {
+    float: right;
+}

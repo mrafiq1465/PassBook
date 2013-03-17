@@ -94,4 +94,8 @@ class AppController extends Controller {
             $this->requireLogin();
         }
     }
+
+    function ajax_response($data) {
+        die(json_encode($data));
+    }
 }

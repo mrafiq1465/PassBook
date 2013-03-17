@@ -96,7 +96,23 @@ $(document).ready(function() {
     $('.dynamicFields').click(function () {
         var $container = $($(this).attr('data-target'));
         $container.show();
+        if (PassType == 'event') {
+            if ($container.attr('id') == 'primaryFieldsContainer' && $container.find('.inner:hidden').length == 1) {
+                return;
+            } else if ($container.attr('id') == 'auxiliaryFieldsContainer' && $container.find('.inner:hidden').length == 1) {
+                return;
+            } else if ($('.switch > div').index($('.switch > div.on')) == 0) {
+                if ($container.attr('id') == 'secondaryFieldsContainer' && $container.find('.inner:hidden').length == 3) {
+                    return;
+                }
+            }
+
+        }
         $container.find('.inner:hidden').eq(0).show();
+    });
+
+    $('.dynamicFieldsContainer a.close').click(function(){
+        $(this).parent().hide().find('input').val('');
     });
 
     var $window = $("#window"),
