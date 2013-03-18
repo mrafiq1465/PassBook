@@ -96,7 +96,9 @@ $(document).ready(function() {
     $('.dynamicFields').click(function () {
         var $container = $($(this).attr('data-target'));
         $container.show();
-        if (PassType == 'event') {
+        var $secondaryAuxiliaryCombinedVisible = $('#auxiliaryFieldsContainer .inner:visible, #secondaryFieldsContainer .inner:visible');
+
+        if (PassType == 1) { //event
             if ($container.attr('id') == 'primaryFieldsContainer' && $container.find('.inner:hidden').length == 1) {
                 return;
             } else if ($container.attr('id') == 'auxiliaryFieldsContainer' && $container.find('.inner:hidden').length == 1) {
@@ -106,7 +108,30 @@ $(document).ready(function() {
                     return;
                 }
             }
-
+        } else if (PassType == 2) { //coupon
+            if ($container.attr('id') == 'auxiliaryFieldsContainer' || $container.attr('id') == 'secondaryFieldsContainer') {
+                if ($secondaryAuxiliaryCombinedVisible.length == 4) {
+                    return;
+                }
+            } else if ($container.attr('id') == 'primaryFieldsContainer' && $container.find('.inner:hidden').length == 1) {
+                return;
+            }
+        } else if (PassType == 3) { //boarding or transport
+            //no rules whatsoever as its designed to get max values for this type
+        } else if (PassType == 4) { //generic
+            if ($container.attr('id') == 'primaryFieldsContainer' && $container.find('.inner:hidden').length == 1) {
+                return;
+            } else if ($('#PassBarcodeFormatId').val() == '2') { //suppose its square typed barcode
+                if ($secondaryAuxiliaryCombinedVisible.length == 3) {
+                    return;
+                }
+            }
+        } else if (PassType == 5) {
+            if ($container.attr('id') == 'primaryFieldsContainer' && $container.find('.inner:hidden').length == 1) {
+                return;
+            } else if ($secondaryAuxiliaryCombinedVisible.length == 4) {
+                return;
+            }
         }
         $container.find('.inner:hidden').eq(0).show();
     });
