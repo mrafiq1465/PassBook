@@ -46,25 +46,15 @@ class Pass extends AppModel
         $this->id = $id;
         $data = $this->read();
 
-        App::import('Vendor', 'Passbook', array('file' => 'Passbook' . DS . 'Passbook.php'));
-        $passbook = new Passbook();
+        App::import('Vendor', 'Passbook', array('file' => 'Passbook' . DS . 'PKPass.php'));
+        $pass = new PKPass();
 
         $data_path = APP . 'data' . DS;
         $data_path_web = WWW_ROOT;
 // Set pass output path
-        $passbook->output_path = $data_path . "passes" . DS . $id . DS;
-
-        if (!is_dir($passbook->output_path)) mkdir($passbook->output_path, 0777, true);
-
-// Set temporary folder
-        $passbook->temp_path = sys_get_temp_dir() . DS;
-
-// Set P12 certificate
-        $passbook->p12_certificate = $data_path . 'ios.p12'; # Required!
-        $passbook->p12_cert_pass = P12_CERT_PASS; # Required!
-
-// Set WWDR certificate
-        $passbook->wwdr_certificate = $data_path . 'AppleWWDRCA.cer'; # Required!
+        $pass->setCertificate($data_path . 'ios.p12'); // Set the path to your Pass Certificate (.p12 file)
+        $pass->setCertificatePassword(P12_CERT_PASS); // Set password for certificate
+        $pass->setWWDRcertPath($data_path . 'AppleWWDRCA.cer');
 
 // Create pass data
         $pass_data = array(
@@ -156,26 +146,38 @@ class Pass extends AppModel
 
 
 // Set JSON
-        $passbook->set_json($pass_data);
+        $pass->setJSON($pass_data);
 
 // Set background
-        if (!empty($this->data['Pass']['backgroundImage'])) $passbook->set_image('background', $data_path_web . $this->data['Pass']['backgroundImage']);
-        if (!empty($this->data['Pass']['backgroundImageRetina'])) $passbook->set_image('background', $data_path_web . $this->data['Pass']['backgroundImageRetina'], true);
+        if (!empty($this->data['Pass']['backgroundImage'])) $pass->addFile($data_path_web . $this->data['Pass']['backgroundImage'],'background.png');
+        if (!empty($this->data['Pass']['backgroundImageRetina'])) $pass->addFile($data_path_web . $this->data['Pass']['backgroundImageRetina'], 'background@2x.png');
 
 // Set icon
-        if (!empty($this->data['Pass']['iconImage'])) $passbook->set_image('icon', $data_path_web . $this->data['Pass']['iconImage']);
-        if (!empty($this->data['Pass']['iconImageRetina'])) $passbook->set_image('icon', $data_path_web . $this->data['Pass']['iconImageRetina'], true);
+        if (!empty($this->data['Pass']['iconImage'])) $pass->addFile($data_path_web . $this->data['Pass']['iconImage'], 'icon.png');
+        if (!empty($this->data['Pass']['iconImageRetina'])) $pass->addFile($data_path_web . $this->data['Pass']['iconImageRetina'], 'icon@2x.png');
 
 // Set logo
-        if (!empty($this->data['Pass']['logoImage'])) $passbook->set_image('logo', $data_path_web . $this->data['Pass']['logoImage']);
-        if (!empty($this->data['Pass']['logoImageRetina'])) $passbook->set_image('logo', $data_path_web . $this->data['Pass']['logoImageRetina'], true);
+        if (!empty($this->data['Pass']['logoImage'])) $pass->addFile($data_path_web . $this->data['Pass']['logoImage'], 'logo.png');
+        if (!empty($this->data['Pass']['logoImageRetina'])) $pass->addFile($data_path_web . $this->data['Pass']['logoImageRetina'], 'logo@2x.png');
 
 // Set thumbnail
-        if (!empty($this->data['Pass']['thumbnailImage'])) $passbook->set_image('thumbnail', $data_path_web . $this->data['Pass']['thumbnailImage']);
-        if (!empty($this->data['Pass']['thumbnailImageRetina'])) $passbook->set_image('thumbnail', $data_path_web . $this->data['Pass']['thumbnailImageRetina'], true);
+        if (!empty($this->data['Pass']['thumbnailImage'])) $pass->addFile($data_path_web . $this->data['Pass']['thumbnailImage'], 'thumbnail.png');
+        if (!empty($this->data['Pass']['thumbnailImageRetina'])) $pass->addFile($data_path_web . $this->data['Pass']['thumbnailImageRetina'], 'thumbnail@2x.png');
+
+        //Set Strip
+        if (!empty($this->data['Pass']['stripImage'])) $pass->addFile($data_path_web . $this->data['Pass']['stripImage'], 'strip.png');
+        if (!empty($this->data['Pass']['stripImageRetina'])) $pass->addFile($data_path_web . $this->data['Pass']['stripImageRetina'], 'strip@2x.png');
 
 // Create a pass
-        $pass = $passbook->create('pass', false);
-        return $passbook->output_path . $pass;
+
+        $passFile = $pass->create();
+        if(!$passFile) { // Create and output the PKPass
+            return array('error' => 'Error: '.$pass->getError());
+        } else {
+            $output_path = $data_path . 'passes/' . $id . '/pass.pkpass';
+            mkdir($data_path . 'passes/' . $id);
+            file_put_contents($output_path, $passFile);
+            return array('path' => $output_path);
+        }
     }
 }

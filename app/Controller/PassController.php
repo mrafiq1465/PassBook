@@ -73,7 +73,12 @@ class PassController extends AppController
                     if (!is_dir($destination_dir)) {
                         mkdir($destination_dir, 0777, true);
                     }
-                    $destination_path = $destination_dir . "$uploaded_field.png";
+
+                    if (strstr($uploaded_field, 'Retina')) $file_name = str_replace('ImageRetina','@2x', $uploaded_field);
+                    else $file_name = str_replace('Image','',$uploaded_field);
+
+                    $destination_path = $destination_dir . "$file_name.png";
+
                     move_uploaded_file($this->request->data[$uploaded_field]['tmp_name'], $destination_path);
                     $this->Pass->data['Pass'][$uploaded_field] = str_replace(WWW_ROOT, '', $destination_path);
                     $this->Pass->save($this->Pass->data);
@@ -107,14 +112,18 @@ class PassController extends AppController
                 die(json_encode(array('error' => 'email not given')));
             }
             $pass = $this->Pass->generate_pass($id);
-            App::uses('CakeEmail', 'Network/Email');
-            $email = new CakeEmail();
-            $email->from(array(SITE_EMAIL => SITE_NAME));
-            $email->to($to);
-            $email->subject('Pass file');
-            $email->attachments($pass);
-            $email->send('My message');
-            $this->ajax_response(array('success' => true));
+            if (!isset($pass['error'])) {
+                App::uses('CakeEmail', 'Network/Email');
+                $email = new CakeEmail();
+                $email->from(array(SITE_EMAIL => SITE_NAME));
+                $email->to($to);
+                $email->subject('Pass file');
+                $email->attachments($pass['path']);
+                $email->send('My message');
+                $this->ajax_response(array('success' => true));
+            } else {
+                $this->ajax_response(array('error' => $pass['error']));
+            }
         } else {
             $this->ajax_response(array('error' => 'Invalid method'));
         }
