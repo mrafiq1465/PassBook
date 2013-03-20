@@ -146,7 +146,7 @@ class Pass extends AppModel
 
 
 // Set JSON
-        $pass->setJSON($pass_data);
+        $pass->setJSON(json_encode($pass_data));
 
 // Set background
         if (!empty($this->data['Pass']['backgroundImage'])) $pass->addFile($data_path_web . $this->data['Pass']['backgroundImage'],'background.png');
