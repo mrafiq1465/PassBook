@@ -25,6 +25,7 @@ DROP TABLE IF EXISTS `barcode_format`;
 CREATE TABLE `barcode_format` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) DEFAULT NULL,
+  `value` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -35,7 +36,7 @@ CREATE TABLE `barcode_format` (
 
 LOCK TABLES `barcode_format` WRITE;
 /*!40000 ALTER TABLE `barcode_format` DISABLE KEYS */;
-INSERT INTO `barcode_format` VALUES (1,'PKBarcodeFormatPDF417'),(2,'QR codes'),(3,'Aztec');
+INSERT INTO `barcode_format` VALUES (1,'PKBarcodeFormatPDF417','PKBarcodeFormatPDF417'),(2,'QR codes','PKBarcodeFormatQR'),(3,'Aztec','PKBarcodeFormatAztec');
 /*!40000 ALTER TABLE `barcode_format` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -100,11 +101,12 @@ CREATE TABLE `pass` (
   `secondaryFields` text,
   `auxiliaryFields` text,
   `barcode_format_id` int(11) DEFAULT NULL,
+  `barcodeMessage` varchar(255) DEFAULT NULL,
   `backFields` text,
   `locations` text,
   `relevantDate` varchar(100) DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -113,7 +115,7 @@ CREATE TABLE `pass` (
 
 LOCK TABLES `pass` WRITE;
 /*!40000 ALTER TABLE `pass` DISABLE KEYS */;
-INSERT INTO `pass` VALUES (1,NULL,NULL,NULL,NULL,NULL,'adsfasd','data/1/iconImage.png','','','data/1/backgroundImageRetina.png','rgb(120,31,120)','rgb(222,185,222)','rgb(26,5,26)',NULL,'fasdfsf','data/1/logoImage.png','data/1/logoImageRetina.png','afdsf','adsfadsf','','data/1/thumbnailImageRetina.png',NULL,NULL,'','[{\"Label\":\"adsfasfas\",\"Value\":\"dfasfdsfs\"}]','[{\"Label\":\"sdasdas\",\"Value\":\"dasd\"}]',1,'[{\"Label\":\"sdfds\",\"Value\":\"fdsf\"}]','[{\"Value\":\"34,34\"}]',''),(2,1,NULL,NULL,NULL,NULL,'sdfasdf',NULL,'',NULL,NULL,'rgb(184,66,184)','rgb(84,36,84)','rgb(189,147,189)',NULL,'asdfdas',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,''),(3,1,NULL,NULL,NULL,NULL,'adfsfas','data/3/iconImage.png','data/3/iconImageRetina.png','data/3/backgroundImage.png','data/3/backgroundImageRetina.png',NULL,NULL,NULL,NULL,'fdasfadsf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'');
+INSERT INTO `pass` VALUES (1,1,NULL,NULL,NULL,NULL,'adsfasd','data/1/icon.png','data/1/icon@2x.png','data/1/background.png','data/1/background@2x.png','rgb(120,31,120)','rgb(222,185,222)','rgb(26,5,26)',NULL,'fasdfsf','data/1/logo.png','data/1/logo@2x.png','afdsf','adsfadsf','data/1/thumbnail.png','data/1/thumbnail@2x.png',NULL,NULL,'','[{\"Label\":\"dfasdf\",\"Value\":\"123\"}]','[{\"Label\":\"adfadsf\",\"Value\":\"123\"}]',1,NULL,'[]','[{\"Value\":\"12.22,23.00\"}]',''),(2,1,NULL,NULL,NULL,NULL,'sdfasdf',NULL,'',NULL,NULL,'rgb(184,66,184)','rgb(84,36,84)','rgb(189,147,189)',NULL,'asdfdas',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,''),(3,1,NULL,NULL,NULL,NULL,'adfsfas','data/3/iconImage.png','data/3/iconImageRetina.png','data/3/backgroundImage.png','data/3/backgroundImageRetina.png',NULL,NULL,NULL,NULL,'fdasfadsf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,''),(4,2,NULL,NULL,NULL,NULL,'adfasdfa','data/4/icon.png','data/4/icon@2x.png',NULL,NULL,'rgb(138,45,138)','rgb(214,32,214)','rgb(64,184,126)',NULL,'afasdf','data/4/logo.png','data/4/logo@2x.png','adfasdf','afdsfa','data/4/thumbnail.png','data/4/thumbnail@2x.png',NULL,NULL,'[{\"Label\":\"asdfasdfasasd\",\"Value\":\"12112\"}]','[]','[]',1,NULL,'[]','[]','');
 /*!40000 ALTER TABLE `pass` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,7 +131,7 @@ CREATE TABLE `pass_type` (
   `name` varchar(32) NOT NULL DEFAULT '',
   `active` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -138,6 +140,7 @@ CREATE TABLE `pass_type` (
 
 LOCK TABLES `pass_type` WRITE;
 /*!40000 ALTER TABLE `pass_type` DISABLE KEYS */;
+INSERT INTO `pass_type` VALUES (1,'event',NULL),(2,'coupon',NULL),(3,'transport',NULL),(4,'store',NULL),(5,'generic',NULL);
 /*!40000 ALTER TABLE `pass_type` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -150,4 +153,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-02-28  0:52:49
+-- Dump completed on 2013-03-27 13:22:16
