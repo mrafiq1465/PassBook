@@ -54,7 +54,7 @@ class Pass extends AppModel
 // Set pass output path
         $pass->setCertificate($data_path . 'ios.p12'); // Set the path to your Pass Certificate (.p12 file)
         $pass->setCertificatePassword(P12_CERT_PASS); // Set password for certificate
-        $pass->setWWDRcertPath($data_path . 'AppleWWDRCA.cer');
+        $pass->setWWDRcertPath($data_path . 'AppleWWDR.pem');
 
 // Create pass data
         $pass_data = array(

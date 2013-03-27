@@ -1,0 +1,31 @@
+@import url("http://cdn.kendostatic.com/2013.1.226/styles/kendo.common.min.css");
+@import url("http://cdn.kendostatic.com/2013.1.226/styles/kendo.default.min.css");
+@import url("http://cdn.kendostatic.com/2013.1.226/styles/kendo.silver.min.css");
+@import url("http://cdn.kendostatic.com/2013.1.226/styles/kendo.dataviz.min.css");
+
+.ampush-kendo *, .ampush-kendo *:before, .ampush-kendo *:after {
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+.ampush-kendo th a {
+  font-weight: bold;
+}
+
+.k-picker-wrap .k-select, .k-numeric-wrap .k-select, .k-dropdown-wrap .k-select {
+  padding: 0px 3px;
+}
+
+.k-animation-container .k-link {
+  font-size: 75% !important;
+}
+
+.k-grid td {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.no-show a .k-icon {
+  display: none;
+}
