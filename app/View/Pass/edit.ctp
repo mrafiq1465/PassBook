@@ -33,7 +33,9 @@
         </div>
     </section>
     <section id="simulator">
-        <?php echo $this->element('simulator/event'); ?>
+        <div class="simulator">
+            <?php echo $this->element('simulator/event'); ?>
+        </div>
     </section>
 </div>
 

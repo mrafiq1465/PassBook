@@ -181,4 +181,13 @@ class PassController extends AppController
         }
         return true;
     }
+
+    public function web_pass($id = null)
+    {
+        $this->layout = 'web_pass';
+        $this->request->data = $this->Pass->read(null, $id);
+        $this->decodeDynamicFields($this->request->data);
+        $barcodeFormats = $this->Pass->BarcodeFormat->find('list');
+        $this->set(compact('barcodeFormats'));
+    }
 }
