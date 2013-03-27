@@ -91,6 +91,7 @@
                 </div>
             </div>
             <?=$this->Form->input('barcode_format_id');?>
+            <?=$this->Form->input('barcodeMessage');?>
             <p class="error"></p>
             <?=$this->Form->end('Next'); ?>
         </div>

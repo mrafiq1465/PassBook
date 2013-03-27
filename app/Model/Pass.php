@@ -52,30 +52,30 @@ class Pass extends AppModel
         $data_path = APP . 'data' . DS;
         $data_path_web = WWW_ROOT;
 // Set pass output path
-        $pass->setCertificate($data_path . 'ios.p12'); // Set the path to your Pass Certificate (.p12 file)
+        $pass->setCertificate($data_path . 'Certificates.p12'); // Set the path to your Pass Certificate (.p12 file)
         $pass->setCertificatePassword(P12_CERT_PASS); // Set password for certificate
         $pass->setWWDRcertPath($data_path . 'AppleWWDR.pem');
 
 // Create pass data
         $pass_data = array(
             // Identifiers
-            'teamIdentifier' => '9E8L8Y3KWG', # Required!
-            'passTypeIdentifier' => 'pass.eventcinemas.movie', # Required!
-            'organizationName' => $data['Pass']['organizationName'],
-            'serialNumber' => '123456789',
             'description' => $data['Pass']['description'],
+            'teamIdentifier' => '9E8L8Y3KWG', # Required!
+            'passTypeIdentifier' => 'pass.flypass.coupon', # Required!
+            'organizationName' => $data['Pass']['organizationName'],
+            'serialNumber' => '12345678',
             // Texts
             'logoText' => $data['Pass']['logoText'],
             // Passbook version
             'formatVersion' => 1,
 
             // Event
-            'relevantDate' => "2013-12-28T13:00-08:00",
+            //'relevantDate' => "2013-12-28T13:00-08:00",
         );
 
         //Barcode
-        $pass_data['barcode']['format'] = $data['BarcodeFormat']['name'];
-        $pass_data['barcode']['message'] = '123456789';
+        $pass_data['barcode']['format'] = $data['BarcodeFormat']['value'];
+        $pass_data['barcode']['message'] = $data['Pass']['barcodeMessage'];
         $encoding = $this->BarcodeFormat->BarcodeMessageEncoding->find('first', array(
             'recursive' => -1,
             'conditions' => array(
@@ -99,8 +99,8 @@ class Pass extends AppModel
         $data['Pass']['primaryFields'] = json_decode($data['Pass']['primaryFields'], 1);
         if (is_array($data['Pass']['primaryFields'])) {
             foreach ($data['Pass']['primaryFields'] as $v) {
-                $pass_data['eventTicket']['primaryFields'][] = array(
-                    'key' => 'event',
+                $pass_data['coupon']['primaryFields'][] = array(
+                    'key' => 'offer',
                     'label' => $v['Label'],
                     'value' => $v['Value']
                 );
@@ -110,46 +110,46 @@ class Pass extends AppModel
         $data['Pass']['secondaryFields'] = json_decode($data['Pass']['secondaryFields'], 1);
         if (is_array($data['Pass']['secondaryFields'])) {
             foreach ($data['Pass']['secondaryFields'] as $v) {
-                $pass_data['eventTicket']['secondaryFields'][] = array(
-                    'key' => 'event',
+                $pass_data['coupon']['secondaryFields'][] = array(
+                    'key' => 'offer',
                     'label' => $v['Label'],
                     'value' => $v['Value']
-                );    
-            } 
+                );
+            }
         }
         $data['Pass']['auxiliaryFields'] = json_decode($data['Pass']['auxiliaryFields'], 1);
         if (is_array($data['Pass']['auxiliaryFields'])) {
             foreach ($data['Pass']['auxiliaryFields'] as $v) {
-                $pass_data['eventTicket']['auxiliaryFields'][] = array(
-                    'key' => 'event',
+                $pass_data['coupon']['auxiliaryFields'][] = array(
+                    'key' => 'offer',
                     'label' => $v['Label'],
                     'value' => $v['Value']
-                );    
-            } 
+                );
+            }
         }
         $data['Pass']['backFields'] = json_decode($data['Pass']['backFields'], 1);
         if (is_array($data['Pass']['backFields'])) {
             foreach ($data['Pass']['backFields'] as $v) {
-                $pass_data['eventTicket']['backFields'][] = array(
-                    'key' => 'event',
+                $pass_data['coupon']['backFields'][] = array(
+                    'key' => 'offer',
                     'label' => $v['Label'],
                     'value' => $v['Value']
-                );    
-            } 
+                );
+            }
         }
-        
+
 
         // Styling
-        if (!empty($pass_data['backgroundColor'])) $pass_data['backgroundColor'] = $data['Pass']['backgroundColor'];
-        if (!empty($pass_data['foregroundColor'])) $pass_data['foregroundColor'] = $data['Pass']['foregroundColor'];
-        if (!empty($pass_data['labelColor'])) $pass_data['labelColor'] = $data['Pass']['labelColor'];
+        if (!empty($this->data['Pass']['backgroundColor'])) $pass_data['backgroundColor'] = $data['Pass']['backgroundColor'];
+        if (!empty($this->data['Pass']['foregroundColor'])) $pass_data['foregroundColor'] = $data['Pass']['foregroundColor'];
+        if (!empty($this->data['Pass']['labelColor'])) $pass_data['labelColor'] = $data['Pass']['labelColor'];
 
 
 // Set JSON
         $pass->setJSON(json_encode($pass_data));
 
 // Set background
-        if (!empty($this->data['Pass']['backgroundImage'])) $pass->addFile($data_path_web . $this->data['Pass']['backgroundImage'],'background.png');
+        if (!empty($this->data['Pass']['backgroundImage'])) $pass->addFile($data_path_web . $this->data['Pass']['backgroundImage'], 'background.png');
         if (!empty($this->data['Pass']['backgroundImageRetina'])) $pass->addFile($data_path_web . $this->data['Pass']['backgroundImageRetina'], 'background@2x.png');
 
 // Set icon
@@ -171,11 +171,11 @@ class Pass extends AppModel
 // Create a pass
 
         $passFile = $pass->create();
-        if(!$passFile) { // Create and output the PKPass
-            return array('error' => 'Error: '.$pass->getError());
+        if (!$passFile) { // Create and output the PKPass
+            return array('error' => 'Error: ' . $pass->getError());
         } else {
             $output_path = $data_path . 'passes/' . $id . '/pass.pkpass';
-            if(!file_exists($data_path . 'passes/' . $id)) {
+            if (!file_exists($data_path . 'passes/' . $id)) {
                 $response = mkdir($data_path . 'passes/' . $id);
                 if (!$response) {
                     return array('error' => 'Output path not writable!');
@@ -183,6 +183,7 @@ class Pass extends AppModel
             }
 
             $response = file_put_contents($output_path, $passFile);
+            file_put_contents($output_path . '.json', json_encode($pass_data));
             if (!$response) {
                 return array('error' => 'Output path not writable!');
             }

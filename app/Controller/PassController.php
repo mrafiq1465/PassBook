@@ -132,11 +132,10 @@ class PassController extends AppController
 
     public function encodeDynamicFields(&$data)
     {
-        if (!empty($data['Pass']['primaryFields']['Label']) && !empty($data['Pass']['primaryFields']['Value'])) {
-            $data['Pass']['primaryFields'] = json_encode($data['Pass']['primaryFields']);
-        } else {
-            $data['Pass']['primaryFields'] = '';
-        }
+        if (isset($data['Pass']['primaryFields'])) $data['Pass']['primaryFields'] = json_encode(array_merge(array_filter(
+            $data['Pass']['primaryFields'],
+            array($this, 'check_all_keys_values'))));
+
         if (isset($data['Pass']['secondaryFields'])) $data['Pass']['secondaryFields'] = json_encode(array_merge(array_filter(
             $data['Pass']['secondaryFields'],
             array($this, 'check_all_keys_values'))));

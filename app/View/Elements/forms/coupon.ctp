@@ -14,6 +14,12 @@
             <img src="/<?=$this->request->data['Pass']['iconImageRetina']?>" id="iconImgRetina"/>
             <?=$this->Form->input('iconImageRetina', array('type' => 'file', 'rel' => '#iconImgRetina', 'class' => 'imageUpload'));?>
 
+
+            <img src="/<?=$this->request->data['Pass']['thumbnailImage']?>" id="thumbnailImg"/>
+            <?=$this->Form->input('thumbnailImage', array('type' => 'file', 'rel' => '#thumbnailImg', 'class' => 'imageUpload'));?>
+            <img src="/<?=$this->request->data['Pass']['thumbnailImageRetina']?>" id="thumbnailImgRetina"/>
+            <?=$this->Form->input('thumbnailImageRetina', array('type' => 'file', 'rel' => '#thumbnailImgRetina', 'class' => 'imageUpload'));?>
+
             <img src="/<?=$this->request->data['Pass']['stripImage']?>" id="stripImg"/>
             <?=$this->Form->input('stripImage', array('type' => 'file', 'rel' => '#stripImg', 'class' => 'imageUpload'));?>
             <img src="/<?=$this->request->data['Pass']['stripImageRetina']?>" id="stripImgRetina"/>
@@ -96,6 +102,7 @@
                 </div>
             </div>
             <?=$this->Form->input('barcode_format_id');?>
+            <?=$this->Form->input('barcodeMessage');?>
             <p class="error"></p>
             <?=$this->Form->end('Next'); ?>
         </div>
