@@ -18,8 +18,6 @@
         <? foreach ($users as $k => $user) { ?>
         <tr class="<?=($k % 2 == 0) ? 'odd' : 'even'?>">
             <td class="name span8"><?php echo $user['User']['name'];  ?> </td>
-            <td class="name span8"><?php echo $user['Company']['name'];  ?> </td>
-            <td class="name span8"><?php echo $user['Role']['name'];  ?> </td>
             <td>
                 <?=$this->Html->link('<i class="icon-pencil"></i> ', '/users/edit/' . $user['User']['id'], array('class' => '', 'escape' => FALSE)); ?>
             </td>

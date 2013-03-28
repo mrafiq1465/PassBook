@@ -32,6 +32,13 @@ class Pass extends AppModel
             'fields' => '',
             'order' => ''
         ),
+        'User' => array(
+            'className' => 'User',
+            'foreignKey' => 'user_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
         'BarcodeFormat' => array(
             'className' => 'BarcodeFormat',
             'foreignKey' => 'barcode_format_id',

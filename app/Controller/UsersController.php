@@ -65,9 +65,6 @@ class UsersController extends AppController {
             }
 
 		}
-		$roles = $this->User->Role->find('list');
-		$companies = $this->User->Company->find('list');
-		$this->set(compact('roles', 'companies'));
 	}
 
 /**
@@ -113,9 +110,6 @@ class UsersController extends AppController {
 		} else {
 			$this->request->data = $this->User->read(null, $id);
 		}
-		$roles = $this->User->Role->find('list');
-		$companies = $this->User->Company->find('list');
-		$this->set(compact('roles', 'companies'));
 	}
 
 /**
@@ -127,10 +121,13 @@ class UsersController extends AppController {
  * @return void
  */
 	public function delete($id = null) {
-		if (!$this->request->is('post')) {
-			throw new MethodNotAllowedException();
-		}
-		$this->User->id = $id;
+        if (!$this->isAdmin()) {
+            $this->Session->setFlash(__('Access denied.'));
+            $this->logout();
+            $this->redirect('/users/login/');
+        }
+
+        $this->User->id = $id;
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('Invalid user'));
 		}
@@ -196,19 +193,19 @@ class UsersController extends AppController {
         if ($this->request->is('post') || $this->request->is('put')) {
             $email = $this->request->data['email'];
             if (empty($email)) {
-                echo json_encode(array('error' => 'Email is not valid'));
+                $this->ajax_response(array('error' => 'Email is not valid'));
             }
             $user = $this->User->find('first', array('recursive' => -1, 'conditions' => array('email' => $email)));
             if (empty($user)) {
-                echo json_encode(array('error' => 'The user could not be found. Please, try again.'));
+                $this->ajax_response(array('error' => 'The user could not be found. Please, try again.'));
             } else {
                 $content = "The password for login is : " . $user['User']['password'];
                 $this->Email->to = $user['User']['email'];
                 $this->Email->from = 'mrafiq1465@gmail.com';
                 $this->Email->subject = 'Login Information';
                 $success = $this->Email->send($content, null, null);
-                if ($success) echo json_encode(array('success' => 'Password sent to the mail address.'));
-                else echo json_encode(array('error' => 'Email could not be sent.'));
+                if ($success) $this->ajax_response(array('success' => 'Password sent to the mail address.'));
+                else $this->ajax_response(array('error' => 'Email could not be sent.'));
             }
         }
     }
