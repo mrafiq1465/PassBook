@@ -1,1 +1,1 @@
-<?=$this->element('simulator/event');?>
+<?=$this->element('web_pass/' . $this->data['PassType']['name']);?>
