@@ -188,7 +188,6 @@ class PassController extends AppController
         $this->request->data = $this->Pass->read(null, $id);
         $this->decodeDynamicFields($this->request->data);
         $barcodeFormats = $this->Pass->BarcodeFormat->find('list');
-        echo "<pre>" . print_r($this->request->data, true) . "</pre>";
         $this->set(compact('barcodeFormats'));
     }
 }
