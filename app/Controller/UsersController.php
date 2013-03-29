@@ -43,6 +43,9 @@ class UsersController extends AppController {
  * @return void
  */
 	public function add() {
+        if (!$this->isAdmin() && $this->isLoggedIn()) {
+            $this->redirect('/');
+        }
 		if ($this->request->is('post')) {
             $users = $this->User->find('first', array('conditions' => array('User.email' => $this->request->data['User']['email'])));
             if(!empty($users)){
@@ -57,10 +60,16 @@ class UsersController extends AppController {
                 $this->User->create();
                 $this->request->data['User']['status'] = 1;
                 if ($this->User->save($this->request->data)) {
-                    $this->Session->setFlash(__('The user has been saved'));
-                    $this->redirect(array('action' => 'index'));
+                    if ($this->isAdmin()){
+                        $this->Session->setFlash(__('The user has been saved'));
+                        $this->redirect(array('action' => 'index'));
+                    } else {
+                        $this->Session->setFlash(__('Successfully registered. You can login now.'));
+                        $this->redirect('/');
+                    }
                 } else {
-                    $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                    if ($this->isAdmin()) $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                    else $this->Session->setFlash(__('Your information could not be saved. Please, try again.'));
                 }
             }
 
@@ -141,7 +150,7 @@ class UsersController extends AppController {
 
     function login() {
         if ($this->isLoggedin()) {
-            $this->redirect('/events');
+            $this->redirect('/');
             exit;
         }
 
@@ -168,7 +177,7 @@ class UsersController extends AppController {
                     $url = $this->data['User']['goto'];
                 }*/
 
-                $url = (empty($url)) ? '/events' : $url;
+                $url = (empty($url)) ? '/' : $url;
                 /*if ($dbuser['User']['username'] == 'admin'){
                     $this->redirect('/admin/');
                 }*/
@@ -178,6 +187,13 @@ class UsersController extends AppController {
                 $this->Session->setFlash('Either your username or password is incorrect.', FALSE, FALSE, 'login');
             }
         }
+    }
+
+    function payment() {
+        if (!$this->isLoggedIn()) {
+            $this->redirect('/users/login');
+        }
+
     }
 
     function logout() {

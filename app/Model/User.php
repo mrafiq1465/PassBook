@@ -38,4 +38,13 @@ class User extends AppModel {
 		)
 	);
 
+    public function getCurrentUserData($id) {
+        return $this->find('first', array(
+            'conditions' => array(
+                'id' => $id,
+            ),
+            'recursive' => -1
+        ));
+    }
+
 }

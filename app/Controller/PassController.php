@@ -28,6 +28,9 @@ class PassController extends AppController
             $this->autoRender = false;
             $this->Pass->create();
             $this->request->data['Pass']['pass_type_id'] = $pass_type_id;
+            if ($this->isLoggedIn()) {
+                $this->request->data['Pass']['user_id'] = $this->user_id();
+            }
             if ($this->Pass->save($this->request->data)) {
                 $this->ajax_response(array('success' => array('id' => $this->Pass->id)));
             } else {
