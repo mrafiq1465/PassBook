@@ -6,22 +6,22 @@
             <div id="tabstrip">
                 <ul>
                     <li class="k-state-active" id="tab1">
-                       Coupon
+                        design
                     </li>
                     <li id="tab2">
-                        Design
+                        front
                     </li>
                     <li id="tab3">
-                        Front
+                        back
                     </li>
                     <li id="tab4">
-                        Back
+                        barcode
                     </li>
                     <li id="tab5">
-                        Relevance
+                        your account
                     </li>
                     <li id="tab6">
-                        Barcode
+                        DONE!
                     </li>
                 </ul>
                 <div>

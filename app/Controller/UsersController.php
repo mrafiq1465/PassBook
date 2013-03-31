@@ -43,6 +43,7 @@ class UsersController extends AppController {
  * @return void
  */
 	public function add() {
+
         if (!$this->isAdmin() && $this->isLoggedIn()) {
             $this->redirect('/');
         }
@@ -72,7 +73,6 @@ class UsersController extends AppController {
                     else $this->Session->setFlash(__('Your information could not be saved. Please, try again.'));
                 }
             }
-
 		}
 	}
 
