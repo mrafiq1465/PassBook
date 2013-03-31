@@ -6,10 +6,10 @@
             <div id="tabstrip">
                 <ul>
                     <li class="k-state-active" id="tab1">
-                        Details
+                        Coupon
                     </li>
                     <li id="tab2">
-                        Base items
+                        Design
                     </li>
                     <li id="tab3">
                         Front
