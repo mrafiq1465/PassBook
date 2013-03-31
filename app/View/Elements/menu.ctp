@@ -5,10 +5,9 @@
     <div class="large-9 columns">
         <nav class="top-bar">
             <ul class="left">
-                <li><a href="/" class="">Home</a></li>
-                <li><a href="/pass/create/coupon/" class="">Coupon Maker</a></li>
-                <li><a href="#" class="">Scanner</a></li>
-                <li><a href="#" class="">Loyalty Cards</a></li>
+                <li><a href="/" class="">home</a></li>
+                <li><a href="/pass/create/coupon/" class="">coupon </a></li>
+                <li><a href="#" class="">loyalty cards</a></li>
                 <li><a href="/users" class="">my account</a></li>
                 <li><a href="/pricing" class="">pricing</a></li>
             </ul>
