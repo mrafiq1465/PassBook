@@ -878,7 +878,7 @@ ul.k-menu-vertical > .k-item
 .k-menu .k-item > .k-link
 {
     display: block;
-    padding: .5em .9em .4em;
+    padding: .5em;
     line-height: 1.34em;
 }
 

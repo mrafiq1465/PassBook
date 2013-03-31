@@ -67,23 +67,23 @@
 <body>
 <section id="mainbody">
             <?php echo $this->element('menu'); ?>
-
             <?php echo $this->Session->flash(); ?>
             <?php echo $this->fetch('content'); ?>
-
 </section>
-
 <footer>
-    &copy; flydigital pty ltd 2013
-    <a href="#"><img src="/img/bird.png"></a>
-    <a href="#"><img src="/img/facebook.png"></a>
-    <a href="#"><img id="mastercard" src="/img/mastercard.png"></a>
-    <a href="#"><img id="visa" src="/img/visa.png"></a>
-
-    <a href="#"><img id="paypal" src="/img/paypal.png"></a>
-    <a href="#"><img id="lock" src="/img/lock.png"></a>
-
+    <div class="row">
+        <div class="large-6 columns">
+            &copy; flydigital pty ltd 2013
+            <a href="#"><img src="/img/bird.png"></a>
+            <a href="#"><img src="/img/facebook.png"></a>
+        </div>
+        <div class="large-6 columns">
+            <a href="#"><img id="lock" src="/img/lock.png"></a>
+            <a href="#"><img id="mastercard" src="/img/mastercard.png"></a>
+            <a href="#"><img id="visa" src="/img/visa.png"></a>
+            <a href="#"><img id="paypal" src="/img/paypal.png"></a>
+        </div>
+    </div>
 </footer>
-
 </body>
 </html>

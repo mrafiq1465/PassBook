@@ -1,4 +1,4 @@
-<div id="k-container">
+<div>
     <div class="current side front">
         <div class="section_header">
             <div class="logo_image" style=" margin: 10px; float: left;">
@@ -51,16 +51,14 @@
             <img src="/img/PDF417_Barcode_Font.jpg" height="100px"/>
         </div>
         <div class="section_flip" style="clear: both; float: right; margin-right: 20px;">
-            <a href="#">i</a>
+            <a class="toggle" href="javascript:void(0);">Flip</a>
         </div>
     </div>
     <div class="side back">
-
+        <a class="toggle" href="javascript:void(0);">Flip</a>
+        Back content
     </div>
 </div>
-<a class="toggle" href="javascript:void(0);">Flip</a>
-
-
 
 <script>
     $(".toggle").click(function () {
@@ -75,33 +73,24 @@
 </script>
 
 <style>
-    #k-container {
-        position: relative;
-        width: 100%;
-        height: 100%;
-    }
-
     .side {
         position: absolute;
         width: 100%;
         height: 100%;
     }
-
     .front {
         background-image: url('/img/passes/event/background.png');
         padding: 0px 0 0 0px;
         width: 360px;
         height: 450px;
-        margin: 190px 0 0 40px;
+        margin: 0px 0 0 40px;
         color: #fff;
     }
-
     .key {
         font-weight: bold;
     }
-
     .back {
-
+        display: none;
     }
 
 </style>

@@ -11,6 +11,7 @@
 /* line 8, ../sass/ampush.scss */
 #mainbody {
   background-color: white;
+    padding-top: 20px;
 }
 
 /* line 13, ../sass/ampush.scss */
@@ -192,6 +193,8 @@ footer {
   color: #ced4d8;
   padding: 1em;
   font-size: 90%;
+  width: 1040px;
+  border-top: 1px solid #c0c0c0;
 }
 
 /* line 165, ../sass/ampush.scss */
@@ -3732,13 +3735,26 @@ button.button.large {
   height: 45px;
   line-height: 45px;
   position: relative;
-  background: #ced4d8;
   margin-bottom: 2.5em;
 }
 /* line 71, ../../../../../../../Library/Ruby/Gems/1.8/gems/zurb-foundation-4.0.9/scss/foundation/components/_top-bar.scss */
 .top-bar ul {
   margin-bottom: 0;
   list-style: none;
+    width:100%;
+}
+.top-bar ul li {
+    width:auto;
+    float: left;
+    margin-right: 30px;
+}
+
+.top-bar ul li a {
+    color: #000;
+}
+
+.top-bar ul li a:hover {
+    color: red;
 }
 /* line 76, ../../../../../../../Library/Ruby/Gems/1.8/gems/zurb-foundation-4.0.9/scss/foundation/components/_top-bar.scss */
 .top-bar .row {
@@ -4005,7 +4021,6 @@ button.button.large {
 @media only screen and (min-width: 78.33333em) {
   /* line 323, ../../../../../../../Library/Ruby/Gems/1.8/gems/zurb-foundation-4.0.9/scss/foundation/components/_top-bar.scss */
   .top-bar {
-    background: #ced4d8;
     *zoom: 1;
     overflow: visible;
   }

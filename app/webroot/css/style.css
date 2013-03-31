@@ -63,11 +63,11 @@ img{
 
 #users{
     float: left;
-    margin-left: 192px;
+    margin-left: 0px;
     margin-right: 160px;
     margin-top: 2%;
     padding-bottom: 3%;
-    border-bottom: 1px solid #c0c0c0;
+    width: 100%;
 }
 
 #menu, #menu ul, #menu ul li{

@@ -1,8 +1,5 @@
-
-<section class="list">
-    <?=$this->element('menu', array(
-    "heading" => "Edit User"
-));?>
+<div class="row">
+    <div class="large-12 column">
 <? echo $this->Form->create('User'); ?>
     <section id="form-container">
         <h3>User Details</h3>
@@ -15,4 +12,5 @@
     </section>
     <? echo $this->Form->end(array('class' => 'btn btn-primary', 'label' => 'Save',)); ?>
 
-</section>
+    </div>
+</div>

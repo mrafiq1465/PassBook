@@ -1,8 +1,6 @@
-<section class="list">
-    <?=$this->element('menu', array(
-    "heading" => "Manage users"
-));?>
 
+<div class="row">
+    <div class="large-12 column">
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
@@ -28,4 +26,6 @@
             <? } ?>
         </tbody>
     </table>
-</section>
+    </div>
+</div>
+

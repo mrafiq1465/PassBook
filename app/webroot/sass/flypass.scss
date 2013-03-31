@@ -7,7 +7,7 @@
 
 #mainbody {
   background-color: $amp-section;
-
+  padding-top: 20px;
 }
 
 .name {
@@ -158,6 +158,8 @@ footer {
   color: $amp-bg;
   padding: 1em;
   font-size: 90%;
+  width: 1040px;
+  border-top: 1px solid #c0c0c0;
 }
 
 

@@ -1,43 +1,44 @@
-<div id="wrapper">
-    <section id="pass_config">
+<section class="app-body">
+    <div class="row">
+        <div class="large-7 columns">
+            <h3>Create a pass in under 5 mins</h3>
 
-        <h3>Create a pass in under 5 mins</h3>
-
-        <div id="tabstrip">
-            <ul>
-                <li class="k-state-active" id="tab1">
-                    Details
-                </li>
-                <li id="tab2">
-                    Base items
-                </li>
-                <li id="tab3">
-                    Front
-                </li>
-                <li id="tab4">
-                    Back
-                </li>
-                <li id="tab5">
-                    Relevance
-                </li>
-                <li id="tab6">
-                    Generate Pass
-                </li>
-            </ul>
-            <?=$this->element('forms/' . $this->data['PassType']['name']);?>
-            <div id="k-window">
-                <p class="message"></p>
-                <button type="button" class="k-button">OK</button>
-                <button type="button" class="k-button">Cancel</button>
+            <div id="tabstrip">
+                <ul>
+                    <li class="k-state-active" id="tab1">
+                        Details
+                    </li>
+                    <li id="tab2">
+                        Base items
+                    </li>
+                    <li id="tab3">
+                        Front
+                    </li>
+                    <li id="tab4">
+                        Back
+                    </li>
+                    <li id="tab5">
+                        Relevance
+                    </li>
+                    <li id="tab6">
+                        Generate Pass
+                    </li>
+                </ul>
+                <?=$this->element('forms/' . $this->data['PassType']['name']);?>
+                <div id="k-window">
+                    <p class="message"></p>
+                    <button type="button" class="k-button">OK</button>
+                    <button type="button" class="k-button">Cancel</button>
+                </div>
             </div>
         </div>
-    </section>
-    <section id="simulator">
-        <div class="simulator">
-            <?php echo $this->element('simulator/event'); ?>
+        <div class="large-5 columns">
+            <div class="simulator">
+                <?php echo $this->element('simulator/event'); ?>
+            </div>
         </div>
-    </section>
-</div>
+    </div>
+</section>
 
 <?
 echo $this->Html->script('colorpicker.js');
