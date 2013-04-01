@@ -1,7 +1,11 @@
-
+<? /**
+ * @var $this View
+ */
+?>
 <div class="row">
     <div class="large-12 column">
         <h1 class="">Login</h1>
+        <?=$this->Form->create()?>
         <? echo $this->Form->input('email', array('placeholder' => 'Email', 'label' => FALSE, 'class' => 'input')); ?>
         <? echo $this->Form->input('password', array('placeholder' => 'Password', 'label' => FALSE, 'class' => 'input')); ?>
         <?php echo $this->Form->end(array('id' => 'submit', 'label' => 'Sign In'));?>

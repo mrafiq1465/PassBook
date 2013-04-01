@@ -1,3 +1,7 @@
+<? /**
+ * @var $this View
+ */
+?>
 <div>
     <div class="">
         <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step1Form')); ?>
@@ -18,13 +22,14 @@
             <img src="/<?=$this->request->data['Pass']['logoImageRetina']?>" id="logoImgRetina"/>
             <?=$this->Form->input('logoImageRetina', array('type' => 'file', 'rel' => '#logoImgRetina', 'class' => 'imageUpload'));?>
 
-            <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step2Form')); ?>
-            <?=$this->Form->input('logoText');?>
-            <?=$this->Form->input('headerText');?>
             <img src="/<?=$this->request->data['Pass']['stripImage']?>" id="stripImg"/>
             <?=$this->Form->input('stripImage', array('type' => 'file', 'rel' => '#stripImg', 'class' => 'imageUpload'));?>
             <img src="/<?=$this->request->data['Pass']['stripImageRetina']?>" id="stripImgRetina"/>
             <?=$this->Form->input('stripImageRetina', array('type' => 'file', 'rel' => '#stripImgRetina', 'class' => 'imageUpload'));?>
+
+            <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step2Form')); ?>
+            <?=$this->Form->input('logoText');?>
+            <?=$this->Form->input('headerText');?>
 
 
             <div>
@@ -140,16 +145,11 @@
 </div>
 <div>
     <div class="">
-        <?
-         if(empty($user_data)){
-
-             $this->element('users/login');
-         }
-        else {
-
-            $this->element('users/payment');
+        <? if(empty($user_data)){
+             echo $this->element('users/login');
+        } else {
+            echo $this->element('users/payment');
         }
-
         ?>
         <?//=$this->element('blocks/generate');?>
     </div>
