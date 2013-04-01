@@ -3,36 +3,13 @@
         <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step1Form')); ?>
         <?=$this->Form->input('organizationName');?>
         <?=$this->Form->input('description');?>
+        <?=$this->Form->input('backgroundColor', array('id' => 'backgroundColor'));?>
+        <?=$this->Form->input('foregroundColor', array('id' => 'foregroundColor'));?>
+        <?=$this->Form->input('labelColor', array('id' => 'labelColor'));?>
         <?=$this->Form->end('Next'); ?>
     </div>
 </div>
-<div>
-    <div class="">
-        <div style="width:45%">
-            <img src="/<?=$this->request->data['Pass']['iconImage']?>" id="iconImg"/>
-            <?=$this->Form->input('iconImage', array('type' => 'file', 'rel' => '#iconImg', 'class' => 'imageUpload'));?>
-            <img src="/<?=$this->request->data['Pass']['iconImageRetina']?>" id="iconImgRetina"/>
-            <?=$this->Form->input('iconImageRetina', array('type' => 'file', 'rel' => '#iconImgRetina', 'class' => 'imageUpload'));?>
 
-
-            <img src="/<?=$this->request->data['Pass']['thumbnailImage']?>" id="thumbnailImg"/>
-            <?=$this->Form->input('thumbnailImage', array('type' => 'file', 'rel' => '#thumbnailImg', 'class' => 'imageUpload'));?>
-            <img src="/<?=$this->request->data['Pass']['thumbnailImageRetina']?>" id="thumbnailImgRetina"/>
-            <?=$this->Form->input('thumbnailImageRetina', array('type' => 'file', 'rel' => '#thumbnailImgRetina', 'class' => 'imageUpload'));?>
-
-            <img src="/<?=$this->request->data['Pass']['stripImage']?>" id="stripImg"/>
-            <?=$this->Form->input('stripImage', array('type' => 'file', 'rel' => '#stripImg', 'class' => 'imageUpload'));?>
-            <img src="/<?=$this->request->data['Pass']['stripImageRetina']?>" id="stripImgRetina"/>
-            <?=$this->Form->input('stripImageRetina', array('type' => 'file', 'rel' => '#stripImgRetina', 'class' => 'imageUpload'));?>
-
-            <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step2Form')); ?>
-            <?=$this->Form->input('backgroundColor', array('id' => 'backgroundColor'));?>
-            <?=$this->Form->input('foregroundColor', array('id' => 'foregroundColor'));?>
-            <?=$this->Form->input('labelColor', array('id' => 'labelColor'));?>
-            <?=$this->Form->end('Next'); ?>
-        </div>
-    </div>
-</div>
 <div>
     <div class="">
         <div style="width:45%">
@@ -41,9 +18,15 @@
             <img src="/<?=$this->request->data['Pass']['logoImageRetina']?>" id="logoImgRetina"/>
             <?=$this->Form->input('logoImageRetina', array('type' => 'file', 'rel' => '#logoImgRetina', 'class' => 'imageUpload'));?>
 
-            <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step3Form')); ?>
+            <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step2Form')); ?>
             <?=$this->Form->input('logoText');?>
             <?=$this->Form->input('headerText');?>
+            <img src="/<?=$this->request->data['Pass']['stripImage']?>" id="stripImg"/>
+            <?=$this->Form->input('stripImage', array('type' => 'file', 'rel' => '#stripImg', 'class' => 'imageUpload'));?>
+            <img src="/<?=$this->request->data['Pass']['stripImageRetina']?>" id="stripImgRetina"/>
+            <?=$this->Form->input('stripImageRetina', array('type' => 'file', 'rel' => '#stripImgRetina', 'class' => 'imageUpload'));?>
+
+
             <div>
                 <div class="dynamicFieldsContainer">
                     <label>Primary Fields: </label>
@@ -101,9 +84,7 @@
                     </div>
                 </div>
             </div>
-            <?=$this->Form->input('barcode_format_id');?>
-            <?=$this->Form->input('barcodeMessage');?>
-            <p class="error"></p>
+
             <?=$this->Form->end('Next'); ?>
         </div>
     </div>
@@ -111,7 +92,7 @@
 <div>
     <div class="">
         <div style="width:45%">
-            <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step4Form')); ?>
+            <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step3Form')); ?>
             <div class="dynamicFieldsContainer">
                 <label>Back Fields: </label>
                 <button type="button" class="k-button dynamicFields" data-target="#backFieldsContainer">Add
@@ -136,7 +117,12 @@
 <div>
     <div class="">
         <div style="width:45%">
-            <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step5Form')); ?>
+            <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step4Form')); ?>
+            <label>Barcode: </label>
+            <?=$this->Form->input('barcode_format_id');?>
+            <?=$this->Form->input('barcodeMessage');?>
+            <p class="error"></p>
+
             <label>Locations: </label>
             <button type="button" class="k-button dynamicFields" data-target="#locationsContainer">Add
             </button>
@@ -148,13 +134,24 @@
                 <? } ?>
             </div>
             <p class="error"></p>
-            <?=$this->Form->end('Finish'); ?>
+            <?=$this->Form->end('Next'); ?>
         </div>
     </div>
 </div>
 <div>
     <div class="">
-        <?=$this->element('blocks/generate');?>
+        <?
+         if(empty($user_data)){
+
+             $this->element('users/login');
+         }
+        else {
+
+            $this->element('users/payment');
+        }
+
+        ?>
+        <?//=$this->element('blocks/generate');?>
     </div>
 </div>
 <script>

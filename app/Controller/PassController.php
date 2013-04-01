@@ -102,7 +102,9 @@ class PassController extends AppController
 
         $barcodeFormats = $this->Pass->BarcodeFormat->find('list');
 
-        $this->set(compact('step', 'barcodeFormats'));
+        $user_data = $this->Session->read('User');
+
+        $this->set(compact('step', 'barcodeFormats','user_data'));
     }
 
     public function generate_pass($id)

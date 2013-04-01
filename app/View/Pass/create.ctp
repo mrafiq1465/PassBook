@@ -15,7 +15,7 @@
                         back
                     </li>
                     <li id="tab4">
-                        barcode
+                        configuration
                     </li>
                     <li id="tab5">
                         your account
@@ -29,6 +29,9 @@
                         <?=$this->Form->create(null, array('id' => 'step1Form')); ?>
                         <?=$this->Form->input('organizationName');?>
                         <?=$this->Form->input('description');?>
+                        <?=$this->Form->input('backgroundColor', array('id' => 'backgroundColor'));?>
+                        <?=$this->Form->input('foregroundColor', array('id' => 'foregroundColor'));?>
+                        <?=$this->Form->input('labelColor', array('id' => 'labelColor'));?>
                         <?=$this->Form->end('Next'); ?>
                     </div>
                 </div>

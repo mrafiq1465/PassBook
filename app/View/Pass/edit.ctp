@@ -15,7 +15,7 @@
                         back
                     </li>
                     <li id="tab4">
-                        barcode
+                        configuration
                     </li>
                     <li id="tab5">
                         your account
@@ -27,8 +27,8 @@
                 <?=$this->element('forms/' . $this->data['PassType']['name']);?>
                 <div id="k-window">
                     <p class="message"></p>
-                    <button type="button" class="k-button">OK</button>
-                    <button type="button" class="k-button">Cancel</button>
+                    <button type="button" class="k-button">Get code</button>
+                    <button type="button" class="k-button">Finalize</button>
                 </div>
             </div>
         </div>
