@@ -29,6 +29,10 @@
                     <p class="message"></p>
                     <button type="button" class="k-button">Get code</button>
                     <button type="button" class="k-button">Finalize</button>
+                    <h6 class="">Do you want to set a download limit for this pass?</h6>
+                    <? echo $this->Form->input('download_limit', array('placeholder' => 'Download limit', 'label' => FALSE, 'class' => 'input')); ?>
+                    <?php echo $this->Form->end(array('id' => 'submit', 'label' => 'Submit'));?>
+
                 </div>
             </div>
         </div>
