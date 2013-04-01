@@ -1,91 +1,77 @@
-# ************************************************************
-# Sequel Pro SQL dump
-# Version 4004
-#
-# http://www.sequelpro.com/
-# http://code.google.com/p/sequel-pro/
-#
-# Host: 127.0.0.1 (MySQL 5.5.29)
-# Database: passbook
-# Generation Time: 2013-03-31 20:57:43 +0000
-# ************************************************************
-
+-- MySQL dump 10.13  Distrib 5.5.19, for Linux (i686)
+--
+-- Host: localhost    Database: passbook
+-- ------------------------------------------------------
+-- Server version	5.5.19
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-
-# Dump of table barcode_format
-# ------------------------------------------------------------
+--
+-- Table structure for table `barcode_format`
+--
 
 DROP TABLE IF EXISTS `barcode_format`;
-
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `barcode_format` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) DEFAULT NULL,
   `value` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `barcode_format`
+--
 
 LOCK TABLES `barcode_format` WRITE;
 /*!40000 ALTER TABLE `barcode_format` DISABLE KEYS */;
-
-INSERT INTO `barcode_format` (`id`, `name`, `value`)
-VALUES
-	(1,'PKBarcodeFormatPDF417','PKBarcodeFormatPDF417'),
-	(2,'QR codes','PKBarcodeFormatQR'),
-	(3,'Aztec','PKBarcodeFormatAztec');
-
+INSERT INTO `barcode_format` VALUES (1,'PKBarcodeFormatPDF417','PKBarcodeFormatPDF417'),(2,'QR codes','PKBarcodeFormatQR'),(3,'Aztec','PKBarcodeFormatAztec');
 /*!40000 ALTER TABLE `barcode_format` ENABLE KEYS */;
 UNLOCK TABLES;
 
-
-# Dump of table barcode_message_encoding
-# ------------------------------------------------------------
+--
+-- Table structure for table `barcode_message_encoding`
+--
 
 DROP TABLE IF EXISTS `barcode_message_encoding`;
-
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `barcode_message_encoding` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `barcode_format_id` int(11) NOT NULL,
   `name` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `barcode_message_encoding`
+--
 
 LOCK TABLES `barcode_message_encoding` WRITE;
 /*!40000 ALTER TABLE `barcode_message_encoding` DISABLE KEYS */;
-
-INSERT INTO `barcode_message_encoding` (`id`, `barcode_format_id`, `name`)
-VALUES
-	(1,1,'iso-8859-1');
-
+INSERT INTO `barcode_message_encoding` VALUES (1,1,'iso-8859-1');
 /*!40000 ALTER TABLE `barcode_message_encoding` ENABLE KEYS */;
 UNLOCK TABLES;
 
-
-# Dump of table barcode_messageEncoding
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `barcode_messageEncoding`;
-
-CREATE TABLE `barcode_messageEncoding` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(32) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-
-# Dump of table pass
-# ------------------------------------------------------------
+--
+-- Table structure for table `pass`
+--
 
 DROP TABLE IF EXISTS `pass`;
-
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pass` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `pass_type_id` int(11) DEFAULT NULL,
@@ -125,37 +111,26 @@ CREATE TABLE `pass` (
   `created` datetime DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pass`
+--
 
 LOCK TABLES `pass` WRITE;
 /*!40000 ALTER TABLE `pass` DISABLE KEYS */;
-
-INSERT INTO `pass` (`id`, `pass_type_id`, `user_id`, `formatVersion`, `uid`, `teamIdentifier`, `passTypeIdentifier`, `organizationName`, `iconImage`, `iconImageRetina`, `backgroundImage`, `backgroundImageRetina`, `backgroundColor`, `foregroundColor`, `labelColor`, `serialNumber`, `description`, `logoImage`, `logoImageRetina`, `logoText`, `headerText`, `thumbnailImage`, `thumbnailImageRetina`, `stripImage`, `stripImageRetina`, `primaryFields`, `secondaryFields`, `auxiliaryFields`, `barcode_format_id`, `barcodeMessage`, `backFields`, `locations`, `relevantDate`, `download_limit`, `download_count`, `created`, `updated`)
-VALUES
-	(1,1,NULL,NULL,NULL,NULL,NULL,'adsfasd','data/1/icon.png','data/1/icon@2x.png','data/1/background.png','data/1/background@2x.png','rgb(120,31,120)','rgb(222,185,222)','rgb(26,5,26)',NULL,'fasdfsf','data/1/logo.png','data/1/logo@2x.png','afdsf','adsfadsf','data/1/thumbnail.png','data/1/thumbnail@2x.png',NULL,NULL,'','[{\"Label\":\"dfasdf\",\"Value\":\"123\"}]','[{\"Label\":\"adfadsf\",\"Value\":\"123\"}]',1,NULL,'[]','[{\"Value\":\"12.22,23.00\"}]','',NULL,NULL,NULL,NULL),
-	(2,1,NULL,NULL,NULL,NULL,NULL,'sdfasdf',NULL,'',NULL,NULL,'rgb(184,66,184)','rgb(84,36,84)','rgb(189,147,189)',NULL,'asdfdas',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),
-	(3,1,NULL,NULL,NULL,NULL,NULL,'adfsfas','data/3/iconImage.png','data/3/iconImageRetina.png','data/3/backgroundImage.png','data/3/backgroundImageRetina.png',NULL,NULL,NULL,NULL,'fdasfadsf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),
-	(4,2,NULL,NULL,NULL,NULL,NULL,'adfasdfa','data/4/icon.png','data/4/icon@2x.png',NULL,NULL,'rgb(138,45,138)','rgb(214,32,214)','rgb(64,184,126)',NULL,'afasdf','data/4/logo.png','data/4/logo@2x.png','adfasdf','afdsfa','data/4/thumbnail.png','data/4/thumbnail@2x.png',NULL,NULL,'[{\"Label\":\"asdfasdfasasd\",\"Value\":\"12112\"}]','[]','[]',1,NULL,'[]','[]','',NULL,NULL,NULL,NULL),
-	(5,2,NULL,NULL,NULL,NULL,NULL,'sadf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'asdf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),
-	(6,2,NULL,NULL,NULL,NULL,NULL,'zxcvz',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'zv',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),
-	(7,2,NULL,NULL,NULL,NULL,NULL,'test','data/7/icon.png','data/7/icon@2x.png',NULL,NULL,'rgb(79,24,79)','rgb(51,19,51)','rgb(64,42,64)',NULL,'test','data/7/logo.png','data/7/logo@2x.png','dfasf','asdfa','data/7/thumbnail.png','data/7/thumbnail@2x.png',NULL,NULL,'[{\"Label\":\"asdf\",\"Value\":\"sdbssdfgsdfg\"}]','[{\"Label\":\"asfdasd\",\"Value\":\"asdfadfsa\"}]','[{\"Label\":\"asdfad\",\"Value\":\"asdfas\"}]',1,'test barcode','[{\"Label\":\"asdfas\",\"Value\":\"asdfasdf\"}]','[]','',NULL,NULL,NULL,NULL),
-	(8,2,NULL,NULL,NULL,NULL,NULL,'as',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'asdf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),
-	(9,2,NULL,NULL,NULL,NULL,NULL,'sadfas',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'asfd',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),
-	(10,2,NULL,NULL,NULL,NULL,NULL,'aaa',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'aaa',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),
-	(11,2,NULL,NULL,NULL,NULL,NULL,'Stef test',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Test',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),
-	(12,2,NULL,NULL,NULL,NULL,NULL,'test','data/12/icon.png',NULL,NULL,NULL,'rgb(0,0,0)','','',NULL,'test',NULL,NULL,'tets','test',NULL,'data/12/thumbnail@2x.png',NULL,NULL,'[]','[]','[]',1,'','[]','[]','',NULL,NULL,NULL,NULL),
-	(13,2,NULL,NULL,NULL,NULL,NULL,'test','data/13/icon.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'test',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),
-	(14,2,NULL,NULL,NULL,NULL,NULL,'test',NULL,NULL,NULL,NULL,'rgb(0,0,0)','rgb(0,0,0)','rgb(0,0,0)',NULL,'teset',NULL,NULL,'hello','how are you',NULL,NULL,NULL,NULL,'[]','[]','[]',1,'scan me',NULL,NULL,'',NULL,NULL,NULL,NULL);
-
+INSERT INTO `pass` VALUES (1,1,NULL,NULL,NULL,NULL,NULL,'adsfasd','data/1/icon.png','data/1/icon@2x.png','data/1/background.png','data/1/background@2x.png','rgb(120,31,120)','rgb(222,185,222)','rgb(26,5,26)',NULL,'fasdfsf','data/1/logo.png','data/1/logo@2x.png','afdsf','adsfadsf','data/1/thumbnail.png','data/1/thumbnail@2x.png',NULL,NULL,'','[{\"Label\":\"dfasdf\",\"Value\":\"123\"}]','[{\"Label\":\"adfadsf\",\"Value\":\"123\"}]',1,NULL,'[]','[{\"Value\":\"12.22,23.00\"}]','',NULL,NULL,NULL,NULL),(2,1,NULL,NULL,NULL,NULL,NULL,'sdfasdf',NULL,'',NULL,NULL,'rgb(184,66,184)','rgb(84,36,84)','rgb(189,147,189)',NULL,'asdfdas',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(3,1,NULL,NULL,NULL,NULL,NULL,'adfsfas','data/3/iconImage.png','data/3/iconImageRetina.png','data/3/backgroundImage.png','data/3/backgroundImageRetina.png',NULL,NULL,NULL,NULL,'fdasfadsf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(4,2,NULL,NULL,NULL,NULL,NULL,'adfasdfa','data/4/icon.png','data/4/icon@2x.png',NULL,NULL,'rgb(138,45,138)','rgb(214,32,214)','rgb(64,184,126)',NULL,'afasdf','data/4/logo.png','data/4/logo@2x.png','adfasdf','afdsfa','data/4/thumbnail.png','data/4/thumbnail@2x.png',NULL,NULL,'[{\"Label\":\"asdfasdfasasd\",\"Value\":\"12112\"}]','[]','[]',1,NULL,'[]','[]','',NULL,NULL,NULL,NULL),(5,2,NULL,NULL,NULL,NULL,NULL,'sadf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'asdf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(6,2,NULL,NULL,NULL,NULL,NULL,'zxcvz',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'zv',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(7,2,NULL,NULL,NULL,NULL,NULL,'test','data/7/icon.png','data/7/icon@2x.png',NULL,NULL,'rgb(79,24,79)','rgb(51,19,51)','rgb(64,42,64)',NULL,'test','data/7/logo.png','data/7/logo@2x.png','dfasf','asdfa','data/7/thumbnail.png','data/7/thumbnail@2x.png',NULL,NULL,'[{\"Label\":\"asdf\",\"Value\":\"sdbssdfgsdfg\"}]','[{\"Label\":\"asfdasd\",\"Value\":\"asdfadfsa\"}]','[{\"Label\":\"asdfad\",\"Value\":\"asdfas\"}]',1,'test barcode','[{\"Label\":\"asdfas\",\"Value\":\"asdfasdf\"}]','[]','',NULL,NULL,NULL,NULL),(8,2,NULL,NULL,NULL,NULL,NULL,'as',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'asdf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(9,2,NULL,NULL,NULL,NULL,NULL,'sadfas',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'asfd',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(10,2,NULL,NULL,NULL,NULL,NULL,'aaa',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'aaa',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(11,2,NULL,NULL,NULL,NULL,NULL,'Stef test',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Test',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(12,2,NULL,NULL,NULL,NULL,NULL,'test','data/12/icon.png',NULL,NULL,NULL,'rgb(0,0,0)','','',NULL,'test',NULL,NULL,'tets','test',NULL,'data/12/thumbnail@2x.png',NULL,NULL,'[]','[]','[]',1,'','[]','[]','',NULL,NULL,NULL,NULL),(13,2,NULL,NULL,NULL,NULL,NULL,'test','data/13/icon.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'test',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(14,2,NULL,NULL,NULL,NULL,NULL,'test',NULL,NULL,NULL,NULL,'rgb(0,0,0)','rgb(0,0,0)','rgb(0,0,0)',NULL,'teset',NULL,NULL,'hello','how are you',NULL,NULL,NULL,NULL,'[]','[]','[]',1,'scan me',NULL,NULL,'',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `pass` ENABLE KEYS */;
 UNLOCK TABLES;
 
-
-# Dump of table pass_download
-# ------------------------------------------------------------
+--
+-- Table structure for table `pass_download`
+--
 
 DROP TABLE IF EXISTS `pass_download`;
-
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pass_download` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `pass_id` int(11) NOT NULL,
@@ -164,54 +139,72 @@ CREATE TABLE `pass_download` (
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `pass_download`
+--
 
+LOCK TABLES `pass_download` WRITE;
+/*!40000 ALTER TABLE `pass_download` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pass_download` ENABLE KEYS */;
+UNLOCK TABLES;
 
-# Dump of table pass_type
-# ------------------------------------------------------------
+--
+-- Table structure for table `pass_type`
+--
 
 DROP TABLE IF EXISTS `pass_type`;
-
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pass_type` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) CHARACTER SET utf8 NOT NULL DEFAULT '',
   `active` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pass_type`
+--
 
 LOCK TABLES `pass_type` WRITE;
 /*!40000 ALTER TABLE `pass_type` DISABLE KEYS */;
-
-INSERT INTO `pass_type` (`id`, `name`, `active`)
-VALUES
-	(1,'event',NULL),
-	(2,'coupon',NULL),
-	(3,'transport',NULL),
-	(4,'store',NULL),
-	(5,'generic',NULL);
-
+INSERT INTO `pass_type` VALUES (1,'event',NULL),(2,'coupon',NULL),(3,'transport',NULL),(4,'store',NULL),(5,'generic',NULL);
 /*!40000 ALTER TABLE `pass_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
-
-# Dump of table payment
-# ------------------------------------------------------------
+--
+-- Table structure for table `payment`
+--
 
 DROP TABLE IF EXISTS `payment`;
-
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `payment` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `pass_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `payment`
+--
 
+LOCK TABLES `payment` WRITE;
+/*!40000 ALTER TABLE `payment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `payment` ENABLE KEYS */;
+UNLOCK TABLES;
 
-# Dump of table users
-# ------------------------------------------------------------
+--
+-- Table structure for table `users`
+--
 
 DROP TABLE IF EXISTS `users`;
-
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
@@ -227,25 +220,26 @@ CREATE TABLE `users` (
   `created` datetime DEFAULT NULL,
   `status` int(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `company`, `phone`, `address`, `state`, `country`, `subscription_type`, `updated`, `created`, `status`)
-VALUES
-	(1,'admin','what@yahoo.com','sdaf',NULL,NULL,NULL,NULL,NULL,NULL,'2013-03-28 02:00:14','2013-03-28 02:00:14',1),
-	(2,'asdfasdf','asdf','sdaf',NULL,NULL,NULL,NULL,NULL,NULL,'2013-03-28 02:02:44','2013-03-28 02:02:44',1),
-	(3,'ra','raf@yahoo.com','test',NULL,NULL,NULL,NULL,NULL,NULL,'2013-03-29 01:38:39','2013-03-29 01:38:39',1);
-
+INSERT INTO `users` VALUES (1,'admin','what@yahoo.com','sdaf',NULL,NULL,NULL,NULL,NULL,NULL,'2013-03-28 02:00:14','2013-03-28 02:00:14',1),(2,'asdfasdf','asdf','sdaf',NULL,NULL,NULL,NULL,NULL,NULL,'2013-03-28 02:02:44','2013-03-28 02:02:44',1),(3,'ra','raf@yahoo.com','test',NULL,NULL,NULL,NULL,NULL,NULL,'2013-03-29 01:38:39','2013-03-29 01:38:39',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-
-
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2013-04-01 11:23:41
