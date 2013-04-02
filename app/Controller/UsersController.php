@@ -184,7 +184,8 @@ class UsersController extends AppController {
                 $this->redirect($url);
             }
             else {
-                $this->Session->setFlash('Either your username or password is incorrect.', FALSE, FALSE, 'login');
+                if (!$this->request->is('ajax')) $this->Session->setFlash('Either your username or password is incorrect.', FALSE, FALSE, 'login');
+                else $this->set(array('error_msg' => 'Either your username or password is incorrect.'));
             }
         }
     }

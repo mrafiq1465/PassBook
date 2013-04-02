@@ -84,7 +84,25 @@ echo $this->Html->css('colorpicker/colorpicker.css');
             $kWindow.find('p').text(switchDivsOn.find('p.message').text());
         });
 
-        tabstrip.data('kendoTabStrip').disable($('#tab6'));
+        $('#tabstrip').data('kendoTabStrip').disable($('#tab6'));
+
+        $(function(){
+
+            function fillAccountBlock(resp) {
+                $('#AccountBlock').html(resp);
+            }
+
+            $(document).on('submit', '#AccountBlock form', function(e){
+                $(this).ajaxSubmit({
+                    success: function (resp) {
+                        fillAccountBlock(resp);
+                    }
+                });
+                return false;
+            });
+
+        });
+
 
     });
 </script>

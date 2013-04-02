@@ -11,11 +11,11 @@
                 <li><a href="/users" class="">my account</a></li>
                 <li><a href="/pricing" class="">pricing</a></li>
             </ul>
-        <nav
+        </nav>
     </div>
 </div>
 <script>
-    $(document).ready(function() {
-       // $("#menu").kendoMenu();
+    $(document).ready(function () {
+        // $("#menu").kendoMenu();
     });
 </script>
