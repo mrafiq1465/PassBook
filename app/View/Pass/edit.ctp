@@ -88,6 +88,22 @@ echo $this->Html->css('colorpicker/colorpicker.css');
 
         $(function () {
 
+            function paymentFormProcess(){
+                if ($('#PaymentForm').length) {
+                    $('#PaymentForm').ajaxForm({
+                        success: function(resp){
+                            resp = $.parseJSON(resp);
+                            if (resp.error !== undefined) {
+                                $('#AccountBlock p.error').text(resp.error).show();
+                            } else {
+                                $('#AccountBlock').html('<p class="message">Your payment is good now, you can now go to next step.</p>');
+                                $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
+                            }
+                        }
+                    });
+                }
+            }
+            paymentFormProcess();
 
             $('#UserLoginForm').ajaxForm({
                 before: function () {
@@ -109,7 +125,10 @@ echo $this->Html->css('colorpicker/colorpicker.css');
                                     $('#AccountBlock').html('<p class="message">Your payment is good now, you can now go to next step.</p>')
                                     $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
                                 } else {
-                                    $('#AccountBlock').load('/users/payment');
+                                    $('#AccountBlock').load('/users/payment', function(){
+                                        $('#PaymentPassId').val(PassId);
+                                        paymentFormProcess();
+                                    });
                                 }
                             }
                         })
