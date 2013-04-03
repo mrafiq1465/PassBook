@@ -66,6 +66,32 @@ INSERT INTO `barcode_message_encoding` VALUES (1,1,'iso-8859-1');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `download`
+--
+
+DROP TABLE IF EXISTS `download`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `download` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `pass_id` int(11) NOT NULL,
+  `uid` varchar(256) NOT NULL DEFAULT '',
+  `device` varchar(32) NOT NULL DEFAULT '',
+  `created` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `download`
+--
+
+LOCK TABLES `download` WRITE;
+/*!40000 ALTER TABLE `download` DISABLE KEYS */;
+/*!40000 ALTER TABLE `download` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `pass`
 --
 
@@ -111,7 +137,7 @@ CREATE TABLE `pass` (
   `created` datetime DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -120,34 +146,8 @@ CREATE TABLE `pass` (
 
 LOCK TABLES `pass` WRITE;
 /*!40000 ALTER TABLE `pass` DISABLE KEYS */;
-INSERT INTO `pass` VALUES (1,1,NULL,NULL,NULL,NULL,NULL,'adsfasd','data/1/icon.png','data/1/icon@2x.png','data/1/background.png','data/1/background@2x.png','rgb(120,31,120)','rgb(222,185,222)','rgb(26,5,26)',NULL,'fasdfsf','data/1/logo.png','data/1/logo@2x.png','afdsf','adsfadsf','data/1/thumbnail.png','data/1/thumbnail@2x.png',NULL,NULL,'','[{\"Label\":\"dfasdf\",\"Value\":\"123\"}]','[{\"Label\":\"adfadsf\",\"Value\":\"123\"}]',1,NULL,'[]','[{\"Value\":\"12.22,23.00\"}]','',NULL,NULL,NULL,NULL),(2,1,NULL,NULL,NULL,NULL,NULL,'sdfasdf',NULL,'',NULL,NULL,'rgb(184,66,184)','rgb(84,36,84)','rgb(189,147,189)',NULL,'asdfdas',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(3,1,NULL,NULL,NULL,NULL,NULL,'adfsfas','data/3/iconImage.png','data/3/iconImageRetina.png','data/3/backgroundImage.png','data/3/backgroundImageRetina.png',NULL,NULL,NULL,NULL,'fdasfadsf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(4,2,NULL,NULL,NULL,NULL,NULL,'adfasdfa','data/4/icon.png','data/4/icon@2x.png',NULL,NULL,'rgb(138,45,138)','rgb(214,32,214)','rgb(64,184,126)',NULL,'afasdf','data/4/logo.png','data/4/logo@2x.png','adfasdf','afdsfa','data/4/thumbnail.png','data/4/thumbnail@2x.png',NULL,NULL,'[{\"Label\":\"asdfasdfasasd\",\"Value\":\"12112\"}]','[]','[]',1,NULL,'[]','[]','',NULL,NULL,NULL,NULL),(5,2,NULL,NULL,NULL,NULL,NULL,'sadf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'asdf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(6,2,NULL,NULL,NULL,NULL,NULL,'zxcvz',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'zv',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(7,2,NULL,NULL,NULL,NULL,NULL,'test','data/7/icon.png','data/7/icon@2x.png',NULL,NULL,'rgb(79,24,79)','rgb(51,19,51)','rgb(64,42,64)',NULL,'test','data/7/logo.png','data/7/logo@2x.png','dfasf','asdfa','data/7/thumbnail.png','data/7/thumbnail@2x.png',NULL,NULL,'[{\"Label\":\"asdf\",\"Value\":\"sdbssdfgsdfg\"}]','[{\"Label\":\"asfdasd\",\"Value\":\"asdfadfsa\"}]','[{\"Label\":\"asdfad\",\"Value\":\"asdfas\"}]',1,'test barcode','[{\"Label\":\"asdfas\",\"Value\":\"asdfasdf\"}]','[]','',NULL,NULL,NULL,NULL),(8,2,NULL,NULL,NULL,NULL,NULL,'as',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'asdf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(9,2,NULL,NULL,NULL,NULL,NULL,'sadfas',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'asfd',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(10,2,NULL,NULL,NULL,NULL,NULL,'aaa',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'aaa',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(11,2,NULL,NULL,NULL,NULL,NULL,'Stef test',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Test',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(12,2,NULL,NULL,NULL,NULL,NULL,'test','data/12/icon.png',NULL,NULL,NULL,'rgb(0,0,0)','','',NULL,'test',NULL,NULL,'tets','test',NULL,'data/12/thumbnail@2x.png',NULL,NULL,'[]','[]','[]',1,'','[]','[]','',NULL,NULL,NULL,NULL),(13,2,NULL,NULL,NULL,NULL,NULL,'test','data/13/icon.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'test',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(14,2,NULL,NULL,NULL,NULL,NULL,'test',NULL,NULL,NULL,NULL,'rgb(0,0,0)','rgb(0,0,0)','rgb(0,0,0)',NULL,'teset',NULL,NULL,'hello','how are you',NULL,NULL,NULL,NULL,'[]','[]','[]',1,'scan me',NULL,NULL,'',NULL,NULL,NULL,NULL);
+INSERT INTO `pass` VALUES (1,1,NULL,NULL,NULL,NULL,NULL,'adsfasd','data/1/icon.png','data/1/icon@2x.png','data/1/background.png','data/1/background@2x.png','rgb(120,31,120)','rgb(222,185,222)','rgb(26,5,26)',NULL,'fasdfsf','data/1/logo.png','data/1/logo@2x.png','afdsf','adsfadsf','data/1/thumbnail.png','data/1/thumbnail@2x.png',NULL,NULL,'','[{\"Label\":\"dfasdf\",\"Value\":\"123\"}]','[{\"Label\":\"adfadsf\",\"Value\":\"123\"}]',1,NULL,'[]','[{\"Value\":\"12.22,23.00\"}]','',NULL,NULL,NULL,NULL),(2,1,NULL,NULL,NULL,NULL,NULL,'sdfasdf',NULL,'',NULL,NULL,'rgb(184,66,184)','rgb(84,36,84)','rgb(189,147,189)',NULL,'asdfdas',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(3,1,NULL,NULL,NULL,NULL,NULL,'adfsfas','data/3/iconImage.png','data/3/iconImageRetina.png','data/3/backgroundImage.png','data/3/backgroundImageRetina.png',NULL,NULL,NULL,NULL,'fdasfadsf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(4,2,NULL,NULL,NULL,NULL,NULL,'adfasdfa','data/4/icon.png','data/4/icon@2x.png',NULL,NULL,'rgb(138,45,138)','rgb(214,32,214)','rgb(64,184,126)',NULL,'afasdf','data/4/logo.png','data/4/logo@2x.png','adfasdf','afdsfa','data/4/thumbnail.png','data/4/thumbnail@2x.png',NULL,NULL,'[{\"Label\":\"asdfasdfasasd\",\"Value\":\"12112\"}]','[]','[]',1,NULL,'[]','[]','',NULL,NULL,NULL,NULL),(5,2,NULL,NULL,NULL,NULL,NULL,'sadf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'asdf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(6,2,NULL,NULL,NULL,NULL,NULL,'zxcvz',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'zv',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(7,2,NULL,NULL,NULL,NULL,NULL,'test','data/7/icon.png','data/7/icon@2x.png',NULL,NULL,'rgb(79,24,79)','rgb(51,19,51)','rgb(64,42,64)',NULL,'test','data/7/logo.png','data/7/logo@2x.png','dfasf','asdfa','data/7/thumbnail.png','data/7/thumbnail@2x.png',NULL,NULL,'[{\"Label\":\"asdf\",\"Value\":\"sdbssdfgsdfg\"}]','[{\"Label\":\"asfdasd\",\"Value\":\"asdfadfsa\"}]','[{\"Label\":\"asdfad\",\"Value\":\"asdfas\"}]',1,'test barcode','[{\"Label\":\"asdfas\",\"Value\":\"asdfasdf\"}]','[]','',NULL,NULL,NULL,NULL),(8,2,NULL,NULL,NULL,NULL,NULL,'as',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'asdf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(9,2,NULL,NULL,NULL,NULL,NULL,'sadfas',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'asfd',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(10,2,NULL,NULL,NULL,NULL,NULL,'aaa',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'aaa',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(11,2,NULL,NULL,NULL,NULL,NULL,'Stef test',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Test',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(12,2,NULL,NULL,NULL,NULL,NULL,'test','data/12/icon.png',NULL,NULL,NULL,'rgb(0,0,0)','','',NULL,'test',NULL,NULL,'tets','test',NULL,'data/12/thumbnail@2x.png',NULL,NULL,'[]','[]','[]',1,'','[]','[]','',NULL,NULL,NULL,NULL),(13,2,NULL,NULL,NULL,NULL,NULL,'test','data/13/icon.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'test',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL),(14,2,NULL,NULL,NULL,NULL,NULL,'test',NULL,NULL,NULL,NULL,'rgb(0,0,0)','rgb(0,0,0)','rgb(0,0,0)',NULL,'teset',NULL,NULL,'hello','how are you',NULL,NULL,NULL,NULL,'[]','[]','[]',1,'scan me',NULL,NULL,'',NULL,NULL,NULL,NULL),(15,2,1,NULL,NULL,NULL,NULL,'adfadsfasdf',NULL,NULL,NULL,NULL,'rgb(125,62,125)','rgb(158,35,158)','rgb(207,37,207)',NULL,'afasdf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,'2013-03-31 22:49:48','2013-03-31 22:49:48'),(16,2,NULL,NULL,NULL,NULL,NULL,'Orgname',NULL,NULL,NULL,NULL,'rgb(176,35,176)','rgb(184,24,184)','rgb(168,45,168)',NULL,'adsfsd','data/16/logo.png','data/16/logo@2x.png','sdsssssss','afdsfa',NULL,NULL,'data/16/strip.png','data/16/strip@2x.png','[{\"Label\":\"asdfasdfasasd\",\"Value\":\"12112\"}]','[{\"Label\":\"adsfasfas\",\"Value\":\"dfasfdsfs\"}]','[{\"Label\":\"adfadsf\",\"Value\":\"123\"}]',1,'sasdsad','[{\"Label\":\"adsfadsf\",\"Value\":\"2323\"}]','[]','',NULL,NULL,'2013-04-01 07:37:47','2013-04-01 07:37:47');
 /*!40000 ALTER TABLE `pass` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `pass_download`
---
-
-DROP TABLE IF EXISTS `pass_download`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pass_download` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `pass_id` int(11) NOT NULL,
-  `uid` varchar(256) NOT NULL DEFAULT '',
-  `device` varchar(32) NOT NULL DEFAULT '',
-  `created` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `pass_download`
---
-
-LOCK TABLES `pass_download` WRITE;
-/*!40000 ALTER TABLE `pass_download` DISABLE KEYS */;
-/*!40000 ALTER TABLE `pass_download` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -186,7 +186,7 @@ CREATE TABLE `payment` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `pass_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,6 +195,7 @@ CREATE TABLE `payment` (
 
 LOCK TABLES `payment` WRITE;
 /*!40000 ALTER TABLE `payment` DISABLE KEYS */;
+INSERT INTO `payment` VALUES (1,16);
 /*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,4 +243,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-04-01 11:23:41
+-- Dump completed on 2013-04-03 12:27:46
