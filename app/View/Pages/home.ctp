@@ -1,13 +1,13 @@
 <section class="app-body">
 <div class="row">
     <div class="large-7 columns">
-        <p class="">
+        <h4>
             create & share mobile <br> passes in minutes...
-        </p>
+        </h4>
         <p>
             <img src="img/home_feature.png" alt="home feature">
         </p>
-        <p>one pass works on all phones</p>
+        <h5>one pass works on all phones</h5>
         <ul>
             <li>Apple, Android & Windows friendly</li>
             <li>create a pass in minutes</li>

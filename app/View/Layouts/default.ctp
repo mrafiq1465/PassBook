@@ -16,6 +16,7 @@
     <![endif]-->
     <!--  meta info -->
 
+    <link rel="stylesheet" type="text/css" href="  http://www.google.com/fonts#ReviewPlace:refine/Collection:Montserrat+Alternates:400,700">
     <?php
 
       echo $this->Html->meta(array("name"    => "viewport",
