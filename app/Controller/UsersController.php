@@ -181,11 +181,14 @@ class UsersController extends AppController {
                 /*if ($dbuser['User']['username'] == 'admin'){
                     $this->redirect('/admin/');
                 }*/
+                if ($this->request->is('ajax')){
+                    $this->ajax_response(array('success' => true));
+                }
                 $this->redirect($url);
             }
             else {
                 if (!$this->request->is('ajax')) $this->Session->setFlash('Either your username or password is incorrect.', FALSE, FALSE, 'login');
-                else $this->set(array('error_msg' => 'Either your username or password is incorrect.'));
+                else $this->ajax_response(array('error' => 'Either your username or password is incorrect.'));
             }
         }
     }

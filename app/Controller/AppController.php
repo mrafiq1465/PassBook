@@ -93,14 +93,6 @@ class AppController extends Controller {
         } elseif($login_req) {
             $this->requireLogin();
         }
-
-        if (!$this->isAdmin() && $this->isLoggedIn() && $this->params->params['controller'] != 'users' && $this->params->params['action'] != 'payment' ) {
-            $subscription_type = $this->Session->read('User.subscription_type');
-            if (empty($subscription_type)){
-                $this->redirect(array('controller'=>'users','action' => 'payment'));
-                exit;
-            }
-        }
     }
 
     function ajax_response($data) {
