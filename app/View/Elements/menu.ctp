@@ -14,8 +14,3 @@
         </nav>
     </div>
 </div>
-<script>
-    $(document).ready(function () {
-        // $("#menu").kendoMenu();
-    });
-</script>
