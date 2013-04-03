@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <div class="row section_auxiliary" style="clear: both;">
+        <div class="row section_auxiliary" style="">
             <? foreach ($this->data['Pass']['secondaryFields'] as $field) {?>
             <div class="logo_text" style="  margin: 10px; float: left;">
                 <span class="key"><?=$field['Label']?></span> <br/> <span class="value"><?=$field['Value']?></span>
@@ -31,14 +31,14 @@
             </div>
             <? } ?>
         </div>
-        <div class="row section_barcode" style="clear: both;  text-align: center; margin-top: 120px">
+        <div class="row section_barcode" style=" text-align: center; margin-top: 120px">
             <img src="/img/PDF417_Barcode_Font.jpg" height="100px"/>
         </div>
-        <div class="section_flip" style="clear: both; float: right; margin-right: 20px;">
+        <div class="section_flip" style=" float: right; margin-right: 20px;">
             <a href="#">i</a>
         </div>
     </div>
-    <div class="side back">
+    <div class="row side back" style="display: none;">
         <? foreach ($this->data['Pass']['backFields'] as $field) {?>
         <div class="logo_text" style="  margin: 10px; float: left;">
             <span class="key"><?=$field['Label']?></span> <br/> <span class="value"><?=$field['Value']?></span>
@@ -61,11 +61,9 @@
     }
 
     .front {
-
         padding: 0px 0 0 0px;
         width: 360px;
         height: 450px;
-        color: #fff;
     }
 
     .key {
