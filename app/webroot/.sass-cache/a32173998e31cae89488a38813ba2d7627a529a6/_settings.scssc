@@ -1,7 +1,7 @@
 3.2.7 (Media Mark)
-d3ae2058cccd3b9677d6803121c1c4c7632bd99e
+5a813496902666bf1c2173017920b862d1a661a7
 o:Sass::Tree::RootNode
-:@template"?y// Required global settings and mixins for Foundation
+:@template"Iy// Required global settings and mixins for Foundation
 @import "foundation/foundation-global";
 
 // Settings file to override Foundation variables
@@ -35,11 +35,11 @@ $body-bg: #ffffff;
 $body-font-family: 'Lato', sans-serif;
 // $body-font-weight: normal;
 // $body-font-style: normal;
-$h1-font-family: 'Montserrat Alternates';
-$h2-font-family: 'Montserrat Alternates';
-$h3-font-family: 'Montserrat Alternates';
-$h4-font-family: 'Montserrat Alternates';
-$h5-font-family: 'Montserrat Alternates';
+//$h1-font-family: 'Montserrat Alternates';
+//$h2-font-family: 'Montserrat Alternates';
+//$h3-font-family: 'Montserrat Alternates';
+//$h4-font-family: 'Montserrat Alternates';
+//$h5-font-family: 'Montserrat Alternates';
 
 // We use this to control font-smoothing
 // $font-smoothing: antialiased;
@@ -1008,7 +1008,7 @@ $topbar-link-color: red;
 // $topbar-breakpoint: emCalc(940px); // Change to 9999px for always mobile layout
 // $topbar-media-query: "only screen and (min-width "#{$topbar-breakpoint}")";
 
-:@has_childrenT:@options{ :@children[èo:Sass::Tree::CommentNode
+:@has_childrenT:@options{ :@children[ão:Sass::Tree::CommentNode
 :
 @type:silent:@value["=/* Required global settings and mixins for Foundation */;@;	[ :
 @lineio:Sass::Tree::ImportNode:@imported_file0:@imported_filename"!foundation/foundation-global;0;@;	[ ;io;
@@ -1040,8 +1040,13 @@ greeniÌ:	blueiÌ;0;@;i;@;	[ ;io;;0;"amp-bg;o;	;{	;iÎ;i;i
  * $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; */;@;	[ ;i#o;;0;"body-font-family;o:Sass::Script::List	:@separator:
 comma;[o:Sass::Script::String	;:string;"	Lato;@;i%o;#	;:identifier;"sans-serif;@;i%;@;i%;@;	[ ;i%o;
 
-;;;["B/* $body-font-weight: normal;
- * $body-font-style: normal; */;@;	[ ;i&o;;0;"h1-font-family;o;#	;;$;"Montserrat Alternates;@;i(;@;	[ ;i(o;;0;"h2-font-family;o;#	;;$;"Montserrat Alternates;@;i);@;	[ ;i)o;;0;"h3-font-family;o;#	;;$;"Montserrat Alternates;@;i*;@;	[ ;i*o;;0;"h4-font-family;o;#	;;$;"Montserrat Alternates;@;i+;@;	[ ;i+o;;0;"h5-font-family;o;#	;;$;"Montserrat Alternates;@;i,;@;	[ ;i,o;
+;;;["/* $body-font-weight: normal;
+ * $body-font-style: normal;
+ *$h1-font-family: 'Montserrat Alternates';
+ *$h2-font-family: 'Montserrat Alternates';
+ *$h3-font-family: 'Montserrat Alternates';
+ *$h4-font-family: 'Montserrat Alternates';
+ *$h5-font-family: 'Montserrat Alternates'; */;@;	[ ;i&o;
 
 ;;;["Q/* We use this to control font-smoothing
  * $font-smoothing: antialiased; */;@;	[ ;i.o;

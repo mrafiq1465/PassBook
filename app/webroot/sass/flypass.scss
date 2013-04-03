@@ -37,6 +37,11 @@
   width:1040px;
   margin:0 auto;
 }
+h1,h2,h3,h4,h5{
+  font-family: 'Montserrat Alternates';
+  font-style: normal;
+  font-weight: bold;
+}
 
 .widget {
   border: 1px solid $amp-border;
@@ -759,4 +764,6 @@ footer {
 
 
 @import url("http://fonts.googleapis.com/css?family=Lato:300,700");
-@import url("http://fonts.googleapis.com/css?family=Montserrat+Alternates:400,700");
+//@import url("http://fonts.googleapis.com/css?family=Tangerine");
+
+@import url("http://www.google.com/fonts#UsePlace:use/Collection:Montserrat+Alternates:400,700");
