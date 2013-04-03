@@ -58,13 +58,13 @@ echo $this->Html->css('colorpicker/colorpicker.css');
         $('.imageUpload').each(function () {
             var $this = $(this);
             $this.kendoUpload({
-                async:{
-                    saveUrl:"/pass/edit/<?=$this->data['Pass']['id']?>/",
-                    removeUrl:"/pass/edit/<?=$this->data['Pass']['id']?>/?remove=" + encodeURIComponent($this.attr('name')),
-                    autoUpload:true
+                async: {
+                    saveUrl: "/pass/edit/<?=$this->data['Pass']['id']?>/",
+                    removeUrl: "/pass/edit/<?=$this->data['Pass']['id']?>/?remove=" + encodeURIComponent($this.attr('name')),
+                    autoUpload: true
                 },
-                multiple:false,
-                success:function (e) {
+                multiple: false,
+                success: function (e) {
                     var $target_img = $($this.attr('rel'));
                     if (e.response.success === true) $target_img.attr('src', '');
                     else $target_img.attr('src', e.response.success + '?' + Math.random());
@@ -86,21 +86,36 @@ echo $this->Html->css('colorpicker/colorpicker.css');
 
         $('#tabstrip').data('kendoTabStrip').disable($('#tab6'));
 
-        $(function(){
+        $(function () {
 
-            function fillAccountBlock(resp) {
-                $('#AccountBlock').html(resp);
-            }
 
-            $(document).on('submit', '#AccountBlock form', function(e){
-                $(this).ajaxSubmit({
-                    success: function (resp) {
-                        fillAccountBlock(resp);
+            $('#UserLoginForm').ajaxForm({
+                before: function () {
+                    $('#AccountBlock p.error').hide();
+                },
+                success: function (resp) {
+                    resp = $.parseJSON(resp);
+                    if (resp.error !== undefined) {
+                        $('#AccountBlock p.error').text(resp.error).show();
+                    } else {
+                        $('#AccountBlock p.error').hide();
+                        //show next form
+                        $.ajax({
+                            url: '/pass/payment_status/' + PassId,
+                            dataType: 'json',
+                            success: function(resp) {
+                                if (resp.result) {
+                                    //paid then, what to do?
+                                    $('#AccountBlock').html('<p class="message">Your payment is good now, you can now go to next step.</p>')
+                                    $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
+                                } else {
+                                    $('#AccountBlock').load('/users/payment');
+                                }
+                            }
+                        })
                     }
-                });
-                return false;
+                }
             });
-
         });
 
 

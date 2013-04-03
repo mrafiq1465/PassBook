@@ -195,4 +195,14 @@ class PassController extends AppController
         $barcodeFormats = $this->Pass->BarcodeFormat->find('list');
         $this->set(compact('barcodeFormats'));
     }
+
+    public function payment_status($pass_id) {
+        $pass_data = $this->Pass->Payment->find('first', array(
+            'recursive' => -1,
+            'conditions' => array(
+                'pass_id' => $pass_id,
+            ),
+        ));
+        $this->ajax_response(array('result' => !empty($pass_data)));
+    }
 }

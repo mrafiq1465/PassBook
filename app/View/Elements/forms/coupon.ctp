@@ -156,4 +156,5 @@
 </div>
 <script>
     var PassType = <?=$this->data['PassType']['id']; ?>;
+    var PassId = <?=$this->data['Pass']['id'];?>
 </script>

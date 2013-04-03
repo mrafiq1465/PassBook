@@ -4,7 +4,10 @@ App::uses('AppModel', 'Model');
  * Pass Model
  *
  * @property PassType $PassType
+ * @property User $User
  * @property BarcodeFormat $BarcodeFormat
+ * @property Download $Download
+ * @property Payment $Payment
  */
 class Pass extends AppModel
 {
@@ -45,6 +48,40 @@ class Pass extends AppModel
             'conditions' => '',
             'fields' => '',
             'order' => ''
+        )
+    );
+
+    /**
+     * hasMany associations
+     *
+     * @var array
+     */
+    public $hasMany = array(
+        'Download' => array(
+            'className' => 'Download',
+            'foreignKey' => 'pass_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        ),
+        'Payment' => array(
+            'className' => 'Payment',
+            'foreignKey' => 'pass_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
         )
     );
 
