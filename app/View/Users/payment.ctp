@@ -1,1 +1,1 @@
-<h1>pay now</h1>
+<?=$this->element('users/payment')?>

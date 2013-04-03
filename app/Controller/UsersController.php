@@ -198,6 +198,19 @@ class UsersController extends AppController {
             $this->redirect('/users/login');
         }
 
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $this->loadModel('Payment');
+            if ($this->Payment->save($this->reqeust->data)){
+                if ($this->request->is('ajax')) {
+                    $this->ajax_response(array('success' => true));
+                }
+            } else {
+                if ($this->request->is('ajax')) {
+                    $this->ajax_response(array('error' => 'data could not be saved'));
+                }
+            }
+
+        }
     }
 
     function logout() {
