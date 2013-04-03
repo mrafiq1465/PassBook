@@ -17,6 +17,11 @@
 <div>
     <div class="">
         <div style="width:45%">
+            <img src="/<?= $this->request->data['Pass']['iconImage'] ?>" id="iconImg"/>
+            <?=$this->Form->input('iconImage', array('type' => 'file', 'rel' => '#iconImg', 'class' => 'imageUpload'));?>
+            <img src="/<?= $this->request->data['Pass']['iconImageRetina'] ?>" id="iconImgRetina"/>
+            <?=$this->Form->input('iconImageRetina', array('type' => 'file', 'rel' => '#iconImgRetina', 'class' => 'imageUpload'));?>
+
             <img src="/<?= $this->request->data['Pass']['logoImage'] ?>" id="logoImg"/>
             <?=$this->Form->input('logoImage', array('type' => 'file', 'rel' => '#logoImg', 'class' => 'imageUpload'));?>
             <img src="/<?= $this->request->data['Pass']['logoImageRetina'] ?>" id="logoImgRetina"/>
