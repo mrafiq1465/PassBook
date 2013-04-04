@@ -1,0 +1,104 @@
+@import "settings";
+@import "compass/typography/lists/horizontal-list";
+@import "compass/css3";
+
+//@import url(http://fonts.googleapis.com/css?family=Montserrat+Alternates:400,700);
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: 'Montserrat Alternates', serif;
+}
+
+.main-nav {
+  padding: 15px 0 30px;
+
+  ul {
+    height: 75px;
+    line-height: 83px;
+    @include horizontal-list-container();
+
+    li {
+      @include horizontal-list-item(13px);
+
+      a {
+        display: block;
+        color: #181818;
+
+        &:hover {
+          color: #ed1c24;
+        }
+      }
+    }
+  }
+}
+
+.hero-unit {
+  border-top: 1px solid #dcdcdc;
+  @include background-image(linear-gradient(white, #ececec 99%, #dcdcdc));
+  min-height: 570px;
+}
+
+.clients {
+  ul {
+    @include horizontal-list-container();
+    margin: 10px 0;
+
+    li {
+      @include horizontal-list-item(12px);
+
+      a {
+        display: block;
+        height: 47px;
+        line-height: 55px;
+      }
+    }
+  }
+}
+
+#main-footer {
+  .row {
+    border-top: 1px solid #999999;
+    padding-top: 10px;
+  }
+
+  ul {
+    @include horizontal-list-container();
+    li {
+      @include horizontal-list-item();
+    }
+
+    &.social {
+      line-height: 1.7;
+      a {
+        padding:0 5px ;
+      }
+      span {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.call-to-action {
+  padding: 15px 0;
+}
+
+.clients h6 {
+  margin-bottom: 10px;
+}
+
+.phone-container {
+  position: relative;
+}
+#phone {
+  position: absolute;
+  z-index: 100;
+  right: 0;
+  top: -30px;
+}
+
+#mainbody {
+  ul {
+    list-style-position: inside;
+  }
+}
+          
