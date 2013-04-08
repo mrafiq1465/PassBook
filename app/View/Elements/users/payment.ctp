@@ -7,7 +7,5 @@
         <? echo $this->Form->input('card_number', array('placeholder' => 'number', 'label' => FALSE, 'class' => 'input')); ?>
         <? echo $this->Form->input('card_ccv', array('placeholder' => 'ccv', 'label' => FALSE, 'class' => 'input')); ?>
         <?php echo $this->Form->end(array('id' => 'submit', 'label' => 'Submit'));?>
-
-
     </div>
 </div>

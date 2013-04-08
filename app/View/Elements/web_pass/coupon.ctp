@@ -3,7 +3,7 @@
      ?>
      <a href="/pass/download_pkpass/<?=$this->data['Pass']['id']?>">click here to add in our passbook</a>
    <?
-  }
+  }else {
 ?>
 <div id="pass_body" style="color:<?=$this->data['Pass']['foregroundColor'];?>;">
     <div class="current side front" style="background-color:<?=$this->data['Pass']['backgroundColor'];?>; ">
@@ -54,6 +54,7 @@
     </div>
 </div>
 
+<? } ?>
 <style>
     #pass_body {
         position: relative;
