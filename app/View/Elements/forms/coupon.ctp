@@ -156,7 +156,7 @@
             echo $this->element('users/payment');
         }
         ?>
-        <?//=$this->element('blocks/generate');?>
+        <?= $this->element('blocks/generate');?>
     </div>
 </div>
 <script>
