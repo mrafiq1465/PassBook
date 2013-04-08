@@ -220,12 +220,12 @@ class PassController extends AppController
     public function download_pkpass($id = null) {
         $this->autoRender = false;
 
-        $pkpass_file = '/data/passes/' .$id . '.pkpass';
+        $pkpass_file = '/data/' .$id . '.pkpass';
 
         header("Pragma: no-cache");
         header("Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0");
         header("Content-Type: application/vnd.apple.pkpass");
-        header('Content-Disposition: attachment; filename="pass.pkpass"');
+        header('Content-Disposition: attachment; filename="'.$pkpass_file.'"');
         clearstatcache();
         $filesize = filesize($pkpass_file);
         if ($filesize)
