@@ -190,8 +190,6 @@ class PassController extends AppController
     public function web_pass($id = null)
     {
         $this->layout = 'web_pass';
-        $isiPad = (bool) strpos($_SERVER['HTTP_USER_AGENT'],'iPad');
-        $isiOS = (bool) strpos($_SERVER['HTTP_USER_AGENT'],'iOS');
 
         $iPod = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
         $iPhone = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
@@ -199,8 +197,7 @@ class PassController extends AppController
         $Android= stripos($_SERVER['HTTP_USER_AGENT'],"Android");
         $webOS= stripos($_SERVER['HTTP_USER_AGENT'],"webOS");
 
-
-        $download_link = true;
+        $download_link = false;
         if( $iPad || $iPhone ){
              $download_link = true;
         }else if($iPod){
