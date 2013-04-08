@@ -190,10 +190,53 @@ class PassController extends AppController
     public function web_pass($id = null)
     {
         $this->layout = 'web_pass';
+        $isiPad = (bool) strpos($_SERVER['HTTP_USER_AGENT'],'iPad');
+        $isiOS = (bool) strpos($_SERVER['HTTP_USER_AGENT'],'iOS');
+
+        $iPod = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
+        $iPhone = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
+        $iPad = stripos($_SERVER['HTTP_USER_AGENT'],"iPad");
+        $Android= stripos($_SERVER['HTTP_USER_AGENT'],"Android");
+        $webOS= stripos($_SERVER['HTTP_USER_AGENT'],"webOS");
+
+
+        $download_link = true;
+        if( $iPad || $iPhone ){
+             $download_link = true;
+        }else if($iPod){
+            //increase the count
+        }else if($Android){
+            //increase the count
+        }else if($webOS){
+            // Just show the pass
+        }
+
         $this->request->data = $this->Pass->read(null, $id);
         $this->decodeDynamicFields($this->request->data);
         $barcodeFormats = $this->Pass->BarcodeFormat->find('list');
-        $this->set(compact('barcodeFormats'));
+        $this->set(compact('barcodeFormats','download_link'));
+    }
+
+    public function download_pkpass($id = null) {
+        $this->autoRender = false;
+
+        $pkpass_file = '/data/passes/' .$id . '.pkpass';
+
+        header("Pragma: no-cache");
+        header("Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0");
+        header("Content-Type: application/vnd.apple.pkpass");
+        header('Content-Disposition: attachment; filename="pass.pkpass"');
+        clearstatcache();
+        $filesize = filesize($pkpass_file);
+        if ($filesize)
+            header("Content-Length: ". $filesize);
+        header('Content-Transfer-Encoding: binary');
+        if (filemtime($pkpass_file)) {
+            date_default_timezone_set("UTC");
+            header('Last-Modified: ' . date("D, d M Y H:i:s", filemtime($pkpass_file)) . ' GMT');
+        }
+        flush();
+        readfile($pkpass_file);
     }
 
     public function payment_status($pass_id) {

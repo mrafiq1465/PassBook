@@ -16,10 +16,23 @@ class UsersController extends AppController {
  * @return void
  */
 	public function index() {
+          $id = 3;
 
-		$this->User->recursive = 0;
-		$this->set('users', $this->paginate());
-        //$this->set('users', $this->paginate(null,array('User.status' => 1)));
+        if (!$this->isLoggedIn()) {
+            $options = array(
+               // 'recursive' => -1,
+                'conditions' => array('User.id' => $id)
+            );
+            $user = $this->User->find('all', $options);
+        }
+        else {
+            $this->redirect('/user/login');
+
+        }
+
+       // $this->User->recursive = 1;
+
+        $this->set(compact('user', 'user'));
     }
 
 /**
@@ -30,7 +43,8 @@ class UsersController extends AppController {
  * @return void
  */
 	public function view($id = null) {
-		$this->User->id = $id;
+
+        $this->User->id = $id;
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('Invalid user'));
 		}

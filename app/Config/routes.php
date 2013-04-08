@@ -32,11 +32,13 @@
     Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
     Router::connect('/pricing', array('controller' => 'pages', 'action' => 'pricing'));
     Router::connect('/help', array('controller' => 'pages', 'action' => 'help'));
+
 /**
  * ... Load all our custom routes
  */
 
     Router::connect('/pass/create/', array('controller' => 'pass', 'action' => 'create'));
+    Router::connect('/pass/download_pkpass/:id', array('controller' => 'pass', 'action' => 'download_pkpass'),array('pass' => array('id')));
 
 /**
  * Load all plugin routes.  See the CakePlugin documentation on
