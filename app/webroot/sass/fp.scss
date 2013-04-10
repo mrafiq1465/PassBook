@@ -4,8 +4,32 @@
 
 //@import url(http://fonts.googleapis.com/css?family=Montserrat+Alternates:400,700);
 
-h1,h2,h3,h4,h5,h6 {
+@mixin font_montserrat() {
   font-family: 'Montserrat Alternates', serif;
+}
+
+@mixin rounded_btn() {
+  color: #fff;
+  background: #b2b2b2;
+  @include border-radius(20px);
+  @include box-shadow(#ccc 2px 2px 5px);
+  padding: 0 19px;
+}
+
+@mixin rounded_btn_after() {
+  content: '';
+  background: white;
+  width: 25px;
+  height: 24px;
+  position: absolute;
+  @include border-radius(50%);
+  left: -17px;
+  top: 24px;
+}
+
+h1,h2,h3,h4,h5,.font_montserrat {
+  @include font_montserrat;
+  font-weight: normal;
 }
 
 .main-nav {
@@ -35,6 +59,21 @@ h1,h2,h3,h4,h5,h6 {
   border-top: 1px solid #dcdcdc;
   @include background-image(linear-gradient(white, #ececec 99%, #dcdcdc));
   min-height: 570px;
+
+  &#home-hero-unit {
+    h4 {
+      font-size: 2.7em;
+      margin-top: 30px;
+    }
+    h5 {
+      font-size: 2em;
+    }
+
+    ul {
+      font-size: 1.5em;
+      line-height: 1.3;
+    }
+  }
 }
 
 .clients {
@@ -91,14 +130,112 @@ h1,h2,h3,h4,h5,h6 {
 }
 #phone {
   position: absolute;
+  padding: 180px 41px 170px;
   z-index: 100;
   right: 0;
   top: -30px;
+  width: 442px;
+  height: 810px;
+  background: transparent url("../img/iphone.png") no-repeat 0 0;
+  .phone-inner {
+    width: 100%;
+    height: 100%;
+    background: transparent url("../img/bg.jpg") no-repeat 0 0;
+  }
+
+  .initial-message {
+    @include font_montserrat();
+    padding-top: 54%;
+    line-height: 1.5;
+    color: white;
+    font-size: 16px;
+  }
 }
 
 #mainbody {
   ul {
     list-style-position: inside;
   }
+}
+
+#main-container {
+  min-height: 800px;
+}
+
+#pass-creation {
+  width: 510px;
+  color: #000;
+  @include font_montserrat();
+
+  form {
+    label {
+      margin-bottom: 10px;
+    }
+  }
+
+  #tab-nav {
+    padding-top: 22px;
+    ul {
+      height: 82px;
+      line-height: 82px;
+      @include horizontal-list-container();
+
+      li {
+        @include horizontal-list-item(10px);
+        position: relative;
+
+        &:first-child::before {
+          content: '';
+        }
+
+        &::before {
+          content: ">";
+          position: absolute;
+          top: 2px;
+          left: -3px;
+          font-size: 11px;
+        }
+
+        a {
+          display: block;
+          color: #000;
+          font-size: 18px ;
+
+          &:hover {
+          }
+        }
+
+        &.active{
+          &::after {
+            @include rounded_btn_after();
+          }
+          a {
+            @include rounded_btn();
+          }
+        }
+      }
+    }
+  }
+}
+.pb-btn {
+  &::after {
+    @include rounded_btn_after();
+    background: #f4f4f4;
+  }
+  &::before {
+    content: ">";
+    position: absolute;
+    top: 18px;
+    right: 15px;
+    font-size: 26px;
+  }
+  @include rounded_btn();
+  font-size: 26px;
+  padding: 15px 41px 19px 33px;
+  display: inline-block;
+  position: relative;
+  height: 74px;
+  line-height: 1.65;
+  background: #ed1c24;
 }
           

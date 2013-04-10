@@ -1,6 +1,10 @@
 <div class="container">
     <div class="row phone-container">
-        <div id="phone"><img src="/img/iphone.png"></div>
+        <div id="phone">
+            <div class="phone-inner">
+                <img src="img/boarding_front.jpg" alt="display"/>
+            </div>
+        </div>
     </div>
 
     <section id="home-hero-unit" class="hero-unit">
