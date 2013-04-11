@@ -214,6 +214,16 @@ class PassController extends AppController
         $this->set(compact('barcodeFormats','download_link'));
     }
 
+    public function web($id = null)
+    {
+        $this->layout = 'web_pass';
+
+        $this->request->data = $this->Pass->read(null, $id);
+        $this->decodeDynamicFields($this->request->data);
+        $barcodeFormats = $this->Pass->BarcodeFormat->find('list');
+        $this->set(compact('barcodeFormats'));
+    }
+
     public function download_pkpass($id = null) {
         $this->autoRender = false;
 
@@ -245,5 +255,53 @@ class PassController extends AppController
             ),
         ));
         $this->ajax_response(array('result' => !empty($pass_data)));
+    }
+
+    public function download_report($id = null){
+
+        $this->autoRender = false;
+
+        $this->Pass->id = $id;
+        if (!$this->Pass->exists()) {
+            throw new NotFoundException(__('Invalid pass'));
+        }
+        $rows[] = array_keys($this->Pass->Download->getColumnTypes());
+
+        $pass_download = $this->Pass->Download->find('all', array('recursive' => -1, 'conditions' => array('Download.pass_id' => $id)));
+
+        foreach ($pass_download as $d) {
+            $rows[] = $d['Download'];
+        }
+
+        $temp_file_name = '/tmp/' . mt_rand(1, 1000000000) . '.csv';
+        $fp = fopen($temp_file_name, 'w');
+        foreach ($rows as $row) {
+            fputcsv($fp, $row);
+        }
+        fclose($fp);
+        $FileName = 'Pass-download-' . date("d-m-y") . '.csv';
+        header('Content-Disposition: inline; filename="' . $temp_file_name . '"');
+        header("Content-Transfer-Encoding: Binary");
+        header("Content-length: " . filesize($temp_file_name));
+        header('Content-Type: application/excel');
+        header('Content-Disposition: attachment; filename="' . $FileName . '"');
+        readfile($temp_file_name);
+
+    }
+
+    public function update_download_limit(){
+        $this->autoRender = false;
+        $pass_id = $this->request->data['pass_id'];
+        $limit = $this->request->data['limit'];
+
+        $this->Pass->id = $pass_id;
+        $success = $this->Pass->save(array(
+                'download_limit' => $limit,
+        ));
+        $success = true;
+        $this->response->type('json');
+        $this->RequestHandler->respondAs('json');
+        echo json_encode(array('response' => !empty($success)));
+
     }
 }
