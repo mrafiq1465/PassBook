@@ -27,27 +27,45 @@
                     <div class="tab-pane">
                         <h2>step 1 : design</h2>
 
-                        <form action="index.html" method="post">
+                        <?=$this->Form->create(null, array('id' => 'step1Form')); ?>
                             <div class="row">
                                 <div class="large-12 columns">
-                                    <label for="name">name of the pass (eg: "Saturday 20% coupon")</label>
-                                    <input type="text" id="name" name="name"/>
+                                    <label for="organizationName">your organization name:</label>
+                                    <?= $this->Form->input('organizationName', array('div' => false, 'placeholder' => 'organization name','label'=> false )); ?>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="large-12 columns">
-                                    <label for="org_name">your organization name:</label>
-                                    <input type="text" id="org_name" name="org_name"/>
-                                </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label for="description">description:</label>
+                                <?= $this->Form->input('description', array('div' => false, 'placeholder' => 'description','label'=> false )); ?>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label for="backgroundColor">background color:</label>
+                                <?= $this->Form->input('backgroundColor', array('id' => 'backgroundColor','div' => false, 'placeholder' => 'background color','label'=> false )); ?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label for="foregroundColor">foreground color:</label>
+                                <?= $this->Form->input('foregroundColor', array('id'=>'foregroundColor' ,'div' => false, 'placeholder' => 'foreground color','label'=> false )); ?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label for="labelColor">label color:</label>
+                                <?= $this->Form->input('labelColor', array('id'=>'labelColor','div' => false, 'placeholder' => 'label color','label'=> false )); ?>
+                            </div>
+                        </div>
                             <div class="row">
                                 <div class="large-12 columns text-right">
-                                    <a class="pb-btn" href="#name">
+                                    <a class="pb-btn" href="#">
                                         next step
                                     </a>
                                 </div>
                             </div>
-                        </form>
+                        <?=$this->Form->end('Next'); ?>
                     </div>
                 </section>
             </div>
