@@ -83,7 +83,7 @@
         padding: 0px 0 0 0px;
         width: 360px;
         height: 450px;
-        margin: 0px 0 0 40px;
+        margin: 0;
         color: #fff;
     }
     .key {

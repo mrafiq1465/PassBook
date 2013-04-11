@@ -1,48 +1,45 @@
-<section class="app-body">
-    <div class="row">
-        <div class="large-7 columns">
-            <h3>Create a pass in under 5 mins</h3>
-
-            <div id="tabstrip">
-                <ul>
-                    <li class="k-state-active" id="tab1">
-                        design
-                    </li>
-                    <li id="tab2">
-                        front
-                    </li>
-                    <li id="tab3">
-                        back
-                    </li>
-                    <li id="tab4">
-                        configuration
-                    </li>
-                    <li id="tab5">
-                        your account
-                    </li>
-                    <li id="tab6">
-                        DONE!
-                    </li>
-                </ul>
-                <?=$this->element('forms/' . $this->data['PassType']['name']);?>
-                <div id="k-window">
-                    <p class="message"></p>
-                    <button type="button" class="k-button">Get code</button>
-                    <button type="button" class="k-button">Finalize</button>
-                    <h6 class="">Do you want to set a download limit for this pass?</h6>
-                    <? echo $this->Form->input('download_limit', array('placeholder' => 'Download limit', 'label' => FALSE, 'class' => 'input')); ?>
-                    <?php echo $this->Form->end(array('id' => 'submit', 'label' => 'Submit'));?>
-
-                </div>
-            </div>
-        </div>
-        <div class="large-5 columns">
-            <div class="simulator">
+<div class="container" id="main-container">
+    <div class="row phone-container">
+        <div id="phone">
+            <div class="phone-inner">
                 <?php echo $this->element('simulator/event'); ?>
             </div>
         </div>
     </div>
-</section>
+
+    <section id="home-hero-unit" class="hero-unit">
+        <div class="row">
+            <div class="large-7 columns">
+                <section id="pass-creation">
+                    <div id="tabstrip">
+
+                        <ul id="tab-nav">
+                            <li id="tab1" class="k-state-active active"><a href="#">design</a></li>
+                            <li id="tab2"><a href="#">content</a></li>
+                            <li id="tab3"><a href="#">barcode</a></li>
+                            <li id="tab4"><a href="#">your account</a></li>
+                            <li id="tab5"><a href="#">DONE!</a></li>
+                        </ul>
+
+                        <?=$this->element('forms/' . $this->data['PassType']['name']);?>
+
+                        <div id="k-window">
+                            <p class="message"></p>
+                            <button type="button" class="k-button">Get code</button>
+                            <button type="button" class="k-button">Finalize</button>
+                            <h6 class="">Do you want to set a download limit for this pass?</h6>
+                            <? echo $this->Form->input('download_limit', array('placeholder' => 'Download limit', 'label' => FALSE, 'class' => 'input')); ?>
+                            <?php echo $this->Form->end(array('id' => 'submit', 'label' => 'Submit'));?>
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+    <section class="app-body">
+    </section>
+</div>
 
 <?
 echo $this->Html->script('colorpicker.js');

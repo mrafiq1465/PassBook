@@ -2,7 +2,7 @@
  * @var $this View
  */
 ?>
-<div>
+<div class="tab-pane">
     <div class="">
         <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step1Form')); ?>
         <?=$this->Form->input('organizationName');?>
@@ -14,7 +14,7 @@
     </div>
 </div>
 
-<div>
+<div class="tab-pane">
     <div class="">
         <div style="width:45%">
             <img src="/<?= $this->request->data['Pass']['iconImage'] ?>" id="iconImg"/>
@@ -99,7 +99,7 @@
         </div>
     </div>
 </div>
-<div>
+<div class="tab-pane">
     <div class="">
         <div style="width:45%">
             <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step3Form')); ?>
@@ -124,7 +124,7 @@
         </div>
     </div>
 </div>
-<div>
+<div class="tab-pane">
     <div class="">
         <div style="width:45%">
             <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step4Form')); ?>
@@ -148,7 +148,7 @@
         </div>
     </div>
 </div>
-<div>
+<div class="tab-pane">
     <div class="" id="AccountBlock">
         <? if (empty($user_data)) {
             echo $this->element('users/login');
