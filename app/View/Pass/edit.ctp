@@ -13,24 +13,28 @@
                 <section id="pass-creation">
                     <div id="tabstrip">
 
-                        <ul id="tab-nav">
-                            <li id="tab1" class="k-state-active active"><a href="#">design</a></li>
-                            <li id="tab2"><a href="#">content</a></li>
-                            <li id="tab3"><a href="#">barcode</a></li>
-                            <li id="tab4"><a href="#">your account</a></li>
-                            <li id="tab5"><a href="#">DONE!</a></li>
-                        </ul>
+                        <?php echo $this->element('pass_create_menu'); ?>
 
                         <?=$this->element('forms/' . $this->data['PassType']['name']);?>
 
                         <div id="k-window">
                             <p class="message"></p>
-                            <button type="button" class="k-button">Get code</button>
-                            <button type="button" class="k-button">Finalize</button>
+
+                            <div class="row" style="margin-bottom:10px;">
+                                <div class="large12 columns">
+                                    <button style="margin-right: 20px" type="button" class="pb-btn">Get code</button>
+                                    <button type="button" class="pb-btn">Finalize</button>
+                                </div>
+                            </div>
+
                             <h6 class="">Do you want to set a download limit for this pass?</h6>
                             <? echo $this->Form->input('download_limit', array('placeholder' => 'Download limit', 'label' => FALSE, 'class' => 'input')); ?>
-                            <?php echo $this->Form->end(array('id' => 'submit', 'label' => 'Submit'));?>
-
+                            <div class="row">
+                                <div class="large-12 columns text-right">
+                                    <?php echo $this->Form->button('submit', array('type' => 'submit', 'class' => 'pb-btn')); ?>
+                                </div>
+                            </div>
+                            <?=$this->Form->end(); ?>
                         </div>
                     </div>
                 </section>

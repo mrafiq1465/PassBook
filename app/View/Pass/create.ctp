@@ -15,13 +15,7 @@
             <div class="large-7 columns">
                 <section id="pass-creation">
                     <div id="tabstrip">
-                        <ul id="tab-nav">
-                            <li id="tab1" class="k-state-active active"><a href="#">design</a></li>
-                            <li id="tab2"><a href="#">content</a></li>
-                            <li id="tab3"><a href="#">barcode</a></li>
-                            <li id="tab4"><a href="#">your account</a></li>
-                            <li id="tab5"><a href="#">DONE!</a></li>
-                        </ul>
+                        <?php echo $this->element('pass_create_menu'); ?>
                         <div class="tab-pane">
                             <h2>step 1 : design</h2>
 
