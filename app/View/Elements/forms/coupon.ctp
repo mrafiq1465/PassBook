@@ -10,20 +10,51 @@ $options = array(
 
 
 <div class="tab-pane">
-    <img src="/<?= $this->request->data['Pass']['iconImage'] ?>" id="iconImg"/>
-    <?=$this->Form->input('iconImage', array('type' => 'file', 'rel' => '#iconImg', 'class' => 'imageUpload'));?>
-    <img src="/<?= $this->request->data['Pass']['iconImageRetina'] ?>" id="iconImgRetina"/>
-    <?=$this->Form->input('iconImageRetina', array('type' => 'file', 'rel' => '#iconImgRetina', 'class' => 'imageUpload'));?>
+    <div class="row-image">
+        <?php if ($this->request->data['Pass']['iconImage']): ?>
+            <img src="/<?= $this->request->data['Pass']['iconImage'] ?>" id="iconImg"/>
+        <?php endif; ?>
+        <?=$this->Form->input('iconImage', array('type' => 'file', 'rel' => '#iconImg', 'class' => 'imageUpload'));?>
+    </div>
 
-    <img src="/<?= $this->request->data['Pass']['logoImage'] ?>" id="logoImg"/>
-    <?=$this->Form->input('logoImage', array('type' => 'file', 'rel' => '#logoImg', 'class' => 'imageUpload'));?>
-    <img src="/<?= $this->request->data['Pass']['logoImageRetina'] ?>" id="logoImgRetina"/>
-    <?=$this->Form->input('logoImageRetina', array('type' => 'file', 'rel' => '#logoImgRetina', 'class' => 'imageUpload'));?>
+    <div class="row-image">
+        <?php if ($this->request->data['Pass']['iconImageRetina']): ?>
+            <img src="/<?= $this->request->data['Pass']['iconImageRetina'] ?>" id="iconImgRetina"/>
+        <?php endif; ?>
+        <?=$this->Form->input('iconImageRetina', array('type' => 'file', 'rel' => '#iconImgRetina', 'class' => 'imageUpload'));?>
+    </div>
 
-    <img src="/<?= $this->request->data['Pass']['stripImage'] ?>" id="stripImg"/>
-    <?=$this->Form->input('stripImage', array('type' => 'file', 'rel' => '#stripImg', 'class' => 'imageUpload'));?>
-    <img src="/<?= $this->request->data['Pass']['stripImageRetina'] ?>" id="stripImgRetina"/>
-    <?=$this->Form->input('stripImageRetina', array('type' => 'file', 'rel' => '#stripImgRetina', 'class' => 'imageUpload'));?>
+    <div class="row-image">
+        <?php if ($this->request->data['Pass']['logoImage']): ?>
+            <img src="/<?= $this->request->data['Pass']['logoImage'] ?>" id="logoImg"/>
+        <?php endif; ?>
+
+        <?=$this->Form->input('logoImage', array('type' => 'file', 'rel' => '#logoImg', 'class' => 'imageUpload'));?>
+    </div>
+
+    <div class="row-image">
+        <?php if ($this->request->data['Pass']['logoImageRetina']): ?>
+            <img src="/<?= $this->request->data['Pass']['logoImageRetina'] ?>" id="logoImgRetina"/>
+        <?php endif; ?>
+
+        <?=$this->Form->input('logoImageRetina', array('type' => 'file', 'rel' => '#logoImgRetina', 'class' => 'imageUpload'));?>
+    </div>
+
+    <div class="row-image">
+        <?php if ($this->request->data['Pass']['stripImage']): ?>
+            <img src="/<?= $this->request->data['Pass']['stripImage'] ?>" id="stripImg"/>
+        <?php endif; ?>
+
+        <?=$this->Form->input('stripImage', array('type' => 'file', 'rel' => '#stripImg', 'class' => 'imageUpload'));?>
+    </div>
+
+    <div class="row-image">
+        <?php if ($this->request->data['Pass']['stripImageRetina']): ?>
+            <img src="/<?= $this->request->data['Pass']['stripImageRetina'] ?>" id="stripImgRetina"/>
+        <?php endif; ?>
+
+        <?=$this->Form->input('stripImageRetina', array('type' => 'file', 'rel' => '#stripImgRetina', 'class' => 'imageUpload'));?>
+    </div>
 
     <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step2Form')); ?>
     <?=$this->Form->input('logoText');?>

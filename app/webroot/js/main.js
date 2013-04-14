@@ -100,7 +100,13 @@ $(document).ready(function() {
 
     //Setup colorpicker with kendo
     $('#backgroundColor, #foregroundColor, #labelColor').kendoColorPicker({
-        palette: "websafe"
+        value: "#ffffff",
+        buttons: false,
+        change: function (e) {
+            //console.log(e);
+            /*var rgb = kendo.parseColor(e.value).toRGB().toBytes();
+            this.element.val('rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')');*/
+        }
     });
 
 
