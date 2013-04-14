@@ -1,3 +1,4 @@
+window.PassBook = {};
 
 $(document).ready(function() {
 
@@ -98,15 +99,26 @@ $(document).ready(function() {
         }
     });*/
 
+    function changeSimulatorColors(e) {
+        var whichColor = e.sender.element.attr("id");
+        if (whichColor === 'backgroundColor') {
+            PassBook.CouponViewModel.set('backgroundColor', e.value);
+        } else if (whichColor === 'foregroundColor'){
+            PassBook.CouponViewModel.set('foregroundColor', e.value);
+        }
+    }
+
     //Setup colorpicker with kendo
     $('#backgroundColor, #foregroundColor, #labelColor').kendoColorPicker({
         value: "#ffffff",
         buttons: false,
-        change: function (e) {
-            //console.log(e);
-            /*var rgb = kendo.parseColor(e.value).toRGB().toBytes();
-            this.element.val('rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')');*/
-        }
+        /*change: function (e) {
+            PassBook.CouponViewModel.set('backgroundColor', e.value);
+            console.log(e);
+            *//*var rgb = kendo.parseColor(e.value).toRGB().toBytes();
+            this.element.val('rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')');*//*
+        }*/
+        select : changeSimulatorColors
     });
 
 
@@ -237,8 +249,17 @@ $(document).ready(function() {
         }
     });
 
+    //MVVM for the simulator
+    if ($("#step2Form").length) {
+        PassBook.CouponViewModel = kendo.observable({
+            logoText: "John",
+            headerText: "Doe",
+            backgroundColor : "#000",
+            foregroundColor : "#fff"
+        });
 
-
+        kendo.bind($("#main-container"), PassBook.CouponViewModel);
+    }
 
 
 

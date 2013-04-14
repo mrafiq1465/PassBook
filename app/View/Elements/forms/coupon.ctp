@@ -57,8 +57,8 @@ $options = array(
     </div>
 
     <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step2Form')); ?>
-    <?=$this->Form->input('logoText');?>
-    <?=$this->Form->input('headerText');?>
+    <?=$this->Form->input('logoText', array('data-bind' => "value: logoText", 'data-value-update'=>"keyup"));?>
+    <?=$this->Form->input('headerText', array('data-bind' => "value: headerText", 'data-value-update' => "keyup"));?>
 
     <div>
         <div class="dynamicFieldsContainer">

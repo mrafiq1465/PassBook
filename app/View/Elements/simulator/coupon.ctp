@@ -1,13 +1,21 @@
 <div id="k-container">
-    <div class="current side front">
+    <div class="side back" id="back">
+        <h1>Just whiz stuff</h1>
+
+        <h3>Another brick in the wall</h3>
+    </div>
+    <div class="current side front" id="front" data-bind="style: {
+        background: backgroundColor,
+        color: foregroundColor
+    }">
         <div class="section_header">
             <div class="logo_image" style=" margin: 10px; float: left;">
                 <img src="/img/passes/event/logo.png"/>
             </div>
-            <div class="logo_text" style="  margin: 10px; float: left;">
+            <div class="logo_text" data-bind="text: logoText" style="  margin: 10px; float: left;">
                 logo text
             </div>
-            <div class="header_text" style="  margin: 10px; float: right;">
+            <div class="header_text" data-bind="text: headerText" style="  margin: 10px; float: right;">
                 header text
             </div>
         </div>
@@ -54,23 +62,20 @@
             <a href="#">i</a>
         </div>
     </div>
-    <div class="side back">
 
-    </div>
 </div>
 <a class="toggle" href="javascript:void(0);">Flip</a>
 
 
 
 <script>
+    var effect = kendo.fx("#container").flipHorizontal($("#front"), $("#back")).duration(1000),
+        reverse = false;
+
     $(".toggle").click(function () {
-        var currentSide = $(".current"),
-                otherSide = $(".side:not(.current)");
-
-        currentSide.removeClass("current");
-        otherSide.addClass("current");
-
-        kendo.fx("#k-container").flipHorizontal(currentSide, otherSide).play();
+        effect.stop();
+        reverse ? effect.reverse() : effect.play();
+        reverse = !reverse;
     });
 </script>
 
@@ -89,10 +94,10 @@
 
     .front {
         background-image: url('/img/passes/event/background.png');
-        padding: 0px 0 0 0px;
+        padding: 0;
         width: 360px;
         height: 450px;
-        margin: 190px 0 0 40px;
+        margin: 0;
         color: #fff;
     }
 
