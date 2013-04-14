@@ -58,33 +58,35 @@ class UsersController extends AppController {
  */
 	public function add() {
 
-        if (!$this->isAdmin() && $this->isLoggedIn()) {
+        if ($this->isLoggedIn()) {
             $this->redirect('/');
         }
+        $error_exist = false;
 		if ($this->request->is('post')) {
+            $this->Session->delete('Message.flash');
+
             $users = $this->User->find('first', array('conditions' => array('User.email' => $this->request->data['User']['email'])));
             if(!empty($users)){
-                $this->Session->setFlash(__('The email already taken. Please, choose another.'));
+                //$this->Session->setFlash(__('The email already taken. Please, choose another.'));
+                $this->ajax_response(array('error' => 'The email already taken. Please, choose another.'));
                 $error_exist = true;
             }
             if($this->request->data['User']['password'] != $this->request->data['User']['password2']){
-                $this->Session->setFlash(__('Passwords don\'t match. Please, try again.'));
+               // $this->Session->setFlash(__('Passwords don\'t match. Please, try again.'));
+                $this->ajax_response(array('error' => 'Passwords don\'t match. Please, try again.'));
                 $error_exist = true;
             }
             if(empty($error_exist)){
                 $this->User->create();
                 $this->request->data['User']['status'] = 1;
                 if ($this->User->save($this->request->data)) {
-                    if ($this->isAdmin()){
-                        $this->Session->setFlash(__('The user has been saved'));
-                        $this->redirect(array('action' => 'index'));
-                    } else {
-                        $this->Session->setFlash(__('Successfully registered. You can login now.'));
-                        $this->redirect('/');
+                    $users = $this->User->find('first', array('conditions' => array('User.email' => $this->request->data['User']['email'])));
+                    $this->Session->write($users);
+                    //$url = (empty($url)) ? '/' : $url;
+                    if ($this->request->is('ajax')){
+                        $this->ajax_response(array('success' => true));
                     }
-                } else {
-                    if ($this->isAdmin()) $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
-                    else $this->Session->setFlash(__('Your information could not be saved. Please, try again.'));
+                   // $this->redirect($url);
                 }
             }
 		}
@@ -182,14 +184,7 @@ class UsersController extends AppController {
                 // write the username to a session
 
                 $this->Session->write($dbuser);
-                // redirect the user
-                //$this->Session->setFlash('You have successfully logged in.'); // Richard asked us to remove this message 2008-10-02 JB
-                /*if ($this->Session->check('goto')) {
-                    $url = $this->Session->read('goto');
-                    $this->Session->delete('goto');
-                } else {
-                    $url = $this->data['User']['goto'];
-                }*/
+
 
                 $url = (empty($url)) ? '/' : $url;
                 /*if ($dbuser['User']['username'] == 'admin'){
@@ -214,6 +209,19 @@ class UsersController extends AppController {
 
         if ($this->request->is('post') || $this->request->is('put')) {
             $this->loadModel('Payment');
+
+
+            $amount = "9.95";
+           /*
+            $pass_id = $this->reqeust->data['Payment']['pass_id'];
+            $card_name = $this->reqeust->data['User']['card_name'];
+            $card_name = $this->reqeust->data['User']['card_number'];
+            $exp_month = $this->reqeust->data['User']['card_expiration_month'];
+            $exp_year = $this->reqeust->data['User']['card_expiration_year'];
+            $ccv = $this->reqeust->data['User']['card_ccv'];
+         */
+
+            /*
             if ($this->Payment->save($this->reqeust->data)){
                 if ($this->request->is('ajax')) {
                     $this->ajax_response(array('success' => true));
@@ -223,6 +231,8 @@ class UsersController extends AppController {
                     $this->ajax_response(array('error' => 'data could not be saved'));
                 }
             }
+            */
+            $this->ajax_response(array('success' => true));
 
         }
     }

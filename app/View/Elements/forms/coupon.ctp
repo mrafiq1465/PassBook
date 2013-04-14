@@ -11,12 +11,9 @@ $options = array(
     <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step1Form')); ?>
     <div class='row'><?=$this->Form->input('organizationName', $options);?></div>
     <div class='row'><?=$this->Form->input('description', $options);?></div>
-    <div
-        class='row'><?=$this->Form->input('backgroundColor', array('id' => 'backgroundColor', 'div' => 'large12 columns'));?></div>
-    <div
-        class='row'><?=$this->Form->input('foregroundColor', array('id' => 'foregroundColor', 'div' => 'large12 columns'));?></div>
-    <div
-        class='row'><?=$this->Form->input('labelColor', array('id' => 'labelColor', 'div' => 'large12 columns'));?></div>
+    <div class='row'><?=$this->Form->input('backgroundColor', array('id' => 'backgroundColor', 'div' => 'large12 columns'));?></div>
+    <div class='row'><?=$this->Form->input('foregroundColor', array('id' => 'foregroundColor', 'div' => 'large12 columns'));?></div>
+    <div class='row'><?=$this->Form->input('labelColor', array('id' => 'labelColor', 'div' => 'large12 columns'));?></div>
     <div class="row">
         <div class="large-12 columns text-right">
             <?php echo $this->Form->button('next step', array('type' => 'submit', 'class' => 'pb-btn')); ?>
@@ -45,14 +42,12 @@ $options = array(
     <?=$this->Form->input('logoText');?>
     <?=$this->Form->input('headerText');?>
 
-
     <div>
         <div class="dynamicFieldsContainer">
             <label>Primary Fields: </label>
             <button type="button" class="k-button dynamicFields" data-target="#primaryFieldsContainer">Add
             </button>
-            <div class="<?= empty($this->data['Pass']['primaryFields']) ? 'hide' : '' ?>"
-                 id="primaryFieldsContainer">
+            <div class="<?= empty($this->data['Pass']['primaryFields']) ? 'hide' : '' ?>" id="primaryFieldsContainer">
                 <? for ($i = 0; $i < 2; $i++) { ?>
                     <div class="<?= empty($this->data['Pass']['primaryFields'][$i]) ? 'hide' : '' ?> inner">
                         <a href="javascript:void(0)" class="close">X</a>
@@ -172,11 +167,11 @@ $options = array(
             echo $this->element('users/payment');
         }
         ?>
-        <?= $this->element('blocks/generate');?>
+        <?//= $this->element('blocks/generate');?>
     </div>
 </div>
 <script>
-    var PassType = <?=$this->data['PassType']['id']; ?>;
-    var PassId =
-    <?=$this->data['Pass']['id'];?>
+    var PassType = "<?=$this->data['PassType']['id']; ?>";
+    var PassId = "<?=$this->data['Pass']['id'];?>";
+
 </script>

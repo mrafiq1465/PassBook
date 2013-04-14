@@ -2,7 +2,7 @@
     <div class="row phone-container">
         <div id="phone">
             <div class="phone-inner">
-                <?php echo $this->element('simulator/event'); ?>
+                <?php echo $this->element('simulator/coupon'); ?>
             </div>
         </div>
     </div>
@@ -89,22 +89,27 @@ echo $this->Html->css('colorpicker/colorpicker.css');
 
         $(function () {
 
-            function paymentFormProcess(){
-                if ($('#PaymentForm').length) {
-                    $('#PaymentForm').ajaxForm({
-                        success: function(resp){
-                            resp = $.parseJSON(resp);
-                            if (resp.error !== undefined) {
+            $('#UserPaymentForm').ajaxForm({
+                before: function () {
+                    $('#AccountBlock p.error').hide();
+                },
+                success: function(resp){
+                     resp = $.parseJSON(resp);
+                        if (resp.error !== undefined) {
                                 $('#AccountBlock p.error').text(resp.error).show();
-                            } else {
-                                $('#AccountBlock').html('<p class="message">Your payment is good now, you can now go to next step.</p>');
+                        } else {
+                                $('#AccountBlock').html('<p class="message">Payment has been made successfully.</p>');
                                 $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
-                            }
                         }
-                    });
                 }
-            }
-            paymentFormProcess();
+            });
+
+            $('#register_btn_block').click(function(e){
+                $('#AccountBlock p.error').hide();
+                $('#AccountBlock').load('/users/add', function(){
+                });
+                e.preventDefault();
+            });
 
             $('#UserLoginForm').ajaxForm({
                 before: function () {
@@ -128,7 +133,7 @@ echo $this->Html->css('colorpicker/colorpicker.css');
                                 } else {
                                     $('#AccountBlock').load('/users/payment', function(){
                                         $('#PaymentPassId').val(PassId);
-                                        paymentFormProcess();
+                                        //paymentFormProcess();
                                     });
                                 }
                             }
@@ -136,6 +141,27 @@ echo $this->Html->css('colorpicker/colorpicker.css');
                     }
                 }
             });
+
+            $('#UserRegistrationForm').ajaxForm({
+                before: function () {
+                    $('#AccountBlock p.error').hide();
+                },
+                success: function (resp) {
+                    resp = $.parseJSON(resp);
+                    if (resp.error !== undefined) {
+                        $('#AccountBlock p.error').text(resp.error).show();
+                    } else {
+                        $('#AccountBlock p.error').hide();
+                        //show next form
+                        $('#AccountBlock').load('/users/payment', function(){
+                            $('#PaymentPassId').val(PassId);
+                           // paymentFormProcess();
+                        });
+
+                    }
+                }
+            });
+
         });
 
 

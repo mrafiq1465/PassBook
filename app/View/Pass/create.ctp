@@ -23,13 +23,13 @@
                             <div class="row">
                                 <div class="large-12 columns">
                                     <label for="organizationName">your organization name:</label>
-                                    <?= $this->Form->input('organizationName', array('div' => false, 'placeholder' => 'organization name', 'label' => false)); ?>
+                                    <? echo $this->Form->input('organizationName', array('placeholder' => 'organization name', 'label' => FALSE, 'class' => 'input', 'required' => 'required', 'validationMessage' => "Please enter organization name")); ?>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="large-12 columns">
                                     <label for="description">description:</label>
-                                    <?= $this->Form->input('description', array('div' => false, 'placeholder' => 'description', 'label' => false)); ?>
+                                    <? echo $this->Form->input('description', array('placeholder' => 'description', 'label' => FALSE, 'class' => 'input', 'required' => 'required', 'validationMessage' => "Please enter description")); ?>
                                 </div>
                             </div>
                             <div class="row">
@@ -48,6 +48,7 @@
                                 <div class="large-12 columns">
                                     <label for="labelColor">label color:</label>
                                     <?= $this->Form->input('labelColor', array('id' => 'labelColor', 'div' => false, 'placeholder' => 'label color', 'label' => false)); ?>
+
                                 </div>
                             </div>
                             <div class="row">
@@ -76,5 +77,15 @@ echo $this->Html->css('colorpicker/colorpicker.css');
     $(document).ready(function () {
         window.create_mode = true;
         $('#tabstrip').data('kendoTabStrip').disable($('[id^=tab]')).enable($('#tab1'));
+
+        var validator = $("#step1Form").kendoValidator().data("kendoValidator");
+        $("#step1Form").submit(function(){
+            return validator.validate();
+        });
+
+
+        //$("#test").kendoColorPicker({ palette: "websafe" });
+
+
     });
 </script>

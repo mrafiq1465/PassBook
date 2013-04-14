@@ -23,8 +23,8 @@
                                  "content" => "width=device-width,  initial-scale=1.0"));
 
     // echo $this->Html->css('reset');
-      echo $this->Html->css('kendo.common.min');
-     echo $this->Html->css('kendo.default.min');
+    echo $this->Html->css('kendo.common.min');
+    echo $this->Html->css('kendo.default.min');
     echo $this->Html->css('style.css' . ((Configure::read('debug') == 2) ? '?' . uniqid() : ''));
     echo $this->Html->css('normalize');
     echo $this->Html->css('app');
