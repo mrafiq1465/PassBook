@@ -8,6 +8,7 @@
         <h1>User Details</h1>
         <p class="error"></p>
         <?=$this->Form->create('User', array('url' => '/users/add', 'id' => 'UserRegistrationForm'))?>
+
         <div class="row">
             <div class="large12 columns">
                 <? echo $this->Form->input('name', array('placeholder' => 'Name', 'label' => FALSE, 'class' => 'input', 'required' => 'required', 'validationMessage' => "Please enter name")); ?>

@@ -2,7 +2,7 @@
     <div class="large-12 columns">
         <h1 class="">Payment</h1>
         <?=$this->Form->create('User', array('url' => '/users/payment', 'id' => 'UserPaymentForm'))?>
-        <input type="hidden" name="data[Payment][pass_id]" id="PaymentPassId" value="<?=$this->data['Pass']['id']?>"/>
+        <input type="hidden" name="data[Payment][pass_id]" id="PaymentPassId" value=""/>
 
         <div class="row">
             <div class="large12 columns">

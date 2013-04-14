@@ -89,29 +89,7 @@ echo $this->Html->css('colorpicker/colorpicker.css');
 
         $(function () {
 
-            $('#UserPaymentForm').ajaxForm({
-                before: function () {
-                    $('#AccountBlock p.error').hide();
-                },
-                success: function(resp){
-                     resp = $.parseJSON(resp);
-                        if (resp.error !== undefined) {
-                                $('#AccountBlock p.error').text(resp.error).show();
-                        } else {
-                                $('#AccountBlock').html('<p class="message">Payment has been made successfully.</p>');
-                                $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
-                        }
-                }
-            });
-
-            $('#register_btn_block').click(function(e){
-                $('#AccountBlock p.error').hide();
-                $('#AccountBlock').load('/users/add', function(){
-                });
-                e.preventDefault();
-            });
-
-            $('#UserLoginForm').ajaxForm({
+            $('#UserRegistrationForm').ajaxForm({
                 before: function () {
                     $('#AccountBlock p.error').hide();
                 },
@@ -142,7 +120,30 @@ echo $this->Html->css('colorpicker/colorpicker.css');
                 }
             });
 
-            $('#UserRegistrationForm').ajaxForm({
+
+            $('#UserPaymentForm').ajaxForm({
+                before: function () {
+                    $('#AccountBlock p.error').hide();
+                },
+                success: function(resp){
+                            resp = $.parseJSON(resp);
+                            if (resp.error !== undefined) {
+                                $('#AccountBlock p.error').text(resp.error).show();
+                            } else {
+                                $('#AccountBlock').html('<p class="message">Your payment is good now, you can now go to next step.</p>');
+                                $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
+                            }
+                        }
+                    });
+
+            $('#register_btn_block').click(function(e){
+                $('#AccountBlock p.error').hide();
+                $('#AccountBlock').load('/users/add', function(){
+                });
+                e.preventDefault();
+            });
+
+            $('#UserLoginForm').ajaxForm({
                 before: function () {
                     $('#AccountBlock p.error').hide();
                 },
@@ -153,17 +154,28 @@ echo $this->Html->css('colorpicker/colorpicker.css');
                     } else {
                         $('#AccountBlock p.error').hide();
                         //show next form
-                        $('#AccountBlock').load('/users/payment', function(){
-                            $('#PaymentPassId').val(PassId);
-                           // paymentFormProcess();
-                        });
-
+                        $.ajax({
+                            url: '/pass/payment_status/' + PassId,
+                            dataType: 'json',
+                            success: function(resp) {
+                                if (resp.result) {
+                                    //paid then, what to do?
+                                    $('#AccountBlock').html('<p class="message">Your payment is good now, you can now go to next step.</p>')
+                                    $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
+                                } else {
+                                    $('#AccountBlock').load('/users/payment', function(){
+                                        alert(PassId);
+                                        $('#PaymentPassId').val(PassId);
+                                        //paymentFormProcess();
+                                    });
+                                }
+                            }
+                        })
                     }
                 }
             });
 
+
         });
-
-
     });
 </script>

@@ -56,13 +56,15 @@ class UsersController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	 function add() {
 
-        if ($this->isLoggedIn()) {
-            $this->redirect('/');
-        }
+        //if ($this->isLoggedIn()) {
+           // $this->redirect('/');
+       // }
         $error_exist = false;
-		if ($this->request->is('post')) {
+
+        if ($this->request->is('post') || $this->request->is('put')) {
+
             $this->Session->delete('Message.flash');
 
             $users = $this->User->find('first', array('conditions' => array('User.email' => $this->request->data['User']['email'])));
@@ -92,13 +94,6 @@ class UsersController extends AppController {
 		}
 	}
 
-/**
- * edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
 	public function edit($id = null) {
         if(!$this->isAdmin()){
             if($this->user_id() != $id){
