@@ -16,17 +16,16 @@ class UsersController extends AppController {
  * @return void
  */
 	public function index() {
-          $id = 3;
 
-        if (!$this->isLoggedIn()) {
+        if ($this->isLoggedIn()) {
             $options = array(
                // 'recursive' => -1,
-                'conditions' => array('User.id' => $id)
+                'conditions' => array('User.id' => $this->user_id())
             );
             $user = $this->User->find('all', $options);
         }
         else {
-            $this->redirect('/user/login');
+            $this->redirect('/users/login');
 
         }
 
