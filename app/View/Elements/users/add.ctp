@@ -84,7 +84,8 @@
                     $('#AccountBlock p.error').text(resp.error).show();
                 } else {
                     $('#AccountBlock p.error').hide();
-                    //show next form
+                    update_pass_user(resp.user_id,PassId);
+
                     $.ajax({
                         url: '/pass/payment_status/' + PassId,
                         dataType: 'json',
@@ -103,6 +104,17 @@
                 }
             }
         });
+
+        function  update_pass_user(user_id,pass_id){
+            $.ajax({
+                type: "POST",
+                url: "/pass/update_pass_user",
+                data: {'user_id': user_id, 'pass_id': pass_id},
+                success: function (resp) {
+                    resp = $.parseJSON(resp);
+                }
+            });
+        }
 
     })
 </script>

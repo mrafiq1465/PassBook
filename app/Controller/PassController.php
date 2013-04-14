@@ -301,7 +301,24 @@ class PassController extends AppController
         $success = true;
         $this->response->type('json');
         $this->RequestHandler->respondAs('json');
-        echo json_encode(array('response' => !empty($success)));
+        //echo json_encode(array('response' => !empty($success)));
+        $this->ajax_response(array('success' => true));
+
+    }
+
+    public function update_pass_user(){
+        $this->autoRender = false;
+        $pass_id = $this->request->data['pass_id'];
+        $user_id = $this->request->data['user_id'];
+
+        $this->Pass->id = $pass_id;
+        $success = $this->Pass->save(array(
+            'user_id' => $user_id,
+        ));
+        $success = true;
+        $this->response->type('json');
+        $this->RequestHandler->respondAs('json');
+        $this->ajax_response(array('success' => true));
 
     }
 }

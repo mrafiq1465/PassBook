@@ -22,18 +22,27 @@
 
                             <div class="row" style="margin-bottom:10px;">
                                 <div class="large12 columns">
-                                    <button style="margin-right: 20px" type="button" class="pb-btn">Get code</button>
-                                    <button type="button" class="pb-btn">Finalize</button>
+                                    <a href="/pass/web_pass/<?=$this->data['Pass']['id']?>" class="pb-btn">Get code</a>
                                 </div>
                             </div>
 
-                            <h6 class="">Do you want to set a download limit for this pass?</h6>
-                            <? echo $this->Form->input('download_limit', array('placeholder' => 'Download limit', 'label' => FALSE, 'class' => 'input')); ?>
+                            <h3>Set download limit</h3>
+                            <p class="done_error"></p>
+                            <?=$this->Form->create('User', array('url' => '/pass/update_download_limit', 'id' => 'UpdateDownloadLimit'))?>
                             <div class="row">
-                                <div class="large-12 columns text-right">
-                                    <?php echo $this->Form->button('submit', array('type' => 'submit', 'class' => 'pb-btn')); ?>
+                                <div class="large12 columns">
+                                    <input type="hidden" name="data[pass_id]" value="<?=$this->data['Pass']['id']?>"/>
+                                    <input type="text" id="UserLimit" class="input" placeholder="Download limit" name="data[limit]">
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <?php echo $this->Form->button('Update', array('type' => 'submit', 'class' => 'pb-btn medium')); ?>
+                                </div>
+                            </div>
+                            <?=$this->Form->end(); ?>
+
                             <?=$this->Form->end(); ?>
                         </div>
                     </div>
@@ -44,11 +53,6 @@
     <section class="app-body">
     </section>
 </div>
-
-<?
-echo $this->Html->script('colorpicker.js');
-echo $this->Html->css('colorpicker/colorpicker.css');
-?>
 
 <script>
     $(document).ready(function () {
@@ -108,6 +112,7 @@ echo $this->Html->css('colorpicker/colorpicker.css');
                     } else {
                         $('#AccountBlock p.error').hide();
                         //show next form
+                        update_pass_user(resp.user_id,PassId);
                         $.ajax({
                             url: '/pass/payment_status/' + PassId,
                             dataType: 'json',
@@ -127,6 +132,32 @@ echo $this->Html->css('colorpicker/colorpicker.css');
                 }
             });
 
+            $('#UpdateDownloadLimit').ajaxForm({
+                before: function () {
+                    $('p.done_error').hide();
+                },
+                success: function (resp) {
+                    resp = $.parseJSON(resp);
+
+                    if (resp.error !== undefined) {
+                        $('p.done_error').text(resp.error).show();
+                    }
+                    else {
+                        $('p.done_error').html('<p class="message">Download limit has been set.</p>')
+                    }
+                }
+            });
+
+            function  update_pass_user(user_id,pass_id){
+                $.ajax({
+                    type: "POST",
+                    url: "/pass/update_pass_user",
+                    data: {'user_id': user_id, 'pass_id': pass_id},
+                    success: function (resp) {
+                        resp = $.parseJSON(resp);
+                    }
+                });
+            }
 
         });
     });
