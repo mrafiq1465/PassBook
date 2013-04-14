@@ -6,21 +6,8 @@ $options = array(
 );
 
 ?>
-<div class="tab-pane">
-    <h2>step 1 : design</h2>
-    <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step1Form')); ?>
-    <div class='row'><?=$this->Form->input('organizationName', $options);?></div>
-    <div class='row'><?=$this->Form->input('description', $options);?></div>
-    <div class='row'><?=$this->Form->input('backgroundColor', array('id' => 'backgroundColor', 'div' => 'large12 columns'));?></div>
-    <div class='row'><?=$this->Form->input('foregroundColor', array('id' => 'foregroundColor', 'div' => 'large12 columns'));?></div>
-    <div class='row'><?=$this->Form->input('labelColor', array('id' => 'labelColor', 'div' => 'large12 columns'));?></div>
-    <div class="row">
-        <div class="large-12 columns text-right">
-            <?php echo $this->Form->button('next step', array('type' => 'submit', 'class' => 'pb-btn')); ?>
-        </div>
-    </div>
-    <?=$this->Form->end(); ?>
-</div>
+<?php echo $this->element('pass/tabs/design_tab'); ?>
+
 
 <div class="tab-pane">
     <img src="/<?= $this->request->data['Pass']['iconImage'] ?>" id="iconImg"/>

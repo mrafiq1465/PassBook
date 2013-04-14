@@ -49,7 +49,7 @@ $(document).ready(function() {
                     $form.find('.error').hide();
                 },
                 beforeSubmit: function (arr, $form, options) {
-                    if (window.create_mode !== undefined && window.create_mode === true) {
+                    if (($form.attr('id') === 'step1Form') || (window.create_mode !== undefined && window.create_mode === true)) {
                         var validator = $form.kendoValidator().data("kendoValidator");
                         return validator.validate();
                     }
