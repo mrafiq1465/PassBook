@@ -85,7 +85,7 @@ class UsersController extends AppController {
                     $this->Session->write($users);
                     //$url = (empty($url)) ? '/' : $url;
                     if ($this->request->is('ajax')){
-                        $this->ajax_response(array('success' => true));
+                        $this->ajax_response(array('success' => true, 'user_id' => $users['User']['id']));
                     }
                    // $this->redirect($url);
                 }
@@ -185,7 +185,7 @@ class UsersController extends AppController {
                     $this->redirect('/admin/');
                 }*/
                 if ($this->request->is('ajax')){
-                    $this->ajax_response(array('success' => true));
+                    $this->ajax_response(array('success' => true, 'user_id' => $dbuser['User']['id']));
                 }
                 $this->redirect($url);
             }
