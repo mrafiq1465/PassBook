@@ -56,5 +56,20 @@
         $("#UserPaymentForm").submit(function(){
             return validator.validate();
         });
+
+        $('#UserPaymentForm').ajaxForm({
+            before: function () {
+                $('#AccountBlock p.error').hide();
+            },
+            success: function(resp){
+                resp = $.parseJSON(resp);
+                if (resp.error !== undefined) {
+                    $('#AccountBlock p.error').text(resp.error).show();
+                } else {
+                    $('#AccountBlock').html('<p class="message">Your payment is good now, you can now go to next step.</p>');
+                    $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
+                }
+            }
+        });
     })
 </script>
