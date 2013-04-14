@@ -48,6 +48,12 @@ $(document).ready(function() {
                 beforeSend: function(){
                     $form.find('.error').hide();
                 },
+                beforeSubmit: function (arr, $form, options) {
+                    if (window.create_mode !== undefined && window.create_mode === true) {
+                        var validator = $form.kendoValidator().data("kendoValidator");
+                        return validator.validate();
+                    }
+                },
                 success:function (resp) {
                     try {
                         resp = $.parseJSON(resp);
@@ -82,7 +88,7 @@ $(document).ready(function() {
         $('.template-background-image').eq($('.template-background-image-ctrl').index($(this))).toggle();
     });
 
-    $('#backgroundColor, #foregroundColor, #labelColor').ColorPicker({
+    /*$('#backgroundColor, #foregroundColor, #labelColor').ColorPicker({
         onSubmit:function (hsb, hex, rgb, el) {
             $(el).val('rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')');
             $(el).ColorPickerHide();
@@ -90,6 +96,11 @@ $(document).ready(function() {
         onBeforeShow:function () {
             $(this).ColorPickerSetColor(this.value);
         }
+    });*/
+
+    //Setup colorpicker with kendo
+    $('#backgroundColor, #foregroundColor, #labelColor').kendoColorPicker({
+        palette: "websafe"
     });
 
 

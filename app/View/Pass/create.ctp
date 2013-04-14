@@ -35,19 +35,19 @@
                             <div class="row">
                                 <div class="large-12 columns">
                                     <label for="backgroundColor">background color:</label>
-                                    <?= $this->Form->input('backgroundColor', array('id' => 'backgroundColor', 'div' => false, 'placeholder' => 'background color', 'label' => false)); ?>
+                                    <?= $this->Form->input('backgroundColor', array('id' => 'backgroundColor', 'type'=> 'color', 'div' => false, 'placeholder' => 'background color', 'label' => false)); ?>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="large-12 columns">
                                     <label for="foregroundColor">foreground color:</label>
-                                    <?= $this->Form->input('foregroundColor', array('id' => 'foregroundColor', 'div' => false, 'placeholder' => 'foreground color', 'label' => false)); ?>
+                                    <?= $this->Form->input('foregroundColor', array('id' => 'foregroundColor', 'type' => 'color', 'div' => false, 'placeholder' => 'foreground color', 'label' => false)); ?>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="large-12 columns">
                                     <label for="labelColor">label color:</label>
-                                    <?= $this->Form->input('labelColor', array('id' => 'labelColor', 'div' => false, 'placeholder' => 'label color', 'label' => false)); ?>
+                                    <?= $this->Form->input('labelColor', array('id' => 'labelColor', 'type' => 'color', 'div' => false, 'placeholder' => 'label color', 'label' => false)); ?>
 
                                 </div>
                             </div>
@@ -77,15 +77,5 @@ echo $this->Html->css('colorpicker/colorpicker.css');
     $(document).ready(function () {
         window.create_mode = true;
         $('#tabstrip').data('kendoTabStrip').disable($('[id^=tab]')).enable($('#tab1'));
-
-        var validator = $("#step1Form").kendoValidator().data("kendoValidator");
-        $("#step1Form").submit(function(){
-            return validator.validate();
-        });
-
-
-        //$("#test").kendoColorPicker({ palette: "websafe" });
-
-
     });
 </script>

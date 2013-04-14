@@ -22,7 +22,8 @@
     #AccountBlock .generate_pass {
         margin-top: 10px;
     }
-    #UserLoginForm span.k-tooltip {
+    #UserLoginForm span.k-tooltip,
+    #step1Form .k-tooltip{
         position: relative;
         top: -10px;
     }
