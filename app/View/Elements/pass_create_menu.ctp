@@ -10,7 +10,7 @@
     .tab-pane input[type=text],
     .tab-pane input[type=password],
     .tab-pane textarea {
-        height: 2.2em;
+        height: auto;
     }
     .tab-pane {
         font-size: 12px;
@@ -22,9 +22,14 @@
     #AccountBlock .generate_pass {
         margin-top: 10px;
     }
-    #UserLoginForm span.k-tooltip,
-    #step1Form .k-tooltip{
+    #pass-creation span.k-tooltip{
         position: relative;
-        top: -10px;
+        top: -12px;
+    }
+    select {
+        padding: 7px;
+        margin-bottom: 15px;
+        border: 1px solid #CCCCCC;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
     }
 </style>
