@@ -73,6 +73,37 @@
         $("#UserRegistrationForm").submit(function(){
             return validator.validate();
         });
+
+        $('#UserRegistrationForm').ajaxForm({
+            before: function () {
+                $('#AccountBlock p.error').hide();
+            },
+            success: function (resp) {
+                resp = $.parseJSON(resp);
+                if (resp.error !== undefined) {
+                    $('#AccountBlock p.error').text(resp.error).show();
+                } else {
+                    $('#AccountBlock p.error').hide();
+                    //show next form
+                    $.ajax({
+                        url: '/pass/payment_status/' + PassId,
+                        dataType: 'json',
+                        success: function(resp) {
+                            if (resp.result) {
+                                //paid then, what to do?
+                                $('#AccountBlock').html('<p class="message">Your payment is good now, you can now go to next step.</p>')
+                                $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
+                            } else {
+                                $('#AccountBlock').load('/users/payment', function(){
+                                    $('#PaymentPassId').val(PassId);
+                                });
+                            }
+                        }
+                    })
+                }
+            }
+        });
+
     })
 </script>
 

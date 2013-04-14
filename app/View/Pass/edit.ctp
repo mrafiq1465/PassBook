@@ -89,52 +89,6 @@ echo $this->Html->css('colorpicker/colorpicker.css');
 
         $(function () {
 
-            $('#UserRegistrationForm').ajaxForm({
-                before: function () {
-                    $('#AccountBlock p.error').hide();
-                },
-                success: function (resp) {
-                    resp = $.parseJSON(resp);
-                    if (resp.error !== undefined) {
-                        $('#AccountBlock p.error').text(resp.error).show();
-                    } else {
-                        $('#AccountBlock p.error').hide();
-                        //show next form
-                        $.ajax({
-                            url: '/pass/payment_status/' + PassId,
-                            dataType: 'json',
-                            success: function(resp) {
-                                if (resp.result) {
-                                    //paid then, what to do?
-                                    $('#AccountBlock').html('<p class="message">Your payment is good now, you can now go to next step.</p>')
-                                    $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
-                                } else {
-                                    $('#AccountBlock').load('/users/payment', function(){
-                                        $('#PaymentPassId').val(PassId);
-                                        //paymentFormProcess();
-                                    });
-                                }
-                            }
-                        })
-                    }
-                }
-            });
-
-
-            $('#UserPaymentForm').ajaxForm({
-                before: function () {
-                    $('#AccountBlock p.error').hide();
-                },
-                success: function(resp){
-                            resp = $.parseJSON(resp);
-                            if (resp.error !== undefined) {
-                                $('#AccountBlock p.error').text(resp.error).show();
-                            } else {
-                                $('#AccountBlock').html('<p class="message">Your payment is good now, you can now go to next step.</p>');
-                                $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
-                            }
-                        }
-                    });
 
             $('#register_btn_block').click(function(e){
                 $('#AccountBlock p.error').hide();
@@ -164,9 +118,7 @@ echo $this->Html->css('colorpicker/colorpicker.css');
                                     $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
                                 } else {
                                     $('#AccountBlock').load('/users/payment', function(){
-                                        alert(PassId);
                                         $('#PaymentPassId').val(PassId);
-                                        //paymentFormProcess();
                                     });
                                 }
                             }
