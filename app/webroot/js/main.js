@@ -250,16 +250,15 @@ $(document).ready(function() {
     });
 
     //MVVM for the simulator
-    if ($("#step2Form").length) {
-        PassBook.CouponViewModel = kendo.observable({
-            logoText: "John",
-            headerText: "Doe",
-            backgroundColor : "#000",
-            foregroundColor : "#fff"
-        });
+    PassBook.CouponViewModel = kendo.observable({
+        logoText: "John",
+        headerText: "Doe",
+        backgroundColor : "#000",
+        foregroundColor : "#fff",
+        logoImage : $("#logoImg").attr('src')
+    });
 
-        kendo.bind($("#main-container"), PassBook.CouponViewModel);
-    }
+    kendo.bind($("#main-container"), PassBook.CouponViewModel);
 
 
 

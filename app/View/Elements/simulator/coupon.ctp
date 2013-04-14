@@ -10,7 +10,7 @@
     }">
         <div class="section_header">
             <div class="logo_image" style=" margin: 10px; float: left;">
-                <img src="/img/passes/event/logo.png"/>
+                <img style="max-width: 105px;" data-bind="attr: { src: logoImage, alt: imageAlt, title: imageTitle }" src="/img/passes/event/logo.png"/>
             </div>
             <div class="logo_text" data-bind="text: logoText" style="  margin: 10px; float: left;">
                 logo text

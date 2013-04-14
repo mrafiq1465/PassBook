@@ -70,9 +70,21 @@
                 },
                 multiple: false,
                 success: function (e) {
-                    var $target_img = $($this.attr('rel'));
+                    var rel = $this.attr('rel');
+                    var $target_img = $(rel);
+                    if (!$target_img.length) {
+                        $this.before("<img/>", {
+                            id:rel
+                        });
+                    }
                     if (e.response.success === true) $target_img.attr('src', '');
-                    else $target_img.attr('src', e.response.success + '?' + Math.random());
+                    else {
+                        var src = e.response.success + '?' + Math.random();
+                        if (rel === '#logoImg') {
+                            PassBook.CouponViewModel.set('logoImage', src);
+                        }
+                        $target_img.attr('src', src);
+                    }
                 }
             });
         });
