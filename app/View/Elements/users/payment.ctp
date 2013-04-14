@@ -38,7 +38,7 @@
             </div>
             <div class="large4 columns">
                 <? echo $this->Form->input('card_ccv', array('placeholder' => 'ccv', 'label' => FALSE, 'class' => 'input','required' => 'required', 'validationMessage' => "Please enter ccv")); ?>
-            </div
+            </div>
         </div>
         <div class="row">
             <div class="large-12 columns text-right">
