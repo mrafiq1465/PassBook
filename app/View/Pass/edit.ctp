@@ -73,9 +73,9 @@
                     var rel = $this.attr('rel');
                     var $target_img = $(rel);
                     if (!$target_img.length) {
-                        $this.before("<img/>", {
-                            id:rel
-                        });
+                        $target_img = $("<img/>", {
+                            id: rel.replace('#', '')
+                        }).insertBefore($this.parents('.file'));
                     }
                     if (e.response.success === true) $target_img.attr('src', '');
                     else {
