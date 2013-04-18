@@ -45,6 +45,17 @@ class PassController extends AppController
             throw new NotFoundException(__('Invalid id'));
         }
         $this->Pass->id = $id;
+        $pass = $this->Pass->read();
+        $user_id = $pass["Pass"]["user_id"];
+
+
+        if(!empty($user_id) && $this->user_id() != $user_id ){
+
+        }
+        else{
+           // $this->redirect('/pass/edit/'.$id.'/step5');
+        }
+
         if (!$this->Pass->exists()) {
             throw new NotFoundException(__('Invalid pass'));
         }

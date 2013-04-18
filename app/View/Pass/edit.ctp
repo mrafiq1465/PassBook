@@ -22,7 +22,7 @@
 
                             <div class="row" style="margin-bottom:10px;">
                                 <div class="large12 columns">
-                                    <a href="/pass/web_pass/<?=$this->data['Pass']['id']?>" class="pb-btn">Get code</a>
+                                    <a target="_blank" href="/pass/web_pass/<?=$this->data['Pass']['id']?>" class="pb-btn">Get code</a>
                                 </div>
                             </div>
 
