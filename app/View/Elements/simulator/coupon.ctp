@@ -5,27 +5,30 @@
         <h3>Another brick in the wall</h3>
     </div>
     <div class="current side front" id="front" data-bind="style: {
-        background: backgroundColor,
-        color: foregroundColor
+        background: pass.backgroundColor,
+        color: pass.foregroundColor
     }">
         <div class="section_header">
             <div class="logo_image" style=" margin: 10px; float: left;">
-                <img style="max-width: 105px;" data-bind="attr: { src: logoImage, alt: imageAlt, title: imageTitle }" src="/img/passes/event/logo.png"/>
+                <img style="max-width: 105px;" data-bind="attr: { src: logoImage}" src="/img/passes/event/logo.png"/>
             </div>
-            <div class="logo_text" data-bind="text: logoText" style="  margin: 10px; float: left;">
+            <div class="logo_text" data-bind="text: pass.logoText" style="  margin: 10px; float: left;">
                 logo text
             </div>
-            <div class="header_text" data-bind="text: headerText" style="  margin: 10px; float: right;">
+            <div class="header_text" data-bind="text: pass.headerText" style="  margin: 10px; float: right;">
                 header text
             </div>
         </div>
         <div class="section_thumbnail" style="clear: both; display:block;">
             <div class="left" style="  margin: 10px; float: left;">
-                <div class="primary_field" style="  margin: 15px 0;">
-                    Rydges Melbourne
-                </div>
-                <div class="secondary_field">
-                    <span class="key">Reservation</span> <br/> <span class="value">123456789L</span>
+                <div class="primary_field" style="  margin: 15px 0;"
+                     data-template="pf-tpl" data-bind="source: pass.primaryFields">
+                    <script id="pf-tpl" type="text/x-kendo-template">
+                        <div class="f">
+                            <span data-bind="text:Label" class="key">Reservation</span> <br/>
+                            <span data-bind="text:Value" class="value">123456789L</span>
+                        </div>
+                    </script>
                 </div>
             </div>
             <div class="right" style="  margin: 10px; float: right;">
@@ -37,14 +40,14 @@
                 Rydges Melbourne
             </div>
         </div>
-        <div class="secondary_field_strip" style="display:none;clear: both;">
-            <div class="logo_text" style="  margin: 10px; float: left;">
-                <span class="key">Arrive:</span> <br/> <span class="value">1 Nov 2012, 2 pm</span>
-            </div>
-            <div class="logo_text" style="  margin: 10px; float: left;">
-                <span class="key">Depart:</span> <br/> <span class="value">3 Nov 2012, 2 pm</span>
-            </div>
-
+        <div class="secondary_field_strip" style="clear: both;"
+             data-template="sf-tpl" data-bind="source: nonPrimaryFields">
+            <script id="sf-tpl" type="text/x-kendo-template">
+                <div class="f">
+                    <span data-bind="text:Label" class="key"></span> <br/>
+                    <span data-bind="text:Value" class="value"></span>
+                </div>
+            </script>
         </div>
         <div class="section_auxiliary" style="clear: both;">
             <div class="logo_text" style="  margin: 10px; float: left;">

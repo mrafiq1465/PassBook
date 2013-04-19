@@ -6,6 +6,9 @@ $options = array(
 );
 
 ?>
+<script type="text/javascript">
+    PassBook.data = <?= json_encode($this->data['Pass']) ?>;
+</script>
 <?php echo $this->element('pass/tabs/design_tab'); ?>
 
 
@@ -57,62 +60,69 @@ $options = array(
     </div>
 
     <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step2Form')); ?>
-    <?=$this->Form->input('logoText', array('data-bind' => "value: logoText", 'data-value-update'=>"keyup"));?>
-    <?=$this->Form->input('headerText', array('data-bind' => "value: headerText", 'data-value-update' => "keyup"));?>
-
+    <?=$this->Form->input('logoText', array('data-bind' => "value: pass.logoText", 'data-value-update'=>"keyup"));?>
+    <?=$this->Form->input('headerText', array('data-bind' => "value: pass.headerText", 'data-value-update' => "keyup"));?>
+    <script id="field-tpl" type="text/x-kendo-template">
+        <div class="pf"><a data-bind="click:removeField"
+                           href="javascript:void(0)" class="close">X</a>
+        <label>Label:</label>
+        <input data-bind="value:Label, attr:{name:getLabel}" data-value-update="keyup" type="text"/>
+        <label>Value:</label>
+        <input data-bind="value:Value, attr:{name:getValue}" data-value-update="keyup" type="text"/></div>
+    </script>
     <div>
-        <div class="dynamicFieldsContainer">
+        <div class="dynamicFieldsContainer" data-source="pass.primaryFields">
             <label>Primary Fields: </label>
-            <button type="button" class="k-button dynamicFields" data-target="#primaryFieldsContainer">Add
+            <button data-bind="click:addPrimaryField" type="button" class="k-button dynamicFields" data-target="#primaryFieldsContainer">Add
             </button>
-            <div class="<?= empty($this->data['Pass']['primaryFields']) ? 'hide' : '' ?>" id="primaryFieldsContainer">
-                <? for ($i = 0; $i < 2; $i++) { ?>
-                    <div class="<?= empty($this->data['Pass']['primaryFields'][$i]) ? 'hide' : '' ?> inner">
+            <div id="primaryFieldsContainer"
+                 data-template="field-tpl" data-bind="source: pass.primaryFields">
+                <? //for ($i = 0; $i < 2; $i++) { ?>
+                    <!--<div class="<?/*= empty($this->data['Pass']['primaryFields'][$i]) ? 'hide' : '' */?> inner">
                         <a href="javascript:void(0)" class="close">X</a>
                         <label>Label:</label>
-                        <?=$this->Form->input("Pass.primaryFields.$i.Label", array('label' => false));?>
+                        <?/*=$this->Form->input("Pass.primaryFields.$i.Label", array('label' => false));*/?>
                         <label>Value:</label>
-                        <?=$this->Form->input("Pass.primaryFields.$i.Value", array('label' => false));?>
-                    </div>
-                <? } ?>
+                        <?/*=$this->Form->input("Pass.primaryFields.$i.Value", array('label' => false));*/?>
+                    </div>-->
+                <? //} ?>
             </div>
         </div>
     </div>
     <div>
-        <div class="dynamicFieldsContainer">
+        <div class="dynamicFieldsContainer" data-source="pass.secondaryFields">
             <label>Secondary Fields: </label>
-            <button type="button" class="k-button dynamicFields" data-target="#secondaryFieldsContainer">Add
+            <button data-bind="click:addSecondaryField" type="button" class="k-button dynamicFields" data-target="#secondaryFieldsContainer">Add
             </button>
-            <div class="<?= empty($this->data['Pass']['secondaryFields']) ? 'hide' : '' ?>"
-                 id="secondaryFieldsContainer">
-                <? for ($i = 0; $i < 4; $i++) { ?>
-                    <div class="<?= empty($this->data['Pass']['secondaryFields'][$i]) ? 'hide' : '' ?> inner">
+            <div id="secondaryFieldsContainer" data-template="field-tpl" data-bind="source: pass.secondaryFields">
+                <? //for ($i = 0; $i < 4; $i++) { ?>
+                    <!--<div class="<?/*= empty($this->data['Pass']['secondaryFields'][$i]) ? 'hide' : '' */?> inner">
                         <a href="javascript:void(0)" class="close">X</a>
                         <label>Label:</label>
-                        <?=$this->Form->input("Pass.secondaryFields.$i.Label", array('label' => false));?>
+                        <?/*=$this->Form->input("Pass.secondaryFields.$i.Label", array('label' => false));*/?>
                         <label>Value:</label>
-                        <?=$this->Form->input("Pass.secondaryFields.$i.Value", array('label' => false));?>
-                    </div>
-                <? } ?>
+                        <?/*=$this->Form->input("Pass.secondaryFields.$i.Value", array('label' => false));*/?>
+                    </div>-->
+                <? //} ?>
             </div>
         </div>
     </div>
     <div>
-        <div class="dynamicFieldsContainer">
+        <div class="dynamicFieldsContainer" data-source="pass.auxiliaryFields">
             <label>Auxiliary Fields: </label>
-            <button type="button" class="k-button dynamicFields" data-target="#auxiliaryFieldsContainer">Add
+            <button data-bind="click:addAuxiliaryField" type="button" class="k-button dynamicFields" data-target="#auxiliaryFieldsContainer">Add
             </button>
-            <div class="<?= empty($this->data['Pass']['auxiliaryFields']) ? 'hide' : '' ?>"
+            <div data-template="field-tpl" data-bind="source: pass.auxiliaryFields"
                  id="auxiliaryFieldsContainer">
-                <? for ($i = 0; $i < 5; $i++) { ?>
-                    <div class="<?= empty($this->data['Pass']['auxiliaryFields'][$i]) ? 'hide' : '' ?> inner">
+                <? //for ($i = 0; $i < 5; $i++) { ?>
+                    <!--<div class="<?/*= empty($this->data['Pass']['auxiliaryFields'][$i]) ? 'hide' : '' */?> inner">
                         <a href="javascript:void(0)" class="close">X</a>
                         <label>Label:</label>
-                        <?=$this->Form->input("Pass.auxiliaryFields.$i.Label", array('label' => false));?>
+                        <?/*=$this->Form->input("Pass.auxiliaryFields.$i.Label", array('label' => false));*/?>
                         <label>Value:</label>
-                        <?=$this->Form->input("Pass.auxiliaryFields.$i.Value", array('label' => false));?>
-                    </div>
-                <? } ?>
+                        <?/*=$this->Form->input("Pass.auxiliaryFields.$i.Value", array('label' => false));*/?>
+                    </div>-->
+                <? //} ?>
             </div>
         </div>
     </div>

@@ -102,9 +102,9 @@ $(document).ready(function() {
     function changeSimulatorColors(e) {
         var whichColor = e.sender.element.attr("id");
         if (whichColor === 'backgroundColor') {
-            PassBook.CouponViewModel.set('backgroundColor', e.value);
+            PassBook.CouponViewModel.set('pass.backgroundColor', e.value);
         } else if (whichColor === 'foregroundColor'){
-            PassBook.CouponViewModel.set('foregroundColor', e.value);
+            PassBook.CouponViewModel.set('pass.foregroundColor', e.value);
         }
     }
 
@@ -122,7 +122,7 @@ $(document).ready(function() {
     });
 
 
-    $('.dynamicFields').click(function () {
+    $('.dynamicFields1').click(function () {
         var $container = $($(this).attr('data-target'));
         $container.show();
         var $secondaryAuxiliaryCombinedVisible = $('#auxiliaryFieldsContainer .inner:visible, #secondaryFieldsContainer .inner:visible');
@@ -251,11 +251,86 @@ $(document).ready(function() {
 
     //MVVM for the simulator
     PassBook.CouponViewModel = kendo.observable({
-        logoText: "John",
-        headerText: "Doe",
-        backgroundColor : "#000",
-        foregroundColor : "#fff",
-        logoImage : $("#logoImg").attr('src')
+        pass: PassBook.data,
+        getFieldType: function (e, parent) {
+            var field;
+            if (this.get('pass.primaryFields') === parent) {
+                field = 'primaryFields'
+            } else if (this.get('pass.auxiliaryFields') === parent) {
+                field = 'auxiliaryFields';
+            } else {
+                field = 'secondaryFields';
+            }
+            return field;
+        },
+        getLabel : function (e) {
+            var parent = e.parent();
+            var field = this.getFieldType(e, parent);
+            return "data[Pass][" +
+                field +
+                "][" +
+                parent.indexOf(e) +
+                "][Label]";
+        },
+        getValue : function (e) {
+            var parent = e.parent();
+            var field = this.getFieldType(e, parent);
+            return "data[Pass][" +
+                field +
+                "][" +
+                parent.indexOf(e) +
+                "][Value]";
+        },
+        logoImage: function () {
+            return "/" + this.get('pass.logoImage');
+        },
+        addPrimaryField: function () {
+            var primaryFields = this.get('pass.primaryFields');
+            if (primaryFields.length < 1) {
+                primaryFields.push({
+                    Label: "",
+                    Value: ""
+                });
+            }
+        },
+        addSecondaryField: function () {
+            var secondaryFields = this.get('pass.secondaryFields');
+            var auxiliaryFields = this.get('pass.auxiliaryFields');
+            var total = secondaryFields.length + auxiliaryFields.length;
+            if (total < 4) {
+                secondaryFields.push({
+                    Label: "",
+                    Value: ""
+                });
+            }
+        },
+        addAuxiliaryField: function () {
+            var secondaryFields = this.get('pass.secondaryFields');
+            var auxiliaryFields = this.get('pass.auxiliaryFields');
+            var total = secondaryFields.length + auxiliaryFields.length;
+            if (total < 4) {
+                auxiliaryFields.push({
+                    Label: "",
+                    Value: ""
+                });
+            }
+        },
+        nf:[],
+        nonPrimaryFields: function () {
+            var me = this;
+            me.nf = [];
+            $.each(this.get('pass.secondaryFields'), function (i, item) {
+                me.nf.push(item);
+            });
+            $.each(this.get('pass.auxiliaryFields'), function (i, item) {
+                me.nf.push(item);
+            });
+            return me.nf;
+        },
+
+        removeField: function (e) {
+            this.get($(e.currentTarget).parents('.dynamicFieldsContainer').data('source')).remove(e.data);
+        }
     });
 
     kendo.bind($("#main-container"), PassBook.CouponViewModel);
