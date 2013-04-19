@@ -13,6 +13,7 @@ $options = array(
 
 
 <div class="tab-pane">
+    <input name="data[step]" value="2" type="hidden"/>
     <div class="row-image">
         <?php if ($this->request->data['Pass']['iconImage']): ?>
             <img src="/<?= $this->request->data['Pass']['iconImage'] ?>" id="iconImg"/>
@@ -136,20 +137,23 @@ $options = array(
 </div>
 <div class="tab-pane">
     <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step3Form')); ?>
+    <input name="data[step]" value="3" type="hidden"/>
+
     <div class="dynamicFieldsContainer">
         <label>Back Fields: </label>
-        <button type="button" class="k-button dynamicFields" data-target="#backFieldsContainer">Add
+        <button data-bind="click:addBackField" type="button" class="k-button dynamicFields" data-target="#backFieldsContainer">Add
         </button>
-        <div class="<?= empty($this->data['Pass']['backFields']) ? 'hide' : '' ?>" id="backFieldsContainer">
-            <? for ($i = 0; $i < 5; $i++) { ?>
-                <div class="<?= empty($this->data['Pass']['backFields'][$i]) ? 'hide' : '' ?> inner">
+        <div data-template="field-tpl" data-bind="source: pass.backFields"
+            id="backFieldsContainer">
+            <? //for ($i = 0; $i < 5; $i++) { ?>
+                <!--<div class="<?/*= empty($this->data['Pass']['backFields'][$i]) ? 'hide' : '' */?> inner">
                     <a href="javascript:void(0)" class="close">X</a>
                     <label>Label:</label>
-                    <?=$this->Form->input("Pass.backFields.$i.Label", array('label' => false));?>
+                    <?/*=$this->Form->input("Pass.backFields.$i.Label", array('label' => false));*/?>
                     <label>Value:</label>
-                    <?=$this->Form->input("Pass.backFields.$i.Value", array('label' => false));?>
-                </div>
-            <? } ?>
+                    <?/*=$this->Form->input("Pass.backFields.$i.Value", array('label' => false));*/?>
+                </div>-->
+            <? //} ?>
         </div>
     </div>
     <p class="error"></p>
@@ -163,20 +167,28 @@ $options = array(
 </div>
 <div class="tab-pane">
     <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step4Form')); ?>
+    <input name="data[step]" value="4" type="hidden"/>
     <label>Barcode: </label>
     <?=$this->Form->input('barcode_format_id');?>
     <?=$this->Form->input('barcodeMessage');?>
     <p class="error"></p>
 
     <label>Locations: </label>
-    <button type="button" class="k-button dynamicFields" data-target="#locationsContainer">Add
+    <button data-bind="click:addLocationField" type="button" class="k-button dynamicFields" data-target="#locationsContainer">Add
     </button>
-    <div class="<?= empty($this->data['Pass']['locations']) ? 'hide' : '' ?>" id="locationsContainer">
-        <? for ($i = 0; $i < 10; $i++) { ?>
-            <div class="<?= empty($this->data['Pass']['locations'][$i]) ? 'hide' : '' ?> inner">
-                <?=$this->Form->input("Pass.locations.$i.Value", array('label' => false, 'placeholder' => 'latitude, longitude'));?>
+    <div data-template="lfield-tpl" data-bind="source: pass.locations"
+        id="locationsContainer">
+        <script id="lfield-tpl" type="text/x-kendo-template">
+            <div class="lf">
+                <input placeholder='latitude, longitude'
+                    data-bind="value:Value, attr:{name:getValue}" data-value-update="keyup" type="text"/>
             </div>
-        <? } ?>
+        </script>
+        <? //for ($i = 0; $i < 10; $i++) { ?>
+            <!--<div class="<?/*= empty($this->data['Pass']['locations'][$i]) ? 'hide' : '' */?> inner">
+                <?/*=$this->Form->input("Pass.locations.$i.Value", array('label' => false, 'placeholder' => 'latitude, longitude'));*/?>
+            </div>-->
+        <? //} ?>
     </div>
     <p class="error"></p>
 

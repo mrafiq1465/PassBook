@@ -14,6 +14,14 @@
         <div class="row">
             <div class="large-7 columns">
                 <section id="pass-creation">
+                    <script type="text/javascript">
+                        <?
+                         $dataJ = new stdClass();
+                         $dataJ->backgroundColor = '';
+                         $dataJ->foregroundColor= '';
+                         ?>
+                        PassBook.data = <?= json_encode($dataJ) ?>;
+                    </script>
                     <div id="tabstrip">
                         <?php echo $this->element('pass_create_menu'); ?>
                         <?php echo $this->element('pass/tabs/design_tab'); ?>

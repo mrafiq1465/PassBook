@@ -28,6 +28,14 @@ class PassController extends AppController
             $this->autoRender = false;
             $this->Pass->create();
             $this->request->data['Pass']['pass_type_id'] = $pass_type_id;
+
+            //settting default values for some fields that must be a JS array to work with KENDO MVVM
+            $this->request->data['Pass']['primaryFields'] = '[]';
+            $this->request->data['Pass']['secondaryFields'] = '[]';
+            $this->request->data['Pass']['auxiliaryFields'] = '[]';
+            $this->request->data['Pass']['backFields'] = '[]';
+            $this->request->data['Pass']['locations'] = '[]';
+
             if ($this->isLoggedIn()) {
                 $this->request->data['Pass']['user_id'] = $this->user_id();
             }
@@ -137,30 +145,36 @@ class PassController extends AppController
 
     public function encodeDynamicFields(&$data)
     {
+        $step = isset($data['step']) ? $data['step'] : 0;
+
         if (isset($data['Pass']['primaryFields']))
             $data['Pass']['primaryFields'] = json_encode(array_merge(array_filter($data['Pass']['primaryFields'],array($this, 'check_all_keys_values'))));
-        else
+        else if ($step == 2)
             $data['Pass']['primaryFields'] = '[]';
 
         if (isset($data['Pass']['secondaryFields'])) $data['Pass']['secondaryFields'] = json_encode(array_merge(array_filter(
             $data['Pass']['secondaryFields'],
             array($this, 'check_all_keys_values'))));
-        else
+        else if ($step == 2)
             $data['Pass']['secondaryFields'] = '[]';
 
         if (isset($data['Pass']['auxiliaryFields']))$data['Pass']['auxiliaryFields'] = json_encode(array_merge(array_filter(
             $data['Pass']['auxiliaryFields'],
             array($this, 'check_all_keys_values'))));
-        else
+        else if ($step == 2)
             $data['Pass']['auxiliaryFields'] = '[]';
 
         if (isset($data['Pass']['backFields'])) $data['Pass']['backFields'] = json_encode(array_merge(array_filter(
             $data['Pass']['backFields'],
             array($this, 'check_all_keys_values'))));
+        else if ($step == 3)
+            $data['Pass']['backFields'] = '[]';
 
         if (isset($data['Pass']['locations'])) $data['Pass']['locations'] = json_encode(array_merge(array_filter(
             $data['Pass']['locations'],
             array($this, 'check_all_keys_values'))));
+        else if ($step == 4)
+            $data['Pass']['locations'] = '[]';
     }
     public function decodeDynamicFields(&$data)
     {

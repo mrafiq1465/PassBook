@@ -258,6 +258,10 @@ $(document).ready(function() {
                 field = 'primaryFields'
             } else if (this.get('pass.auxiliaryFields') === parent) {
                 field = 'auxiliaryFields';
+            } else if (this.get('pass.backFields') === parent) {
+                field = 'backFields';
+            } else if (this.get('pass.locations') === parent) {
+                field = 'locations';
             } else {
                 field = 'secondaryFields';
             }
@@ -288,6 +292,24 @@ $(document).ready(function() {
             var primaryFields = this.get('pass.primaryFields');
             if (primaryFields.length < 1) {
                 primaryFields.push({
+                    Label: "",
+                    Value: ""
+                });
+            }
+        },
+        addBackField: function () {
+            var backFields = this.get('pass.backFields');
+            if (backFields.length < 5) {
+                backFields.push({
+                    Label: "",
+                    Value: ""
+                });
+            }
+        },
+        addLocationField: function () {
+            var locationFields = this.get('pass.locations');
+            if (locationFields.length < 10) {
+                locationFields.push({
                     Label: "",
                     Value: ""
                 });
