@@ -82,6 +82,8 @@
                         var src = e.response.success + '?' + Math.random();
                         if (rel === '#logoImg') {
                             PassBook.CouponViewModel.set('logoImage', src);
+                        } else if (rel === '#stripImg') {
+                            PassBook.CouponViewModel.set('pass.stripImage', src);
                         }
                         $target_img.attr('src', src);
                     }

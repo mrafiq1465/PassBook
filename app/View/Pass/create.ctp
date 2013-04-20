@@ -1,8 +1,9 @@
 <div class="container" id="main-container">
     <div class="row phone-container">
         <div id="phone">
-            <div class="phone-inner">
-                <div class="initial-message text-center">
+            <div class="phone-inner" data-bind="style: {background: pass.backgroundColor}">
+                <div class="initial-message text-center"
+                     data-bind="style: {color: pass.foregroundColor}">
                     your pass will update here <br>
                     as you make changes
                 </div>

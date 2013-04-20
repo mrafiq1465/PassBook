@@ -103,8 +103,10 @@ $(document).ready(function() {
         var whichColor = e.sender.element.attr("id");
         if (whichColor === 'backgroundColor') {
             PassBook.CouponViewModel.set('pass.backgroundColor', e.value);
-        } else if (whichColor === 'foregroundColor'){
+        } else if (whichColor === 'foregroundColor') {
             PassBook.CouponViewModel.set('pass.foregroundColor', e.value);
+        } else if (whichColor === 'labelColor') {
+            PassBook.CouponViewModel.set('pass.labelColor', e.value);
         }
     }
 
@@ -285,8 +287,15 @@ $(document).ready(function() {
                 parent.indexOf(e) +
                 "][Value]";
         },
+        sfClass : function () {
+            var col = 12 / this.nonPrimaryFields().length;
+            return 'small-' + col + ' columns';
+        },
         logoImage: function () {
             return "/" + this.get('pass.logoImage');
+        },
+        stripImage: function () {
+            return "transparent url(" + this.get('pass.stripImage') + ") repeat";
         },
         addPrimaryField: function () {
             var primaryFields = this.get('pass.primaryFields');

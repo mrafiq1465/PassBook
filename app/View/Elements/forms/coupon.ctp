@@ -139,7 +139,7 @@ $options = array(
     <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step3Form')); ?>
     <input name="data[step]" value="3" type="hidden"/>
 
-    <div class="dynamicFieldsContainer">
+    <div class="dynamicFieldsContainer" data-source="pass.backFields">
         <label>Back Fields: </label>
         <button data-bind="click:addBackField" type="button" class="k-button dynamicFields" data-target="#backFieldsContainer">Add
         </button>
