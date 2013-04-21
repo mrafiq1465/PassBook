@@ -60,7 +60,7 @@
         </div>
         <div class="row">
             <div class="large-12 columns">
-                <?php echo $this->Form->button('Submit', array('type' => 'submit', 'class' => 'pb-btn medium')); ?>
+                <?php echo $this->Form->button('Register', array('type' => 'submit', 'class' => 'pb-btn medium')); ?>
             </div>
         </div>
         <?=$this->Form->end(); ?>

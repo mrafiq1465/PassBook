@@ -18,7 +18,7 @@
         </div>
         <div class="row">
             <div class="large-12 columns text-right">
-                <?php echo $this->Form->button('Submit', array('type' => 'submit', 'class' => 'pb-btn')); ?>
+                <?php echo $this->Form->button('Payment', array('type' => 'submit', 'class' => 'pb-btn medium')); ?>
             </div>
         </div>
         <?=$this->Form->end(); ?>
@@ -96,6 +96,7 @@
                 $('#AccountBlock p.error').hide();
             },
             success: function(resp){
+                alert(resp);
                 resp = $.parseJSON(resp);
                 if (resp.error !== undefined) {
                     $('#AccountBlock p.error').text(resp.error).show();

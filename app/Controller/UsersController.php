@@ -254,6 +254,9 @@ class UsersController extends AppController {
             );
             $dbuser = $this->User->find('all', $options);
         }
+
+        $this->ajax_response(array('success' => true,'user_id' => $this->user_id()));
+       /*
         $user_token = $dbuser['User']['payment_token'];
 
         if ($this->request->is('post') || $this->request->is('put')) {
@@ -262,20 +265,11 @@ class UsersController extends AppController {
             $amount = "9.95";
             //$pass_id = $this->reqeust->data['Payment']['pass_id'];
 
-            /*
-            if ($this->Payment->save($this->reqeust->data)){
-                if ($this->request->is('ajax')) {
-                    $this->ajax_response(array('success' => true));
-                }
-            } else {
-                if ($this->request->is('ajax')) {
-                    $this->ajax_response(array('error' => 'data could not be saved'));
-                }
-            }
-            */
+
             $this->ajax_response(array('success' => true));
 
         }
+        */
     }
 
 

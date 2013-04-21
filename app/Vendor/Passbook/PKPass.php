@@ -194,7 +194,7 @@ class PKPass {
 			$this->clean();
 			return false;	
 		}
-		
+
 		//Create signature
 		if($this->createSignature($manifest) == false) {
 			$this->clean();
