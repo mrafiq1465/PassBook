@@ -184,8 +184,14 @@ class UsersController extends AppController {
                 /*if ($dbuser['User']['username'] == 'admin'){
                     $this->redirect('/admin/');
                 }*/
+                if(!empty($dbuser['User']['payment_token']) && $dbuser['User']['payment_token_status'] == 1){
+                    $payment_token = true;
+                }else {
+                    $payment_token = false;
+                }
+
                 if ($this->request->is('ajax')){
-                    $this->ajax_response(array('success' => true, 'user_id' => $dbuser['User']['id']));
+                    $this->ajax_response(array('success' => true, 'user_id' => $dbuser['User']['id'], 'payment_token' => $payment_token));
                 }
                 $this->redirect($url);
             }
@@ -199,6 +205,11 @@ class UsersController extends AppController {
     function payment() {
         if (!$this->isLoggedIn()) {
             $this->redirect('/users/login');
+        }else {
+            $options = array(
+                'conditions' => array('User.id' => $this->user_id())
+            );
+            $user = $this->User->find('all', $options);
         }
 
         if ($this->request->is('post') || $this->request->is('put')) {
@@ -230,6 +241,43 @@ class UsersController extends AppController {
 
         }
     }
+
+    function paymentToken() {
+       //Zubair: This actioan will be called where user already have a token in user table.
+        // so we will need to use this token & get the payment.
+
+        if (!$this->isLoggedIn()) {
+            $this->redirect('/users/login');
+        }else {
+            $options = array(
+                'conditions' => array('User.id' => $this->user_id())
+            );
+            $dbuser = $this->User->find('all', $options);
+        }
+        $user_token = $dbuser['User']['payment_token'];
+
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $this->loadModel('Payment');
+
+            $amount = "9.95";
+            //$pass_id = $this->reqeust->data['Payment']['pass_id'];
+
+            /*
+            if ($this->Payment->save($this->reqeust->data)){
+                if ($this->request->is('ajax')) {
+                    $this->ajax_response(array('success' => true));
+                }
+            } else {
+                if ($this->request->is('ajax')) {
+                    $this->ajax_response(array('error' => 'data could not be saved'));
+                }
+            }
+            */
+            $this->ajax_response(array('success' => true));
+
+        }
+    }
+
 
     function logout() {
         // delete the user session

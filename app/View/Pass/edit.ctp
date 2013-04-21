@@ -106,8 +106,6 @@
         $('#tabstrip').data('kendoTabStrip').disable($('#tab6'));
 
         $(function () {
-
-
             $('#register_btn_block').click(function(e){
                 $('#AccountBlock p.error').hide();
                 $('#AccountBlock').load('/users/add', function(){
@@ -121,6 +119,13 @@
                 },
                 success: function (resp) {
                     resp = $.parseJSON(resp);
+
+                    if (resp.payment_token) {
+                        $('#payment_token').show();
+                    } else {
+                        $('#payment_token').hide();
+                    }
+
                     if (resp.error !== undefined) {
                         $('#AccountBlock p.error').text(resp.error).show();
                     } else {

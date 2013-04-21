@@ -1,14 +1,33 @@
 <div class="row">
     <div class="large-12 columns">
         <h1 class="">Payment</h1>
-        <?=$this->Form->create('User', array('url' => '/users/payment', 'id' => 'UserPaymentForm'))?>
-        <input type="hidden" name="data[Payment][pass_id]" id="PaymentPassId" value=""/>
-
         <div class="row">
             <div class="large12 columns">
                 <label>Amount: $9.95</label>
             </div>
         </div>
+        <?=$this->Form->create('User', array('url' => '/users/paymentToken', 'id' => 'UserPaymentToken'))?>
+        <input type="hidden" name="data[Payment][pass_id]" id="PaymentPassId" value=""/>
+        <div id="payment_token" class="row" style=" display: block">
+            <div class="large12 columns">
+                <p>
+                    We have detected your credit card information in our system. Please click below if you want to
+                    use the same card.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns text-right">
+                <?php echo $this->Form->button('Submit', array('type' => 'submit', 'class' => 'pb-btn')); ?>
+            </div>
+        </div>
+        <?=$this->Form->end(); ?>
+
+        <?=$this->Form->create('User', array('url' => '/users/payment', 'id' => 'UserPaymentForm'))?>
+        <input type="hidden" name="data[Payment][pass_id]" id="PaymentPassId" value=""/>
+
+
+
         <div class="row">
             <div class="large12 columns">
                 <? echo $this->Form->input('card_name', array('placeholder' => 'card holder name', 'label' => false, 'class' => 'input', 'required' => 'required', 'validationMessage' => "Please enter card holder name")); ?>
@@ -58,6 +77,21 @@
         });
 
         $('#UserPaymentForm').ajaxForm({
+            before: function () {
+                $('#AccountBlock p.error').hide();
+            },
+            success: function(resp){
+                resp = $.parseJSON(resp);
+                if (resp.error !== undefined) {
+                    $('#AccountBlock p.error').text(resp.error).show();
+                } else {
+                    $('#AccountBlock').html('<p class="message">Your payment is good now, you can now go to next step.</p>');
+                    $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
+                }
+            }
+        });
+
+        $('#UserPaymentToken').ajaxForm({
             before: function () {
                 $('#AccountBlock p.error').hide();
             },
