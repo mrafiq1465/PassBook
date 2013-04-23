@@ -49,7 +49,7 @@
             </div>
         </section>
         <div class="section_barcode text-center">
-            <img src="/img/PDF417_Barcode_Font.jpg" height="100px"/>
+            <img data-bind="visible: isBarcodeVisible" src="/img/PDF417_Barcode_Font.jpg" style="max-width: 100% "/>
         </div>
     </div>
     <a class="toggle" href="javascript:void(0);">i</a>
@@ -69,6 +69,17 @@
 </script>
 
 <style>
+    .pb-btn {
+        height: 59px;
+        line-height: 1.2;
+    }
+    .pb-btn:hover {
+        background-color: #2284a1;
+        color: #ffffff;
+    }
+    .pb-btn::before, .pb-btn {
+        font-size: 20px;
+    }
     #k-container {
         position: relative;
         width: 100%;
@@ -79,6 +90,13 @@
 
     .section_header, .primary_fields, .non_primary_fields {
         padding: 17px;
+    }
+
+    .k-dropdown-wrap .k-input {
+        -moz-sizing: content-box;
+        -ms-sizing: content-box;
+        -webkit-box-sizing: content-box;
+        box-sizing: content-box;
     }
 
     .primary_fields > div {

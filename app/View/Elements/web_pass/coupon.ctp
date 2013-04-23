@@ -1,60 +1,114 @@
+<?php
 
+$nonPrimaryFields = array_merge(
+    $this->data['Pass']['secondaryFields'],
+    $this->data['Pass']['auxiliaryFields']
+);
+$class = '';
+if ($c = count($nonPrimaryFields)) {
+    $class = "small-" . 12 / $c . " columns";
+}
 
-<div id="pass_body" style="color:<?=$this->data['Pass']['foregroundColor'];?>;">
-    <div class="current side front" style="background-color:<?=$this->data['Pass']['backgroundColor'];?>; ">
-        <div class="row">
-            <div class="logo_image" style=" margin: 10px; float: left;">
-                <img src="/<?=$this->data['Pass']['logoImage'];?>"/>
-            </div>
-            <div class="logo_text" style="  margin: 10px; float: left;">
-                <?=$this->data['Pass']['logoText'];?>
-            </div>
-            <div class="header_text" style="  margin: 10px; float: right;">
-                <?=$this->data['Pass']['headerText'];?>
+?>
+<div class="row phone-container">
+    <div id="phone">
+        <div class="phone-inner">
+            <div id="k-container" style="color:<?= $this->data['Pass']['foregroundColor']; ?>;">
+                <div class="side back" id="back">
+                    <div class="back-inner">
+                        <div class="row">
+                            <div class="small-12 columns">
+                                <div class="backFields">
+                                    <? foreach ($this->data['Pass']['backFields'] as $field) { ?>
+                                        <div class="bf">
+                                            <span class="key"><?=$field['Label']?></span> <br/>
+                                            <span class="value"><?=$field['Value']?></span>
+                                        </div>
+                                    <? } ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="current side front" id="front"
+                     style="background-color:<?= $this->data['Pass']['backgroundColor']; ?>;">
+                    <section class="section_header">
+                        <div class="row">
+                            <div class="small-3 columns">
+                                <img style="max-width: 100%;" src="/<?= $this->data['Pass']['logoImage']; ?>"/>
+                            </div>
+                            <div class="small-6 columns">
+                                <?=$this->data['Pass']['logoText'];?>
+                            </div>
+                            <div class="small-3 columns">
+                                <?=$this->data['Pass']['headerText'];?>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="primary_fields" style="background-image: url('/<?= $this->data['Pass']['stripImage']; ?>');">
+                        <div class="primary_field">
+                            <? foreach ($this->data['Pass']['primaryFields'] as $field) { ?>
+                                <div class="pf">
+                                    <span class="key"><?=$field["Label"]?></span>
+                                    <br/>
+                                    <span class="value"><?=$field["Value"]?></span>
+                                </div>
+                            <? } ?>
+                        </div>
+                    </section>
+                    <section class="non_primary_fields">
+                        <div class="secondary_field_strip row collapse">
+                            <? foreach ($nonPrimaryFields as $field) { ?>
+                                <div class="f <?= $class ?>" >
+                                    <span class="key"><?=$field['Label']?></span>
+                                    <br/>
+                                    <span class="value"><?=$field['Value']?></span>
+                                </div>
+                            <? } ?>
+                        </div>
+                    </section>
+                    <div class="section_barcode text-center">
+                        <img src="/img/PDF417_Barcode_Font.jpg" height="100px"/>
+                    </div>
+                </div>
+                <a class="toggle" href="javascript:void(0);">i</a>
             </div>
         </div>
-        <div class="row" style="background-image: url('/<?=$this->data['Pass']['stripImage'];?>');clear: both; height: 100px;">
-            <div class="primary_field" style="  padding: 10px;">
-                <? foreach ($this->data['Pass']['primaryFields'] as $field) {?>
-                <span class="key"><?=$field["Label"]?></span> <br/> <span class="value"><?=$field["Value"]?></span>
-                <? } ?>
-            </div>
-        </div>
-
-        <div class="row section_auxiliary" style="">
-            <? foreach ($this->data['Pass']['secondaryFields'] as $field) {?>
-            <div class="logo_text" style="  margin: 10px; float: left;">
-                <span class="key"><?=$field['Label']?></span> <br/> <span class="value"><?=$field['Value']?></span>
-            </div>
-            <? } ?>
-            <? foreach ($this->data['Pass']['auxiliaryFields'] as $field) {?>
-            <div class="logo_text" style="  margin: 10px; float: left;">
-                <span class="key"><?=$field['Label']?></span> <br/> <span class="value"><?=$field['Value']?></span>
-            </div>
-            <? } ?>
-        </div>
-        <div class="row section_barcode" style=" text-align: center; margin-top: 120px">
-            <img src="/img/PDF417_Barcode_Font.jpg" height="100px"/>
-        </div>
-        <div class="section_flip" style=" float: right; margin-right: 20px;">
-            <a href="#">i</a>
-        </div>
-    </div>
-    <div class="row side back" style="display: none;">
-        <? foreach ($this->data['Pass']['backFields'] as $field) {?>
-        <div class="logo_text" style="  margin: 10px; float: left;">
-            <span class="key"><?=$field['Label']?></span> <br/> <span class="value"><?=$field['Value']?></span>
-        </div>
-        <? } ?>
     </div>
 </div>
 
 
+
+<script>
+    var effect = kendo.fx("#container").flipHorizontal($("#front"), $("#back")).duration(1000),
+        reverse = false;
+
+    $(".toggle").click(function () {
+        effect.stop();
+        reverse ? effect.reverse() : effect.play();
+        reverse = !reverse;
+    });
+</script>
+
 <style>
-    #pass_body {
+    #phone {
+        position: static;
+        margin: 0 auto;
+    }
+    #k-container {
         position: relative;
         width: 100%;
         height: 100%;
+        font-size: .8em;
+        line-height: 1.5;
+    }
+
+    .section_header, .primary_fields, .non_primary_fields {
+        padding: 17px;
+    }
+
+    .primary_fields > div {
+        padding: 5px;
     }
 
     .side {
@@ -64,17 +118,80 @@
     }
 
     .front {
-        padding: 0px 0 0 0px;
+        padding: 0;
         width: 360px;
         height: 450px;
+        margin: 0;
+        color: #fff;
     }
 
     .key {
         font-weight: bold;
     }
 
-    .back {
-
+    .back, .back-inner {
+        background: #f8f8f8;
+        padding: 15px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        border-radius: 10px;
     }
+
+    .back-inner {
+        background: #fff;
+        border: 1px solid #e2e2e2;
+        padding: 15px 20px;
+    }
+
+    .backFields .bf {
+        color: #999;
+        margin-bottom: 10px;
+        border-top: 1px solid #eee;
+        padding-top: 10px;
+    }
+
+    .backFields .key {
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+
+    .backFields .value {
+        font-size: 1.7em;
+        padding-left: 10px;
+    }
+
+    .backFields .bf:first-child {
+        border: none;
+        padding-top: 0;
+    }
+
+    .section_header {
+        height: 15%;
+    }
+
+    .primary_fields, .non_primary_fields {
+        height: 30%;
+    }
+
+    .section_barcode {
+        height: 25%;
+    }
+
+    .toggle {
+        position: absolute;
+        z-index: 10000;
+        bottom: 19px;
+        right: 19px;
+        color: #222;
+        background: #ccc;
+        padding: 1px 6px;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        border-radius: 50%;
+        font-size: .8em;
+    }
+
 
 </style>

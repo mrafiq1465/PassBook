@@ -42,7 +42,26 @@ $(document).ready(function() {
             },
             select: onSelect
         });
-        $("#PassBarcodeFormatId").kendoDropDownList();
+        var PassBarcodeFormatId = $("#PassBarcodeFormatId");
+        if (PassBarcodeFormatId.length) {
+            PassBarcodeFormatId.kendoDropDownList({
+                select: function (e) {
+                    var dataItem = this.dataItem(e.item.index());
+
+                    if (dataItem.value == 1) {
+                        PassBook.CouponViewModel.set('isBarcodeVisible', false);
+                    } else {
+                        PassBook.CouponViewModel.set('isBarcodeVisible', true);
+                    }
+                }
+            });
+            var dropdownlist = PassBarcodeFormatId.data("kendoDropDownList");
+
+            // set width of the drop-down list
+            dropdownlist.wrapper.width(300);
+            dropdownlist.list.width(300);
+        }
+
         $('form[id^=step]').each(function(){
             var $form = $(this);
             $(this).ajaxForm({
@@ -294,6 +313,7 @@ $(document).ready(function() {
         logoImage: function () {
             return "/" + this.get('pass.logoImage');
         },
+        isBarcodeVisible: true,
         stripImage: function () {
             return "transparent url(" + this.get('pass.stripImage') + ") repeat";
         },
@@ -361,8 +381,16 @@ $(document).ready(function() {
 
         removeField: function (e) {
             this.get($(e.currentTarget).parents('.dynamicFieldsContainer').data('source')).remove(e.data);
+        },
+
+        init: function () {
+            if (this.get('pass.barcode_format_id') == 1) {
+                this.set('isBarcodeVisible', false);
+            }
         }
     });
+
+    PassBook.CouponViewModel.init();
 
     kendo.bind($("#main-container"), PassBook.CouponViewModel);
 
