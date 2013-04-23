@@ -96,7 +96,6 @@
                 $('#AccountBlock p.error').hide();
             },
             success: function(resp){
-                alert(resp);
                 resp = $.parseJSON(resp);
                 if (resp.error !== undefined) {
                     $('#AccountBlock p.error').text(resp.error).show();
