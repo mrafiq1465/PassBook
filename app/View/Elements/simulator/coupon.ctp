@@ -1,15 +1,17 @@
 <div id="k-container">
-    <div class="side back" id="back">
-        <div class="back-inner">
-            <div class="row">
-                <div class="small-12 columns">
-                    <div class="backFields" data-template="bf-tpl" data-bind="source: pass.backFields">
-                        <script id="bf-tpl" type="text/x-kendo-template">
-                            <div class="bf">
-                                <span data-bind="text:Label" class="key"></span> <br/>
-                                <span data-bind="text:Value" class="value"></span>
-                            </div>
-                        </script>
+    <div class="side back" id="back" data-bind="style: {background: pass.foregroundColor}">
+        <div class="inner1">
+            <div class="back-inner">
+                <div class="row">
+                    <div class="small-12 columns">
+                        <div class="backFields" data-template="bf-tpl" data-bind="source: pass.backFields">
+                            <script id="bf-tpl" type="text/x-kendo-template">
+                                <div class="bf">
+                                    <span data-bind="text:Label" class="key"></span> <br/>
+                                    <span data-bind="text:Value" class="value"></span>
+                                </div>
+                            </script>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -92,6 +94,12 @@
         padding: 17px;
     }
 
+    .k-list>.k-state-selected {
+        background: none !important;
+        border: none !important;
+        color: #ed1c24 !important;
+    }
+
     .k-dropdown-wrap .k-input {
         -moz-sizing: content-box;
         -ms-sizing: content-box;
@@ -109,12 +117,13 @@
     }
 
     .front {
-        background-image: url('/img/passes/event/background.png');
         padding: 0;
         width: 360px;
-        height: 450px;
         margin: 0;
-        color: #fff;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        border-radius: 10px;
     }
 
     .key {
@@ -124,6 +133,20 @@
     .back, .back-inner {
         background: #f8f8f8;
         padding: 15px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    .back {
+        padding:15px 5px 5px;
+    }
+    .back .inner1 {
+        width: 100%;
+        height: 100%;
+        background: #f8f8f8;
+        padding: 10px;
         -webkit-border-radius: 10px;
         -moz-border-radius: 10px;
         -ms-border-radius: 10px;

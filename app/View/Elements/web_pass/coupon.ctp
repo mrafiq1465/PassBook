@@ -14,17 +14,19 @@ if ($c = count($nonPrimaryFields)) {
     <div id="phone">
         <div class="phone-inner">
             <div id="k-container" style="color:<?= $this->data['Pass']['foregroundColor']; ?>;">
-                <div class="side back" id="back">
-                    <div class="back-inner">
-                        <div class="row">
-                            <div class="small-12 columns">
-                                <div class="backFields">
-                                    <? foreach ($this->data['Pass']['backFields'] as $field) { ?>
-                                        <div class="bf">
-                                            <span class="key"><?=$field['Label']?></span> <br/>
-                                            <span class="value"><?=$field['Value']?></span>
-                                        </div>
-                                    <? } ?>
+                <div class="side back" id="back" style="background:<?= $this->data['Pass']['foregroundColor']; ?>;">
+                    <div class="inner1">
+                        <div class="back-inner">
+                            <div class="row">
+                                <div class="small-12 columns">
+                                    <div class="backFields">
+                                        <? foreach ($this->data['Pass']['backFields'] as $field) { ?>
+                                            <div class="bf">
+                                                <span class="key"><?=$field['Label']?></span> <br/>
+                                                <span class="value"><?=$field['Value']?></span>
+                                            </div>
+                                        <? } ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -93,7 +95,11 @@ if ($c = count($nonPrimaryFields)) {
 <style>
     #phone {
         position: static;
-        margin: 0 auto;
+        margin: -100px auto 0;
+    }
+
+    #phone .phone-inner, #phone {
+        background: none;
     }
     #k-container {
         position: relative;
@@ -120,9 +126,11 @@ if ($c = count($nonPrimaryFields)) {
     .front {
         padding: 0;
         width: 360px;
-        height: 450px;
         margin: 0;
-        color: #fff;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        border-radius: 10px;
     }
 
     .key {
@@ -132,6 +140,21 @@ if ($c = count($nonPrimaryFields)) {
     .back, .back-inner {
         background: #f8f8f8;
         padding: 15px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    .back {
+        padding: 15px 5px 5px;
+    }
+
+    .back .inner1 {
+        width: 100%;
+        height: 100%;
+        background: #f8f8f8;
+        padding: 10px;
         -webkit-border-radius: 10px;
         -moz-border-radius: 10px;
         -ms-border-radius: 10px;
