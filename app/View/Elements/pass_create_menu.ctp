@@ -16,9 +16,9 @@
         font-size: 12px;
     }
 
-    #pass-creation ul#tab-nav li a {
+    /*#pass-creation ul#tab-nav li a {
         font-size: 14px;
-    }
+    }*/
     #AccountBlock .generate_pass {
         margin-top: 10px;
     }

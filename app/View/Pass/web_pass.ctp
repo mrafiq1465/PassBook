@@ -5,7 +5,7 @@
 </div>
 <div class="row">
     <div class="large-12 columns text-center">
-        <a class="pb-btn" href="/pass/web/<?=$this->data['Pass']['id']?>">Download WebPass</a>
+        <a class="pb-btn small" href="/pass/web/<?=$this->data['Pass']['id']?>">Download WebPass</a>
     </div>
 </div>
 <div class="row">

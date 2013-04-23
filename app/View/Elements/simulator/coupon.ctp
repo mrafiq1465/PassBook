@@ -1,21 +1,19 @@
 <div id="k-container">
-    <div class="side back" id="back" data-bind="style: {
-        background: pass.backgroundColor,
-        color: pass.foregroundColor
-    }">
-        <div class="row">
-            <div class="small-12 columns">
-                <div class="backFields" data-template="bf-tpl" data-bind="source: pass.backFields">
-                    <script id="bf-tpl" type="text/x-kendo-template">
-                        <div class="bf">
-                            <span data-bind="text:Label, style: {color: pass.labelColor}" class="key"></span> <br/>
-                            <span data-bind="text:Value" class="value"></span>
-                        </div>
-                    </script>
+    <div class="side back" id="back">
+        <div class="back-inner">
+            <div class="row">
+                <div class="small-12 columns">
+                    <div class="backFields" data-template="bf-tpl" data-bind="source: pass.backFields">
+                        <script id="bf-tpl" type="text/x-kendo-template">
+                            <div class="bf">
+                                <span data-bind="text:Label" class="key"></span> <br/>
+                                <span data-bind="text:Value" class="value"></span>
+                            </div>
+                        </script>
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
     <div class="current side front" id="front" data-bind="style: {
         background: pass.backgroundColor,
@@ -105,16 +103,40 @@
         font-weight: bold;
     }
 
-    .back {
-
+    .back, .back-inner {
+        background: #f8f8f8;
+        padding: 15px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        border-radius: 10px;
     }
 
-    .backFields {
-        padding: 1em;
+    .back-inner {
+        background: #fff;
+        border: 1px solid #e2e2e2;
+        padding: 15px 20px;
     }
 
     .backFields .bf {
+        color: #999;
         margin-bottom: 10px;
+        border-top: 1px solid #eee;
+        padding-top: 10px;
+    }
+
+    .backFields .key {
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+    .backFields .value {
+        font-size: 1.7em;
+        padding-left: 10px;
+    }
+
+    .backFields .bf:first-child {
+        border: none;
+        padding-top: 0;
     }
     .section_header {
         height: 15%;
@@ -130,7 +152,7 @@
         position: absolute;
         z-index: 10000;
         bottom: 19px;
-        right: 10px;
+        right: 19px;
         color: #222;
         background: #ccc;
         padding: 1px 6px;
