@@ -14,7 +14,7 @@
 
      //if($download_link){
         ?>
-        <a style=" margin-top: 30px;" class="pb-btn" href="/pass/download_pkpass/<?=$this->data['Pass']['id']?>">Add To Passbook</a>
+        <a style=" margin-top: 30px;" class="pb-btn small" href="/pass/download_pkpass/<?=$this->data['Pass']['id']?>">Add To Passbook</a>
         <?//}
         ?>
     </div>
