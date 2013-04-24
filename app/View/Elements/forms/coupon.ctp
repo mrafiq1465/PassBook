@@ -92,7 +92,7 @@ $options = array(
     </div>
     <div>
         <div class="dynamicFieldsContainer" data-source="pass.secondaryFields">
-            <label>Secondary Fields: </label>
+            <label>Left hand side content: </label>
             <button data-bind="click:addSecondaryField" type="button" class="k-button dynamicFields" data-target="#secondaryFieldsContainer">Add
             </button>
             <div id="secondaryFieldsContainer" data-template="field-tpl" data-bind="source: pass.secondaryFields">
@@ -110,7 +110,7 @@ $options = array(
     </div>
     <div>
         <div class="dynamicFieldsContainer" data-source="pass.auxiliaryFields">
-            <label>Auxiliary Fields: </label>
+            <label>Right hand side content: </label>
             <button data-bind="click:addAuxiliaryField" type="button" class="k-button dynamicFields" data-target="#auxiliaryFieldsContainer">Add
             </button>
             <div data-template="field-tpl" data-bind="source: pass.auxiliaryFields"
@@ -168,11 +168,11 @@ $options = array(
 <div class="tab-pane">
     <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step4Form')); ?>
     <input name="data[step]" value="4" type="hidden"/>
-    <label>Barcode: </label>
+    <label>Barcode number (optional): </label>
     <?=$this->Form->input('barcode_format_id');?>
     <?=$this->Form->input('barcodeMessage');?>
     <p class="error"></p>
-
+    <p>For Apple Passbook users you can choose to prompt the user on their lock screen when they are within 100 meters or closer of the location below. To find a lat/long, please click here (linked to http://www.latlong.net/)"</p>
     <label>Locations: </label>
     <button data-bind="click:addLocationField" type="button" class="k-button dynamicFields" data-target="#locationsContainer">Add
     </button>
