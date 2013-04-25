@@ -13,17 +13,21 @@
                 <h4>
                     create & share mobile <br> passes in minutes...
                 </h4>
+                <p>
+                    <a href="/pass/create/coupon/"><img src="img/btn_start_design.png" alt="start designing your pass"></a>
+                </p>
 
+                <h5>one pass works on all phones</h5>
+                <ul>
+                    <li>create a pass in 5 minutes</li>
+                    <li>fully control the design, message and offer</li>
+                    <li>distribute by email, web, Facebook, SMS, & more</li>
+                    <li>track downloads and redemptions</li>
+                    <li>works on Apple Passbook, Android & Windows Mobile</li>
+                </ul>
                 <p>
                     <img src="img/home_feature.png" alt="home feature">
                 </p>
-                <h5>one pass works on all phones</h5>
-                <ul>
-                    <li>Apple, Android & Windows friendly</li>
-                    <li>create a pass in minutes</li>
-                    <li>control your own design</li>
-                    <li>cancel at any time</li>
-                </ul>
             </div>
         </div>
     </section>
@@ -31,9 +35,6 @@
 
         <div class="row">
             <div class="large-7 columns">
-                <div class="call-to-action text-center">
-                    <a href="/pass/create/coupon/"><img src="img/btn_start_design.png" alt="start designing your pass"></a>
-                </div>
                 <div class="clients">
                     <h6>who else uses flypass?</h6>
 
