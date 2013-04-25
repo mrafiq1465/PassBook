@@ -19,11 +19,11 @@
 
                 <h5>one pass works on all phones</h5>
                 <ul>
-                    <li>create a pass in 5 minutes</li>
-                    <li>fully control the design, message and offer</li>
-                    <li>distribute by email, web, Facebook, SMS, & more</li>
+                    <li>create a pass in minutes</li>
+                    <li>control your design, message and offer</li>
+                    <li>distribute by email, web, Facebook or SMS</li>
                     <li>track downloads and redemptions</li>
-                    <li>works on Apple Passbook, Android & Windows Mobile</li>
+                    <li>Apple, Android and Windows friendly</li>
                 </ul>
                 <p>
                     <img src="img/home_feature.png" alt="home feature">
@@ -31,8 +31,7 @@
             </div>
         </div>
     </section>
-    <section class="app-body">
-
+    <!--section class="app-body">
         <div class="row">
             <div class="large-7 columns">
                 <div class="clients">
@@ -47,5 +46,5 @@
             </div>
         </div>
 
-    </section>
+    </section-->
 </div>
