@@ -325,16 +325,16 @@ $(document).ready(function() {
             return 'small-' + col + ' columns';
         },
         logoImage: function () {
-            return "/" + this.get('pass.logoImage');
+            return "/" + this.get('pass.logoImageRetina');
         },
         isBarcodeVisible: true,
         isLogoImageVisible: true,
         stripImage: function () {
-            return "transparent url(" + this.get('pass.stripImage') + ") no-repeat center center";
+            return "transparent url(" + this.get('pass.stripImageRetina') + ") no-repeat center center";
         },
         addPrimaryField: function () {
             var primaryFields = this.get('pass.primaryFields');
-            if (primaryFields.length < 1) {
+            if (primaryFields && primaryFields.length < 1) {
                 primaryFields.push({
                     Label: "",
                     Value: ""
@@ -404,9 +404,11 @@ $(document).ready(function() {
                 this.set('isBarcodeVisible', false);
             }
 
-            if (!this.get('pass.logoImage')) {
+            if (!this.get('pass.logoImageRetina')) {
                 this.set('isLogoImageVisible', false);
             }
+
+            this.addPrimaryField();
         }
     });
 

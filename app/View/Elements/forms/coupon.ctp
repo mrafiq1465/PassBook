@@ -6,6 +6,11 @@ $options = array(
 );
 
 ?>
+<style type="text/css">
+    #primaryFieldsContainer .close {
+        display: none;
+    }
+</style>
 <script type="text/javascript">
     PassBook.data = <?= json_encode($this->data['Pass']) ?>;
 </script>
@@ -14,50 +19,54 @@ $options = array(
 
 <div class="tab-pane">
     <input name="data[step]" value="2" type="hidden"/>
-    <div class="row-image">
-        <?php if ($this->request->data['Pass']['iconImage']): ?>
-            <img src="/<?= $this->request->data['Pass']['iconImage'] ?>" id="iconImg"/>
-        <?php endif; ?>
-        <?=$this->Form->input('iconImage', array('type' => 'file', 'rel' => '#iconImg', 'class' => 'imageUpload'));?>
+    <!--<div class="row-image">
+        <?php /*if ($this->request->data['Pass']['iconImage']): */?>
+            <img src="/<?/*= $this->request->data['Pass']['iconImage'] */?>" id="iconImg"/>
+        <?php /*endif; */?>
+        <?/*=$this->Form->input('iconImage', array('type' => 'file', 'rel' => '#iconImg', 'class' => 'imageUpload'));*/?>
     </div>
 
     <div class="row-image">
-        <?php if ($this->request->data['Pass']['iconImageRetina']): ?>
-            <img src="/<?= $this->request->data['Pass']['iconImageRetina'] ?>" id="iconImgRetina"/>
-        <?php endif; ?>
-        <?=$this->Form->input('iconImageRetina', array('type' => 'file', 'rel' => '#iconImgRetina', 'class' => 'imageUpload'));?>
+        <?php /*if ($this->request->data['Pass']['iconImageRetina']): */?>
+            <img src="/<?/*= $this->request->data['Pass']['iconImageRetina'] */?>" id="iconImgRetina"/>
+        <?php /*endif; */?>
+        <?/*=$this->Form->input('iconImageRetina', array('type' => 'file', 'rel' => '#iconImgRetina', 'class' => 'imageUpload'));*/?>
     </div>
 
     <div class="row-image">
-        <?php if ($this->request->data['Pass']['logoImage']): ?>
-            <img src="/<?= $this->request->data['Pass']['logoImage'] ?>" id="logoImg"/>
-        <?php endif; ?>
+        <?php /*if ($this->request->data['Pass']['logoImage']): */?>
+            <img src="/<?/*= $this->request->data['Pass']['logoImage'] */?>" id="logoImg"/>
+        <?php /*endif; */?>
 
-        <?=$this->Form->input('logoImage', array('type' => 'file', 'rel' => '#logoImg', 'class' => 'imageUpload'));?>
-    </div>
+        <?/*=$this->Form->input('logoImage', array('type' => 'file', 'rel' => '#logoImg', 'class' => 'imageUpload'));*/?>
+    </div>-->
 
     <div class="row-image">
         <?php if ($this->request->data['Pass']['logoImageRetina']): ?>
             <img src="/<?= $this->request->data['Pass']['logoImageRetina'] ?>" id="logoImgRetina"/>
         <?php endif; ?>
 
-        <?=$this->Form->input('logoImageRetina', array('type' => 'file', 'rel' => '#logoImgRetina', 'class' => 'imageUpload'));?>
+        <?=$this->Form->input('logoImageRetina', array('type' => 'file', 'rel' => '#logoImgRetina', 'class' => 'imageUpload',
+            'label' => 'Upload your logo (PNG file, max 100 pixels high, any width)'));?>
     </div>
 
-    <div class="row-image">
-        <?php if ($this->request->data['Pass']['stripImage']): ?>
-            <img src="/<?= $this->request->data['Pass']['stripImage'] ?>" id="stripImg"/>
-        <?php endif; ?>
+    <!--<div class="row-image">
+        <?php /*if ($this->request->data['Pass']['stripImage']): */?>
+            <img src="/<?/*= $this->request->data['Pass']['stripImage'] */?>" id="stripImg"/>
+        <?php /*endif; */?>
 
-        <?=$this->Form->input('stripImage', array('type' => 'file', 'rel' => '#stripImg', 'class' => 'imageUpload'));?>
-    </div>
+        <?/*=$this->Form->input('stripImage', array('type' => 'file', 'rel' => '#stripImg', 'class' => 'imageUpload'));*/?>
+    </div>-->
 
     <div class="row-image">
         <?php if ($this->request->data['Pass']['stripImageRetina']): ?>
             <img src="/<?= $this->request->data['Pass']['stripImageRetina'] ?>" id="stripImgRetina"/>
         <?php endif; ?>
 
-        <?=$this->Form->input('stripImageRetina', array('type' => 'file', 'rel' => '#stripImgRetina', 'class' => 'imageUpload'));?>
+        <?=$this->Form->input('stripImageRetina', array('type' => 'file', 'rel' => '#stripImgRetina',
+            'class' => 'imageUpload',
+            'label' => 'Upload a strip image (PNG file, will be resized to 623 x 200)'
+        ));?>
     </div>
 
     <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step2Form')); ?>
@@ -74,8 +83,8 @@ $options = array(
     <div>
         <div class="dynamicFieldsContainer" data-source="pass.primaryFields">
             <label>Primary Fields: </label>
-            <button data-bind="click:addPrimaryField" type="button" class="k-button dynamicFields" data-target="#primaryFieldsContainer">Add
-            </button>
+            <!--<button data-bind="click:addPrimaryField" type="button" class="k-button dynamicFields" data-target="#primaryFieldsContainer">Add
+            </button>-->
             <div id="primaryFieldsContainer"
                  data-template="field-tpl" data-bind="source: pass.primaryFields">
                 <? //for ($i = 0; $i < 2; $i++) { ?>

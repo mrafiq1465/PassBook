@@ -97,11 +97,11 @@
                     if (e.response.success === true) $target_img.attr('src', '');
                     else {
                         var src = e.response.success + '?' + Math.random();
-                        if (rel === '#logoImg') {
+                        if (rel === '#logoImgRetina') {
                             PassBook.CouponViewModel.set('logoImage', src);
                             PassBook.CouponViewModel.set('isLogoImageVisible', true);
-                        } else if (rel === '#stripImg') {
-                            PassBook.CouponViewModel.set('pass.stripImage', src);
+                        } else if (rel === '#stripImgRetina') {
+                            PassBook.CouponViewModel.set('pass.stripImageRetina', src);
                         }
                         $target_img.attr('src', src);
                     }

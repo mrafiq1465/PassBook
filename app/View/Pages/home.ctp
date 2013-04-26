@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" id="main-container">
     <div class="row phone-container">
         <div id="phone">
             <div class="phone-inner">
