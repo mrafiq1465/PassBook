@@ -40,7 +40,21 @@ $(document).ready(function() {
                     effects:"fadeIn"
                 }
             },
-            select: onSelect
+            select: onSelect,
+            activate : function (e) {
+                var $front = $("#front");
+                if ($front.length) {
+                    var effect = kendo.fx("#container").flipHorizontal($front, $("#back")).duration(1000);
+
+                    if ($(e.contentElement).attr('id') === 'tabstrip-3' && (window.currentView !== 'back')) {
+                        effect.play();
+                        window.currentView = 'back';
+                    } else if (window.currentView !== 'front'){
+                        effect.reverse();
+                        window.currentView = 'front';
+                    }
+                }
+            }
         });
         var PassBarcodeFormatId = $("#PassBarcodeFormatId");
         if (PassBarcodeFormatId.length) {
@@ -314,8 +328,9 @@ $(document).ready(function() {
             return "/" + this.get('pass.logoImage');
         },
         isBarcodeVisible: true,
+        isLogoImageVisible: true,
         stripImage: function () {
-            return "transparent url(" + this.get('pass.stripImage') + ") repeat";
+            return "transparent url(" + this.get('pass.stripImage') + ") no-repeat center center";
         },
         addPrimaryField: function () {
             var primaryFields = this.get('pass.primaryFields');
@@ -384,8 +399,13 @@ $(document).ready(function() {
         },
 
         init: function () {
-            if (this.get('pass.barcode_format_id') == 1) {
+            var barcode = this.get('pass.barcode_format_id');
+            if (!barcode || barcode == 1) {
                 this.set('isBarcodeVisible', false);
+            }
+
+            if (!this.get('pass.logoImage')) {
+                this.set('isLogoImageVisible', false);
             }
         }
     });

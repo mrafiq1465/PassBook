@@ -29,6 +29,10 @@ class PassController extends AppController
             $this->Pass->create();
             $this->request->data['Pass']['pass_type_id'] = $pass_type_id;
 
+            # set label color same as foreground color
+            # as label_color field is being removed
+            $this->request->data['Pass']['labelColor'] = $this->request->data['Pass']['foregroundColor'];
+
             //settting default values for some fields that must be a JS array to work with KENDO MVVM
             $this->request->data['Pass']['primaryFields'] = '[]';
             $this->request->data['Pass']['secondaryFields'] = '[]';
@@ -106,6 +110,13 @@ class PassController extends AppController
                     $this->Pass->save($this->Pass->data);
                 } else {
                     $this->encodeDynamicFields($this->request->data);
+
+                    # set label color same as foreground color
+                    # as label_color field is being removed
+                    if (isset($this->request->data['Pass']['foregroundColor'])) {
+                        $this->request->data['Pass']['labelColor'] = $this->request->data['Pass']['foregroundColor'];
+                    }
+
                     $this->Pass->save($this->request->data);
                 }
             }

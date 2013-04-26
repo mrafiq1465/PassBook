@@ -26,13 +26,13 @@
             <?= $this->Form->input('foregroundColor', array('id' => 'foregroundColor', 'required' => 'required', 'type' => 'color', 'div' => false, 'placeholder' => 'foreground color', 'label' => false)); ?>
         </div>
     </div>
-    <div class="row">
+    <!--<div class="row">
         <div class="large-12 columns">
             <label for="labelColor">label color:</label>
-            <?= $this->Form->input('labelColor', array('id' => 'labelColor', 'required' => 'required', 'type' => 'color', 'div' => false, 'placeholder' => 'label color', 'label' => false)); ?>
+            <?/*= $this->Form->input('labelColor', array('id' => 'labelColor', 'required' => 'required', 'type' => 'color', 'div' => false, 'placeholder' => 'label color', 'label' => false)); */?>
 
         </div>
-    </div>
+    </div>-->
     <div class="row">
         <div class="large-12 columns text-right">
             <?php echo $this->Form->button('next step', array('type' => 'submit', 'class' => 'pb-btn')); ?>
