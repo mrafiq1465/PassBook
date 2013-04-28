@@ -93,6 +93,7 @@ class PassController extends AppController
                         $uploaded_field = $k;
                     }
                 }
+                //var_dump($this->request->data);
                 if (isset($uploaded_field)) {
                     usleep(300000);
                     $destination_dir = WWW_ROOT . "data" . DS . $id . DS;
@@ -102,6 +103,24 @@ class PassController extends AppController
 
                     if (strstr($uploaded_field, 'Retina')) $file_name = str_replace('ImageRetina','@2x', $uploaded_field);
                     else $file_name = str_replace('Image','',$uploaded_field);
+
+                    if($file_name == "logo@2x") {
+                        $destination_path_icon_2x = $destination_dir . "icon@2x.png";
+                        $destination_path_icon = $destination_dir . "icon.png";
+                        $destination_path_logo = $destination_dir . "logo.png";
+                        copy($this->request->data[$uploaded_field]['tmp_name'], $destination_path_icon_2x);
+                        copy($this->request->data[$uploaded_field]['tmp_name'], $destination_path_icon);
+                        copy($this->request->data[$uploaded_field]['tmp_name'], $destination_path_logo);
+                        $this->Pass->data['Pass']['iconImageRetina'] = str_replace(WWW_ROOT, '', $destination_path_icon_2x);
+                        $this->Pass->data['Pass']['iconImage'] = str_replace(WWW_ROOT, '', $destination_path_icon);
+                        $this->Pass->data['Pass']['logoImage'] = str_replace(WWW_ROOT, '', $destination_path_logo);
+
+                    }
+                    if($file_name == "strip@2x") {
+                        $destination_path_strip = $destination_dir . "strip.png";
+                        copy($this->request->data[$uploaded_field]['tmp_name'], $destination_path_strip);
+                        $this->Pass->data['Pass']['stripImage'] = str_replace(WWW_ROOT, '', $destination_path_strip);
+                    }
 
                     $destination_path = $destination_dir . "$file_name.png";
 

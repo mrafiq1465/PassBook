@@ -268,14 +268,14 @@ class PKPass {
 			$this->SHAs[$name] = sha1(file_get_contents($path));
 			
 		}
-		
+
+
 		if(!$hasicon){
 			$this->sError = 'Missing required icon.png file.';
 			$this->clean();
 			return false;
 		}
-		
-		
+
 		$manifest = json_encode((object)$this->SHAs);
 		
 		return $manifest;

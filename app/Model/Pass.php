@@ -201,20 +201,25 @@ class Pass extends AppModel
         if (!empty($this->data['Pass']['iconImageRetina'])) $pass->addFile($data_path_web . $this->data['Pass']['iconImageRetina'], 'icon@2x.png');
 
 // Set logo
-        if (!empty($this->data['Pass']['logoImage'])) $pass->addFile($data_path_web . $this->data['Pass']['logoImage'], 'logo.png');
-        if (!empty($this->data['Pass']['logoImageRetina'])) $pass->addFile($data_path_web . $this->data['Pass']['logoImageRetina'], 'logo@2x.png');
+        if (!empty($this->data['Pass']['logoImage'])) {
+            $pass->addFile($data_path_web . $this->data['Pass']['logoImage'], 'logo.png');
+        }
+        if (!empty($this->data['Pass']['logoImageRetina']))  {
+            $pass->addFile($data_path_web . $this->data['Pass']['logoImageRetina'], 'logo@2x.png');
+        }
 
 // Set thumbnail
         if (!empty($this->data['Pass']['thumbnailImage'])) $pass->addFile($data_path_web . $this->data['Pass']['thumbnailImage'], 'thumbnail.png');
         if (!empty($this->data['Pass']['thumbnailImageRetina'])) $pass->addFile($data_path_web . $this->data['Pass']['thumbnailImageRetina'], 'thumbnail@2x.png');
 
-        //Set Strip
+//Set Strip
         if (!empty($this->data['Pass']['stripImage'])) $pass->addFile($data_path_web . $this->data['Pass']['stripImage'], 'strip.png');
         if (!empty($this->data['Pass']['stripImageRetina'])) $pass->addFile($data_path_web . $this->data['Pass']['stripImageRetina'], 'strip@2x.png');
 
 // Create a pass
 
         $passFile = $pass->create();
+
         if (!$passFile) { // Create and output the PKPass
             return array('error' => 'Error: ' . $pass->getError());
         } else {
