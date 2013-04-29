@@ -75,14 +75,14 @@ $options = array(
     <script id="field-tpl" type="text/x-kendo-template">
         <div class="pf"><a data-bind="click:removeField"
                            href="javascript:void(0)" class="close">X</a>
-        <label>Label:</label>
+        <label>Heading:</label>
         <input data-bind="value:Label, attr:{name:getLabel}" data-value-update="keyup" type="text"/>
-        <label>Value:</label>
+        <label>Message:</label>
         <input data-bind="value:Value, attr:{name:getValue}" data-value-update="keyup" type="text"/></div>
     </script>
     <div>
         <div class="dynamicFieldsContainer" data-source="pass.primaryFields">
-            <label>Primary Fields: </label>
+            <label>Strip image text: </label>
             <!--<button data-bind="click:addPrimaryField" type="button" class="k-button dynamicFields" data-target="#primaryFieldsContainer">Add
             </button>-->
             <div id="primaryFieldsContainer"
