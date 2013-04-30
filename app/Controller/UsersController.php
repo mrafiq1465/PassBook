@@ -30,7 +30,7 @@ class UsersController extends AppController {
         }
 
        // $this->User->recursive = 1;
-
+        $this->request->data = $this->User->read(null, $this->user_id());
         $this->set(compact('user', 'user'));
     }
 

@@ -1,3 +1,9 @@
+<style type="text/css">
+    .user-profile select{
+        margin: 0 0 1.33333em 0;
+        padding: 0.66667em;
+    }
+</style>
 <div class="row" xmlns="http://www.w3.org/1999/html">
     <div class="large-12 column">
         <div class="section-container tabs" data-section>
@@ -8,34 +14,49 @@
                         <div class="large-12 columns">
                             <h3>Manage Passes</h3>
 
-                            <ul class="left" style=" width: 800px;">
-
-                                <li style="width: 100px; float: left;">&nbsp;</li>
-                                <li style="width: 100px; float: left;">&nbsp;</li>
-                                <li style="width: 100px; float: left;">&nbsp;</li>
-                                <li style="width: 100px; float: left;">Name</li>
-                                <li style="width: 150px; float: left;">Downloads</li>
-                                <li style="width: 150px; float: left;">Download limit</li>
-                            </ul>
-                                  <?
-                                     foreach ($user[0]['Pass'] as $p) { ?>
-
-                                         <ul class="left" style=" width: 800px;">
-                                        <li style="width: 50px; float: left; display: none;"><? echo $p['id'] ?></li>
-                                        <li style="width: 100px; float: left;"><img src="<? echo $p['iconImage'] ?>" width="50px" alt="icon" /></li>
-                                             <li style="width: 100px; float: left;"><a href="/pass/web_pass/<? echo $p['id'] ?>">view pass</a></li>
-                                        <li style="width: 100px; float: left;"><a href="/pass/web_pass/<? echo $p['id'] ?>">Get Code</a></li>
-                                        <li style="width: 100px; float: left;"><? echo $p['organizationName']?></li>
-                                        <li style="width: 150px; float: left;"><? echo $p['download_count']?>
-                                            <a href="/pass/download_report/<? echo $p['id'] ?>" target="_blank">Export</a>
-                                        </li>
-                                        <li style="width: 250px; float: left;">
-                                            <input type="radio" name="limit" value="no-limit"> no limit<br>
-                                            <input type="radio" name="limit" value="limit" > limit to
-                                            <input style="width: 50px;" class="update_limit" id="download_limit_<? echo $p['id'] ?>" name="download_limit_<? echo $p['id'] ?>" value="<? echo $p['download_limit']?>" /> downloads</li>
-                                       </ul>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th width="200"></th>
+                                    <th width="200"></th>
+                                    <th width="200"></th>
+                                    <th width="200">Name</th>
+                                    <th width="200">Downloads</th>
+                                    <th>Download limit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <? foreach ($user[0]['Pass'] as $p) { ?>
+                                <tr data-id="<? echo $p['id'] ?>">
+                                    <td width="200"><img src="<? echo $p['iconImage'] ?>" width="50px" alt="icon"/></td>
+                                    <td width="150">
+                                        <a href="/pass/web_pass/<? echo $p['id'] ?>">view pass</a>
+                                    </td>
+                                    <td width="150">
+                                        <a href="/pass/web_pass/<? echo $p['id'] ?>">Get Code</a>
+                                    </td>
+                                    <td width="150">
+                                        <? echo $p['organizationName']?>
+                                    </td>
+                                    <td width="150">
+                                        <? echo $p['download_count']?>
+                                        <a href="/pass/download_report/<? echo $p['id'] ?>" target="_blank">Export</a>
+                                    </td>
+                                    <td>
+                                        <input type="radio" name="limit" value="no-limit"> no limit<br>
+                                        <input type="radio" name="limit" value="limit"> limit to
+                                        <input style="width: 50px;" class="update_limit"
+                                               id="download_limit_<? echo $p['id'] ?>"
+                                               name="download_limit_<? echo $p['id'] ?>"
+                                               value="<? echo $p['download_limit'] ?>"/> downloads
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6"></td>
+                                </tr>
                                 <? } ?>
-
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -62,20 +83,8 @@
             </section>
             <section class="section">
                 <p class="title"><a href="#customer">Manage Profile</a></p>
-                <div class="content" data-slug="profile">
+                <div style="font-size: 12px;padding: 20px;" class="content user-profile" data-slug="profile">
                     <?=$this->element('users/edit'); ?>
-                    <div class="row">
-                        <div class="large-4 columns">
-                            Name
-                            <?
-                             echo "<pre>";
-                             print_r($user[0]['User']);
-                            echo "</pre>";
-                            ?>
-                        </div>
-                           <div class="large-8 columns">
-                        </div>
-                    </div>
                 </div>
             </section>
         </div>
