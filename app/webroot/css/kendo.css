@@ -2,35 +2,35 @@
 @import url("http://cdn.kendostatic.com/2013.1.226/styles/kendo.default.min.css");
 @import url("http://cdn.kendostatic.com/2013.1.226/styles/kendo.silver.min.css");
 @import url("http://cdn.kendostatic.com/2013.1.226/styles/kendo.dataviz.min.css");
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/kendo\.scss}line{font-family:\000036}}
+/* line 6, ../sass/kendo.scss */
 .ampush-kendo *, .ampush-kendo *:before, .ampush-kendo *:after {
   -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/kendo\.scss}line{font-family:\0000312}}
+/* line 12, ../sass/kendo.scss */
 .ampush-kendo th a {
   font-weight: bold;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/kendo\.scss}line{font-family:\0000316}}
+/* line 16, ../sass/kendo.scss */
 .k-picker-wrap .k-select, .k-numeric-wrap .k-select, .k-dropdown-wrap .k-select {
   padding: 0px 3px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/kendo\.scss}line{font-family:\0000320}}
+/* line 20, ../sass/kendo.scss */
 .k-animation-container .k-link {
   font-size: 75% !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/kendo\.scss}line{font-family:\0000324}}
+/* line 24, ../sass/kendo.scss */
 .k-grid td {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/kendo\.scss}line{font-family:\0000329}}
+/* line 29, ../sass/kendo.scss */
 .no-show a .k-icon {
   display: none;
 }

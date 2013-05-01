@@ -14,49 +14,81 @@
                         <div class="large-12 columns">
                             <h3>Manage Passes</h3>
 
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th width="200"></th>
-                                    <th width="200"></th>
-                                    <th width="200"></th>
-                                    <th width="200">Name</th>
-                                    <th width="200">Downloads</th>
-                                    <th>Download limit</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <? foreach ($user[0]['Pass'] as $p) { ?>
-                                <tr data-id="<? echo $p['id'] ?>">
-                                    <td width="200"><img src="<? echo $p['iconImage'] ?>" width="50px" alt="icon"/></td>
-                                    <td width="150">
-                                        <a href="/pass/web_pass/<? echo $p['id'] ?>">view pass</a>
-                                    </td>
-                                    <td width="150">
-                                        <a href="/pass/web_pass/<? echo $p['id'] ?>">Get Code</a>
-                                    </td>
-                                    <td width="150">
-                                        <? echo $p['organizationName']?>
-                                    </td>
-                                    <td width="150">
-                                        <? echo $p['download_count']?>
-                                        <a href="/pass/download_report/<? echo $p['id'] ?>" target="_blank">Export</a>
-                                    </td>
-                                    <td>
-                                        <input type="radio" name="limit" value="no-limit"> no limit<br>
-                                        <input type="radio" name="limit" value="limit"> limit to
-                                        <input style="width: 50px;" class="update_limit"
-                                               id="download_limit_<? echo $p['id'] ?>"
-                                               name="download_limit_<? echo $p['id'] ?>"
-                                               value="<? echo $p['download_limit'] ?>"/> downloads
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="6"></td>
-                                </tr>
-                                <? } ?>
-                                </tbody>
-                            </table>
+                            <div class="manage_pass_container">
+                                <table class="manage-pass">
+                                    <thead>
+                                    <tr>
+                                        <th width="10%"></th>
+                                        <th width="10%"></th>
+                                        <th width="10%"></th>
+                                        <th width="15%">Name</th>
+                                        <th width="15%">Downloads</th>
+                                        <th>Download limit</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <? foreach ($user[0]['Pass'] as $p) { ?>
+                                        <tr data-id="<? echo $p['id'] ?>">
+                                            <td width="10%" class="pass_img"><img src="<? echo $p['iconImage'] ?>"
+                                                                                  width="50px" alt="icon"/></td>
+                                            <td width="10%">
+                                                <a href="/pass/web_pass/<? echo $p['id'] ?>">view pass</a>
+                                            </td>
+                                            <td width="10%">
+                                                <a class="get_code" href="/pass/web_pass/<? echo $p['id'] ?>">Get
+                                                    Code</a>
+                                            </td>
+                                            <td width="15%">
+                                                <? echo $p['organizationName'] ?>
+                                            </td>
+                                            <td width="15%">
+                                                <? echo $p['download_count'] ?>
+                                                <a href="/pass/download_report/<? echo $p['id'] ?>" target="_blank">Export</a>
+                                            </td>
+                                            <td>
+                                                <input type="radio" name="limit" value="no-limit"> no limit<br>
+                                                <input type="radio" name="limit" value="limit"> limit to
+                                                <input style="width: 50px;" class="update_limit"
+                                                       id="download_limit_<? echo $p['id'] ?>"
+                                                       name="download_limit_<? echo $p['id'] ?>"
+                                                       value="<? echo $p['download_limit'] ?>"/> downloads
+                                            </td>
+                                        </tr>
+                                        <tr class="hide pass_code">
+                                            <td colspan="6" class="pass_code">
+                                                <h5>Get code to distribute your pass:</h5>
+
+                                                <div class="row">
+                                                    <div class="small-4 columns">
+                                                        <div class="instruction">1) Copy and paste this link into an
+                                                            email/Facebook etc
+                                                        </div>
+                                                        <div>
+                                                            <input type="text"
+                                                                   value="/pass/web_pass/<? echo $p['id'] ?>"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="small-4 columns">
+                                                        <div class="instruction">or... 2) Choose one of our buttons and
+                                                            grab the code
+                                                        </div>
+                                                        <div class="btn_group">
+                                                            <button class="download_pass_btn red active">Download Pass
+                                                            </button>
+                                                            <button class="download_pass_btn velvet">Download Pass
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="small-4 columns">
+                                                        <textarea cols="30" rows="3"><a href='http://www.flypass.com.au'><img src=""alt=""/></a></textarea>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <? } ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -96,6 +128,16 @@
 $(document).ready(function() {
 
     $(document).foundation();
+
+    $(".get_code").on('click', function () {
+        $(this).parents('tr').next().fadeToggle();
+        return false;
+    });
+
+    $(".btn_group").on('click', 'button', function () {
+        $(this).parent().find('button').removeClass('active');
+        $(this).addClass('active');
+    });
 
     $('.update_limit').click(function(e){
          var id = this.id;

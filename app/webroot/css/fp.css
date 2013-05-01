@@ -1,14 +1,14 @@
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\0000343}}
+/* line 43, ../sass/fp.scss */
 h1, h2, h3, h4, h5, .font_montserrat {
   font-family: 'Montserrat Alternates', serif;
   font-weight: normal;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\0000348}}
+/* line 48, ../sass/fp.scss */
 .main-nav {
   padding: 15px 0 30px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\0000351}}
+/* line 51, ../sass/fp.scss */
 .main-nav ul {
   height: 75px;
   line-height: 83px;
@@ -18,7 +18,7 @@ h1, h2, h3, h4, h5, .font_montserrat {
   overflow: hidden;
   *zoom: 1;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\0000356}}
+/* line 56, ../sass/fp.scss */
 .main-nav ul li {
   list-style-image: none;
   list-style-type: none;
@@ -29,29 +29,29 @@ h1, h2, h3, h4, h5, .font_montserrat {
   padding-left: 13px;
   padding-right: 13px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/RailsInstaller\/Ruby1\.9\.3\/lib\/ruby\/gems\/1\.9\.1\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/typography\/lists\/_horizontal-list\.scss}line{font-family:\0000348}}
+/* line 48, c:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .main-nav ul li:first-child, .main-nav ul li.first {
   padding-left: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/RailsInstaller\/Ruby1\.9\.3\/lib\/ruby\/gems\/1\.9\.1\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/typography\/lists\/_horizontal-list\.scss}line{font-family:\0000349}}
+/* line 49, c:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .main-nav ul li:last-child {
   padding-right: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/RailsInstaller\/Ruby1\.9\.3\/lib\/ruby\/gems\/1\.9\.1\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/typography\/lists\/_horizontal-list\.scss}line{font-family:\0000350}}
+/* line 50, c:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .main-nav ul li.last {
   padding-right: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\0000359}}
+/* line 59, ../sass/fp.scss */
 .main-nav ul li a {
   display: block;
   color: #181818;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\0000363}}
+/* line 63, ../sass/fp.scss */
 .main-nav ul li a:hover {
   color: #ed1c24;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\0000371}}
+/* line 71, ../sass/fp.scss */
 .hero-unit {
   border-top: 1px solid #dcdcdc;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(99%, #ececec), color-stop(100%, #dcdcdc));
@@ -61,22 +61,22 @@ h1, h2, h3, h4, h5, .font_montserrat {
   background-image: linear-gradient(#ffffff, #ececec 99%, #dcdcdc);
   min-height: 570px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\0000377}}
+/* line 77, ../sass/fp.scss */
 .hero-unit#home-hero-unit h4 {
   font-size: 2.7em;
   margin-top: 30px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\0000381}}
+/* line 81, ../sass/fp.scss */
 .hero-unit#home-hero-unit h5 {
   font-size: 2em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\0000385}}
+/* line 85, ../sass/fp.scss */
 .hero-unit#home-hero-unit ul {
   font-size: 1.5em;
   line-height: 1.3;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\0000393}}
+/* line 93, ../sass/fp.scss */
 .clients ul {
   margin: 0;
   padding: 0;
@@ -85,7 +85,7 @@ h1, h2, h3, h4, h5, .font_montserrat {
   *zoom: 1;
   margin: 10px 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\0000397}}
+/* line 97, ../sass/fp.scss */
 .clients ul li {
   list-style-image: none;
   list-style-type: none;
@@ -96,31 +96,31 @@ h1, h2, h3, h4, h5, .font_montserrat {
   padding-left: 12px;
   padding-right: 12px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/RailsInstaller\/Ruby1\.9\.3\/lib\/ruby\/gems\/1\.9\.1\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/typography\/lists\/_horizontal-list\.scss}line{font-family:\0000348}}
+/* line 48, c:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .clients ul li:first-child, .clients ul li.first {
   padding-left: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/RailsInstaller\/Ruby1\.9\.3\/lib\/ruby\/gems\/1\.9\.1\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/typography\/lists\/_horizontal-list\.scss}line{font-family:\0000349}}
+/* line 49, c:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .clients ul li:last-child {
   padding-right: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/RailsInstaller\/Ruby1\.9\.3\/lib\/ruby\/gems\/1\.9\.1\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/typography\/lists\/_horizontal-list\.scss}line{font-family:\0000350}}
+/* line 50, c:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .clients ul li.last {
   padding-right: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003100}}
+/* line 100, ../sass/fp.scss */
 .clients ul li a {
   display: block;
   height: 47px;
   line-height: 55px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003110}}
+/* line 110, ../sass/fp.scss */
 #main-footer .row {
   border-top: 1px solid #999999;
   padding-top: 10px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003115}}
+/* line 115, ../sass/fp.scss */
 #main-footer ul {
   margin: 0;
   padding: 0;
@@ -128,7 +128,7 @@ h1, h2, h3, h4, h5, .font_montserrat {
   overflow: hidden;
   *zoom: 1;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003117}}
+/* line 117, ../sass/fp.scss */
 #main-footer ul li {
   list-style-image: none;
   list-style-type: none;
@@ -139,47 +139,47 @@ h1, h2, h3, h4, h5, .font_montserrat {
   padding-left: 4px;
   padding-right: 4px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/RailsInstaller\/Ruby1\.9\.3\/lib\/ruby\/gems\/1\.9\.1\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/typography\/lists\/_horizontal-list\.scss}line{font-family:\0000348}}
+/* line 48, c:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 #main-footer ul li:first-child, #main-footer ul li.first {
   padding-left: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/RailsInstaller\/Ruby1\.9\.3\/lib\/ruby\/gems\/1\.9\.1\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/typography\/lists\/_horizontal-list\.scss}line{font-family:\0000349}}
+/* line 49, c:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 #main-footer ul li:last-child {
   padding-right: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/RailsInstaller\/Ruby1\.9\.3\/lib\/ruby\/gems\/1\.9\.1\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/typography\/lists\/_horizontal-list\.scss}line{font-family:\0000350}}
+/* line 50, c:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 #main-footer ul li.last {
   padding-right: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003121}}
+/* line 121, ../sass/fp.scss */
 #main-footer ul.social {
   line-height: 1.7;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003123}}
+/* line 123, ../sass/fp.scss */
 #main-footer ul.social a {
   padding: 0 5px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003126}}
+/* line 126, ../sass/fp.scss */
 #main-footer ul.social span {
   font-size: 12px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003133}}
+/* line 133, ../sass/fp.scss */
 .call-to-action {
   padding: 15px 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003137}}
+/* line 137, ../sass/fp.scss */
 .clients h6 {
   margin-bottom: 10px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003141}}
+/* line 141, ../sass/fp.scss */
 .phone-container {
   position: relative;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003144}}
+/* line 144, ../sass/fp.scss */
 #phone {
   position: absolute;
   padding: 180px 41px 170px;
@@ -190,13 +190,13 @@ h1, h2, h3, h4, h5, .font_montserrat {
   height: 810px;
   background: transparent url("../img/iphone.png") no-repeat 0 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003153}}
+/* line 153, ../sass/fp.scss */
 #phone .phone-inner {
   width: 100%;
   height: 100%;
   background: transparent url("../img/bg.jpg") no-repeat 0 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003159}}
+/* line 159, ../sass/fp.scss */
 #phone .initial-message {
   font-family: 'Montserrat Alternates', serif;
   padding-top: 54%;
@@ -205,27 +205,27 @@ h1, h2, h3, h4, h5, .font_montserrat {
   font-size: 16px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003169}}
+/* line 169, ../sass/fp.scss */
 #mainbody ul {
   list-style-position: inside;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003174}}
+/* line 174, ../sass/fp.scss */
 #main-container {
   min-height: 800px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003178}}
+/* line 178, ../sass/fp.scss */
 #pass-creation {
   width: 510px;
   color: #000;
   font-family: 'Montserrat Alternates', serif;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003184}}
+/* line 184, ../sass/fp.scss */
 #pass-creation form label {
   margin-bottom: 10px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003189}}
+/* line 189, ../sass/fp.scss */
 #pass-creation ul#tab-nav {
   height: 82px;
   line-height: 82px;
@@ -236,7 +236,7 @@ h1, h2, h3, h4, h5, .font_montserrat {
   *zoom: 1;
   margin-top: 22px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003195}}
+/* line 195, ../sass/fp.scss */
 #pass-creation ul#tab-nav li {
   list-style-image: none;
   list-style-type: none;
@@ -249,27 +249,27 @@ h1, h2, h3, h4, h5, .font_montserrat {
   background: transparent;
   border: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/RailsInstaller\/Ruby1\.9\.3\/lib\/ruby\/gems\/1\.9\.1\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/typography\/lists\/_horizontal-list\.scss}line{font-family:\0000348}}
+/* line 48, c:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 #pass-creation ul#tab-nav li:first-child, #pass-creation ul#tab-nav li.first {
   padding-left: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/RailsInstaller\/Ruby1\.9\.3\/lib\/ruby\/gems\/1\.9\.1\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/typography\/lists\/_horizontal-list\.scss}line{font-family:\0000349}}
+/* line 49, c:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 #pass-creation ul#tab-nav li:last-child {
   padding-right: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/RailsInstaller\/Ruby1\.9\.3\/lib\/ruby\/gems\/1\.9\.1\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/typography\/lists\/_horizontal-list\.scss}line{font-family:\0000350}}
+/* line 50, c:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 #pass-creation ul#tab-nav li.last {
   padding-right: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003199}}
+/* line 199, ../sass/fp.scss */
 #pass-creation ul#tab-nav li:first-child a {
   margin: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003200}}
+/* line 200, ../sass/fp.scss */
 #pass-creation ul#tab-nav li:first-child a ::before {
   content: '';
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003207}}
+/* line 207, ../sass/fp.scss */
 #pass-creation ul#tab-nav li a {
   display: block;
   color: #000;
@@ -277,7 +277,7 @@ h1, h2, h3, h4, h5, .font_montserrat {
   padding: 0 7px;
   position: relative;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003216}}
+/* line 216, ../sass/fp.scss */
 #pass-creation ul#tab-nav li a::before {
   content: ">";
   position: absolute;
@@ -286,7 +286,7 @@ h1, h2, h3, h4, h5, .font_montserrat {
   font-size: 11px;
   color: #000;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003231}}
+/* line 231, ../sass/fp.scss */
 #pass-creation ul#tab-nav li.k-state-active a {
   color: #fff;
   background: #b2b2b2;
@@ -302,7 +302,7 @@ h1, h2, h3, h4, h5, .font_montserrat {
   border: none;
   padding: 0 17px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003235}}
+/* line 235, ../sass/fp.scss */
 #pass-creation ul#tab-nav li.k-state-active a::after {
   content: '';
   background: white;
@@ -319,7 +319,7 @@ h1, h2, h3, h4, h5, .font_montserrat {
   border-bottom-right-radius: 24px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003244}}
+/* line 244, ../sass/fp.scss */
 .pb-btn {
   color: #fff;
   background: #b2b2b2;
@@ -341,7 +341,7 @@ h1, h2, h3, h4, h5, .font_montserrat {
   line-height: 1.65;
   background: #ed1c24;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003245}}
+/* line 245, ../sass/fp.scss */
 .pb-btn::after {
   content: '';
   background: white;
@@ -366,7 +366,7 @@ h1, h2, h3, h4, h5, .font_montserrat {
   -webkit-border-bottom-right-radius: 18px;
   border-bottom-right-radius: 18px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003252}}
+/* line 252, ../sass/fp.scss */
 .pb-btn::before {
   content: ">";
   position: absolute;
@@ -374,28 +374,83 @@ h1, h2, h3, h4, h5, .font_montserrat {
   right: 15px;
   font-size: 26px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003267}}
+/* line 267, ../sass/fp.scss */
 .pb-btn.small {
   padding: 11px 30px 14px 24px;
   font-size: 1em;
   height: 55px;
   line-height: 1.9;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003273}}
+/* line 273, ../sass/fp.scss */
 .pb-btn.small::before {
   font-size: 1em;
   top: 12px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003279}}
+/* line 279, ../sass/fp.scss */
 #tabstrip {
   background: transparent;
   border: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/d\:\/wamp\/www\/djsreader\/app3\/sass\/fp\.scss}line{font-family:\00003282}}
+/* line 282, ../sass/fp.scss */
 #tabstrip.k-tabstrip .k-content {
   margin: 0;
   padding: 0;
   border: none;
   background: transparent;
+}
+
+/* line 287, ../sass/fp.scss */
+.manage_pass_container {
+  padding: 10px;
+}
+
+/* line 290, ../sass/fp.scss */
+.manage-pass {
+  font-size: .75em;
+  width: 100%;
+  border: none;
+}
+/* line 296, ../sass/fp.scss */
+.manage-pass td, .manage-pass th {
+  padding: .75em 0;
+  background: #ffffff;
+  border-bottom: 1px solid #dedede;
+}
+/* line 301, ../sass/fp.scss */
+.manage-pass td.pass_code, .manage-pass td.pass_img, .manage-pass th.pass_code, .manage-pass th.pass_img {
+  padding: .75em;
+}
+/* line 306, ../sass/fp.scss */
+.manage-pass input, .manage-pass textarea {
+  height: auto;
+  margin: 0;
+  padding: .4em;
+}
+/* line 312, ../sass/fp.scss */
+.manage-pass .instruction {
+  margin-bottom: 5px;
+}
+
+/* line 317, ../sass/fp.scss */
+.download_pass_btn {
+  padding: 5px;
+  font-size: 1em;
+  border: 3px solid #fff;
+}
+/* line 322, ../sass/fp.scss */
+.download_pass_btn.red {
+  background: #ff6663;
+}
+/* line 325, ../sass/fp.scss */
+.download_pass_btn.red.active {
+  border-color: #ff0000;
+}
+/* line 330, ../sass/fp.scss */
+.download_pass_btn.velvet {
+  background: #8361ff;
+}
+/* line 333, ../sass/fp.scss */
+.download_pass_btn.velvet.active {
+  border-color: #3600fa;
 }

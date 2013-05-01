@@ -283,4 +283,55 @@ h1,h2,h3,h4,h5,.font_montserrat {
     @include reset_style();
   }
 }
-          
+
+.manage_pass_container {
+  padding: 10px;
+}
+.manage-pass {
+
+  font-size: .75em;
+  width: 100%;
+  border: none;
+
+  td,th {
+    padding: .75em 0;
+    background: #ffffff;
+    border-bottom: 1px solid #dedede;
+
+    &.pass_code, &.pass_img {
+      padding: .75em;
+    }
+  }
+
+  input, textarea {
+    height: auto;
+    margin: 0;
+    padding: .4em;
+  }
+
+  .instruction {
+    margin-bottom: 5px;
+  }
+}
+
+.download_pass_btn {
+  padding: 5px;
+  font-size: 1em;
+  border: 3px solid #fff;
+
+  &.red {
+    background: #ff6663;
+
+    &.active {
+      border-color: #ff0000;
+    }
+  }
+
+  &.velvet {
+    background: #8361ff;
+
+    &.active {
+      border-color: darken(#8361ff, 20%);
+    }
+  }
+}
