@@ -49,8 +49,7 @@
                                                 <input type="radio" name="limit" value="no-limit"> no limit<br>
                                                 <input type="radio" name="limit" value="limit"> limit to
                                                 <input style="width: 50px;" class="update_limit"
-                                                       id="download_limit_<? echo $p['id'] ?>"
-                                                       name="download_limit_<? echo $p['id'] ?>"
+                                                       id="<? echo $p['id'] ?>"
                                                        value="<? echo $p['download_limit'] ?>"/> downloads
                                             </td>
                                         </tr>
@@ -139,22 +138,19 @@ $(document).ready(function() {
         $(this).addClass('active');
     });
 
-    $('.update_limit').click(function(e){
-         var id = this.id;
-         var input_id = "#download_limit_"+id;
-
-        //alert($(input_id).val());
+    $('.update_limit').keyup(function(e){
+//         var id = this.id;
 
         $.ajax({
             type: "POST",
             url: "/pass/update_download_limit",
-            data: {'pass_id': id, 'limit': $(input_id).val() },
+            data: {'pass_id': this.id, 'limit': this.value },
             success: function (msg) {
-                if(msg.response == true){
+                if(msg.success == true){
                     alert('download limit has been updated');
                 }
                 else {
-                    alert('Problem in saving. Please try later');
+                    //alert('Problem in saving. Please try later');
                 }
             }
         });
