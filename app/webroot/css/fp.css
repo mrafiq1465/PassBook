@@ -426,31 +426,78 @@ h1, h2, h3, h4, h5, .font_montserrat {
   height: auto;
   margin: 0;
   padding: .4em;
+  font-size: .75em;
 }
-/* line 312, ../sass/fp.scss */
+/* line 313, ../sass/fp.scss */
 .manage-pass .instruction {
   margin-bottom: 5px;
 }
 
-/* line 317, ../sass/fp.scss */
+/* line 318, ../sass/fp.scss */
 .download_pass_btn {
   padding: 5px;
   font-size: 1em;
   border: 3px solid #fff;
 }
-/* line 322, ../sass/fp.scss */
+/* line 323, ../sass/fp.scss */
 .download_pass_btn.red {
   background: #ff6663;
 }
-/* line 325, ../sass/fp.scss */
+/* line 326, ../sass/fp.scss */
 .download_pass_btn.red.active {
   border-color: #ff0000;
 }
-/* line 330, ../sass/fp.scss */
+/* line 331, ../sass/fp.scss */
 .download_pass_btn.velvet {
   background: #8361ff;
 }
-/* line 333, ../sass/fp.scss */
+/* line 334, ../sass/fp.scss */
 .download_pass_btn.velvet.active {
   border-color: #3600fa;
+}
+
+/* line 340, ../sass/fp.scss */
+.get_code {
+  position: relative;
+}
+/* line 344, ../sass/fp.scss */
+.get_code::before {
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: -15px;
+  top: 20%;
+  content: '';
+  border-left: 10px solid #000;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+/* line 356, ../sass/fp.scss */
+.get_code.active::before {
+  border-top: 10px solid #000;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+}
+
+/* line 363, ../sass/fp.scss */
+.download_count {
+  padding-right: 20px;
+}
+
+/* line 367, ../sass/fp.scss */
+.user-profile {
+  font-size: .75em;
+}
+/* line 369, ../sass/fp.scss */
+.user-profile form {
+  width: 50%;
+}
+/* line 372, ../sass/fp.scss */
+.user-profile input {
+  height: auto;
+  margin: 0 0 5px;
+}
+/* line 377, ../sass/fp.scss */
+.user-profile .row {
+  margin-bottom: 10px;
 }

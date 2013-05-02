@@ -307,6 +307,7 @@ h1,h2,h3,h4,h5,.font_montserrat {
     height: auto;
     margin: 0;
     padding: .4em;
+    font-size: .75em;
   }
 
   .instruction {
@@ -333,5 +334,47 @@ h1,h2,h3,h4,h5,.font_montserrat {
     &.active {
       border-color: darken(#8361ff, 20%);
     }
+  }
+}
+
+.get_code {
+
+  position: relative;
+
+  &::before {
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: -15px;
+    top: 20%;
+    content: '';
+    border-left: 10px solid #000;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+  }
+
+  &.active::before {
+    border-top: 10px solid #000;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+  }
+}
+
+.download_count {
+  padding-right: 20px;
+}
+
+.user-profile {
+  font-size: .75em;
+  form {
+    width: 50%;
+  }
+  input {
+    height: auto;
+    margin: 0 0 5px;
+  }
+
+  .row {
+    margin-bottom: 10px;
   }
 }

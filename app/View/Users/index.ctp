@@ -42,7 +42,7 @@
                                                 <? echo $p['organizationName'] ?>
                                             </td>
                                             <td width="15%">
-                                                <? echo $p['download_count'] ?>
+                                                <span class="download_count"><? echo $p['download_count'] ?></span>
                                                 <a href="/pass/download_report/<? echo $p['id'] ?>" target="_blank">Export</a>
                                             </td>
                                             <td>
@@ -129,7 +129,9 @@ $(document).ready(function() {
     $(document).foundation();
 
     $(".get_code").on('click', function () {
-        $(this).parents('tr').next().fadeToggle();
+        var $this = $(this);
+        $this.toggleClass('active');
+        $this.parents('tr').next().fadeToggle();
         return false;
     });
 
