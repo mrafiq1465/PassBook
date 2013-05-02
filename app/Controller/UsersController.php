@@ -25,7 +25,7 @@ class UsersController extends AppController {
             $user = $this->User->find('all', $options);
         }
         else {
-            $this->redirect('/users/login');
+            $this->redirect('/users/login_account');
 
         }
 
@@ -157,6 +157,37 @@ class UsersController extends AppController {
 		$this->Session->setFlash(__('User was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
+
+    function login_account() {
+        if ($this->isLoggedin()) {
+            $this->redirect('/users');
+            exit;
+        }
+
+        if (!empty($this->data)) {
+            $this->Session->delete('Message.flash');
+
+            $dbuser = $this->User->find('first', array('recursive' => -1, 'conditions' => array(
+                'OR' => array(
+                    array('User.name' => $this->data['User']['email']),
+                    array('User.email' => $this->data['User']['email'])
+                )
+            )));
+
+            if(!empty($dbuser) && ($dbuser['User']['password'] == $this->data['User']['password'] )){
+                // write the username to a session
+
+                $this->Session->write($dbuser);
+                $this->ajax_response(array('success' => true, 'user_id' => $dbuser['User']['id']));
+
+                $this->redirect('/users');
+            }
+            else {
+                if (!$this->request->is('ajax')) $this->Session->setFlash('Either your username or password is incorrect.', FALSE, FALSE, 'login');
+                else $this->ajax_response(array('error' => 'Either your username or password is incorrect.'));
+            }
+        }
+    }
 
     function login() {
         if ($this->isLoggedin()) {
