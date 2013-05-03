@@ -41,6 +41,7 @@
             'foundation/foundation.cookie.js',
             'foundation/foundation.section.js',
             'foundation/foundation.tooltips.js',
+            'foundation/foundation.topbar.js',
             'kendo/kendo.all.min.js',
             'main.js' . ((Configure::read('debug') == 2) ? '?' . uniqid() : ''),
         ));

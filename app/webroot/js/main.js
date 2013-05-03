@@ -2,6 +2,7 @@ window.PassBook = {};
 
 $(document).ready(function() {
 
+    $(document).foundation();
 
     $("#menu").kendoMenu();
     $("#pass_type").kendoMenu();
