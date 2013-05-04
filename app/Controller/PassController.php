@@ -120,11 +120,11 @@ class PassController extends AppController
                         $image->load($destination_path_logo);
 
                         // for logo
-                        $image->resizeToWidth(150);
+                        $image->resizeToWidth(130);
                         $image->save($destination_path_logo);
 
                         // for icon
-                        $image->resizeToWidth(100);
+                        $image->resizeToWidth(130);
                         $image->save($destination_path_icon);
 
                         // for icon 2x
@@ -137,6 +137,15 @@ class PassController extends AppController
                     if($file_name == "strip@2x") {
                         $destination_path_strip = $destination_dir . "strip.png";
                         copy($this->request->data[$uploaded_field]['tmp_name'], $destination_path_strip);
+
+                        $image = new SimpleImage();
+                        $image->load($destination_path_strip);
+
+                        // for strip
+                        $image->resizeToWidth(320);
+                        $image->save($destination_path_strip);
+
+                        $image->save($destination_path_strip);
                         $this->Pass->data['Pass']['stripImage'] = str_replace(WWW_ROOT, '', $destination_path_strip);
                     }
 
@@ -296,6 +305,8 @@ class PassController extends AppController
     {
         $this->layout = 'web_pass';
 
+        $status = $this->update_download_history($id);
+
         $this->request->data = $this->Pass->read(null, $id);
         $this->decodeDynamicFields($this->request->data);
         $barcodeFormats = $this->Pass->BarcodeFormat->find('list');
@@ -304,6 +315,8 @@ class PassController extends AppController
 
     public function download_pkpass($id = null) {
         $this->autoRender = false;
+
+        $status = $this->update_download_history($id);
 
         $data_path = APP . 'data' . DS;
         $pkpass_file = $data_path . 'passes/' . $id . '/pass.pkpass';
@@ -323,6 +336,40 @@ class PassController extends AppController
         }
         flush();
         readfile($pkpass_file);
+    }
+
+    public function update_download_history($pass_id) {
+        $this->autoRender = false;
+
+        $this->Pass->id = $pass_id;
+        $pass =  $this->Pass->read(null, $pass_id);
+        $pass_updated = $pass['updated'];
+        $pass_download_count = $pass['download_count'];
+
+        $cookie_name = 'flypass_'.$pass_id;
+        $browser_cookie = '';  //Need to get cookie value from browser.
+
+        $pass_download = $this->Pass->Download->find('first', array('recursive' => -1, 'conditions' => array('Download.pass_id' => $pass_id,'Download.browser_cookie' => $browser_cookie)));
+
+        if(empty($pass_download)){
+            $response = $this->Pass->Download->save(array(
+                'pass_id' => $pass_id,
+                'browser_cookie' => $browser_cookie,
+                'device' => '',
+                'browser' => ''
+            ));
+
+            if($response){
+                $this->Pass->id = $pass_id;
+                $response = $this->Pass->save(array(
+                    'download_count' => $pass_download_count+1
+                ));
+            }
+        } else {
+
+        }
+        return $response;
+
     }
 
     public function payment_status($pass_id) {
