@@ -305,11 +305,13 @@ class PassController extends AppController
     {
         $this->layout = 'web_pass';
 
-        $status = $this->update_download_history($id);
+       // $status = $this->update_download_history($id);
 
         $this->request->data = $this->Pass->read(null, $id);
+
         $this->decodeDynamicFields($this->request->data);
         $barcodeFormats = $this->Pass->BarcodeFormat->find('list');
+        //print_r( $this->request->data);
         $this->set(compact('barcodeFormats'));
     }
 
@@ -343,15 +345,23 @@ class PassController extends AppController
 
         $this->Pass->id = $pass_id;
         $pass =  $this->Pass->read(null, $pass_id);
-        $pass_updated = $pass['updated'];
-        $pass_download_count = $pass['download_count'];
+
+        $pass_updated = $pass["Pass"]['updated'];
+
+        $pass_download_count = $pass["Pass"]['download_count'];
 
         $cookie_name = 'flypass_'.$pass_id;
-        $browser_cookie = '';  //Need to get cookie value from browser.
+        $browser_cookie = '';
+        if (isset($_COOKIE[$cookie_name])){
+            $browser_cookie = $_COOKIE[$cookie_name];
+        }
 
-        $pass_download = $this->Pass->Download->find('first', array('recursive' => -1, 'conditions' => array('Download.pass_id' => $pass_id,'Download.browser_cookie' => $browser_cookie)));
+        $pass_download = $this->Pass->Download->find('first', array('recursive' => -1, 'conditions' => array('Download.pass_id' => $pass_id,'Download.browser_cookie' => $browser_cookie, 'Download.created >'=> $pass_updated)));
+
 
         if(empty($pass_download)){
+            $browser_cookie = uniqid();
+
             $response = $this->Pass->Download->save(array(
                 'pass_id' => $pass_id,
                 'browser_cookie' => $browser_cookie,
@@ -365,10 +375,13 @@ class PassController extends AppController
                     'download_count' => $pass_download_count+1
                 ));
             }
+            setcookie($cookie_name, $browser_cookie, time()+360000);
+
         } else {
 
         }
-        return $response;
+
+        return 'success';
 
     }
 
