@@ -41,6 +41,7 @@
     Router::connect('/pass/create/', array('controller' => 'pass', 'action' => 'create'));
     Router::connect('/pass/download_pkpass/:id', array('controller' => 'pass', 'action' => 'download_pkpass'),array('pass' => array('id')));
     Router::connect('/pass/download_report/:id', array('controller' => 'pass', 'action' => 'download_report'),array('pass' => array('id')));
+    Router::connect('/pass/update_download_history/', array('controller' => 'pass', 'action' => 'update_download_history'));
 
 
 /**

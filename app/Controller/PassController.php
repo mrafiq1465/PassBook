@@ -305,7 +305,7 @@ class PassController extends AppController
     {
         $this->layout = 'web_pass';
 
-       // $status = $this->update_download_history($id);
+        $status = $this->update_download_history($id);
 
         $this->request->data = $this->Pass->read(null, $id);
 
@@ -341,7 +341,7 @@ class PassController extends AppController
     }
 
     public function update_download_history($pass_id) {
-        $this->autoRender = false;
+       // $this->autoRender = false;
 
         $this->Pass->id = $pass_id;
         $pass =  $this->Pass->read(null, $pass_id);

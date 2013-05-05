@@ -32,7 +32,7 @@
                                             <td width="10%" class="pass_img"><img src="<? echo $p['iconImage'] ?>"
                                                                                   width="50px" alt="icon"/></td>
                                             <td width="10%">
-                                                <a href="/pass/web_pass/<? echo $p['id'] ?>">view pass</a>
+                                                <a target="_blank" href="/pass/web_pass/<? echo $p['id'] ?>">view pass</a>
                                             </td>
                                             <td width="10%">
                                                 <a class="get_code" href="/pass/web_pass/<? echo $p['id'] ?>">Get
@@ -64,7 +64,7 @@
                                                         </div>
                                                         <div>
                                                             <input type="text"
-                                                                   value="/pass/web_pass/<? echo $p['id'] ?>"/>
+                                                                   value="http://test.flypass.com.au/pass/web_pass/<? echo $p['id'] ?>"/>
                                                         </div>
                                                     </div>
                                                     <div class="small-4 columns">
