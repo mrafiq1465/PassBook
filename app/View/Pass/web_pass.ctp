@@ -1,6 +1,11 @@
+<style type="text/css">
+    .row {
+        margin-bottom: 10px;
+    }
+</style>
 <div class="row">
     <div class="large-12 columns text-center">
-        <img src="/<?=$this->data['Pass']['logoImage'];?>" alt="Logo" />
+        <div style="padding: 10px;"><img src="/<?=$this->data['Pass']['logoImage'];?>" alt="Logo" /></div>
     </div>
 </div>
 <div class="row">
@@ -13,7 +18,7 @@
         <?
      //if($download_link){
         ?>
-        <a style=" margin-top: 30px;" class="pb-btn small" href="/pass/download_pkpass/<?=$this->data['Pass']['id']?>">Add To Passbook</a>
+        <a class="pb-btn small" href="/pass/download_pkpass/<?=$this->data['Pass']['id']?>">Add To Passbook</a>
         <?//}
         ?>
     </div>
@@ -23,4 +28,10 @@
         <a class="pb-btn small" href="/pass/save_home_screen/<?=$this->data['Pass']['id']?>">save to home screen</a>
     </div>
 </div>
-
+<script type="text/javascript">
+    $(function () {
+        $('[rel=apple-touch-icon-precomposed]').each(function () {
+            $(this).attr('href', '/<?=$this->data['Pass']['logoImage'];?>')
+        });
+    });
+</script>

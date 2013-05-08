@@ -481,22 +481,27 @@ class SimpleImage {
          $this->image = imagecreatefrompng($filename);
       }
    }
-   function save($filename, $image_type=IMAGETYPE_JPEG, $compression=75, $permissions=null) {
 
-      if( $image_type == IMAGETYPE_JPEG ) {
-         imagejpeg($this->image,$filename,$compression);
-      } elseif( $image_type == IMAGETYPE_GIF ) {
+    function save($filename, $image_type = IMAGETYPE_JPEG, $compression = 75, $permissions = null)
+    {
 
-         imagegif($this->image,$filename);
-      } elseif( $image_type == IMAGETYPE_PNG ) {
+        // do this or they'll all go to jpeg
+        $image_type = $this->image_type;
 
-         imagepng($this->image,$filename);
-      }
-      if( $permissions != null) {
-
-         chmod($filename,$permissions);
-      }
-   }
+        if ($image_type == IMAGETYPE_JPEG) {
+            imagejpeg($this->image, $filename, $compression);
+        } elseif ($image_type == IMAGETYPE_GIF) {
+            imagegif($this->image, $filename);
+        } elseif ($image_type == IMAGETYPE_PNG) {
+            // need this for transparent png to work
+            imagealphablending($this->image, false);
+            imagesavealpha($this->image, true);
+            imagepng($this->image, $filename);
+        }
+        if ($permissions != null) {
+            chmod($filename, $permissions);
+        }
+    }
    function output($image_type=IMAGETYPE_JPEG) {
 
       if( $image_type == IMAGETYPE_JPEG ) {
@@ -536,10 +541,34 @@ class SimpleImage {
       $this->resize($width,$height);
    }
 
-   function resize($width,$height) {
+   /*function resize($width,$height) {
       $new_image = imagecreatetruecolor($width, $height);
       imagecopyresampled($new_image, $this->image, 0, 0, 0, 0, $width, $height, $this->getWidth(), $this->getHeight());
       $this->image = $new_image;
-   }
+   }*/
+
+    function resize($width, $height, $forcesize = 'n')
+    {
+
+        /* optional. if file is smaller, do not resize. */
+        if ($forcesize == 'n') {
+            if ($width > $this->getWidth() && $height > $this->getHeight()) {
+                $width  = $this->getWidth();
+                $height = $this->getHeight();
+            }
+        }
+
+        $new_image = imagecreatetruecolor($width, $height);
+        /* Check if this image is PNG or GIF, then set if Transparent*/
+        if (($this->image_type == IMAGETYPE_GIF) || ($this->image_type == IMAGETYPE_PNG)) {
+            imagealphablending($new_image, false);
+            imagesavealpha($new_image, true);
+            $transparent = imagecolorallocatealpha($new_image, 255, 255, 255, 127);
+            imagefilledrectangle($new_image, 0, 0, $width, $height, $transparent);
+        }
+        imagecopyresampled($new_image, $this->image, 0, 0, 0, 0, $width, $height, $this->getWidth(), $this->getHeight());
+
+        $this->image = $new_image;
+    }
 
 }
