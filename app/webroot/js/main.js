@@ -331,7 +331,11 @@ $(document).ready(function() {
         isBarcodeVisible: true,
         isLogoImageVisible: true,
         stripImage: function () {
-            return "transparent url(" + this.get('pass.stripImageRetina') + ") no-repeat center center";
+            var sir = this.get('pass.stripImageRetina');
+            if ( !!sir.match(/^\//g) === false ) {
+                sir = "/" + sir;
+            }
+            return "transparent url('" + sir + "') no-repeat center center";
         },
         addPrimaryField: function () {
             var primaryFields = this.get('pass.primaryFields');
