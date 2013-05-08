@@ -14,7 +14,7 @@ if ($c = count($nonPrimaryFields)) {
     <div id="phone">
         <div class="phone-inner">
             <div id="k-container" style="color:<?= $this->data['Pass']['foregroundColor']; ?>;">
-                <div class="side back" id="back" style="background:<?= $this->data['Pass']['foregroundColor']; ?>;">
+                <div class="side back" id="back" style="background:<?= $this->data['Pass']['backgroundColor']; ?>;">
                     <div class="inner1">
                         <div class="back-inner">
                             <div class="row">
@@ -47,7 +47,7 @@ if ($c = count($nonPrimaryFields)) {
                             </div>
                         </div>
                     </section>
-                    <section class="primary_fields" style="background-image: url('/<?= $this->data['Pass']['stripImage']; ?>');">
+                    <section class="primary_fields" style="background: transparent url('/<?= $this->data['Pass']['stripImage']; ?>') no-repeat center;">
                         <div class="primary_field">
                             <? foreach ($this->data['Pass']['primaryFields'] as $field) { ?>
                                 <div class="pf">
@@ -95,7 +95,9 @@ if ($c = count($nonPrimaryFields)) {
 <style>
     #phone {
         position: static;
-        margin: -100px auto 0;
+        width: 360px;
+        padding: 0;
+        margin: 0 auto;
     }
 
     #phone .phone-inner, #phone {
