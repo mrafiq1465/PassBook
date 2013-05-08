@@ -2,6 +2,9 @@
     .row {
         margin-bottom: 10px;
     }
+    body {
+        background-color: <?= $this->data['Pass']['backgroundColor']; ?>;
+    }
 </style>
 <div class="row">
     <div class="large-12 columns text-center">
