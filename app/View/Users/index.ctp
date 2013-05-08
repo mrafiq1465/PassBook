@@ -46,8 +46,8 @@
                                                 <a href="/pass/download_report/<? echo $p['id'] ?>" target="_blank">Export</a>
                                             </td>
                                             <td>
-                                                <input type="radio" name="limit" value="no-limit"> no limit<br>
-                                                <input type="radio" name="limit" value="limit"> limit to
+                                                <input <? if (!$p['download_limit']) :?>checked="checked" <?endif;?> type="radio" name="limit" value="no-limit"> no limit<br>
+                                                <input <? if ($p['download_limit'] > 0) :?>checked="checked" <?endif;?> type="radio" name="limit" value="limit"> limit to
                                                 <input style="width: 50px;" class="update_limit"
                                                        id="<? echo $p['id'] ?>"
                                                        value="<? echo $p['download_limit'] ?>"/> downloads
