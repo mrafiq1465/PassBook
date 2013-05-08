@@ -43,6 +43,7 @@
             'foundation/foundation.tooltips.js',
             'foundation/foundation.topbar.js',
             'kendo/kendo.all.min.js',
+            'history.min.js',
             'main.js' . ((Configure::read('debug') == 2) ? '?' . uniqid() : ''),
         ));
 
