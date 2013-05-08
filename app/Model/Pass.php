@@ -151,34 +151,38 @@ class Pass extends AppModel
             }
         }
 
+        $i = 1;
         $data['Pass']['secondaryFields'] = json_decode($data['Pass']['secondaryFields'], 1);
         if (is_array($data['Pass']['secondaryFields'])) {
             foreach ($data['Pass']['secondaryFields'] as $v) {
                 $pass_data['coupon']['secondaryFields'][] = array(
-                    'key' => 'offer',
+                    'key' => 'offer_'.$i,
                     'label' => $v['Label'],
                     'value' => $v['Value']
                 );
+                $i++;
             }
         }
         $data['Pass']['auxiliaryFields'] = json_decode($data['Pass']['auxiliaryFields'], 1);
         if (is_array($data['Pass']['auxiliaryFields'])) {
             foreach ($data['Pass']['auxiliaryFields'] as $v) {
                 $pass_data['coupon']['auxiliaryFields'][] = array(
-                    'key' => 'offer',
+                    'key' => 'offer_'.$i,
                     'label' => $v['Label'],
                     'value' => $v['Value']
                 );
+                $i++;
             }
         }
         $data['Pass']['backFields'] = json_decode($data['Pass']['backFields'], 1);
         if (is_array($data['Pass']['backFields'])) {
             foreach ($data['Pass']['backFields'] as $v) {
                 $pass_data['coupon']['backFields'][] = array(
-                    'key' => 'offer',
+                    'key' => 'offer_'.$i,
                     'label' => $v['Label'],
                     'value' => $v['Value']
                 );
+                $i++;
             }
         }
 
