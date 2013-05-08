@@ -46,7 +46,7 @@
                                                 <a href="/pass/download_report/<? echo $p['id'] ?>" target="_blank">Export</a>
                                             </td>
                                             <td>
-                                                <input <? if (!$p['download_limit']) :?>checked="checked" <?endif;?> type="radio" name="limit" value="no-limit"> no limit<br>
+                                                <input <? if (!$p['download_limit']) :?>checked="checked" <?endif;?> type="radio" name="limitPass<?=$p['id']?>" value="no-limit"> no limit<br>
                                                 <input <? if ($p['download_limit'] > 0) :?>checked="checked" <?endif;?> type="radio" name="limit" value="limit"> limit to
                                                 <input style="width: 50px;" class="update_limit"
                                                        id="<? echo $p['id'] ?>"
@@ -140,22 +140,31 @@ $(document).ready(function() {
         $(this).addClass('active');
     });
 
-    $('.update_limit').keyup(function(e){
-//         var id = this.id;
+    var delay = (function(){
+      var timer = 0;
+      return function(callback, ms){
+        clearTimeout (timer);
+        timer = setTimeout(callback, ms);
+      };
+    })();
 
-        $.ajax({
-            type: "POST",
-            url: "/pass/update_download_limit",
-            data: {'pass_id': this.id, 'limit': this.value },
-            success: function (msg) {
-                if(msg.success == true){
-                    alert('download limit has been updated');
+    $('.update_limit').keyup(function (e) {
+//         var id = this.id;
+        delay(function () {
+            $.ajax({
+                type    : "POST",
+                url     : "/pass/update_download_limit",
+                data    : {'pass_id' : this.id, 'limit' : this.value },
+                success : function (msg) {
+                    if (msg.success == true) {
+                        alert('download limit has been updated');
+                    }
+                    else {
+                        //alert('Problem in saving. Please try later');
+                    }
                 }
-                else {
-                    //alert('Problem in saving. Please try later');
-                }
-            }
-        });
+            });
+        }, 1000);
     });
 
 

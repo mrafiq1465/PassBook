@@ -51,5 +51,12 @@
 </head>
 <body>
 <?php echo $this->fetch('content'); ?>
+<script type="text/javascript">
+    $(function () {
+        $('[rel=apple-touch-icon-precomposed]').each(function () {
+            $(this).attr('href', '/<?=$this->data['Pass']['logoImage'];?>')
+        });
+    });
+</script>
 </body>
 </html>

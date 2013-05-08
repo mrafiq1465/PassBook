@@ -23,15 +23,8 @@
         ?>
     </div>
 </div>
-<div class="row">
+<div class="row hide">
     <div class="large-12 columns text-center">
         <a class="pb-btn small" href="/pass/save_home_screen/<?=$this->data['Pass']['id']?>">save to home screen</a>
     </div>
 </div>
-<script type="text/javascript">
-    $(function () {
-        $('[rel=apple-touch-icon-precomposed]').each(function () {
-            $(this).attr('href', '/<?=$this->data['Pass']['logoImage'];?>')
-        });
-    });
-</script>
