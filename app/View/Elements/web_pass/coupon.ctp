@@ -98,6 +98,7 @@ if ($c = count($nonPrimaryFields)) {
         width: 360px;
         padding: 0;
         margin: 0 auto;
+        height: 480px;
     }
 
     #phone .phone-inner, #phone {
