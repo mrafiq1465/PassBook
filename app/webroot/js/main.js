@@ -332,7 +332,7 @@ $(document).ready(function() {
         isLogoImageVisible: true,
         stripImage: function () {
             var sir = this.get('pass.stripImageRetina');
-            if ( !!sir.match(/^\//g) === false ) {
+            if ( sir && !!sir.match(/^\//g) === false ) {
                 sir = "/" + sir;
             }
             return "transparent url('" + sir + "') no-repeat center center";
