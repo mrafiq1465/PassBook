@@ -2,6 +2,9 @@
     .row {
         margin-bottom: 10px;
     }
+    body {
+        background-color: <?= $this->data['Pass']['backgroundColor']; ?>;
+    }
 </style>
 <div class="row">
     <div class="large-12 columns text-center">
@@ -10,7 +13,7 @@
 </div>
 <div class="row">
     <div class="large-12 columns text-center">
-        <a class="pb-btn small" href="/pass/web/<?=$this->data['Pass']['id']?>">Download WebPass</a>
+        <a class="pb-btn small" href="/pass/web/<?=$this->data['Pass']['id']?>">View Coupon</a>
     </div>
 </div>
 <div class="row">
