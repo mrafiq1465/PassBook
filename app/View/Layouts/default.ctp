@@ -61,10 +61,19 @@
 </section>
 <div id="main-footer">
     <div class="row collapse">
-        <div class="large-6 columns">
+        <div class="large-9 columns">
             <ul class="social">
                 <li>
                     <span>&copy; flydigital pty ltd 2013</span>
+                </li>
+                <li>
+                    <a href="/refund">refund & returns policy</a>
+                </li>
+                <li>
+                    <a href="/security">security policy</a>
+                </li>
+                <li>
+                    <a href="/privacy">privacy policy</a>
                 </li>
                 <li>
                     <a href="#"><img src="/img/bird.png"></a>
@@ -74,7 +83,7 @@
                 </li>
             </ul>
         </div>
-        <div class="large-6 columns text-right">
+        <div class="large-3 columns text-right">
             <ul class="right">
                 <li>
                     <a href="#"><img id="lock" src="/img/lock.png"></a>
