@@ -61,4 +61,18 @@ class PagesController extends AppController {
 
     }
 
+    public function refund(){
+
+
+    }
+    public function privacy(){
+
+
+    }
+
+    public function security(){
+
+
+    }
+
 }

@@ -32,6 +32,9 @@
     Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
     Router::connect('/pricing', array('controller' => 'pages', 'action' => 'pricing'));
     Router::connect('/help', array('controller' => 'pages', 'action' => 'help'));
+    Router::connect('/refund', array('controller' => 'pages', 'action' => 'refund'));
+    Router::connect('/security', array('controller' => 'pages', 'action' => 'security'));
+    Router::connect('/privacy', array('controller' => 'pages', 'action' => 'privacy'));
 
 /**
  * ... Load all our custom routes
