@@ -133,7 +133,7 @@ class Pass extends AppModel
         $data['Pass']['locations'] = json_decode($data['Pass']['locations'], 1);
         foreach ($data['Pass']['locations'] as $location) {
             $location = explode(',', $location['Value']);
-            $pass_data['locations'][] = array(
+            $pass_data['coupon']['locations'][] = array(
                 'latitude' => $location[0],
                 'longitude' => $location[1],
             );
@@ -185,7 +185,6 @@ class Pass extends AppModel
                 $i++;
             }
         }
-
 
         // Styling
         if (!empty($this->data['Pass']['backgroundColor'])) $pass_data['backgroundColor'] = $data['Pass']['backgroundColor'];
