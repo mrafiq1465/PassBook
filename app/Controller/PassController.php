@@ -8,7 +8,6 @@ App::uses('AppController', 'Controller');
 class PassController extends AppController
 {
 
-
     public function index()
     {
 
@@ -60,12 +59,11 @@ class PassController extends AppController
         $pass = $this->Pass->read();
         $user_id = $pass["Pass"]["user_id"];
 
-
         if(!empty($user_id) && $this->user_id() != $user_id ){
-
+            $this->redirect('/users/login_account/');
         }
         else{
-           // $this->redirect('/pass/edit/'.$id.'/step5');
+
         }
 
         if (!$this->Pass->exists()) {
