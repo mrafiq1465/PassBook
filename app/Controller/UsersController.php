@@ -169,7 +169,6 @@ class UsersController extends AppController {
 
             $dbuser = $this->User->find('first', array('recursive' => -1, 'conditions' => array(
                 'OR' => array(
-                    array('User.name' => $this->data['User']['email']),
                     array('User.email' => $this->data['User']['email'])
                 )
             )));
@@ -200,7 +199,6 @@ class UsersController extends AppController {
 
             $dbuser = $this->User->find('first', array('recursive' => -1, 'conditions' => array(
                 'OR' => array(
-                    array('User.name' => $this->data['User']['email']),
                     array('User.email' => $this->data['User']['email'])
                 )
             )));
