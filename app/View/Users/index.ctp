@@ -93,16 +93,6 @@
                 </div>
             </section>
             <section class="section">
-                <p class="title"><a href="#customer">Manage Customers</a></p>
-                <div class="content" data-slug="customer">
-                    <div class="row">
-                        <div class="large-12 columns">
-
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="section">
                 <p class="title"><a href="#pass">Manage Payments</a></p>
                 <div class="content" data-slug="payment">
                     <div class="row">
