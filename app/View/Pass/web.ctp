@@ -2,7 +2,7 @@
 
     $download_limit = $this->data['Pass']['download_limit'];
     $download_count = $this->data['Pass']['download_count'];
-    if(!empty($download_limit) && $download_count >= $download_limit ){
+    if(!empty($download_limit) || $download_count >= $download_limit ){
     ?>
 
     <div class="row">
