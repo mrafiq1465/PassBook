@@ -45,7 +45,7 @@
             var download_count = $('#download_count').val();
             var download_limit = $('#download_limit').val();
 
-            if(download_count >= download_limit) {
+            if(download_count > download_limit) {
                 alert('You can not download this pass. It exceeded the download limit');
             }
             else{
