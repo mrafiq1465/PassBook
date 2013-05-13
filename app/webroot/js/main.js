@@ -2,6 +2,7 @@ window.PassBook = {};
 
 $(document).ready(function() {
 
+    $(document).foundation();
 
     $("#menu").kendoMenu();
     $("#pass_type").kendoMenu();
@@ -40,9 +41,42 @@ $(document).ready(function() {
                     effects:"fadeIn"
                 }
             },
-            select: onSelect
+            select: onSelect,
+            activate : function (e) {
+                var $front = $("#front");
+                if ($front.length) {
+                    var effect = kendo.fx("#container").flipHorizontal($front, $("#back")).duration(1000);
+
+                    if ($(e.contentElement).attr('id') === 'tabstrip-3' && (window.currentView !== 'back')) {
+                        effect.play();
+                        window.currentView = 'back';
+                    } else if (window.currentView !== 'front'){
+                        effect.reverse();
+                        window.currentView = 'front';
+                    }
+                }
+            }
         });
-        $("#PassBarcodeFormatId").kendoDropDownList();
+        var PassBarcodeFormatId = $("#PassBarcodeFormatId");
+        if (PassBarcodeFormatId.length) {
+            PassBarcodeFormatId.kendoDropDownList({
+                select: function (e) {
+                    var dataItem = this.dataItem(e.item.index());
+
+                    if (dataItem.value == 1) {
+                        PassBook.CouponViewModel.set('isBarcodeVisible', false);
+                    } else {
+                        PassBook.CouponViewModel.set('isBarcodeVisible', true);
+                    }
+                }
+            });
+            var dropdownlist = PassBarcodeFormatId.data("kendoDropDownList");
+
+            // set width of the drop-down list
+            dropdownlist.wrapper.width(300);
+            dropdownlist.list.width(300);
+        }
+
         $('form[id^=step]').each(function(){
             var $form = $(this);
             $(this).ajaxForm({
@@ -103,8 +137,10 @@ $(document).ready(function() {
         var whichColor = e.sender.element.attr("id");
         if (whichColor === 'backgroundColor') {
             PassBook.CouponViewModel.set('pass.backgroundColor', e.value);
-        } else if (whichColor === 'foregroundColor'){
+        } else if (whichColor === 'foregroundColor') {
             PassBook.CouponViewModel.set('pass.foregroundColor', e.value);
+        } else if (whichColor === 'labelColor') {
+            PassBook.CouponViewModel.set('pass.labelColor', e.value);
         }
     }
 
@@ -285,12 +321,25 @@ $(document).ready(function() {
                 parent.indexOf(e) +
                 "][Value]";
         },
+        sfClass : function () {
+            var col = 12 / this.nonPrimaryFields().length;
+            return 'small-' + col + ' columns';
+        },
         logoImage: function () {
-            return "/" + this.get('pass.logoImage');
+            return "/" + this.get('pass.logoImageRetina');
+        },
+        isBarcodeVisible: true,
+        isLogoImageVisible: true,
+        stripImage: function () {
+            var sir = this.get('pass.stripImageRetina');
+            if ( sir && !!sir.match(/^\//g) === false ) {
+                sir = "/" + sir;
+            }
+            return "transparent url('" + sir + "') no-repeat center center";
         },
         addPrimaryField: function () {
             var primaryFields = this.get('pass.primaryFields');
-            if (primaryFields.length < 1) {
+            if (primaryFields && primaryFields.length < 1) {
                 primaryFields.push({
                     Label: "",
                     Value: ""
@@ -352,8 +401,23 @@ $(document).ready(function() {
 
         removeField: function (e) {
             this.get($(e.currentTarget).parents('.dynamicFieldsContainer').data('source')).remove(e.data);
+        },
+
+        init: function () {
+            var barcode = this.get('pass.barcode_format_id');
+            if (!barcode || barcode == 1) {
+                this.set('isBarcodeVisible', false);
+            }
+
+            if (!this.get('pass.logoImageRetina')) {
+                this.set('isLogoImageVisible', false);
+            }
+
+            this.addPrimaryField();
         }
     });
+
+    PassBook.CouponViewModel.init();
 
     kendo.bind($("#main-container"), PassBook.CouponViewModel);
 

@@ -11,9 +11,22 @@
 
         <div class="row">
             <div class="large12 columns">
-                <? echo $this->Form->input('name', array('placeholder' => 'Name', 'label' => FALSE, 'class' => 'input', 'required' => 'required', 'validationMessage' => "Please enter name")); ?>
+                <?php $title = array('Mr.' => 'Mr.', 'Mrs.' => 'Mrs.', 'Ms.' => 'Ms.');
+                echo $this->Form->input('title', array('options' => $title, 'default' => 'Mrs.','class'=>'small'));
+                ?>
             </div>
         </div>
+        <div class="row">
+            <div class="large12 columns">
+                <? echo $this->Form->input('first_name', array('placeholder' => 'First Name', 'label' => FALSE, 'class' => 'input', 'required' => 'required', 'validationMessage' => "Please enter first name")); ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large12 columns">
+                <? echo $this->Form->input('last_name', array('placeholder' => 'Last Name', 'label' => FALSE, 'class' => 'input', 'required' => 'required', 'validationMessage' => "Please enter last name")); ?>
+            </div>
+        </div>
+
         <div class="row">
             <div class="large12 columns">
                 <? echo $this->Form->input('email', array('placeholder' => 'Email', 'label' => FALSE, 'class' => 'input', 'required' => 'required', 'validationMessage' => "Please enter email")); ?>
@@ -41,26 +54,46 @@
         </div>
         <div class="row">
             <div class="large12 columns">
+                <? echo $this->Form->input('mobile', array('placeholder' => 'Mobile', 'label' => FALSE, 'class' => 'input', 'required' => 'required', 'validationMessage' => "Please enter mobile")); ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large12 columns">
                 <? echo $this->Form->input('address', array('placeholder' => 'Address', 'label' => FALSE, 'class' => 'input', 'required' => 'required', 'validationMessage' => "Please enter address")); ?>
             </div>
         </div>
         <div class="row">
             <div class="large12 columns">
-        <?php $states = array('nsw' => 'NSW', 'vic' => 'VIC', 'qld' => 'QLD', 'wa' => 'WA', 'nt' => 'NT', 'tas' => 'TAS', 'act' => 'ACT');
+                <? echo $this->Form->input('suburb', array('placeholder' => 'Suburb', 'label' => FALSE, 'class' => 'input', 'required' => 'required', 'validationMessage' => "Please enter suburb")); ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large12 columns">
+                <? echo $this->Form->input('postcode', array('placeholder' => 'PostCode', 'label' => FALSE, 'class' => 'input', 'required' => 'required', 'validationMessage' => "Please enter postcode")); ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large12 columns">
+                <? echo $this->Form->input('job_description', array('placeholder' => 'Job Description', 'label' => FALSE, 'class' => 'input')); ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large12 columns">
+        <?php $states = array('NSW' => 'NSW', 'VIC' => 'VIC', 'QLD' => 'QLD', 'WA' => 'WA', 'NT' => 'NT', 'TAS' => 'TAS', 'ACT' => 'ACT');
             echo $this->Form->input('state', array('options' => $states, 'default' => 'nsw','class'=>'small'));
         ?>
             </div>
         </div>
         <div class="row">
             <div class="large12 columns">
-                <?php $country = array('Australia' => 'Australia', 'New Zealand' => 'New Zealand');
+                <?php $country = array('AU' => 'Australia', 'NZ' => 'New Zealand');
                       echo $this->Form->input('country', array('options' => $country, 'default' => 'Australia','class'=>'small'));
                 ?>
             </div>
         </div>
         <div class="row">
             <div class="large-12 columns">
-                <?php echo $this->Form->button('Submit', array('type' => 'submit', 'class' => 'pb-btn medium')); ?>
+                <?php echo $this->Form->button('Register', array('type' => 'submit', 'class' => 'pb-btn medium')); ?>
             </div>
         </div>
         <?=$this->Form->end(); ?>

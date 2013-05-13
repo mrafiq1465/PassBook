@@ -8,7 +8,6 @@ App::uses('AppController', 'Controller');
 class PassController extends AppController
 {
 
-
     public function index()
     {
 
@@ -28,6 +27,10 @@ class PassController extends AppController
             $this->autoRender = false;
             $this->Pass->create();
             $this->request->data['Pass']['pass_type_id'] = $pass_type_id;
+
+            # set label color same as foreground color
+            # as label_color field is being removed
+            $this->request->data['Pass']['labelColor'] = $this->request->data['Pass']['foregroundColor'];
 
             //settting default values for some fields that must be a JS array to work with KENDO MVVM
             $this->request->data['Pass']['primaryFields'] = '[]';
@@ -56,12 +59,11 @@ class PassController extends AppController
         $pass = $this->Pass->read();
         $user_id = $pass["Pass"]["user_id"];
 
-
         if(!empty($user_id) && $this->user_id() != $user_id ){
-
+            $this->redirect('/users/login_account/');
         }
         else{
-           // $this->redirect('/pass/edit/'.$id.'/step5');
+
         }
 
         if (!$this->Pass->exists()) {
@@ -89,6 +91,7 @@ class PassController extends AppController
                         $uploaded_field = $k;
                     }
                 }
+                //var_dump($this->request->data);
                 if (isset($uploaded_field)) {
                     usleep(300000);
                     $destination_dir = WWW_ROOT . "data" . DS . $id . DS;
@@ -99,6 +102,51 @@ class PassController extends AppController
                     if (strstr($uploaded_field, 'Retina')) $file_name = str_replace('ImageRetina','@2x', $uploaded_field);
                     else $file_name = str_replace('Image','',$uploaded_field);
 
+                    if($file_name == "logo@2x") {
+                        $destination_path_icon_2x = $destination_dir . "icon@2x.png";
+                        $destination_path_icon = $destination_dir . "icon.png";
+                        $destination_path_logo = $destination_dir . "logo.png";
+                        copy($this->request->data[$uploaded_field]['tmp_name'], $destination_path_icon_2x);
+                        copy($this->request->data[$uploaded_field]['tmp_name'], $destination_path_icon);
+                        copy($this->request->data[$uploaded_field]['tmp_name'], $destination_path_logo);
+                        $this->Pass->data['Pass']['iconImageRetina'] = str_replace(WWW_ROOT, '', $destination_path_icon_2x);
+                        $this->Pass->data['Pass']['iconImage'] = str_replace(WWW_ROOT, '', $destination_path_icon);
+                        $this->Pass->data['Pass']['logoImage'] = str_replace(WWW_ROOT, '', $destination_path_logo);
+
+                        // Image resize
+                        $image = new SimpleImage();
+                        $image->load($destination_path_logo);
+
+                        // for logo
+                        $image->resizeToWidth(130);
+                        $image->save($destination_path_logo);
+
+                        // for icon
+                        $image->resizeToWidth(130);
+                        $image->save($destination_path_icon);
+
+                        // for icon 2x
+                       #$image->resizeToWidth(200);
+                       #$image->save($destination_path_logo);
+
+                        // for other goes here
+
+                    }
+                    if($file_name == "strip@2x") {
+                        $destination_path_strip = $destination_dir . "strip.png";
+                        copy($this->request->data[$uploaded_field]['tmp_name'], $destination_path_strip);
+
+                        $image = new SimpleImage();
+                        $image->load($destination_path_strip);
+
+                        // for strip
+                        $image->resizeToWidth(320);
+                        $image->save($destination_path_strip);
+
+                        $image->save($destination_path_strip);
+                        $this->Pass->data['Pass']['stripImage'] = str_replace(WWW_ROOT, '', $destination_path_strip);
+                    }
+
                     $destination_path = $destination_dir . "$file_name.png";
 
                     move_uploaded_file($this->request->data[$uploaded_field]['tmp_name'], $destination_path);
@@ -106,6 +154,13 @@ class PassController extends AppController
                     $this->Pass->save($this->Pass->data);
                 } else {
                     $this->encodeDynamicFields($this->request->data);
+
+                    # set label color same as foreground color
+                    # as label_color field is being removed
+                    if (isset($this->request->data['Pass']['foregroundColor'])) {
+                        $this->request->data['Pass']['labelColor'] = $this->request->data['Pass']['foregroundColor'];
+                    }
+
                     $this->Pass->save($this->request->data);
                 }
             }
@@ -248,14 +303,20 @@ class PassController extends AppController
     {
         $this->layout = 'web_pass';
 
+        $status = $this->update_download_history($id);
+
         $this->request->data = $this->Pass->read(null, $id);
+
         $this->decodeDynamicFields($this->request->data);
         $barcodeFormats = $this->Pass->BarcodeFormat->find('list');
+        //print_r( $this->request->data);
         $this->set(compact('barcodeFormats'));
     }
 
     public function download_pkpass($id = null) {
         $this->autoRender = false;
+
+        $status = $this->update_download_history($id);
 
         $data_path = APP . 'data' . DS;
         $pkpass_file = $data_path . 'passes/' . $id . '/pass.pkpass';
@@ -275,6 +336,51 @@ class PassController extends AppController
         }
         flush();
         readfile($pkpass_file);
+    }
+
+    public function update_download_history($pass_id) {
+       // $this->autoRender = false;
+
+        $this->Pass->id = $pass_id;
+        $pass =  $this->Pass->read(null, $pass_id);
+
+        $pass_updated = $pass["Pass"]['updated'];
+
+        $pass_download_count = $pass["Pass"]['download_count'];
+
+        $cookie_name = 'flypass_'.$pass_id;
+        $browser_cookie = '';
+        if (isset($_COOKIE[$cookie_name])){
+            $browser_cookie = $_COOKIE[$cookie_name];
+        }
+
+        $pass_download = $this->Pass->Download->find('first', array('recursive' => -1, 'conditions' => array('Download.pass_id' => $pass_id,'Download.browser_cookie' => $browser_cookie, 'Download.created >'=> $pass_updated)));
+
+
+        if(empty($pass_download)){
+            $browser_cookie = uniqid();
+
+            $response = $this->Pass->Download->save(array(
+                'pass_id' => $pass_id,
+                'browser_cookie' => $browser_cookie,
+                'device' => '',
+                'browser' => ''
+            ));
+
+            if($response){
+                $this->Pass->id = $pass_id;
+                $response = $this->Pass->save(array(
+                    'download_count' => $pass_download_count+1
+                ));
+            }
+            setcookie($cookie_name, $browser_cookie, time()+360000);
+
+        } else {
+
+        }
+
+        return 'success';
+
     }
 
     public function payment_status($pass_id) {
@@ -351,4 +457,116 @@ class PassController extends AppController
         $this->ajax_response(array('success' => true));
 
     }
+}
+
+class SimpleImage {
+
+   var $image;
+   var $image_type;
+
+   function load($filename) {
+
+      $image_info = getimagesize($filename);
+      $this->image_type = $image_info[2];
+      if( $this->image_type == IMAGETYPE_JPEG ) {
+
+         $this->image = imagecreatefromjpeg($filename);
+      } elseif( $this->image_type == IMAGETYPE_GIF ) {
+
+         $this->image = imagecreatefromgif($filename);
+      } elseif( $this->image_type == IMAGETYPE_PNG ) {
+
+         $this->image = imagecreatefrompng($filename);
+      }
+   }
+
+    function save($filename, $image_type = IMAGETYPE_JPEG, $compression = 75, $permissions = null)
+    {
+
+        // do this or they'll all go to jpeg
+        $image_type = $this->image_type;
+
+        if ($image_type == IMAGETYPE_JPEG) {
+            imagejpeg($this->image, $filename, $compression);
+        } elseif ($image_type == IMAGETYPE_GIF) {
+            imagegif($this->image, $filename);
+        } elseif ($image_type == IMAGETYPE_PNG) {
+            // need this for transparent png to work
+            imagealphablending($this->image, false);
+            imagesavealpha($this->image, true);
+            imagepng($this->image, $filename);
+        }
+        if ($permissions != null) {
+            chmod($filename, $permissions);
+        }
+    }
+   function output($image_type=IMAGETYPE_JPEG) {
+
+      if( $image_type == IMAGETYPE_JPEG ) {
+         imagejpeg($this->image);
+      } elseif( $image_type == IMAGETYPE_GIF ) {
+
+         imagegif($this->image);
+      } elseif( $image_type == IMAGETYPE_PNG ) {
+
+         imagepng($this->image);
+      }
+   }
+   function getWidth() {
+
+      return imagesx($this->image);
+   }
+   function getHeight() {
+
+      return imagesy($this->image);
+   }
+   function resizeToHeight($height) {
+
+      $ratio = $height / $this->getHeight();
+      $width = $this->getWidth() * $ratio;
+      $this->resize($width,$height);
+   }
+
+   function resizeToWidth($width) {
+      $ratio = $width / $this->getWidth();
+      $height = $this->getheight() * $ratio;
+      $this->resize($width,$height);
+   }
+
+   function scale($scale) {
+      $width = $this->getWidth() * $scale/100;
+      $height = $this->getheight() * $scale/100;
+      $this->resize($width,$height);
+   }
+
+   /*function resize($width,$height) {
+      $new_image = imagecreatetruecolor($width, $height);
+      imagecopyresampled($new_image, $this->image, 0, 0, 0, 0, $width, $height, $this->getWidth(), $this->getHeight());
+      $this->image = $new_image;
+   }*/
+
+    function resize($width, $height, $forcesize = 'n')
+    {
+
+        /* optional. if file is smaller, do not resize. */
+        if ($forcesize == 'n') {
+            if ($width > $this->getWidth() && $height > $this->getHeight()) {
+                $width  = $this->getWidth();
+                $height = $this->getHeight();
+            }
+        }
+
+        $new_image = imagecreatetruecolor($width, $height);
+        /* Check if this image is PNG or GIF, then set if Transparent*/
+        if (($this->image_type == IMAGETYPE_GIF) || ($this->image_type == IMAGETYPE_PNG)) {
+            imagealphablending($new_image, false);
+            imagesavealpha($new_image, true);
+            $transparent = imagecolorallocatealpha($new_image, 255, 255, 255, 127);
+            imagefilledrectangle($new_image, 0, 0, $width, $height, $transparent);
+        }
+        imagecopyresampled($new_image, $this->image, 0, 0, 0, 0, $width, $height, $this->getWidth(), $this->getHeight());
+
+        $this->image = $new_image;
+    }
+
 }

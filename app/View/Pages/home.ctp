@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" id="main-container">
     <div class="row phone-container">
         <div id="phone">
             <div class="phone-inner">
@@ -13,27 +13,27 @@
                 <h4>
                     create & share mobile <br> passes in minutes...
                 </h4>
+                <p>
+                    <a href="/pass/create/coupon/"><img src="img/btn_start_design.png" alt="start designing your pass"></a>
+                </p>
 
+                <h5>one pass works on all phones</h5>
+                <ul>
+                    <li>create a pass in minutes</li>
+                    <li>control your design, message and offer</li>
+                    <li>distribute by email, web, Facebook or SMS</li>
+                    <li>track downloads and redemptions</li>
+                    <li>Apple, Android and Windows friendly</li>
+                </ul>
                 <p>
                     <img src="img/home_feature.png" alt="home feature">
                 </p>
-                <h5>one pass works on all phones</h5>
-                <ul>
-                    <li>Apple, Android & Windows friendly</li>
-                    <li>create a pass in minutes</li>
-                    <li>control your own design</li>
-                    <li>cancel at any time</li>
-                </ul>
             </div>
         </div>
     </section>
-    <section class="app-body">
-
+    <!--section class="app-body">
         <div class="row">
             <div class="large-7 columns">
-                <div class="call-to-action text-center">
-                    <a href="/pass/create/coupon/"><img src="img/btn_start_design.png" alt="start designing your pass"></a>
-                </div>
                 <div class="clients">
                     <h6>who else uses flypass?</h6>
 
@@ -46,5 +46,5 @@
             </div>
         </div>
 
-    </section>
+    </section-->
 </div>

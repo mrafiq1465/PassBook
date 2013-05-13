@@ -25,12 +25,12 @@ class UsersController extends AppController {
             $user = $this->User->find('all', $options);
         }
         else {
-            $this->redirect('/users/login');
+            $this->redirect('/users/login_account');
 
         }
 
        // $this->User->recursive = 1;
-
+        $this->request->data = $this->User->read(null, $this->user_id());
         $this->set(compact('user', 'user'));
     }
 
@@ -158,6 +158,36 @@ class UsersController extends AppController {
 		$this->redirect(array('action' => 'index'));
 	}
 
+    function login_account() {
+        if ($this->isLoggedin()) {
+            $this->redirect('/users');
+            exit;
+        }
+
+        if (!empty($this->data)) {
+            $this->Session->delete('Message.flash');
+
+            $dbuser = $this->User->find('first', array('recursive' => -1, 'conditions' => array(
+                'OR' => array(
+                    array('User.email' => $this->data['User']['email'])
+                )
+            )));
+
+            if(!empty($dbuser) && ($dbuser['User']['password'] == $this->data['User']['password'] )){
+                // write the username to a session
+
+                $this->Session->write($dbuser);
+                $this->ajax_response(array('success' => true, 'user_id' => $dbuser['User']['id']));
+
+                $this->redirect('/users');
+            }
+            else {
+                if (!$this->request->is('ajax')) $this->Session->setFlash('Either your username or password is incorrect.', FALSE, FALSE, 'login');
+                else $this->ajax_response(array('error' => 'Either your username or password is incorrect.'));
+            }
+        }
+    }
+
     function login() {
         if ($this->isLoggedin()) {
             $this->redirect('/');
@@ -169,7 +199,6 @@ class UsersController extends AppController {
 
             $dbuser = $this->User->find('first', array('recursive' => -1, 'conditions' => array(
                 'OR' => array(
-                    array('User.name' => $this->data['User']['email']),
                     array('User.email' => $this->data['User']['email'])
                 )
             )));
@@ -184,8 +213,14 @@ class UsersController extends AppController {
                 /*if ($dbuser['User']['username'] == 'admin'){
                     $this->redirect('/admin/');
                 }*/
+                if(!empty($dbuser['User']['payment_token']) && $dbuser['User']['payment_token_status'] == 1){
+                    $payment_token = true;
+                }else {
+                    $payment_token = false;
+                }
+
                 if ($this->request->is('ajax')){
-                    $this->ajax_response(array('success' => true, 'user_id' => $dbuser['User']['id']));
+                    $this->ajax_response(array('success' => true, 'user_id' => $dbuser['User']['id'], 'payment_token' => $payment_token));
                 }
                 $this->redirect($url);
             }
@@ -197,9 +232,14 @@ class UsersController extends AppController {
     }
 
     function payment() {
-//        if (!$this->isLoggedIn()) {
-//            $this->redirect('/users/login');
-//        }
+        if (!$this->isLoggedIn()) {
+            $this->redirect('/users/login');
+        }else {
+            $options = array(
+                'conditions' => array('User.id' => $this->user_id())
+            );
+            $user = $this->User->find('all', $options);
+        }
 
         if ($this->request->is('post') || $this->request->is('put')) {
             $this->loadModel('Payment');
@@ -277,6 +317,37 @@ class UsersController extends AppController {
 
         }
     }
+
+    function paymentToken() {
+       //Zubair: This actioan will be called where user already have a token in user table.
+        // so we will need to use this token & get the payment.
+
+        if (!$this->isLoggedIn()) {
+            $this->redirect('/users/login');
+        }else {
+            $options = array(
+                'conditions' => array('User.id' => $this->user_id())
+            );
+            $dbuser = $this->User->find('all', $options);
+        }
+
+        $this->ajax_response(array('success' => true,'user_id' => $this->user_id()));
+       /*
+        $user_token = $dbuser['User']['payment_token'];
+
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $this->loadModel('Payment');
+
+            $amount = "9.95";
+            //$pass_id = $this->reqeust->data['Payment']['pass_id'];
+
+
+            $this->ajax_response(array('success' => true));
+
+        }
+        */
+    }
+
 
     function logout() {
         // delete the user session

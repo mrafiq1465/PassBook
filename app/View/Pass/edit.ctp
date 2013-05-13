@@ -1,11 +1,15 @@
+<style type="text/css">
+    #phone {
+        right: auto;
+        margin-left: -20px;
+    }
+    #phone.affix {
+        position: fixed;
+        top: -120px;
+    }
+</style>
 <div class="container" id="main-container">
-    <div class="row phone-container">
-        <div id="phone">
-            <div class="phone-inner">
-                <?php echo $this->element('simulator/coupon'); ?>
-            </div>
-        </div>
-    </div>
+
 
     <section id="home-hero-unit" class="hero-unit">
         <div class="row">
@@ -48,14 +52,27 @@
                     </div>
                 </section>
             </div>
+            <div class="large-5 columns phone-container">
+                <div id="phone">
+                    <div class="phone-inner">
+                        <?php echo $this->element('simulator/coupon'); ?>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </section>
     <section class="app-body">
     </section>
 </div>
-
+<script type="text/javascript" src="/js/bootstrap-affix.js"></script>
 <script>
     $(document).ready(function () {
+
+        $('#phone').affix({
+            offset: $('#nav').position()
+        });
+
         var tabNumber = parseInt('<?=$step?>');
         var $tabToActivate = $('#tab' + tabNumber);
         $('#tabstrip').data('kendoTabStrip').activateTab($tabToActivate);
@@ -80,8 +97,11 @@
                     if (e.response.success === true) $target_img.attr('src', '');
                     else {
                         var src = e.response.success + '?' + Math.random();
-                        if (rel === '#logoImg') {
+                        if (rel === '#logoImgRetina') {
                             PassBook.CouponViewModel.set('logoImage', src);
+                            PassBook.CouponViewModel.set('isLogoImageVisible', true);
+                        } else if (rel === '#stripImgRetina') {
+                            PassBook.CouponViewModel.set('pass.stripImageRetina', src);
                         }
                         $target_img.attr('src', src);
                     }
@@ -104,8 +124,6 @@
         $('#tabstrip').data('kendoTabStrip').disable($('#tab6'));
 
         $(function () {
-
-
             $('#register_btn_block').click(function(e){
                 $('#AccountBlock p.error').hide();
                 $('#AccountBlock').load('/users/add', function(){
@@ -119,6 +137,13 @@
                 },
                 success: function (resp) {
                     resp = $.parseJSON(resp);
+
+                    if (resp.payment_token) {
+                        $('#payment_token').show();
+                    } else {
+                        $('#payment_token').hide();
+                    }
+
                     if (resp.error !== undefined) {
                         $('#AccountBlock p.error').text(resp.error).show();
                     } else {

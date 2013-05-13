@@ -6,6 +6,11 @@ $options = array(
 );
 
 ?>
+<style type="text/css">
+    #primaryFieldsContainer .close {
+        display: none;
+    }
+</style>
 <script type="text/javascript">
     PassBook.data = <?= json_encode($this->data['Pass']) ?>;
 </script>
@@ -14,50 +19,54 @@ $options = array(
 
 <div class="tab-pane">
     <input name="data[step]" value="2" type="hidden"/>
-    <div class="row-image">
-        <?php if ($this->request->data['Pass']['iconImage']): ?>
-            <img src="/<?= $this->request->data['Pass']['iconImage'] ?>" id="iconImg"/>
-        <?php endif; ?>
-        <?=$this->Form->input('iconImage', array('type' => 'file', 'rel' => '#iconImg', 'class' => 'imageUpload'));?>
+    <!--<div class="row-image">
+        <?php /*if ($this->request->data['Pass']['iconImage']): */?>
+            <img src="/<?/*= $this->request->data['Pass']['iconImage'] */?>" id="iconImg"/>
+        <?php /*endif; */?>
+        <?/*=$this->Form->input('iconImage', array('type' => 'file', 'rel' => '#iconImg', 'class' => 'imageUpload'));*/?>
     </div>
 
     <div class="row-image">
-        <?php if ($this->request->data['Pass']['iconImageRetina']): ?>
-            <img src="/<?= $this->request->data['Pass']['iconImageRetina'] ?>" id="iconImgRetina"/>
-        <?php endif; ?>
-        <?=$this->Form->input('iconImageRetina', array('type' => 'file', 'rel' => '#iconImgRetina', 'class' => 'imageUpload'));?>
+        <?php /*if ($this->request->data['Pass']['iconImageRetina']): */?>
+            <img src="/<?/*= $this->request->data['Pass']['iconImageRetina'] */?>" id="iconImgRetina"/>
+        <?php /*endif; */?>
+        <?/*=$this->Form->input('iconImageRetina', array('type' => 'file', 'rel' => '#iconImgRetina', 'class' => 'imageUpload'));*/?>
     </div>
 
     <div class="row-image">
-        <?php if ($this->request->data['Pass']['logoImage']): ?>
-            <img src="/<?= $this->request->data['Pass']['logoImage'] ?>" id="logoImg"/>
-        <?php endif; ?>
+        <?php /*if ($this->request->data['Pass']['logoImage']): */?>
+            <img src="/<?/*= $this->request->data['Pass']['logoImage'] */?>" id="logoImg"/>
+        <?php /*endif; */?>
 
-        <?=$this->Form->input('logoImage', array('type' => 'file', 'rel' => '#logoImg', 'class' => 'imageUpload'));?>
-    </div>
+        <?/*=$this->Form->input('logoImage', array('type' => 'file', 'rel' => '#logoImg', 'class' => 'imageUpload'));*/?>
+    </div>-->
 
     <div class="row-image">
         <?php if ($this->request->data['Pass']['logoImageRetina']): ?>
             <img src="/<?= $this->request->data['Pass']['logoImageRetina'] ?>" id="logoImgRetina"/>
         <?php endif; ?>
 
-        <?=$this->Form->input('logoImageRetina', array('type' => 'file', 'rel' => '#logoImgRetina', 'class' => 'imageUpload'));?>
+        <?=$this->Form->input('logoImageRetina', array('type' => 'file', 'rel' => '#logoImgRetina', 'class' => 'imageUpload',
+            'label' => 'Upload your logo (PNG file, max 100 pixels high, any width)'));?>
     </div>
 
-    <div class="row-image">
-        <?php if ($this->request->data['Pass']['stripImage']): ?>
-            <img src="/<?= $this->request->data['Pass']['stripImage'] ?>" id="stripImg"/>
-        <?php endif; ?>
+    <!--<div class="row-image">
+        <?php /*if ($this->request->data['Pass']['stripImage']): */?>
+            <img src="/<?/*= $this->request->data['Pass']['stripImage'] */?>" id="stripImg"/>
+        <?php /*endif; */?>
 
-        <?=$this->Form->input('stripImage', array('type' => 'file', 'rel' => '#stripImg', 'class' => 'imageUpload'));?>
-    </div>
+        <?/*=$this->Form->input('stripImage', array('type' => 'file', 'rel' => '#stripImg', 'class' => 'imageUpload'));*/?>
+    </div>-->
 
     <div class="row-image">
         <?php if ($this->request->data['Pass']['stripImageRetina']): ?>
             <img src="/<?= $this->request->data['Pass']['stripImageRetina'] ?>" id="stripImgRetina"/>
         <?php endif; ?>
 
-        <?=$this->Form->input('stripImageRetina', array('type' => 'file', 'rel' => '#stripImgRetina', 'class' => 'imageUpload'));?>
+        <?=$this->Form->input('stripImageRetina', array('type' => 'file', 'rel' => '#stripImgRetina',
+            'class' => 'imageUpload',
+            'label' => 'Upload a strip image (PNG file, will be resized to 623 x 200)'
+        ));?>
     </div>
 
     <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step2Form')); ?>
@@ -66,16 +75,16 @@ $options = array(
     <script id="field-tpl" type="text/x-kendo-template">
         <div class="pf"><a data-bind="click:removeField"
                            href="javascript:void(0)" class="close">X</a>
-        <label>Label:</label>
+        <label>Heading:</label>
         <input data-bind="value:Label, attr:{name:getLabel}" data-value-update="keyup" type="text"/>
-        <label>Value:</label>
+        <label>Message:</label>
         <input data-bind="value:Value, attr:{name:getValue}" data-value-update="keyup" type="text"/></div>
     </script>
     <div>
         <div class="dynamicFieldsContainer" data-source="pass.primaryFields">
-            <label>Primary Fields: </label>
-            <button data-bind="click:addPrimaryField" type="button" class="k-button dynamicFields" data-target="#primaryFieldsContainer">Add
-            </button>
+            <label>Strip image text: </label>
+            <!--<button data-bind="click:addPrimaryField" type="button" class="k-button dynamicFields" data-target="#primaryFieldsContainer">Add
+            </button>-->
             <div id="primaryFieldsContainer"
                  data-template="field-tpl" data-bind="source: pass.primaryFields">
                 <? //for ($i = 0; $i < 2; $i++) { ?>
@@ -92,7 +101,7 @@ $options = array(
     </div>
     <div>
         <div class="dynamicFieldsContainer" data-source="pass.secondaryFields">
-            <label>Secondary Fields: </label>
+            <label>Left hand side content: </label>
             <button data-bind="click:addSecondaryField" type="button" class="k-button dynamicFields" data-target="#secondaryFieldsContainer">Add
             </button>
             <div id="secondaryFieldsContainer" data-template="field-tpl" data-bind="source: pass.secondaryFields">
@@ -110,7 +119,7 @@ $options = array(
     </div>
     <div>
         <div class="dynamicFieldsContainer" data-source="pass.auxiliaryFields">
-            <label>Auxiliary Fields: </label>
+            <label>Right hand side content: </label>
             <button data-bind="click:addAuxiliaryField" type="button" class="k-button dynamicFields" data-target="#auxiliaryFieldsContainer">Add
             </button>
             <div data-template="field-tpl" data-bind="source: pass.auxiliaryFields"
@@ -139,7 +148,7 @@ $options = array(
     <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step3Form')); ?>
     <input name="data[step]" value="3" type="hidden"/>
 
-    <div class="dynamicFieldsContainer">
+    <div class="dynamicFieldsContainer" data-source="pass.backFields">
         <label>Back Fields: </label>
         <button data-bind="click:addBackField" type="button" class="k-button dynamicFields" data-target="#backFieldsContainer">Add
         </button>
@@ -168,11 +177,11 @@ $options = array(
 <div class="tab-pane">
     <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step4Form')); ?>
     <input name="data[step]" value="4" type="hidden"/>
-    <label>Barcode: </label>
+    <label>Barcode number (optional): </label>
     <?=$this->Form->input('barcode_format_id');?>
     <?=$this->Form->input('barcodeMessage');?>
     <p class="error"></p>
-
+    <p>For Apple Passbook users you can choose to prompt the user on their lock screen when they are within 100 meters or closer of the location below. To find a lat/long, please click here (linked to http://www.latlong.net/)"</p>
     <label>Locations: </label>
     <button data-bind="click:addLocationField" type="button" class="k-button dynamicFields" data-target="#locationsContainer">Add
     </button>
