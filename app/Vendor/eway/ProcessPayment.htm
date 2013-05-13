@@ -1,0 +1,50 @@
+<HTML>
+
+<TITLE>Process Payment</TITLE>
+
+<BODY>
+
+ 
+      <span> 
+          <p class="intro">Click <a href="SampleModule.htm">here</a> for a complete list of operations.</p> 
+          <H1 class="intro">Process a Payment.</H1>     
+                        
+                        <form action='soap.php' method="POST">
+                            <input type='hidden' name='action' value='process_payment' />
+                          <table cellspacing="0" cellpadding="4" frame="box" bordercolor="#dcdcdc" rules="none" style="border-collapse: collapse;"> 
+                          <tr> 
+	<td class="frmHeader">Parameter</td> 
+	<td class="frmHeader">Value</td> 
+</tr> 
+ 
+                        
+                          <tr> 
+                            <td class="frmText" style="color: #000000; font-weight: normal;">managedCustomerID:</td> 
+                            <td><input class="frmInput" type="text" size="50" name="managedCustomerID"></td> 
+                          </tr> 
+                          <tr> 
+                            <td class="frmText" style="color: #000000; font-weight: normal;">amount:</td> 
+                            <td><input class="frmInput" type="text" size="50" name="amount"></td> 
+                          </tr> 		
+                          <tr> 
+                            <td class="frmText" style="color: #000000; font-weight: normal;">invoiceReference:</td> 
+                            <td><input class="frmInput" type="text" size="50" name="invoiceReference"></td> 
+                          </tr> 	
+                          <tr> 
+                            <td class="frmText" style="color: #000000; font-weight: normal;">invoiceDescription:</td> 
+                            <td><input class="frmInput" type="text" size="50" name="invoiceDescription"></td> 
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td align="right"> <input type="submit" value="Process" class="button"></td>
+                          </tr>
+                        </table> 
+                      
+ 
+                    </form> 
+                  </span> 
+				  
+</BODY>
+
+</HTML>
+

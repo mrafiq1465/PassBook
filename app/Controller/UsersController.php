@@ -197,15 +197,62 @@ class UsersController extends AppController {
     }
 
     function payment() {
-        if (!$this->isLoggedIn()) {
-            $this->redirect('/users/login');
-        }
+//        if (!$this->isLoggedIn()) {
+//            $this->redirect('/users/login');
+//        }
 
         if ($this->request->is('post') || $this->request->is('put')) {
             $this->loadModel('Payment');
 
+            require_once('../Vendor/eway/lib/nusoap.php');
+
+            // read ID, Username and Password from config.ini
+            $config = parse_ini_file("../Vendor/eway/config.ini");
+
+            // init soap client
+            $client = new nusoap_client("https://www.ewaygateway.com/gateway/ManagedPaymentService/test/managedCreditCardPayment.asmx", false);
+            $err = $client->getError();
+
+            if ($err) {
+                echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
+                echo '<h2>Debug</h2><pre>' . htmlspecialchars($client->getDebug(), ENT_QUOTES) . '</pre>';
+                exit();
+            }
+
+            $client->namespaces['man'] = 'https://www.eway.com.au/gateway/managedpayment';
+            // set SOAP header
+            $headers = "<man:eWAYHeader><man:eWAYCustomerID>" . $config['eWAYCustomerID'] . "</man:eWAYCustomerID><man:Username>" . $config['UserName'] . "</man:Username><man:Password>" . $config['Password'] . "</man:Password></man:eWAYHeader>";
+            $client->setHeaders($headers);
 
             $amount = "9.95";
+            
+            $requestbody = array(
+//                'man:Title' => $_POST['Title'],
+//                'man:FirstName' => $_POST['FirstName'],
+//                'man:LastName' => $_POST['LastName'],
+//                'man:Address' => $_POST['Address'],
+//                'man:Suburb' => $_POST['Suburb'],
+//                'man:State' => $_POST['State'],
+//                'man:Company' => $_POST['Company'],
+//                'man:PostCode' => $_POST['PostCode'],
+//                'man:Country' => $_POST['Country'],
+//                'man:Email' => $_POST['Email'],
+//                'man:Fax' => $_POST['Fax'],
+//                'man:Phone' => $_POST['Phone'],
+//                'man:Mobile' => $_POST['Mobile'],
+//                'man:CustomerRef' => $_POST['CustomerRef'],
+//                'man:JobDesc' => $_POST['JobDesc'],
+//                'man:Comments' => $_POST['Comments'],
+//                'man:URL' => $_POST['URL'],
+                'man:CCNumber' => $_POST['data']['User']['card_number'],
+                'man:CCNameOnCard' => $_POST['data']['User']['card_name'],
+                'man:CCExpiryMonth' => $_POST['data']['User']['card_expiration_month'],
+                'man:CCExpiryYear' => $_POST['data']['User']['card_expiration_year']
+            );
+            $soapaction = 'https://www.eway.com.au/gateway/managedpayment/CreateCustomer';
+            $result = $client->call('man:CreateCustomer', $requestbody, '', $soapaction);
+            var_dump($result);
+
            /*
             $pass_id = $this->reqeust->data['Payment']['pass_id'];
             $card_name = $this->reqeust->data['User']['card_name'];

@@ -57,6 +57,7 @@
             return validator.validate();
         });
 
+/*
         $('#UserPaymentForm').ajaxForm({
             before: function () {
                 $('#AccountBlock p.error').hide();
@@ -71,5 +72,6 @@
                 }
             }
         });
+*/
     })
 </script>
