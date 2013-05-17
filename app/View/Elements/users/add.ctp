@@ -39,7 +39,7 @@
         </div>
         <div class="row">
             <div class="large12 columns">
-                <? echo $this->Form->input('password2', array('placeholder' => 'Confirm Password', 'label' => FALSE, 'class' => 'input', 'required' => 'required', 'validationMessage' => "Please enter password again")); ?>
+                <? echo $this->Form->input('password2', array('placeholder' => 'Confirm Password', 'label' => FALSE, 'class' => 'input', 'required' => 'required', 'type'=> 'password', 'validationMessage' => "Please enter password again")); ?>
             </div>
         </div>
         <div class="row">
@@ -102,7 +102,17 @@
 
 <script>
     $(function(){
-        var validator = $("#UserRegistrationForm").kendoValidator().data("kendoValidator");
+        var validator = $("#UserRegistrationForm").kendoValidator({
+            rules : {
+                custom : function (input) {
+                    if (input.is("#UserPassword2")) {
+                        return input.val() === $("#UserPassword").val()
+                    } else {
+                        return true;
+                    }
+                }
+            }
+        }).data("kendoValidator");
         $("#UserRegistrationForm").submit(function(){
             return validator.validate();
         });

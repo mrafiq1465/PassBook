@@ -48,7 +48,7 @@
                                             <td>
                                                 <input <? if (!$p['download_limit']) :?>checked="checked" <?endif;?> type="radio" name="limitPass<?=$p['id']?>" value="no-limit"> no limit<br>
                                                 <input <? if ($p['download_limit'] > 0) :?>checked="checked" <?endif;?> type="radio" name="limit" value="limit"> limit to
-                                                <input style="width: 50px;" class="update_limit"
+                                                <input style="width: 50px;" class="update_limit" data-download-count="<? echo $p['download_count'] ?>"
                                                        id="<? echo $p['id'] ?>"
                                                        value="<? echo $p['download_limit'] ?>"/> downloads
                                             </td>
@@ -140,21 +140,29 @@ $(document).ready(function() {
 
     $('.update_limit').keyup(function (e) {
 //         var id = this.id;
-        delay(function () {
-            $.ajax({
-                type    : "POST",
-                url     : "/pass/update_download_limit",
-                data    : {'pass_id' : this.id, 'limit' : this.value },
-                success : function (msg) {
-                    if (msg.success == true) {
-                        alert('download limit has been updated');
+        var $this = $(this);
+        var val = $this.val();
+        if (!!val.match(/^(\d+)$/) && val >= $this.data('download-count')) {
+            delay(function () {
+                $.ajax({
+                    type    : "POST",
+                    url     : "/pass/update_download_limit",
+                    data    : {'pass_id' : this.id, 'limit' : this.value },
+                    success : function (msg) {
+                        if (msg.success == true) {
+                            alert('download limit has been updated');
+                        }
+                        else {
+                            //alert('Problem in saving. Please try later');
+                        }
                     }
-                    else {
-                        //alert('Problem in saving. Please try later');
-                    }
-                }
-            });
-        }, 1000);
+                });
+            }, 500);
+        } else {
+            alert("Download limit can't be smaller than download count");
+            return false;
+        }
+
     });
 
 
