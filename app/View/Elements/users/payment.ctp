@@ -7,7 +7,7 @@
             </div>
         </div>
         <?=$this->Form->create('User', array('url' => '/users/paymentToken', 'id' => 'UserPaymentToken'))?>
-        <input type="hidden" name="data[Payment][pass_id]" id="PaymentPassId" value=""/>
+        <input type="hidden" name="data[Payment][pass_id]" id="PaymentPassId" value="<?= $this->data['Pass']['id'];?>"/>
         <div id="payment_token" class="row" style=" display: block">
             <div class="large12 columns">
                 <p>
@@ -24,9 +24,7 @@
         <?=$this->Form->end(); ?>
 
         <?=$this->Form->create('User', array('url' => '/users/payment', 'id' => 'UserPaymentForm'))?>
-        <input type="hidden" name="data[Payment][pass_id]" id="PaymentPassId" value=""/>
-
-
+        <input type="hidden" name="data[Payment][pass_id]" id="PaymentPassId" value="<?= $this->data['Pass']['id'];?>" />
 
         <div class="row">
             <div class="large12 columns">
@@ -82,6 +80,8 @@
             },
             success: function(resp){
                 resp = $.parseJSON(resp);
+                alert(resp.request);
+                alert(resp.response);
                 if (resp.error !== undefined) {
                     $('#AccountBlock p.error').text(resp.error).show();
                 } else {

@@ -290,8 +290,10 @@ class UsersController extends AppController {
                 'man:CCExpiryYear' => $_POST['data']['User']['card_expiration_year']
             );
             $soapaction = 'https://www.eway.com.au/gateway/managedpayment/CreateCustomer';
-            $result = $client->call('man:CreateCustomer', $requestbody, '', $soapaction);
-            var_dump($result);
+            $result =  $client->call('man:CreateCustomer', $requestbody, '', $soapaction);
+
+           // print_r($requestbody);
+           // print_r($result);
 
            /*
             $pass_id = $this->reqeust->data['Payment']['pass_id'];
@@ -313,7 +315,7 @@ class UsersController extends AppController {
                 }
             }
             */
-            $this->ajax_response(array('success' => true));
+            $this->ajax_response(array('success' => true, 'request' => $requestbody, 'response' => $result));
 
         }
     }
