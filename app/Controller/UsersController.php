@@ -19,7 +19,7 @@ class UsersController extends AppController {
 
         if ($this->isLoggedIn()) {
             $options = array(
-               // 'recursive' => -1,
+                'recursive' => 2,
                 'conditions' => array('User.id' => $this->user_id())
             );
             $user = $this->User->find('all', $options);
