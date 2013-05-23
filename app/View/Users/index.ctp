@@ -51,7 +51,7 @@
                                             </td>
                                             <td>
                                                 <input <? if (!$p['download_limit']) :?>checked="checked" <?endif;?> type="radio" name="limitPass<?=$p['id']?>" value="no-limit"> no limit<br>
-                                                <input <? if ($p['download_limit'] > 0) :?>checked="checked" <?endif;?> type="radio" name="limit" value="limit"> limit to
+                                                <input <? if ($p['download_limit'] > 0) :?>checked="checked" <?endif;?> type="radio" name="limitPass<?=$p['id']?>" value="limit"> limit to
                                                 <input style="width: 50px;" class="update_limit" data-download-count="<? echo $p['download_count'] ?>"
                                                        id="<? echo $p['id'] ?>"
                                                        value="<? echo $p['download_limit'] ?>"/> downloads
