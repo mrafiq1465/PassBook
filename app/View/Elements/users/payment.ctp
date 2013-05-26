@@ -6,6 +6,11 @@
                 <label>Amount: $9.95</label>
             </div>
         </div>
+        <?
+        echo "<pre>";
+         //var_dump($this->data);
+        echo "</pre>";
+         ?>
         <?=$this->Form->create('User', array('url' => '/users/paymentToken', 'id' => 'UserPaymentToken'))?>
         <input type="hidden" name="data[Payment][pass_id]" id="PaymentPassId" value="<?= $this->data['Pass']['id'];?>"/>
         <div id="payment_token" class="row" style=" display: block">
@@ -80,12 +85,12 @@
             },
             success: function(resp){
                 resp = $.parseJSON(resp);
-                alert(resp.request);
-                alert(resp.response);
+               // alert(resp.request);
+               // alert(resp.response);
                 if (resp.error !== undefined) {
                     $('#AccountBlock p.error').text(resp.error).show();
                 } else {
-                    $('#AccountBlock').html('<p class="message">Your payment is good now, you can now go to next step.</p>');
+                    $('#AccountBlock').html('<p class="message">Payment has been made for this pass. Please go to next step.</p>');
                     $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
                 }
             }
@@ -100,7 +105,7 @@
                 if (resp.error !== undefined) {
                     $('#AccountBlock p.error').text(resp.error).show();
                 } else {
-                    $('#AccountBlock').html('<p class="message">Your payment is good now, you can now go to next step.</p>');
+                    $('#AccountBlock').html('<p class="message">Payment has been made for this pass. Please go to next step.</p>');
                     $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
                 }
             }
