@@ -231,17 +231,140 @@ class UsersController extends AppController {
         }
     }
 
-    function payment() {
-        if (!$this->isLoggedIn()) {
-            $this->redirect('/users/login');
-        }else {
-            $options = array(
-                'conditions' => array('User.id' => $this->user_id())
-            );
-            $user = $this->User->find('all', $options);
+    function _eway_user_exists() {
+        return false;
+    }
+
+    function _eway_payment() {
+        //
+    }
+
+
+    function __eway_load_library() {
+        //Include RapidAPI Library
+        require('../Vendor/Rapid3.0.php');
+
+        //Create RapidAPI Service
+        $this->eway = new RapidAPI();
+
+        //$redirect_url = preg_replace('/default.php/', 'results.php', $self_url);
+
+    }
+
+    function __eway_create_request() {
+
+        $this->__eway_load_library();
+
+        //Create AccessCode Request Object
+        $request = new CreateAccessCodeRequest();
+
+        $self_url = 'http';
+        if (!empty($_SERVER['HTTPS'])) {$self_url .= "s";}
+        $self_url .= "://" . $_SERVER["SERVER_NAME"];
+
+        if ($_SERVER["SERVER_PORT"] != "80") {
+            $self_url .= ":".$_SERVER["SERVER_PORT"];
         }
 
-        if ($this->request->is('post') || $this->request->is('put')) {
+        $self_url .= $_SERVER["REQUEST_URI"];
+        $request->RedirectUrl = $self_url;
+
+        return $request;
+
+    }
+
+    function _eway_user_create() {
+
+        // get access token by submitting user information
+        $request = $this->__eway_create_request();
+
+        $request->Method = 'CreateTokenCustomer';
+
+        $request->Customer->Title = 'Mr.';
+        $request->Customer->FirstName = 'naam';
+        //Note: LastName is Required Field When Create/Update a TokenCustomer
+        $request->Customer->LastName = 'nai';
+        $request->Customer->Email = 'zubair6@gmail.com';
+        $request->Customer->Country = 'au';
+        $request->Customer->Reference = 1;
+        $request->RedirectUrl = 'http://www.passbook/users/payment/';
+
+        $request->Payment->TotalAmount = 0;
+
+        $result = $this->eway->CreateAccessCode($request);
+
+        //Check if any error returns
+        if(isset($result->Errors))
+        {
+            //Get Error Messages from Error Code. Error Code Mappings are in the Config.ini file
+            $ErrorArray = explode(",", $result->Errors);
+
+            $lblError = "";
+
+            foreach ( $ErrorArray as $error )
+            {
+                if(isset($this->eway->APIConfig[$error]))
+                    $lblError .= $error." ".$this->eway->APIConfig[$error]."<br>";
+                else
+                    $lblError .= $error;
+            }
+            // todo: remove error
+            die($lblError);
+
+            return False;
+        }
+        $this->set('FormActionURL', $result->FormActionURL);
+        $this->set('AccessCode', $result->AccessCode);
+        return True;
+    }
+
+    function payment() {
+//        if (!$this->isLoggedIn()) {
+//            $this->redirect('/users/login');
+//        }else {
+//            $options = array(
+//                'conditions' => array('User.id' => $this->user_id())
+//            );
+//            $user = $this->User->find('all', $options);
+//        }
+
+        if ($this->request->is('post')) {
+
+        }
+        // make_payment
+        if (isset($this->request->query['AccessCode'])) {
+            $this->__eway_load_library();
+
+            $request = new GetAccessCodeResultRequest();
+
+            $request->AccessCode = $this->request->query['AccessCode'];
+
+            //Call RapidAPI to get the result
+            $result = $this->eway->GetAccessCodeResult($request);
+            if(isset($result->Errors))
+            {
+                //Get Error Messages from Error Code. Error Code Mappings are in the Config.ini file
+                $ErrorArray = explode(",", $result->Errors);
+                var_dump($ErrorArray);
+                $lblError = "";
+                foreach ( $ErrorArray as $error )
+                {
+                    $lblError .= $this->eway->APIConfig[$error]."<br>";
+                }
+                var_dump($lblError);
+            }
+            else {
+                var_dump($result);
+            }
+            die('a');
+        }
+        else if (!$this->_eway_user_exists()) {
+            $this->_eway_user_create();
+            // display form to input card information
+        }
+
+
+        if (false) {
             $this->loadModel('Payment');
 
             require_once('../Vendor/eway/lib/nusoap.php');
