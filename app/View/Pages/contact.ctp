@@ -1,6 +1,6 @@
 <div class="row">
     <div class="large-8 columns">
-        <h3>Contact us</h3>
+        <h4>Contact us</h4>
         <p class="error"></p>
         <p>
             To get in touch with the team at Fly Pass for any enquiry, pricing, support or feedback, please use the form below:
@@ -19,7 +19,7 @@
         </div>
         <div class="row">
             <div class="large8 columns">
-                <? echo $this->Form->input('comment', array('placeholder' => 'Comments/Questions', 'label' => FALSE, 'class' => 'input', 'required' => 'required', 'validationMessage' => "Please enter comments")); ?>
+                <? echo $this->Form->input('comment', array('placeholder' => 'Comments/Questions', 'label' => FALSE, 'class' => 'input', 'escape' => false, 'cols' => 3, 'type' => 'textarea', 'required' => 'required', 'validationMessage' => "Please enter comments")); ?>
             </div>
         </div>
         <div class="row">

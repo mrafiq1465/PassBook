@@ -83,9 +83,9 @@ class PagesController extends AppController {
 
         $subject = "Enquiry from Flypass";
         $message = 'test message';
-        $name = $this->request->data['name'];
-        $email = $this->request->data['email'];
-        $comment = $this->request->data['comment'];
+        $name = $this->request->data['Contact']['name'];
+        $email = $this->request->data['Contact']['email'];
+        $comment = $this->request->data['Contact']['comment'];
 
         App::uses('CakeEmail', 'Network/Email');
         $email = new CakeEmail();
