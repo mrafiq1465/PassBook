@@ -3,6 +3,10 @@
         margin: 0 0 1.33333em 0;
         padding: 0.66667em;
     }
+    .table-bordered {
+        width: 100%;
+        font-size: .75em;
+    }
 </style>
 <div class="row" xmlns="http://www.w3.org/1999/html">
     <div class="large-12 column">
@@ -47,8 +51,8 @@
                                             </td>
                                             <td>
                                                 <input <? if (!$p['download_limit']) :?>checked="checked" <?endif;?> type="radio" name="limitPass<?=$p['id']?>" value="no-limit"> no limit<br>
-                                                <input <? if ($p['download_limit'] > 0) :?>checked="checked" <?endif;?> type="radio" name="limit" value="limit"> limit to
-                                                <input style="width: 50px;" class="update_limit"
+                                                <input <? if ($p['download_limit'] > 0) :?>checked="checked" <?endif;?> type="radio" name="limitPass<?=$p['id']?>" value="limit"> limit to
+                                                <input style="width: 50px;" class="update_limit" data-download-count="<? echo $p['download_count'] ?>"
                                                        id="<? echo $p['id'] ?>"
                                                        value="<? echo $p['download_limit'] ?>"/> downloads
                                             </td>
@@ -97,7 +101,41 @@
                 <div class="content" data-slug="payment">
                     <div class="row">
                         <div class="large-12 columns">
-                            Manage Payments
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Pass Details</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Download</th>
+                                    <th>Next Payment</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?
+                                    foreach($user[0]['Pass'] as $pass):
+                                        $i = 0;
+                                        foreach($pass['Payment'] as $payment):
+                                            $total = count($pass['Payment']);
+                                ?>
+                                <tr>
+                                    <? if ($i == 0): ?>
+                                    <td rowspan='<?= $total?>'>something</td>
+                                    <?endif;?>
+                                    <td><?= $payment['date']?></td>
+                                    <td>$<?= $payment['amount']?></td>
+                                    <td><a href='#'>Link</a></td>
+                                    <? if ($i == 0): ?>
+                                    <td rowspan='<?= $total?>'>Aug 1</td>
+                                    <?endif;?>
+                                </tr>
+                                <?
+                                        $i++;
+                                        endforeach;
+                                    endforeach;
+                                ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -140,21 +178,29 @@ $(document).ready(function() {
 
     $('.update_limit').keyup(function (e) {
 //         var id = this.id;
-        delay(function () {
-            $.ajax({
-                type    : "POST",
-                url     : "/pass/update_download_limit",
-                data    : {'pass_id' : this.id, 'limit' : this.value },
-                success : function (msg) {
-                    if (msg.success == true) {
-                        alert('download limit has been updated');
+        var $this = $(this);
+        var val = $this.val();
+        if (!!val.match(/^(\d+)$/) && val >= $this.data('download-count')) {
+            delay(function () {
+                $.ajax({
+                    type    : "POST",
+                    url     : "/pass/update_download_limit",
+                    data    : {'pass_id' : this.id, 'limit' : this.value },
+                    success : function (msg) {
+                        if (msg.success == true) {
+                            alert('download limit has been updated');
+                        }
+                        else {
+                            //alert('Problem in saving. Please try later');
+                        }
                     }
-                    else {
-                        //alert('Problem in saving. Please try later');
-                    }
-                }
-            });
-        }, 1000);
+                });
+            }, 500);
+        } else {
+            alert("Download limit can't be smaller than download count");
+            return false;
+        }
+
     });
 
 

@@ -75,4 +75,28 @@ class PagesController extends AppController {
 
     }
 
+    function contact(){
+
+    }
+
+    public function thanks(){
+
+        $subject = "Enquiry from Flypass";
+        $message = 'test message';
+        $name = $this->request->data['Contact']['name'];
+        $email = $this->request->data['Contact']['email'];
+        $comment = $this->request->data['Contact']['comment'];
+
+        App::uses('CakeEmail', 'Network/Email');
+        $email = new CakeEmail();
+        $email->from('no-reply@flypass.com.au');
+       // $email->to('support@flydigital.com.au');
+        $email->to('raf@flydigital.com.au');
+        $email->subject($subject);
+        $email->template('enquiry', 'enquiry');
+        $email->viewVars(array('message' =>  $name));
+        $email->emailFormat('both');
+
+    }
+
 }

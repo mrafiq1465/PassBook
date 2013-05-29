@@ -101,5 +101,6 @@
         </div>
     </div>
 </div>
+<?php echo $this->element('ga'); ?>
 </body>
 </html>

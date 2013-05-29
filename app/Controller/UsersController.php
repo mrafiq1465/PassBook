@@ -19,7 +19,7 @@ class UsersController extends AppController {
 
         if ($this->isLoggedIn()) {
             $options = array(
-               // 'recursive' => -1,
+                'recursive' => 2,
                 'conditions' => array('User.id' => $this->user_id())
             );
             $user = $this->User->find('all', $options);
@@ -390,31 +390,33 @@ class UsersController extends AppController {
             $amount = "9.95";
             
             $requestbody = array(
-//                'man:Title' => $_POST['Title'],
-//                'man:FirstName' => $_POST['FirstName'],
-//                'man:LastName' => $_POST['LastName'],
-//                'man:Address' => $_POST['Address'],
-//                'man:Suburb' => $_POST['Suburb'],
-//                'man:State' => $_POST['State'],
-//                'man:Company' => $_POST['Company'],
-//                'man:PostCode' => $_POST['PostCode'],
-//                'man:Country' => $_POST['Country'],
-//                'man:Email' => $_POST['Email'],
-//                'man:Fax' => $_POST['Fax'],
-//                'man:Phone' => $_POST['Phone'],
-//                'man:Mobile' => $_POST['Mobile'],
-//                'man:CustomerRef' => $_POST['CustomerRef'],
-//                'man:JobDesc' => $_POST['JobDesc'],
-//                'man:Comments' => $_POST['Comments'],
-//                'man:URL' => $_POST['URL'],
+                'man:Title' => $user['title'],
+                'man:FirstName' => $user['first_name'],
+                'man:LastName' => $user['last_name'],
+                'man:Address' => $user['address'],
+                'man:Suburb' => $user['suburb'],
+                'man:State' => $user['state'],
+                'man:Company' => $user['company'],
+                'man:PostCode' => $user['postcode'],
+                'man:Country' => $user['country'],
+                'man:Email' => $user['email'],
+                'man:Fax' => $user['phone'],
+                'man:Phone' => $user['phone'],
+                'man:Mobile' => $user['mobile'],
+                'man:CustomerRef' => 1234,//$_POST['CustomerRef'],
+                'man:JobDesc' => $user['job_description'],
+                'man:Comments' => $user['Comments'],
+                'man:URL' => 'http://www.flypass.com.au',
                 'man:CCNumber' => $_POST['data']['User']['card_number'],
                 'man:CCNameOnCard' => $_POST['data']['User']['card_name'],
                 'man:CCExpiryMonth' => $_POST['data']['User']['card_expiration_month'],
                 'man:CCExpiryYear' => $_POST['data']['User']['card_expiration_year']
             );
             $soapaction = 'https://www.eway.com.au/gateway/managedpayment/CreateCustomer';
-            $result = $client->call('man:CreateCustomer', $requestbody, '', $soapaction);
-            var_dump($result);
+            $result =  $client->call('man:CreateCustomer', $requestbody, '', $soapaction);
+
+           // print_r($requestbody);
+           // print_r($result);
 
            /*
             $pass_id = $this->reqeust->data['Payment']['pass_id'];
@@ -436,7 +438,7 @@ class UsersController extends AppController {
                 }
             }
             */
-            $this->ajax_response(array('success' => true));
+            $this->ajax_response(array('success' => true, 'request' => $requestbody, 'response' => $result));
 
         }
     }
