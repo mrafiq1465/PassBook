@@ -58,5 +58,6 @@
         });
     });
 </script>
+<?php echo $this->element('ga'); ?>
 </body>
 </html>

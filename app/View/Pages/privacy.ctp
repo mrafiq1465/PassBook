@@ -1,6 +1,6 @@
 <div class="row">
     <div class="large-12 column">
-        <h3>Fly Digital Pty Ltd Privacy Policy
+        <h3>Privacy Policy
         </h3>
         <h4>
             Introduction
@@ -19,14 +19,14 @@
             Any information collected by Fly Digital Pty Ltd is collected via correspondence from you or your company. This may be via the telephone, Email, mail, fax or directly through our website.
         </p>
         <h4>
-            Use of Collection Information
+            Use of Collected Information
         </h4>
         <p>
             Any details collected from Fly Digital Pty Ltd customers is required in order to provide you with our products and/or services, and a high level of customer service.
             Correspondence is recorded in order to provide service references, and to assist in our staff development.
         </p>
         <h4>
-            Storage of Collected Informatio
+            Storage of Collected Information
         </h4>
         <p>
             The security of your personal information is important to us. When you enter sensitive information

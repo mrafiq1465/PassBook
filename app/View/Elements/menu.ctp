@@ -117,9 +117,10 @@
                 <ul class="left">
                     <li><a href="/" class="">home</a></li>
                     <li><a href="/pass/create/coupon/" class="">coupon </a></li>
-                    <li><a href="#" class="">loyalty cards</a></li>
+                    <!--li><a href="#" class="">loyalty cards</a></li-->
                     <li><a href="/users" class="">my account</a></li>
                     <li><a href="/pricing" class="">pricing</a></li>
+                    <li><a href="/contact" class="">contact us</a></li>
                 </ul>
             </section>
         </nav>
