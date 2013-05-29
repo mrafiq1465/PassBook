@@ -1,5 +1,10 @@
-<div class="row">
-    <div class="large-8 columns">
+<style type="text/css">
+textarea {
+    height: auto;
+}
+</style>
+<div class="row user-profile">
+    <div class="large-12 columns">
         <h4>Contact us</h4>
         <p class="error"></p>
         <p>
