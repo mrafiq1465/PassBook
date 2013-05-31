@@ -145,7 +145,19 @@ $(document).ready(function() {
     }
 
     //Setup colorpicker with kendo
-    $('#backgroundColor, #foregroundColor, #labelColor').kendoColorPicker({
+    $('#backgroundColor').kendoColorPicker({
+        value: "#e90000",
+        buttons: false,
+        /*change: function (e) {
+         PassBook.CouponViewModel.set('backgroundColor', e.value);
+         console.log(e);
+         *//*var rgb = kendo.parseColor(e.value).toRGB().toBytes();
+         this.element.val('rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')');*//*
+         }*/
+        select : changeSimulatorColors
+    });
+
+    $('#foregroundColor, #labelColor').kendoColorPicker({
         value: "#ffffff",
         buttons: false,
         /*change: function (e) {

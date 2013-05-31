@@ -19,7 +19,7 @@
                         <?
                          $dataJ = new stdClass();
                          $dataJ->backgroundColor = '';
-                         $dataJ->foregroundColor= '';
+                         $dataJ->foregroundColor = '';
                          ?>
                         PassBook.data = <?= json_encode($dataJ) ?>;
                     </script>
@@ -34,10 +34,6 @@
     <section class="app-body">
     </section>
 </div>
-<?
-//echo $this->Html->script('colorpicker.js');
-//echo $this->Html->css('colorpicker/colorpicker.css');
-?>
 
 <script>
     $(document).ready(function () {
