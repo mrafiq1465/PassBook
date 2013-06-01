@@ -51,12 +51,14 @@ $options = array(
     </div>-->
 
     <div class="row-image">
+        <h2>Header</h2>
         <?php if ($this->request->data['Pass']['logoImageRetina']): ?>
             <img src="/<?= $this->request->data['Pass']['logoImageRetina'] ?>" id="logoImgRetina"/>
         <?php endif; ?>
 
         <?=$this->Form->input('logoImageRetina', array('type' => 'file', 'rel' => '#logoImgRetina', 'class' => 'imageUpload',
-            'label' => 'Upload your logo (PNG file, max 100 pixels high, any width)'));?>
+            'label' => 'Upload your logo (PNG file, max 60 pixels high, any width)'));?>
+        <?=$this->Form->input('headerText', array('data-bind' => "value: pass.headerText", 'data-value-update' => "keyup"));?>
     </div>
 
     <!--<div class="row-image">
@@ -68,6 +70,7 @@ $options = array(
     </div>-->
 
     <div class="row-image">
+        <h2>Strip Image</h2>
         <?php if ($this->request->data['Pass']['stripImageRetina']): ?>
             <img src="/<?= $this->request->data['Pass']['stripImageRetina'] ?>" id="stripImgRetina"/>
         <?php endif; ?>
@@ -80,20 +83,18 @@ $options = array(
 
     <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step2Form')); ?>
     <?//=$this->Form->input('logoText', array('data-bind' => "value: pass.logoText", 'data-value-update'=>"keyup"));?>
-    <?=$this->Form->input('headerText', array('data-bind' => "value: pass.headerText", 'data-value-update' => "keyup"));?>
+
     <script id="field-tpl" type="text/x-kendo-template">
         <div class="pf"><a data-bind="click:removeField"
                            href="javascript:void(0)" class="close">X</a>
-        <label>Heading:</label>
+        <label>Heading</label>
         <input data-bind="value:Label, attr:{name:getLabel}" data-value-update="keyup" type="text"/>
-        <label>Message:</label>
+        <label>Message</label>
         <input data-bind="value:Value, attr:{name:getValue}" data-value-update="keyup" type="text"/></div>
     </script>
     <div>
         <div class="dynamicFieldsContainer" data-source="pass.primaryFields">
-            <label>Strip image text: </label>
-            <!--<button data-bind="click:addPrimaryField" type="button" class="k-button dynamicFields" data-target="#primaryFieldsContainer">Add
-            </button>-->
+
             <div id="primaryFieldsContainer"
                  data-template="field-tpl" data-bind="source: pass.primaryFields">
                 <? //for ($i = 0; $i < 2; $i++) { ?>
@@ -110,7 +111,8 @@ $options = array(
     </div>
     <div>
         <div class="dynamicFieldsContainer" data-source="pass.secondaryFields">
-            <label>Left hand side content: </label>
+           <h2>Main Coupon Body</h2>
+            <label>Your coupon offer content</label>
             <button data-bind="click:addSecondaryField" type="button" class="k-button dynamicFields" data-target="#secondaryFieldsContainer">Add
             </button>
             <div id="secondaryFieldsContainer" data-template="field-tpl" data-bind="source: pass.secondaryFields">
@@ -128,11 +130,11 @@ $options = array(
     </div>
     <div>
         <div class="dynamicFieldsContainer" data-source="pass.auxiliaryFields">
-            <label>Right hand side content: </label>
+            <!--label>Right hand side content: </label>
             <button data-bind="click:addAuxiliaryField" type="button" class="k-button dynamicFields" data-target="#auxiliaryFieldsContainer">Add
             </button>
             <div data-template="field-tpl" data-bind="source: pass.auxiliaryFields"
-                 id="auxiliaryFieldsContainer">
+                 id="auxiliaryFieldsContainer"-->
                 <? //for ($i = 0; $i < 5; $i++) { ?>
                     <!--<div class="<?/*= empty($this->data['Pass']['auxiliaryFields'][$i]) ? 'hide' : '' */?> inner">
                         <a href="javascript:void(0)" class="close">X</a>
@@ -142,7 +144,7 @@ $options = array(
                         <?/*=$this->Form->input("Pass.auxiliaryFields.$i.Value", array('label' => false));*/?>
                     </div>-->
                 <? //} ?>
-            </div>
+            <!--/div-->
         </div>
     </div>
     <div class="row">
