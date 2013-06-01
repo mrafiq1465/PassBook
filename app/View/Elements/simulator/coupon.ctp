@@ -24,7 +24,7 @@
         <section class="section_header">
             <div class="row">
                 <div class="small-5 columns" style="min-height: 1px;">
-                    <img style="max-width: 100%;"
+                    <img style="max-width: 160px;height:50px;"
                          data-bind="attr: { src: logoImage}, visible: isLogoImageVisible">
                 </div>
 <!--                <div class="small-6 columns" data-bind="text: pass.logoText"></div>-->
