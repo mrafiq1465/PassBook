@@ -23,12 +23,12 @@
     }">
         <section class="section_header">
             <div class="row">
-                <div class="small-3 columns" style="min-height: 1px;">
+                <div class="small-5 columns" style="min-height: 1px;">
                     <img style="max-width: 100%;"
                          data-bind="attr: { src: logoImage}, visible: isLogoImageVisible">
                 </div>
-                <div class="small-6 columns" data-bind="text: pass.logoText"></div>
-                <div class="small-3 columns" data-bind="text: pass.headerText"></div>
+<!--                <div class="small-6 columns" data-bind="text: pass.logoText"></div>-->
+                <div class="small-7 columns" data-bind="text: pass.headerText"></div>
             </div>
         </section>
         <section class="primary_fields" data-bind="style: {background: stripImage}">

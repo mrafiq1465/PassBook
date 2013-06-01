@@ -380,7 +380,7 @@ $(document).ready(function() {
             var secondaryFields = this.get('pass.secondaryFields');
             var auxiliaryFields = this.get('pass.auxiliaryFields');
             var total = secondaryFields.length + auxiliaryFields.length;
-            if (total < 4) {
+            if (total < 2) {
                 secondaryFields.push({
                     Label: "",
                     Value: ""
@@ -391,7 +391,7 @@ $(document).ready(function() {
             var secondaryFields = this.get('pass.secondaryFields');
             var auxiliaryFields = this.get('pass.auxiliaryFields');
             var total = secondaryFields.length + auxiliaryFields.length;
-            if (total < 4) {
+            if (total < 2) {
                 auxiliaryFields.push({
                     Label: "",
                     Value: ""
