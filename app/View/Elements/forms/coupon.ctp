@@ -193,7 +193,7 @@ $options = array(
 
     <div style="margin-top: 10px;"><?=$this->Form->input('barcodeMessage');?></div>
     <p class="error"></p>
-    <p>For Apple Passbook users you can choose to prompt the user on their lock screen when they are within 100 meters or closer of the location below. To find a lat/long, please click here (linked to http://www.latlong.net/)"</p>
+    <p>For Apple Passbook users you can choose to prompt the user on their lock screen when they are within 100 meters or closer of the location below. To find a lat/long, please click here (linked to <a target="_blank" href="http://www.latlong.net/">http://www.latlong.net/</a>)"</p>
     <label>Locations: </label>
     <button data-bind="click:addLocationField" type="button" class="k-button dynamicFields" data-target="#locationsContainer">Add
     </button>
