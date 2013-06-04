@@ -17,13 +17,13 @@
     <div class="row">
         <div class="large-12 columns">
             <label for="backgroundColor">background color:</label>
-            <?= $this->Form->input('backgroundColor', array('id' => 'backgroundColor', 'required' => 'required', 'type' => 'color', 'div' => false, 'placeholder' => 'background color', 'label' => false)); ?>
+            <?= $this->Form->input('backgroundColor', array('id' => 'backgroundColor', 'default' => '#ed1c24', 'required' => 'required', 'type' => 'color', 'div' => false, 'placeholder' => 'background color', 'label' => false)); ?>
         </div>
     </div>
     <div class="row">
         <div class="large-12 columns">
             <label for="foregroundColor">text color:</label>
-            <?= $this->Form->input('foregroundColor', array('id' => 'foregroundColor', 'required' => 'required', 'type' => 'color', 'div' => false, 'placeholder' => 'foreground color', 'label' => false)); ?>
+            <?= $this->Form->input('foregroundColor', array('id' => 'foregroundColor', 'default' => '#ffffff', 'required' => 'required', 'type' => 'color', 'div' => false, 'placeholder' => 'foreground color', 'label' => false)); ?>
         </div>
     </div>
     <!--<div class="row">

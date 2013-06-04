@@ -88,15 +88,24 @@ $options = array(
         <div class="pf"><a data-bind="click:removeField"
                            href="javascript:void(0)" class="close">X</a>
         <label>Heading</label>
-        <input data-bind="value:Label, attr:{name:getLabel}" data-value-update="keyup" type="text"/>
+        <input data-bind="value:Label, attr:{name:getLabel}" data-value-update="keyup" placeholder="My Offer Is:" type="text"/>
         <label>Message</label>
+        <input data-bind="value:Value, attr:{name:getValue}" data-value-update="keyup" placeholder="Type your offer here!" type="text"/></div>
+    </script>
+
+    <script id="field-tpl-p" type="text/x-kendo-template">
+        <div class="pf"><a data-bind="click:removeField"
+                           href="javascript:void(0)" class="close">X</a>
+        <label>Strip image copy line 1 (optional)</label>
+        <input data-bind="value:Label, attr:{name:getLabel}" data-value-update="keyup" type="text"/>
+        <label>Strip image copy line 2 (optional)</label>
         <input data-bind="value:Value, attr:{name:getValue}" data-value-update="keyup" type="text"/></div>
     </script>
     <div>
         <div class="dynamicFieldsContainer" data-source="pass.primaryFields">
 
             <div id="primaryFieldsContainer"
-                 data-template="field-tpl" data-bind="source: pass.primaryFields">
+                 data-template="field-tpl-p" data-bind="source: pass.primaryFields">
                 <? //for ($i = 0; $i < 2; $i++) { ?>
                     <!--<div class="<?/*= empty($this->data['Pass']['primaryFields'][$i]) ? 'hide' : '' */?> inner">
                         <a href="javascript:void(0)" class="close">X</a>
