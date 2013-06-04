@@ -145,7 +145,19 @@ $(document).ready(function() {
     }
 
     //Setup colorpicker with kendo
-    $('#backgroundColor, #foregroundColor, #labelColor').kendoColorPicker({
+    $('#backgroundColor').kendoColorPicker({
+        value: "#e90000",
+        buttons: false,
+        /*change: function (e) {
+         PassBook.CouponViewModel.set('backgroundColor', e.value);
+         console.log(e);
+         *//*var rgb = kendo.parseColor(e.value).toRGB().toBytes();
+         this.element.val('rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')');*//*
+         }*/
+        select : changeSimulatorColors
+    });
+
+    $('#foregroundColor, #labelColor').kendoColorPicker({
         value: "#ffffff",
         buttons: false,
         /*change: function (e) {
@@ -368,7 +380,7 @@ $(document).ready(function() {
             var secondaryFields = this.get('pass.secondaryFields');
             var auxiliaryFields = this.get('pass.auxiliaryFields');
             var total = secondaryFields.length + auxiliaryFields.length;
-            if (total < 4) {
+            if (total < 3) {
                 secondaryFields.push({
                     Label: "",
                     Value: ""
@@ -379,7 +391,7 @@ $(document).ready(function() {
             var secondaryFields = this.get('pass.secondaryFields');
             var auxiliaryFields = this.get('pass.auxiliaryFields');
             var total = secondaryFields.length + auxiliaryFields.length;
-            if (total < 4) {
+            if (total < 2) {
                 auxiliaryFields.push({
                     Label: "",
                     Value: ""
