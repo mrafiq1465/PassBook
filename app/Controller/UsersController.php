@@ -232,12 +232,21 @@ class UsersController extends AppController {
     }
 
     function _eway_get_token_customer_id() {
-        // todo: check for token user id in database and return the token id
-        // return null if token id does not exists
-//        return 915388925370;
+
+        if ($this->isLoggedIn()) {
+            $options = array(
+                'recursive' => 2,
+                'conditions' => array('User.id' => $this->user_id())
+            );
+            $user = $this->User->find('all', $options);
+        }
+        $TokenCustomerID = $user['User']['TokenCustomerID'];
+        if(!empty($TokenCustomerID)){
+            return (float) $TokenCustomerID;
+        }
+
         return null;
     }
-
 
     protected $eway = null;
 
@@ -280,27 +289,52 @@ class UsersController extends AppController {
     }
 
     function _eway_payment_complete_success($result) {
-        file_put_contents('token_payment_data.txt', var_export($result, true));
-        //
+        //file_put_contents('token_payment_data.txt', var_export($result, true));
+
+        $this->request->data['User']['AccessCode'] = $result->AccessCode;
+        $this->request->data['User']['AuthorisationCode'] = $result->AuthorisationCode;
+        $this->request->data['User']['ResponseCode'] = $result->ResponseCode;
+        $this->request->data['User']['ResponseMessage'] = $result->ResponseMessage;
+        $this->request->data['User']['InvoiceNumber'] = $result->InvoiceNumber;
+        $this->request->data['User']['InvoiceReference'] = $result->InvoiceReference;
+        $this->request->data['User']['TotalAmount'] = $result->TotalAmount;
+        $this->request->data['User']['TransactionID'] = $result->TransactionID;
+        $this->request->data['User']['TransactionStatus'] = $result->TransactionStatus;
+        $this->request->data['User']['TokenCustomerID'] = $result->TokenCustomerID;
+        $this->request->data['User']['PaymentDate'] = '';
+
+        $this->User->id = $this->user_id();
+        if ($this->User->save($this->request->data)){
+           $url = "/pass/edit/".$this->Session->read('pass_id').'/step6';
+           $this->redirect($url);
+        }
     }
 
     function _eway_payment_complete_error($result) {
-        file_put_contents('token_payment_data.txt', var_export($result, true));
-        //
+       // file_put_contents('token_payment_data.txt', var_export($result, true));
+        $url = "/pass/edit/".$this->Session->read('pass_id').'/step5';
+        $this->redirect($url);
     }
 
     function _eway_payment_create($customer_id) {
         $request = $this->__eway_create_request();
 
         if (!$customer_id) {
-            // todo: set user id in reference for backtracking
+            if ($this->isLoggedIn()) {
+                $options = array(
+                    'recursive' => 2,
+                    'conditions' => array('User.id' => $this->user_id())
+                );
+                $user = $this->User->find('all', $options);
+            }
+
             $request->Customer->Reference = 1;
             // todo: set other user information
-            $request->Customer->Title = 'Mr.';
-            $request->Customer->FirstName = 'naam';
+            $request->Customer->Title = $user['User']['title'];
+            $request->Customer->FirstName = $user['User']['first_name'];
             //Note: LastName is Required Field When Create/Update a TokenCustomer
-            $request->Customer->LastName = 'nai';
-            $request->Customer->Email = 'zubair6@gmail.com';
+            $request->Customer->LastName = $user['User']['last_name'];
+            $request->Customer->Email = $user['User']['email'];
             // todo: end of other user information
 
             $request->Customer->Country = 'au';
@@ -337,7 +371,7 @@ class UsersController extends AppController {
             return false;
         }
 
-        var_dump($result);
+        //var_dump($result);
 
         $this->set('FormActionURL', $result->FormActionURL);
         $this->set('AccessCode', $result->AccessCode);
@@ -447,7 +481,7 @@ class UsersController extends AppController {
                         $this->_eway_payment_complete_error($result);
                     }
                     // todo: redirect to success page
-                    var_dump($result);
+                    //var_dump($result);
                     die('');
 //                }
             }

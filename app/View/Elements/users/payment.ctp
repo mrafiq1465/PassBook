@@ -96,7 +96,7 @@
             }
             ?>
         </select>
-        /
+
         <select ID="EWAY_CARDSTARTYEAR" name="EWAY_CARDSTARTYEAR">
             <?php
             $i = date("y");

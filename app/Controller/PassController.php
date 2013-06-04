@@ -43,6 +43,7 @@ class PassController extends AppController
                 $this->request->data['Pass']['user_id'] = $this->user_id();
             }
             if ($this->Pass->save($this->request->data)) {
+
                 $this->ajax_response(array('success' => array('id' => $this->Pass->id)));
             } else {
                 $this->ajax_response(array('error' => __('The user could not be saved. Please, try again.')));
@@ -55,9 +56,11 @@ class PassController extends AppController
         if (empty($id)) {
             throw new NotFoundException(__('Invalid id'));
         }
+
         $this->Pass->id = $id;
         $pass = $this->Pass->read();
         $user_id = $pass["Pass"]["user_id"];
+        $this->Session->write('pass_id', $id);
 
         if(!empty($user_id) && $this->user_id() != $user_id ){
             $this->redirect('/users/login_account/');
