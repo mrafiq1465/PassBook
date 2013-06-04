@@ -295,11 +295,11 @@ class UsersController extends AppController {
         $this->request->data['User']['AuthorisationCode'] = $result->AuthorisationCode;
         $this->request->data['User']['ResponseCode'] = $result->ResponseCode;
         $this->request->data['User']['ResponseMessage'] = $result->ResponseMessage;
-        $this->request->data['User']['InvoiceNumber'] = $result->InvoiceNumber;
-        $this->request->data['User']['InvoiceReference'] = $result->InvoiceReference;
-        $this->request->data['User']['TotalAmount'] = $result->TotalAmount;
-        $this->request->data['User']['TransactionID'] = $result->TransactionID;
-        $this->request->data['User']['TransactionStatus'] = $result->TransactionStatus;
+        //$this->request->data['User']['InvoiceNumber'] = $result->InvoiceNumber;
+        //$this->request->data['User']['InvoiceReference'] = $result->InvoiceReference;
+        //$this->request->data['User']['TotalAmount'] = $result->TotalAmount;
+        //$this->request->data['User']['TransactionID'] = $result->TransactionID;
+        //$this->request->data['User']['TransactionStatus'] = $result->TransactionStatus;
         $this->request->data['User']['TokenCustomerID'] = $result->TokenCustomerID;
         $this->request->data['User']['PaymentDate'] = '';
 
