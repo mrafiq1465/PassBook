@@ -182,7 +182,7 @@ class UsersController extends AppController {
                 $this->redirect('/users');
             }
             else {
-                if (!$this->request->is('ajax')) $this->Session->setFlash('Either your username or password is incorrect.', FALSE, FALSE, 'login');
+                if (!$this->request->is('ajax')) $this->Session->setFlash('Either your username or password is incorrect.', false, false, 'login');
                 else $this->ajax_response(array('error' => 'Either your username or password is incorrect.'));
             }
         }
@@ -225,24 +225,28 @@ class UsersController extends AppController {
                 $this->redirect($url);
             }
             else {
-                if (!$this->request->is('ajax')) $this->Session->setFlash('Either your username or password is incorrect.', FALSE, FALSE, 'login');
+                if (!$this->request->is('ajax')) $this->Session->setFlash('Either your username or password is incorrect.', false, false, 'login');
                 else $this->ajax_response(array('error' => 'Either your username or password is incorrect.'));
             }
         }
     }
 
-    function _eway_user_exists() {
-        return false;
+    function _eway_get_token_customer_id() {
+        // todo: check for token user id in database and return the token id
+        // return null if token id does not exists
+//        return 915388925370;
+        return null;
     }
 
-    function _eway_payment() {
-        //
-    }
 
+    protected $eway = null;
 
     function __eway_load_library() {
+        if ($this->eway) {
+            return;
+        }
         //Include RapidAPI Library
-        require('../Vendor/Rapid3.0.php');
+        require_once('../Vendor/Rapid3.0.php');
 
         //Create RapidAPI Service
         $this->eway = new RapidAPI();
@@ -251,13 +255,8 @@ class UsersController extends AppController {
 
     }
 
-    function __eway_create_request() {
 
-        $this->__eway_load_library();
-
-        //Create AccessCode Request Object
-        $request = new CreateAccessCodeRequest();
-
+    function __get_site_url() {
         $self_url = 'http';
         if (!empty($_SERVER['HTTPS'])) {$self_url .= "s";}
         $self_url .= "://" . $_SERVER["SERVER_NAME"];
@@ -265,37 +264,61 @@ class UsersController extends AppController {
         if ($_SERVER["SERVER_PORT"] != "80") {
             $self_url .= ":".$_SERVER["SERVER_PORT"];
         }
+        $self_url .= '/users/payment/'; //$_SERVER["REQUEST_URI"];
+        return $self_url;
+    }
 
-        $self_url .= $_SERVER["REQUEST_URI"];
-        $request->RedirectUrl = $self_url;
 
+    function __eway_create_request() {
+
+        $this->__eway_load_library();
+
+        //Create AccessCode Request Object
+        $request = new CreateAccessCodeRequest();
         return $request;
 
     }
 
-    function _eway_user_create() {
+    function _eway_payment_complete_success($result) {
+        file_put_contents('token_payment_data.txt', var_export($result, true));
+        //
+    }
 
-        // get access token by submitting user information
+    function _eway_payment_complete_error($result) {
+        file_put_contents('token_payment_data.txt', var_export($result, true));
+        //
+    }
+
+    function _eway_payment_create($customer_id) {
         $request = $this->__eway_create_request();
 
-        $request->Method = 'CreateTokenCustomer';
+        if (!$customer_id) {
+            // todo: set user id in reference for backtracking
+            $request->Customer->Reference = 1;
+            // todo: set other user information
+            $request->Customer->Title = 'Mr.';
+            $request->Customer->FirstName = 'naam';
+            //Note: LastName is Required Field When Create/Update a TokenCustomer
+            $request->Customer->LastName = 'nai';
+            $request->Customer->Email = 'zubair6@gmail.com';
+            // todo: end of other user information
 
-        $request->Customer->Title = 'Mr.';
-        $request->Customer->FirstName = 'naam';
-        //Note: LastName is Required Field When Create/Update a TokenCustomer
-        $request->Customer->LastName = 'nai';
-        $request->Customer->Email = 'zubair6@gmail.com';
-        $request->Customer->Country = 'au';
-        $request->Customer->Reference = 1;
-        $request->RedirectUrl = 'http://www.passbook/users/payment/';
+            $request->Customer->Country = 'au';
+        }
+        else {
+            $request->Customer->TokenCustomerID = $customer_id;
 
-        $request->Payment->TotalAmount = 0;
+        }
 
+        $request->Method = 'TokenPayment';
+
+        $request->Payment->TotalAmount = 1000;
+
+        $request->RedirectUrl = $this->__get_site_url() . '?mode=token_payment';
         $result = $this->eway->CreateAccessCode($request);
 
         //Check if any error returns
-        if(isset($result->Errors))
-        {
+        if(isset($result->Errors)) {
             //Get Error Messages from Error Code. Error Code Mappings are in the Config.ini file
             $ErrorArray = explode(",", $result->Errors);
 
@@ -308,15 +331,71 @@ class UsersController extends AppController {
                 else
                     $lblError .= $error;
             }
-            // todo: remove error
+            // todo: remove die, log the error and display the user that a critical error has occured
             die($lblError);
 
-            return False;
+            return false;
         }
+
+        var_dump($result);
+
         $this->set('FormActionURL', $result->FormActionURL);
         $this->set('AccessCode', $result->AccessCode);
-        return True;
+        return true;
     }
+
+//    function _eway_user_create_complete($result) {
+//        // todo: save user in database
+//        file_put_contents('token_customer_data.txt', var_export($result, true));
+//    }
+//
+//    function _eway_user_create() {
+//
+//        // get access token by submitting user information
+//        $request = $this->__eway_create_request();
+//
+//        // todo: set user id in reference for backtracking
+//        $request->Customer->Reference = 1;
+//        // todo: set other user information
+//        $request->Customer->Title = 'Mr.';
+//        $request->Customer->FirstName = 'naam';
+//        //Note: LastName is Required Field When Create/Update a TokenCustomer
+//        $request->Customer->LastName = 'nai';
+//        $request->Customer->Email = 'zubair6@gmail.com';
+//        // todo: end of other user information
+//
+//        $request->Method = 'CreateTokenCustomer';
+//
+//        $request->Customer->Country = 'au';
+//        $request->Payment->TotalAmount = 0;
+//
+//        $request->RedirectUrl = $this->__get_site_url() . '?mode=token_customer';
+//
+//        $result = $this->eway->CreateAccessCode($request);
+//
+//        //Check if any error returns
+//        if(isset($result->Errors)) {
+//            //Get Error Messages from Error Code. Error Code Mappings are in the Config.ini file
+//            $ErrorArray = explode(",", $result->Errors);
+//
+//            $lblError = "";
+//
+//            foreach ( $ErrorArray as $error )
+//            {
+//                if(isset($this->eway->APIConfig[$error]))
+//                    $lblError .= $error." ".$this->eway->APIConfig[$error]."<br>";
+//                else
+//                    $lblError .= $error;
+//            }
+//            // todo: remove die, log the error and display the user that a critical error has occured
+//            die($lblError);
+//
+//            return false;
+//        }
+//        $this->set('FormActionURL', $result->FormActionURL);
+//        $this->set('AccessCode', $result->AccessCode);
+//        return true;
+//    }
 
     function payment() {
 //        if (!$this->isLoggedIn()) {
@@ -329,7 +408,7 @@ class UsersController extends AppController {
 //        }
 
         if ($this->request->is('post')) {
-
+            die('data posted here');
         }
         // make_payment
         if (isset($this->request->query['AccessCode'])) {
@@ -341,6 +420,7 @@ class UsersController extends AppController {
 
             //Call RapidAPI to get the result
             $result = $this->eway->GetAccessCodeResult($request);
+
             if(isset($result->Errors))
             {
                 //Get Error Messages from Error Code. Error Code Mappings are in the Config.ini file
@@ -354,92 +434,27 @@ class UsersController extends AppController {
                 var_dump($lblError);
             }
             else {
-                var_dump($result);
+//                if ($this->request->query['mode']=='token_customer') {
+//                    $this->_eway_user_create_complete($result);
+//                    $this->_eway_payment_create($result->TokenCustomerID);
+//                }
+//                else if ($this->request->query['mode']=='token_payment') {
+
+                    if ($result->ResponseCode == '00') {
+                        $this->_eway_payment_complete_success($result);
+                    }
+                    else {
+                        $this->_eway_payment_complete_error($result);
+                    }
+                    // todo: redirect to success page
+                    var_dump($result);
+                    die('');
+//                }
             }
-            die('a');
         }
-        else if (!$this->_eway_user_exists()) {
-            $this->_eway_user_create();
+        else {
+            $this->_eway_payment_create($this->_eway_get_token_customer_id());
             // display form to input card information
-        }
-
-
-        if (false) {
-            $this->loadModel('Payment');
-
-            require_once('../Vendor/eway/lib/nusoap.php');
-
-            // read ID, Username and Password from config.ini
-            $config = parse_ini_file("../Vendor/eway/config.ini");
-
-            // init soap client
-            $client = new nusoap_client("https://www.ewaygateway.com/gateway/ManagedPaymentService/test/managedCreditCardPayment.asmx", false);
-            $err = $client->getError();
-
-            if ($err) {
-                echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
-                echo '<h2>Debug</h2><pre>' . htmlspecialchars($client->getDebug(), ENT_QUOTES) . '</pre>';
-                exit();
-            }
-
-            $client->namespaces['man'] = 'https://www.eway.com.au/gateway/managedpayment';
-            // set SOAP header
-            $headers = "<man:eWAYHeader><man:eWAYCustomerID>" . $config['eWAYCustomerID'] . "</man:eWAYCustomerID><man:Username>" . $config['UserName'] . "</man:Username><man:Password>" . $config['Password'] . "</man:Password></man:eWAYHeader>";
-            $client->setHeaders($headers);
-
-            $amount = "9.95";
-            
-            $requestbody = array(
-                'man:Title' => $user['title'],
-                'man:FirstName' => $user['first_name'],
-                'man:LastName' => $user['last_name'],
-                'man:Address' => $user['address'],
-                'man:Suburb' => $user['suburb'],
-                'man:State' => $user['state'],
-                'man:Company' => $user['company'],
-                'man:PostCode' => $user['postcode'],
-                'man:Country' => $user['country'],
-                'man:Email' => $user['email'],
-                'man:Fax' => $user['phone'],
-                'man:Phone' => $user['phone'],
-                'man:Mobile' => $user['mobile'],
-                'man:CustomerRef' => 1234,//$_POST['CustomerRef'],
-                'man:JobDesc' => $user['job_description'],
-                'man:Comments' => $user['Comments'],
-                'man:URL' => 'http://www.flypass.com.au',
-                'man:CCNumber' => $_POST['data']['User']['card_number'],
-                'man:CCNameOnCard' => $_POST['data']['User']['card_name'],
-                'man:CCExpiryMonth' => $_POST['data']['User']['card_expiration_month'],
-                'man:CCExpiryYear' => $_POST['data']['User']['card_expiration_year']
-            );
-            $soapaction = 'https://www.eway.com.au/gateway/managedpayment/CreateCustomer';
-            $result =  $client->call('man:CreateCustomer', $requestbody, '', $soapaction);
-
-           // print_r($requestbody);
-           // print_r($result);
-
-           /*
-            $pass_id = $this->reqeust->data['Payment']['pass_id'];
-            $card_name = $this->reqeust->data['User']['card_name'];
-            $card_name = $this->reqeust->data['User']['card_number'];
-            $exp_month = $this->reqeust->data['User']['card_expiration_month'];
-            $exp_year = $this->reqeust->data['User']['card_expiration_year'];
-            $ccv = $this->reqeust->data['User']['card_ccv'];
-         */
-
-            /*
-            if ($this->Payment->save($this->reqeust->data)){
-                if ($this->request->is('ajax')) {
-                    $this->ajax_response(array('success' => true));
-                }
-            } else {
-                if ($this->request->is('ajax')) {
-                    $this->ajax_response(array('error' => 'data could not be saved'));
-                }
-            }
-            */
-            $this->ajax_response(array('success' => true, 'request' => $requestbody, 'response' => $result));
-
         }
     }
 
