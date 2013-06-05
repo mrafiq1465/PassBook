@@ -122,28 +122,33 @@
                 $('#AccountBlock p.error').hide();
             },
             success: function (resp) {
+                alert(resp);
                 resp = $.parseJSON(resp);
                 if (resp.error !== undefined) {
                     $('#AccountBlock p.error').text(resp.error).show();
                 } else {
                     $('#AccountBlock p.error').hide();
                     update_pass_user(resp.user_id,PassId);
+                    $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
+                    $('#AccountBlock').html('<p style="padding-top: 20px;" class="message">You have been login successfully, please go to next step.</p>')
 
-                    $.ajax({
-                        url: '/pass/payment_status/' + PassId,
-                        dataType: 'json',
-                        success: function(resp) {
-                            if (resp.result) {
-                                //paid then, what to do?
-                                $('#AccountBlock').html('<p class="message">Your payment is good now, you can now go to next step.</p>')
-                                $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
-                            } else {
-                                $('#AccountBlock').load('/users/payment', function(){
-                                    $('#PaymentPassId').val(PassId);
-                                });
-                            }
-                        }
-                    })
+                    /*
+                     $.ajax({
+                         url: '/pass/payment_status/' + PassId,
+                         dataType: 'json',
+                         success: function(resp) {
+                             if (resp.result) {
+                                 //paid then, what to do?
+                                 $('#AccountBlock').html('<p class="message">Your payment is good now, you can now go to next step.</p>')
+                                 $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
+                             } else {
+                                 $('#AccountBlock').load('/users/payment', function(){
+                                     $('#PaymentPassId').val(PassId);
+                                 });
+                             }
+                         }
+                     });
+                     */
                 }
             }
         });

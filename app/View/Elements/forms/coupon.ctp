@@ -234,7 +234,8 @@ $options = array(
         <? if (empty($user_data)) {
             echo $this->element('users/login');
         } else {
-            echo $this->element('users/payment');
+          echo $this->element('users/info');
+           // echo $this->element('users/payment');
         }
         ?>
         <?//= $this->element('blocks/generate');?>
@@ -243,5 +244,5 @@ $options = array(
 <script>
     var PassType = "<?=$this->data['PassType']['id']; ?>";
     var PassId = "<?=$this->data['Pass']['id'];?>";
-
+    $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
 </script>

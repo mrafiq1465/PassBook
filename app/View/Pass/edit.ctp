@@ -9,8 +9,6 @@
     }
 </style>
 <div class="container" id="main-container">
-
-
     <section id="home-hero-unit" class="hero-unit">
         <div class="row">
             <div class="large-7 columns">
@@ -136,13 +134,16 @@
                     $('#AccountBlock p.error').hide();
                 },
                 success: function (resp) {
+
                     resp = $.parseJSON(resp);
 
+                    /*
                     if (resp.payment_token) {
                         $('#payment_token').show();
                     } else {
                         $('#payment_token').hide();
                     }
+                    */
 
                     if (resp.error !== undefined) {
                         $('#AccountBlock p.error').text(resp.error).show();
@@ -150,6 +151,11 @@
                         $('#AccountBlock p.error').hide();
                         //show next form
                         update_pass_user(resp.user_id,PassId);
+                       // $('#AccountBlock').html('<p style="padding-top: 20px;" class="message">You have been login successfully, please go to next step.</p>')
+
+                        $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
+                          Window.location.href = "/pass/edit/"+ PassId +"/step6";
+                        /*
                         $.ajax({
                             url: '/pass/payment_status/' + PassId,
                             dataType: 'json',
@@ -164,7 +170,8 @@
                                     });
                                 }
                             }
-                        })
+                        });
+                        */
                     }
                 }
             });

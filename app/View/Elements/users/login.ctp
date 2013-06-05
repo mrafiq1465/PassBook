@@ -2,6 +2,7 @@
  * @var $this View
  */
 ?>
+
 <div class="row">
     <div class="large-12 columns">
         <h1>Login</h1>
