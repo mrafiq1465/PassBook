@@ -37,6 +37,9 @@
     Router::connect('/privacy', array('controller' => 'pages', 'action' => 'privacy'));
     Router::connect('/contact', array('controller' => 'pages', 'action' => 'contact'));
     Router::connect('/thanks', array('controller' => 'pages', 'action' => 'thanks'));
+    Router::connect('/feedback_submit', array('controller' => 'pages', 'action' => 'feedback_submit'));
+    Router::connect('/feedback', array('controller' => 'pages', 'action' => 'feedback'));
+
 
 /**
  * ... Load all our custom routes
