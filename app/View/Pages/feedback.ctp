@@ -5,7 +5,7 @@
 </style>
 
 <div class="row user-profile">
-    <div class="large-10 column">
+    <div class="large-8 column">
         <h3>Fly Pass BETA - Your Feedback</h3>
 
         <p>Thanks for trying out Fly Pass for us. We've only recently launched this new system and are running
