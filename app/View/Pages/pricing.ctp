@@ -11,6 +11,13 @@
 <div class="row">
     <div class="large-12 column">
         <h3>Pricing</h3>
+        <h4>BETA Phase Pricing update - Fly Pass is FREE!</h4>
+        <p>
+            As we are currently in our BETA testing phase, using Fly Pass is completely free for the moment!
+            Create and send as many coupons as you like. All we ask is that you take a moment to submit your
+            feedback via our feedback page (linked) and tell us, good or bad, what you think or what you would
+            like added in the future. Thanks for taking the time to try Fly Pass.
+        </p>
 
         <p>Pricing for Fly Pass coupons is based on the number of times your pass is downloaded, not the number of
            people you send your coupon to. Therefore you're only charged for people who actually see your coupon.</p>

@@ -12,18 +12,18 @@ textarea {
         </p>
         <?=$this->Form->create('Contact', array('url' => '/pages/thanks', 'id' => 'ContactForm'))?>
         <div class="row">
-            <div class="large8 columns">
+            <div class="large-8 columns">
                 <? echo $this->Form->input('name', array('placeholder' => 'Name', 'label' => FALSE, 'class' => 'input', 'required' => 'required', 'validationMessage' => "Please enter your anme")); ?>
             </div>
 
         </div>
         <div class="row">
-            <div class="large8 columns">
+            <div class="large-8 columns">
                 <? echo $this->Form->input('email', array('placeholder' => 'Email', 'label' => FALSE, 'class' => 'input', 'required' => 'required', 'validationMessage' => "Please enter email")); ?>
             </div>
         </div>
         <div class="row">
-            <div class="large8 columns">
+            <div class="large-8 columns">
                 <? echo $this->Form->input('comment', array('placeholder' => 'Comments/Questions', 'label' => FALSE, 'class' => 'input', 'escape' => false, 'cols' => 3, 'type' => 'textarea', 'required' => 'required', 'validationMessage' => "Please enter comments")); ?>
             </div>
         </div>

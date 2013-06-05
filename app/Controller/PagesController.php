@@ -79,6 +79,10 @@ class PagesController extends AppController {
 
     }
 
+    function feedback(){
+
+    }
+
     public function thanks(){
 
         $subject = "Enquiry from Flypass";
@@ -96,6 +100,29 @@ class PagesController extends AppController {
         $email->template('enquiry', 'enquiry');
         $email->viewVars(array('message' =>  $name));
         $email->emailFormat('both');
+        $email->send();
+
+    }
+
+    public function feedback_submit(){
+
+        $subject = "Feedback from Flypass";
+        $message = 'FeebBack';
+        $name = $this->request->data['Feedback']['name'];
+        $email = $this->request->data['Feedback']['email'];
+        $comment = $this->request->data['Feedback']['comment'];
+        $ratings = $this->request->data['Feedback']['$ratings'];
+
+        App::uses('CakeEmail', 'Network/Email');
+        $email = new CakeEmail();
+        $email->from('no-reply@flypass.com.au');
+        // $email->to('support@flydigital.com.au');
+        $email->to('raf@flydigital.com.au');
+        $email->subject($subject);
+        $email->template('enquiry', 'enquiry');
+        $email->viewVars(array('message' =>  $name));
+        $email->emailFormat('both');
+        $email->send();
 
     }
 
