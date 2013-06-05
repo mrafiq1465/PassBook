@@ -27,6 +27,8 @@
 
         <?php echo $this->Html->link('Register', '#', array('class' => 'pull-left register', 'id' => 'register_btn_block')); ?>
         <?php echo $this->Html->link('Forgot password', '#', array('class' => 'pull-right forgot_password')); ?>
+        <?= $this->element('users/forgot_password'); ?>
+
     </div>
 </div>
 

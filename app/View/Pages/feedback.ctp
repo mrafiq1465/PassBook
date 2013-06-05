@@ -2,6 +2,9 @@
     textarea {
         height: auto;
     }
+    input[type=radio].block {
+        margin-right: 6px;
+    }
 </style>
 
 <div class="row user-profile">
@@ -36,7 +39,9 @@
         <div class="row">
             <div class="large-12 columns">
                 RATE YOUR OVERALL FLY PASS EXPERIENCE OUT OF 5 {0 (terrible),1,2,3,4,5 (faultless)}
-                <?=$this->Form->input('rating', array('type' => 'radio', 'width' => '20px', 'options' => range(0, 5),'label' =>false,'div' => false, 'class'=> ''))
+                <?=$this->Form->input('rating', array('type' => 'radio',
+                    'separator' => '<br>',
+                    'width' => '20px', 'options' => range(0, 5),'label' =>false,'div' => true, 'class'=> 'block'))
                 ?>
             </div>
         </div>
