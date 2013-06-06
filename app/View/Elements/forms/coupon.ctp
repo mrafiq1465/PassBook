@@ -244,5 +244,7 @@ $options = array(
 <script>
     var PassType = "<?=$this->data['PassType']['id']; ?>";
     var PassId = "<?=$this->data['Pass']['id'];?>";
-    $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
+    $(document).ready(function () {
+        $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
+    });
 </script>

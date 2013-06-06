@@ -122,7 +122,7 @@
                 $('#AccountBlock p.error').hide();
             },
             success: function (resp) {
-                alert(resp);
+
                 resp = $.parseJSON(resp);
                 if (resp.error !== undefined) {
                     $('#AccountBlock p.error').text(resp.error).show();
@@ -130,7 +130,8 @@
                     $('#AccountBlock p.error').hide();
                     update_pass_user(resp.user_id,PassId);
                     $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
-                    $('#AccountBlock').html('<p style="padding-top: 20px;" class="message">You have been login successfully, please go to next step.</p>')
+                    window.location.href = "/pass/edit/"+ PassId +"/step6";
+                    //$('#AccountBlock').html('<p style="padding-top: 20px;" class="message">You have been login successfully, please go to next step.</p>')
 
                     /*
                      $.ajax({
