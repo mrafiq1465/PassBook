@@ -150,11 +150,16 @@
                     } else {
                         $('#AccountBlock p.error').hide();
                         //show next form
+
                         update_pass_user(resp.user_id,PassId);
+                        $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
                        // $('#AccountBlock').html('<p style="padding-top: 20px;" class="message">You have been login successfully, please go to next step.</p>')
 
-                        $('#tabstrip').data('kendoTabStrip').enable($('#tab6'));
-                          window.location.href = "/pass/edit/"+ PassId +"/step6";
+                        setTimeout(function() {
+                            window.location.href = "/pass/edit/"+ PassId +"/step6";
+                        }, 1000);
+
+                         // window.location.href = "/pass/edit/"+ PassId +"/step6";
                         /*
                         $.ajax({
                             url: '/pass/payment_status/' + PassId,
