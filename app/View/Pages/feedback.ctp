@@ -7,7 +7,7 @@
     }
 </style>
 
-<div class="row user-profile">
+<div class="row">
     <div class="large-8 column">
         <h3>Fly Pass BETA - Your Feedback</h3>
 
@@ -25,18 +25,18 @@
         </p>
 
         <?=$this->Form->create('Feedback', array('url' => '/pages/feedback_submit', 'id' => 'FeedbackForm'))?>
-        <div class="row">
+        <div class="row user-profile">
             <div class="large-12 columns">
                 <? echo $this->Form->input('name', array('placeholder' => 'YOUR NAME ', 'label' => FALSE, 'class' => 'input', 'required' => 'required', 'validationMessage' => "Please enter your anme")); ?>
             </div>
 
         </div>
-        <div class="row">
+        <div class="row user-profile">
             <div class="large-12 columns">
                 <? echo $this->Form->input('email', array('placeholder' => 'YOUR EMAIL', 'label' => FALSE, 'class' => 'input', 'required' => 'required', 'validationMessage' => "Please enter email")); ?>
             </div>
         </div>
-        <div class="row">
+        <div class="row user-profile">
             <div class="large-12 columns">
                 RATE YOUR OVERALL FLY PASS EXPERIENCE OUT OF 5 {0 (terrible),1,2,3,4,5 (faultless)}
                 <?=$this->Form->input('rating', array('type' => 'radio',
@@ -45,12 +45,12 @@
                 ?>
             </div>
         </div>
-        <div class="row">
+        <div class="row user-profile">
             <div class="large-12 columns">
                 <? echo $this->Form->input('comment', array('placeholder' => 'YOUR FEEDBACK', 'label' => FALSE, 'class' => 'input', 'escape' => false, 'cols' => 3, 'type' => 'textarea', 'required' => 'required', 'validationMessage' => "Please enter Feedback")); ?>
             </div>
         </div>
-        <div class="row">
+        <div class="row user-profile">
             <div class="large-12 columns">
                 <?php echo $this->Form->button('Submit', array('type' => 'submit', 'class' => 'pb-btn medium')); ?>
             </div>
