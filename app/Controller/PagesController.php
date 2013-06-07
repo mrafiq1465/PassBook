@@ -88,7 +88,7 @@ class PagesController extends AppController {
         $subject = "Enquiry from Flypass";
         $message = 'test message';
         $name = $this->request->data['Contact']['name'];
-        $email = $this->request->data['Contact']['email'];
+        $user_email = $this->request->data['Contact']['email'];
         $comment = $this->request->data['Contact']['comment'];
 
         App::uses('CakeEmail', 'Network/Email');
@@ -98,7 +98,11 @@ class PagesController extends AppController {
         $email->to('raf@flydigital.com.au');
         $email->subject($subject);
         $email->template('enquiry', 'enquiry');
-        $email->viewVars(array('message' =>  $name));
+        $email->viewVars(array('info' =>  array(
+            "name" => $name,
+            "email" => $user_email,
+            "comment" => $comment
+        )));
         $email->emailFormat('both');
         $email->send();
 

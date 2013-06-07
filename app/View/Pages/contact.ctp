@@ -10,7 +10,7 @@ textarea {
         <p>
             To get in touch with the team at Fly Pass for any enquiry, pricing, support or feedback, please use the form below:
         </p>
-        <?=$this->Form->create('Contact', array('url' => '/pages/thanks', 'id' => 'ContactForm'))?>
+        <?=$this->Form->create('Contact', array('url' => '/thanks', 'id' => 'ContactForm'))?>
         <div class="row">
             <div class="large-8 columns">
                 <? echo $this->Form->input('name', array('placeholder' => 'Name', 'label' => FALSE, 'class' => 'input', 'required' => 'required', 'validationMessage' => "Please enter your anme")); ?>
