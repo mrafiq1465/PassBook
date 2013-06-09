@@ -111,11 +111,10 @@ class PagesController extends AppController {
     public function feedback_submit(){
 
         $subject = "Feedback from Flypass";
-        $message = 'FeebBack';
         $name = $this->request->data['Feedback']['name'];
-        $email = $this->request->data['Feedback']['email'];
+        $user_email = $this->request->data['Feedback']['email'];
         $comment = $this->request->data['Feedback']['comment'];
-        $ratings = $this->request->data['Feedback']['$ratings'];
+        $rating = $this->request->data['Feedback']['rating'];
 
         App::uses('CakeEmail', 'Network/Email');
         $email = new CakeEmail();
@@ -124,7 +123,12 @@ class PagesController extends AppController {
         $email->to('raf@flydigital.com.au');
         $email->subject($subject);
         $email->template('enquiry', 'enquiry');
-        $email->viewVars(array('message' =>  $name));
+        $email->viewVars(array('info' => array(
+            "name" => $name,
+            "email" => $user_email,
+            "comment" => $comment,
+            "rating" => $rating
+        )));
         $email->emailFormat('both');
         $email->send();
 

@@ -122,6 +122,9 @@
                     <li><a href="/users" class="">my account</a></li>
                     <li><a href="/pricing" class="">pricing</a></li>
                     <li><a href="/contact" class="">contact us</a></li>
+                    <?php if ($authUser): ?>
+                    <li><a href="/users/logout" class="">logout</a></li>
+                    <?php endif; ?>
                 </ul>
             </section>
         </nav>

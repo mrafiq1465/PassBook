@@ -93,6 +93,8 @@ class AppController extends Controller {
         } elseif($login_req) {
             $this->requireLogin();
         }
+
+        $this->set('authUser', $this->Session->check('User'));
     }
 
     function ajax_response($data) {

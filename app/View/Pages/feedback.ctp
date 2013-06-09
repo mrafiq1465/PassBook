@@ -5,6 +5,9 @@
     input[type=radio].block {
         margin-right: 6px;
     }
+    .input {
+        margin-bottom: 10px;
+    }
 </style>
 
 <div class="row">
@@ -24,7 +27,7 @@
             Thank you!
         </p>
 
-        <?=$this->Form->create('Feedback', array('url' => '/pages/feedback_submit', 'id' => 'FeedbackForm'))?>
+        <?=$this->Form->create('Feedback', array('url' => '/feedback_submit', 'id' => 'FeedbackForm'))?>
         <div class="row user-profile">
             <div class="large-12 columns">
                 <? echo $this->Form->input('name', array('placeholder' => 'YOUR NAME ', 'label' => FALSE, 'class' => 'input', 'required' => 'required', 'validationMessage' => "Please enter your anme")); ?>
