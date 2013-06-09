@@ -527,7 +527,7 @@ class UsersController extends AppController {
         // delete the user session
         $this->Session->destroy();
         // redirect to posts index page
-        $this->Session->setFlash('You have successfully logged out.');
+        $this->Session->setFlash('');
         $this->redirect('/');
     }
 
