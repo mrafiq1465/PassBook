@@ -46,7 +46,7 @@
             var download_limit = $('#download_limit').val();
 
             if( download_limit > download_count) {
-                alert('You can not download this pass. It exceeded the download limit');
+               // alert('You can not download this pass. It exceeded the download limit');
             }
             else{
                 var href = $(this).attr('href');
