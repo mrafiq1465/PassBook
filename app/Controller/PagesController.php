@@ -94,8 +94,8 @@ class PagesController extends AppController {
         App::uses('CakeEmail', 'Network/Email');
         $email = new CakeEmail();
         $email->from('no-reply@flypass.com.au');
-       // $email->to('support@flydigital.com.au');
-        $email->to('raf@flydigital.com.au');
+        $email->to('support@flydigital.com.au');
+       // $email->to('raf@flydigital.com.au');
         $email->subject($subject);
         $email->template('enquiry', 'enquiry');
         $email->viewVars(array('info' =>  array(
@@ -119,8 +119,8 @@ class PagesController extends AppController {
         App::uses('CakeEmail', 'Network/Email');
         $email = new CakeEmail();
         $email->from('no-reply@flypass.com.au');
-        // $email->to('support@flydigital.com.au');
-        $email->to('raf@flydigital.com.au');
+        $email->to('support@flydigital.com.au');
+        //$email->to('raf@flydigital.com.au');
         $email->subject($subject);
         $email->template('feedback', 'feedback');
         $email->viewVars(array('info' => array(
