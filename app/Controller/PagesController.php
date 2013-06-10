@@ -122,7 +122,7 @@ class PagesController extends AppController {
         // $email->to('support@flydigital.com.au');
         $email->to('raf@flydigital.com.au');
         $email->subject($subject);
-        $email->template('enquiry', 'enquiry');
+        $email->template('feedback', 'feedback');
         $email->viewVars(array('info' => array(
             "name" => $name,
             "email" => $user_email,
