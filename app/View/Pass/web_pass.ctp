@@ -42,16 +42,20 @@
 
         $('.download').click(function(e){
 
+            var href = $(this).attr('href');
+            window.location.href = href;
+            /*
             var download_count = $('#download_count').val();
             var download_limit = $('#download_limit').val();
 
             if( download_limit > download_count) {
-               // alert('You can not download this pass. It exceeded the download limit');
+                alert('You can not download this pass. It exceeded the download limit');
             }
             else{
                 var href = $(this).attr('href');
                 window.location.href = href;
             }
+            */
             e.preventDefault();
         });
 
