@@ -78,10 +78,11 @@
                 resp = $.parseJSON(resp);
 
                 if (resp.error !== undefined) {
-                    $alertDiv.text(resp.error).removeClass('success alert-box').addClass('alert-box alert').show();
+                    $alertDiv.removeClass('success alert-box').addClass('alert-box alert').show().html(resp.error);
                 } else {
-                    $alertDiv.text(resp.error).removeClass('alert-box alert').addClass('success alert-box').show();
+                    $alertDiv.removeClass('alert-box alert').addClass('success alert-box').show().html(resp.success);
                 }
+
             }
         });
     });
