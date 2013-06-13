@@ -176,18 +176,19 @@ $(document).ready(function() {
       };
     })();
 
-    $('.update_limit').keyup(function (e) {
-//         var id = this.id;
+    $('.update_limit').change(function () {
         var $this = $(this);
         var val = $this.val();
+
         if (!!val.match(/^(\d+)$/) && val >= $this.data('download-count')) {
             delay(function () {
                 $.ajax({
                     type    : "POST",
-                    url     : "/pass/update_download_limit",
-                    data    : {'pass_id' : this.id, 'limit' : this.value },
+                    url     : "/pass/update_download_limit/",
+                    data    : {'pass_id' : $this.attr('id'), 'limit' : val },
                     success : function (msg) {
-                        if (msg.success == true) {
+                        msg = $.parseJSON(msg);
+                        if (msg.success === true) {
                             alert('download limit has been updated');
                         }
                         else {
