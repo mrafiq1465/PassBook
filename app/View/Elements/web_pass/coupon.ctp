@@ -39,10 +39,7 @@ if ($c = count($nonPrimaryFields)) {
                             <div class="small-3 columns">
                                 <img style="max-width: 100%;" src="/<?= $this->data['Pass']['logoImage']; ?>"/>
                             </div>
-                            <div class="small-6 columns">
-                                <?=$this->data['Pass']['logoText'];?>
-                            </div>
-                            <div class="small-3 columns">
+                            <div class="small-9 columns">
                                 <?=$this->data['Pass']['headerText'];?>
                             </div>
                         </div>

@@ -109,7 +109,7 @@ class Pass extends AppModel
             'organizationName' => $data['Pass']['organizationName'],
             'serialNumber' => '12345678',
             // Texts
-            'logoText' => $data['Pass']['logoText'],
+            'logoText' => $data['Pass']['headerText'],
             // Passbook version
             'formatVersion' => 1,
 
