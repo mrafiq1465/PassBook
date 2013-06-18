@@ -58,7 +58,7 @@ $options = array(
 
         <?=$this->Form->input('logoImageRetina', array('type' => 'file', 'rel' => '#logoImgRetina', 'class' => 'imageUpload',
             'label' => 'Upload your logo (PNG file, max 60 pixels high, any width)'));?>
-        <?=$this->Form->input('headerText', array('data-bind' => "value: pass.headerText", 'data-value-update' => "keyup"));?>
+
     </div>
 
     <!--<div class="row-image">
@@ -82,6 +82,7 @@ $options = array(
     </div>
 
     <?=$this->Form->create(null, array('url' => '/pass/edit/' . $this->data['Pass']['id'], 'id' => 'step2Form')); ?>
+    <?=$this->Form->input('headerText', array('data-bind' => "value: pass.headerText", 'data-value-update' => "keyup"));?>
     <?//=$this->Form->input('logoText', array('data-bind' => "value: pass.logoText", 'data-value-update'=>"keyup"));?>
 
     <script id="field-tpl" type="text/x-kendo-template">
@@ -238,7 +239,7 @@ $options = array(
            // echo $this->element('users/payment');
         }
         ?>
-        <?//= $this->element('blocks/generate');?>
+        <?= $this->element('blocks/generate');?>
     </div>
 </div>
 <script>
