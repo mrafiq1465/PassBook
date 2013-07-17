@@ -61,9 +61,10 @@ $(document).ready(function() {
         if (PassBarcodeFormatId.length) {
             PassBarcodeFormatId.kendoDropDownList({
                 select: function (e) {
+
                     var dataItem = this.dataItem(e.item.index());
 
-                    if (dataItem.value == 1) {
+                    if (dataItem.value == 1 || dataItem.value == 2) {
                         PassBook.CouponViewModel.set('isBarcodeVisible', false);
                     } else {
                         PassBook.CouponViewModel.set('isBarcodeVisible', true);
@@ -417,7 +418,7 @@ $(document).ready(function() {
 
         init: function () {
             var barcode = this.get('pass.barcode_format_id');
-            if (!barcode || barcode == 1) {
+            if (!barcode || barcode == 1 || barcode == 2) {
                 this.set('isBarcodeVisible', false);
             }
 
@@ -426,6 +427,7 @@ $(document).ready(function() {
             }
 
             this.addPrimaryField();
+            this.addBackField();
         }
     });
 

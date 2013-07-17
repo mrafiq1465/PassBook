@@ -203,7 +203,7 @@ $options = array(
 
     <div style="margin-top: 10px;">
         <label>Barcode Code (Fly Pass will convert this to a barcode for you)</label>
-        <?=$this->Form->input('barcodeMessage');?></div>
+        <?=$this->Form->input('barcodeMessage', array('data-bind' => "value: pass.barcodeMessage", 'data-value-update' => "keyup"));?></div>
     <p class="error"></p>
        <h2>Location Options </h2>
     <p>For Apple Passbook users you can choose to prompt the user on their lock screen when they are within 100 meters or closer of the location below. To find a lat/long, please click here (linked to <a target="_blank" href="http://www.latlong.net/">http://www.latlong.net/</a>)"</p>

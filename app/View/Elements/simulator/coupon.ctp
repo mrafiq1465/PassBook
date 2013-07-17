@@ -51,8 +51,11 @@
                 </script>
             </div>
         </section>
+
         <div class="section_barcode text-center">
             <img data-bind="visible: isBarcodeVisible" src="/img/PDF417_Barcode_Font.jpg" style="max-width: 100% "/>
+            <br>
+            <span data-bind="text: pass.barcodeMessage,visible: isBarcodeVisible" class="value"></span>
         </div>
     </div>
     <a class="toggle" href="javascript:void(0);">i</a>

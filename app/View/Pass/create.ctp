@@ -20,6 +20,7 @@
                          $dataJ = new stdClass();
                          $dataJ->backgroundColor = '';
                          $dataJ->foregroundColor = '';
+                         $dataJ->backFields = array();
                          ?>
                         PassBook.data = <?= json_encode($dataJ) ?>;
                     </script>
