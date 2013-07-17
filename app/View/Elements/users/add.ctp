@@ -74,11 +74,6 @@
         </div>
         <div class="row">
             <div class="large12 columns">
-                <? echo $this->Form->input('job_description', array('placeholder' => 'Job Description', 'label' => FALSE, 'class' => 'input')); ?>
-            </div>
-        </div>
-        <div class="row">
-            <div class="large12 columns">
         <?php $states = array('NSW' => 'NSW', 'VIC' => 'VIC', 'QLD' => 'QLD', 'WA' => 'WA', 'NT' => 'NT', 'TAS' => 'TAS', 'ACT' => 'ACT');
             echo $this->Form->input('state', array('options' => $states, 'default' => 'nsw','class'=>'small'));
         ?>

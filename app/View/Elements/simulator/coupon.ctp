@@ -23,12 +23,12 @@
     }">
         <section class="section_header">
             <div class="row">
-                <div class="small-5 columns" style="min-height: 1px;">
+                <div class="small-4 columns" style="min-height: 1px;">
                     <img style="max-width: 160px;height:50px;"
                          data-bind="attr: { src: logoImage}, visible: isLogoImageVisible">
                 </div>
 <!--                <div class="small-6 columns" data-bind="text: pass.logoText"></div>-->
-                <div class="small-7 columns" data-bind="text: pass.headerText"></div>
+                <div class="small-8 columns text-center" data-bind="text: pass.headerText"></div>
             </div>
         </section>
         <section class="primary_fields" data-bind="style: {background: stripImage}">
@@ -93,6 +93,7 @@
 
     .section_header, .primary_fields, .non_primary_fields {
         padding: 17px;
+        font-size:1.2em;
     }
 
     .k-list>.k-state-selected {
@@ -168,11 +169,11 @@
     }
 
     .backFields .key {
-        font-size: 1.2em;
+        font-size: 1.5em;
         font-weight: bold;
     }
     .backFields .value {
-        font-size: 1.7em;
+        font-size: 1.1em;
         padding-left: 10px;
     }
 
@@ -204,6 +205,5 @@
         border-radius: 50%;
         font-size: .8em;
     }
-
 
 </style>

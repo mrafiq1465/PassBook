@@ -7,6 +7,7 @@
         position: fixed;
         top: -120px;
     }
+
 </style>
 <div class="container" id="main-container">
     <section id="home-hero-unit" class="hero-unit">

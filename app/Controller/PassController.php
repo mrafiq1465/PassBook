@@ -53,6 +53,7 @@ class PassController extends AppController
 
     public function edit($id, $step = 'step1')
     {
+
         if (empty($id)) {
             throw new NotFoundException(__('Invalid id'));
         }
